@@ -1,0 +1,113 @@
+<class-diagram version="1.0.3" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true">  
+  <class id="1" corner="BOTTOM_RIGHT" language="java" name="at.chipkarte.client.kse.soap.ErgebnisKonsultation" 
+    project="at.chipkarte.client" file="/at.chipkarte.client/src/at/chipkarte/client/kse/soap/ErgebnisKonsultation.java" 
+    binary="false">    
+    <position height="-1" width="-1" x="281" y="268"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="false"/>      
+      <operations public="true" package="true" protected="true" private="false"/>    
+    </display>  
+  </class>  
+  <class id="2" corner="BOTTOM_RIGHT" language="java" name="at.chipkarte.client.kse.soap.Konsultationsdaten" 
+    project="at.chipkarte.client" file="/at.chipkarte.client/src/at/chipkarte/client/kse/soap/Konsultationsdaten.java" 
+    binary="false">    
+    <position height="-1" width="-1" x="848" y="-13"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="false"/>      
+      <operations public="true" package="true" protected="true" private="false"/>    
+    </display>  
+  </class>  
+  <class id="3" corner="BOTTOM_RIGHT" language="java" name="at.chipkarte.client.kse.soap.KonsultationsBeleg" 
+    project="at.chipkarte.client" file="/at.chipkarte.client/src/at/chipkarte/client/kse/soap/KonsultationsBeleg.java" 
+    binary="false">    
+    <position height="191" width="476" x="72" y="-137"/>    
+    <display autosize="false" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="false"/>      
+      <operations public="true" package="true" protected="true" private="false"/>    
+    </display>  
+  </class>  
+  <class id="4" corner="BOTTOM_RIGHT" language="java" name="at.chipkarte.client.base.soap.SvPerson" 
+    project="at.chipkarte.client" file="/at.chipkarte.client/src/at/chipkarte/client/base/soap/SvPerson.java" 
+    binary="false">    
+    <position height="109" width="326" x="634" y="217"/>    
+    <display autosize="false" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="false"/>      
+      <operations public="true" package="true" protected="true" private="false"/>    
+    </display>  
+  </class>  
+  <class id="5" corner="BOTTOM_RIGHT" language="java" name="at.chipkarte.client.kse.soap.Zusatzinformation" 
+    project="at.chipkarte.client" file="/at.chipkarte.client/src/at/chipkarte/client/kse/soap/Zusatzinformation.java" 
+    binary="false">    
+    <position height="-1" width="-1" x="866" y="486"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="false"/>      
+      <operations public="true" package="true" protected="true" private="false"/>    
+    </display>  
+  </class>  
+  <class id="6" corner="BOTTOM_RIGHT" language="java" name="at.chipkarte.client.kse.soap.OfflineRecord" 
+    project="at.chipkarte.client" file="/at.chipkarte.client/src/at/chipkarte/client/kse/soap/OfflineRecord.java" 
+    binary="false">    
+    <position height="-1" width="-1" x="1308" y="161"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="false"/>      
+      <operations public="true" package="true" protected="true" private="false"/>    
+    </display>  
+  </class>  
+  <association>    
+    <bendpoint x="711" y="167"/>    
+    <end type="SOURCE" nodeId="2" navigable="false">      
+      <attribute name="angehoerigenDaten"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <end type="SOURCE" nodeId="1" navigable="false">      
+      <attribute name="konsultationsDaten"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <end type="SOURCE" nodeId="2" navigable="false">      
+      <attribute name="konsultationsBeleg"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <bendpoint x="940" y="174"/>    
+    <end type="SOURCE" nodeId="2" navigable="false">      
+      <attribute name="versichertenDaten"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <bendpoint x="576" y="431"/>    
+    <end type="SOURCE" nodeId="1" navigable="false">      
+      <attribute name="zusatzinformation"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <end type="SOURCE" nodeId="1" navigable="false">      
+      <attribute name="nachsignKonsultationen"/>      
+      <multiplicity minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" nodeId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" package="true" initial-value="false" signature="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="false"/>    
+    <operations public="true" package="true" protected="true" private="false"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

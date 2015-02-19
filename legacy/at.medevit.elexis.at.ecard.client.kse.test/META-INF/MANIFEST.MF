@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: e-card Anbindung Client Krankenscheinersatz Test
+Bundle-SymbolicName: at.medevit.elexis.at.ecard.client.kse.test
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: medevit.at
+Fragment-Host: at.medevit.elexis.at.ecard.client.kse;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.junit
+Import-Package: at.chipkarte.client.base.soap.vp

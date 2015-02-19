@@ -1,0 +1,4353 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://soap.emedik.client.chipkarte.at" xmlns:intf="http://soap.emedik.client.chipkarte.at" xmlns:tns1="http://soap.base.client.chipkarte.at" xmlns:tns2="http://exceptions.soap.base.client.chipkarte.at" xmlns:tns3="http://exceptions.soap.emedik.client.chipkarte.at" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://soap.emedik.client.chipkarte.at">
+ <wsdl:types>
+  <schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://soap.emedik.client.chipkarte.at">
+   <import namespace="http://exceptions.soap.emedik.client.chipkarte.at"/>
+   <import namespace="http://soap.base.client.chipkarte.at"/>
+   <import namespace="http://exceptions.soap.base.client.chipkarte.at"/>
+   <element name="zustimmungErklaeren">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="svNummer" nillable="true" minOccurs="0" type="xsd:string"/>
+      <element name="cardReaderId" nillable="true" minOccurs="0" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="zustimmungErklaerenResponse">
+    <complexType>
+     <sequence>
+      <element name="zustimmungErklaerenReturn" type="impl:TeilnahmeDaten"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="MedikationsPosition">
+    <sequence>
+     <element name="abgabeDatum" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="abgabeDatumManuell" type="xsd:boolean"/>
+     <element name="abgabeKennzeichen" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="dosierungAbends" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="dosierungMittags" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="dosierungMorgens" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="dosierungNachts" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="einnahmeEnde" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="einnahmeEndeManuell" type="xsd:boolean"/>
+     <element name="einnahmePause" type="xsd:int"/>
+     <element name="einnahmeStart" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="einnahmeStartManuell" type="xsd:boolean"/>
+     <element name="einnahmeTage" type="xsd:int"/>
+     <element name="medikationsPositionId" type="xsd:long"/>
+     <element name="menge" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="mengenArt" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="mengenArtManuell" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="nichtDispersiert" type="xsd:boolean"/>
+     <element name="nichtSpeichern" type="xsd:boolean"/>
+     <element name="packungsAnzahl" type="xsd:int"/>
+     <element name="pausenEinheit" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="pzn" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="rezeptNummer" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="rwInTagen" type="xsd:int"/>
+     <element name="tagesDosierung" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="verordnungId" type="xsd:long"/>
+     <element name="zusatzTextZurDosierung" nillable="true" minOccurs="0" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   
+   <complexType name="Medikation">
+    <sequence>
+     <element name="bezeichnung" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="medikationBeginn" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="medikationEnde" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="medikationEndeManuell" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="medikationId" type="xsd:long"/>
+     <element maxOccurs="unbounded" name="medikationsPositionen" nillable="true" minOccurs="0" type="impl:MedikationsPosition"/>
+     <element name="praeparatNummer" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="therapieArt" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="verordnet" type="xsd:boolean"/>
+    </sequence>
+   </complexType>
+   
+   <complexType name="Dokumentation">
+    <sequence>
+     <element name="dokumentationId" type="xsd:long"/>
+     <element name="dokumentationsArt" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="dokumentationsDatum" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="kommentar" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="zusatzBeiSonstiges" nillable="true" minOccurs="0" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   
+   <complexType name="Warnung">
+    <sequence>
+     <element name="arzneistoffCode1" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="arzneistoffCode2" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="atcCode1" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="atcCode2" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="basisWirkstoffCode1" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="basisWirkstoffCode2" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element maxOccurs="unbounded" name="dokumentationen" nillable="true" minOccurs="0" type="impl:Dokumentation"/>
+     <element name="duplikatsArt" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="interaktionsCode" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="medikationId1" type="xsd:long"/>
+     <element name="medikationId2" type="xsd:long"/>
+     <element name="medikationsPositionId1" type="xsd:long"/>
+     <element name="medikationsPositionId2" type="xsd:long"/>
+     <element name="schwereGrad" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="substanzGruppeCode1" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="substanzGruppeCode2" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="verletzungsArt" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="verletzungsTage" type="xsd:int"/>
+     <element name="warnungId" type="xsd:long"/>
+     <element name="warnungsArt" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="warnungsSchluessel" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="warnungsStatus" nillable="true" minOccurs="0" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   
+   <complexType name="MedikationsContainer">
+    <sequence>
+     <element name="hashCode" type="xsd:int"/>
+     <element name="medDatenVersion" type="xsd:int"/>
+     <element maxOccurs="unbounded" name="medikation" nillable="true" minOccurs="0" type="impl:Medikation"/>
+     <element name="voDatenVersion" type="xsd:int"/>
+     <element maxOccurs="unbounded" name="warnungen" nillable="true" minOccurs="0" type="impl:Warnung"/>
+    </sequence>
+   </complexType>
+   <complexType name="FehlerInfo">
+    <sequence>
+     <element maxOccurs="unbounded" name="argumentListe" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element maxOccurs="unbounded"  name="datenFeld" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="fehlerCode" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="fehlerText" nillable="true" minOccurs="0" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="VerarbeitungsInformation">
+    <sequence>
+     <element name="verarbeitungsStatus" nillable="true" minOccurs="0" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Verordnung">
+    <sequence>
+     <element name="bezeichnung" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="dosierungAbends" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="dosierungMittags" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="dosierungMorgens" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="dosierungNachts" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="einnahmeEnde" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="einnahmeEndeManuell" type="xsd:boolean"/>
+     <element name="einnahmePause" type="xsd:int"/>
+     <element name="einnahmeStart" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="einnahmeStartManuell" type="xsd:boolean"/>
+     <element name="einnahmeTage" type="xsd:int"/>
+     <element name="erstellungsZeitpunkt" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="fehler" nillable="true" minOccurs="0" type="impl:FehlerInfo"/>
+     <element name="menge" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="mengenArt" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="mengenArtManuell" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="packungsAnzahl" type="xsd:int"/>
+     <element name="pausenEinheit" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="pzn" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="tagesDosierung" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="therapieArt" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="verordnungId" type="xsd:long"/>
+     <element name="zusatzText" nillable="true" minOccurs="0" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   
+   <complexType name="TeilnahmeDaten">
+    <sequence>
+     <element name="aktuelleMedikation" nillable="true" minOccurs="0" type="impl:MedikationsContainer"/>
+     <element name="einwilligungBis" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="hatZustimmung" type="xsd:boolean"/>
+     <element name="svPerson" nillable="true" minOccurs="0" type="tns1:SvPerson"/>
+     <element name="verarbeitungsInformation" nillable="true" minOccurs="0" type="impl:VerarbeitungsInformation"/>
+     <element maxOccurs="unbounded" name="verordnungen" nillable="true" minOccurs="0" type="impl:Verordnung"/>
+    </sequence>
+   </complexType>
+   <element name="fault" type="tns2:AccessException"/>
+   <element name="fault1" type="tns2:CardException"/>
+   <element name="fault2" type="tns2:DialogException"/>
+   <element name="fault3" type="tns2:ServiceException"/>
+   <element name="fault4" type="tns3:EmedikException"/>
+   <element name="fault5" type="tns3:EmedikInvalidParameterException"/>
+   <element name="fault6" type="tns3:EmedikEmdbException"/>
+   <element name="fault7" type="tns3:EmedikCdaValidationException"/>
+   <element name="fault8" type="tns3:EmedikFormatException"/>
+   <element name="zustimmungWiderrufen">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="svNummer" nillable="true" minOccurs="0" type="xsd:string"/>
+      <element name="cardReaderId" nillable="true" minOccurs="0" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="zustimmungWiderrufenResponse">
+    <complexType>
+     <sequence>
+      <element name="zustimmungWiderrufenReturn" type="impl:ZustimmungWiderrufenErgebnis"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ZustimmungWiderrufenErgebnis">
+    <sequence>
+     <element name="svNummer" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="verarbeitungsInformation" nillable="true" minOccurs="0" type="impl:VerarbeitungsInformation"/>
+    </sequence>
+   </complexType>
+   <element name="einwilligungAnlegen">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="svNummer" nillable="true" minOccurs="0" type="xsd:string"/>
+      <element name="cardReaderId" nillable="true" minOccurs="0" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="einwilligungAnlegenResponse">
+    <complexType>
+     <sequence>
+      <element name="einwilligungAnlegenReturn" type="impl:TeilnahmeDaten"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="patientenDatenAbfragen">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="svNummer" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="patientenDatenAbfragenResponse">
+    <complexType>
+     <sequence>
+      <element name="patientenDatenAbfragenReturn" type="impl:TeilnahmeDaten"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="medikationsUebersichtAbrufen">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="svNummer" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="medikationsUebersichtAbrufenResponse">
+    <complexType>
+     <sequence>
+      <element name="medikationsUebersichtAbrufenReturn" type="impl:VerarbeitungsInformation"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="medikationsListeAbrufen">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="svNummer" type="xsd:string"/>
+      <element name="verordnungenAbrufen" type="xsd:boolean"/>
+      <element name="medikationAbrufen" type="xsd:boolean"/>
+      <element name="historischeMedikationAbrufen" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="medikationsListeAbrufenResponse">
+    <complexType>
+     <sequence>
+      <element name="medikationsListeAbrufenReturn" type="impl:MedikationsListeAbrufenErgebnis"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="MedikationsListeAbrufenErgebnis">
+    <sequence>
+     <element name="medikation" nillable="true" minOccurs="0" type="impl:MedikationsContainer"/>
+     <element name="verarbeitungsInformation" nillable="true" minOccurs="0" type="impl:VerarbeitungsInformation"/>
+     <element maxOccurs="unbounded" name="verordnungen" nillable="true" minOccurs="0" type="impl:Verordnung"/>
+    </sequence>
+   </complexType>
+   <element name="historieEinerWarnungAbrufen">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="svNummer" type="xsd:string"/>
+      <element name="warnungsSchluessel" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="historieEinerWarnungAbrufenResponse">
+    <complexType>
+     <sequence>
+      <element name="historieEinerWarnungAbrufenReturn" type="impl:HistorieEinerWarnungAbrufenErgebnis"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="HistorieEinerWarnungAbrufenErgebnis">
+    <sequence>
+     <element name="verarbeitungsInformation" nillable="true" minOccurs="0" type="impl:VerarbeitungsInformation"/>
+     <element name="warnungen" nillable="true" minOccurs="0" type="impl:MedikationsContainer"/>
+    </sequence>
+   </complexType>
+   <element name="medikationsHistorieEinerArzneiSpezialitaetAbrufen">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="svNummer" type="xsd:string"/>
+      <element name="praeparatNummer" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="medikationsHistorieEinerArzneiSpezialitaetAbrufenResponse">
+    <complexType>
+     <sequence>
+      <element name="medikationsHistorieEinerArzneiSpezialitaetAbrufenReturn" type="impl:MedikationsHistorieEinerArzneiSpezialitaetAbrufenErgebnis"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="MedikationsHistorieEinerArzneiSpezialitaetAbrufenErgebnis">
+    <sequence>
+     <element name="medikationen" nillable="true" minOccurs="0" type="impl:MedikationsContainer"/>
+     <element name="verarbeitungsInformation" nillable="true" minOccurs="0" type="impl:VerarbeitungsInformation"/>
+    </sequence>
+   </complexType>
+   <element name="verordnungenAbrufenCda">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="svNummer" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="verordnungenAbrufenCdaResponse">
+    <complexType>
+     <sequence>
+      <element name="verordnungenAbrufenCdaReturn" type="impl:CdaAbfrageErgebnis"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="CdaAbfrageErgebnis">
+    <sequence>
+     <element maxOccurs="unbounded" name="cdaDokumente" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="verarbeitungsInformation" nillable="true" minOccurs="0" type="impl:VerarbeitungsInformation"/>
+    </sequence>
+   </complexType>
+   <element name="abgabenAbrufenCda">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="svNummer" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="abgabenAbrufenCdaResponse">
+    <complexType>
+     <sequence>
+      <element name="abgabenAbrufenCdaReturn" type="impl:CdaAbfrageErgebnis"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="vorbelegungAbgabenErmitteln">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="svNummer" type="xsd:string"/>
+      <element name="vorbelegungAusMed" type="xsd:boolean"/>
+      <element maxOccurs="unbounded" name="pznListe" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="vorbelegungAbgabenErmittelnResponse">
+    <complexType>
+     <sequence>
+      <element name="vorbelegungAbgabenErmittelnReturn" type="impl:VorbelegungAbgabenErmittelnErgebnis"/>
+     </sequence>
+    </complexType>
+   </element>
+   
+   <complexType name="Vorbelegung">
+    <sequence>
+     <element name="dosierungAbends" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="dosierungMittags" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="dosierungMorgens" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="dosierungNachts" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="einnahmeEnde" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="einnahmePause" type="xsd:int"/>
+     <element name="einnahmeStart" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="einnahmeTage" type="xsd:int"/>
+     <element name="medikationId" type="xsd:long"/>
+     <element name="mengenArtManuell" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="packungsAnzahl" type="xsd:int"/>
+     <element name="pausenEinheit" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="pzn" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="tagesDosierung" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="therapieArt" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="zusatzText" nillable="true" minOccurs="0" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   
+   <complexType name="VorbelegungAbgabenErmittelnErgebnis">
+    <sequence>
+     <element maxOccurs="unbounded" name="pznNichtGefundenEmdb" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="verarbeitungsInformation" nillable="true" minOccurs="0" type="impl:VerarbeitungsInformation"/>
+     <element maxOccurs="unbounded" name="vorbelegungEmdb" nillable="true" minOccurs="0" type="impl:Vorbelegung"/>
+     <element maxOccurs="unbounded" name="vorbelegungVO" nillable="true" minOccurs="0" type="impl:Vorbelegung"/>
+    </sequence>
+   </complexType>
+   <element name="abgabenVorbereiten">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="svNummer" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="abgaben" type="impl:Abgabe"/>
+      <element maxOccurs="unbounded" name="dokumentationsInput" nillable="true" minOccurs="0" type="impl:DokumentationsInput"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="Abgabe">
+    <sequence>
+     <element name="abgabeDatum" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="abgabeKennzeichen" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="dosierungAbends" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="dosierungMittags" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="dosierungMorgens" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="dosierungNachts" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="einnahmeEnde" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="einnahmeEndeManuell" type="xsd:boolean"/>
+     <element name="einnahmePause" type="xsd:int"/>
+     <element name="einnahmeStart" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="einnahmeStartManuell" type="xsd:boolean"/>
+     <element name="einnahmeTage" type="xsd:int"/>
+     <element name="fehler" nillable="true" minOccurs="0" type="impl:FehlerInfo"/>
+     <element name="mengenArtManuell" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="packungsAnzahl" type="xsd:int"/>
+     <element name="pausenEinheit" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="pzn" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="rezeptNummer" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="tagesDosierung" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="therapieArt" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="verordnungId" type="xsd:long"/>
+     <element name="zusatzText" nillable="true" minOccurs="0" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="DokumentationsInput">
+    <sequence>
+     <element name="dokumentationsArt" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="fehler" nillable="true" minOccurs="0" type="impl:FehlerInfo"/>
+     <element name="kommentar" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="warnungsSchluessel" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="zusatzBeiSonstiges" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="medikationId" type="xsd:long"/>
+     <element name="medikationsPositionId" type="xsd:long"/>
+    </sequence>
+   </complexType>
+   <element name="abgabenVorbereitenResponse">
+    <complexType>
+     <sequence>
+      <element name="abgabenVorbereitenReturn" type="impl:AbgabenVorbereitenErgebnis"/>
+     </sequence>
+    </complexType>
+   </element>
+   
+   
+   <complexType name="AbgabenVorbereitenErgebnis">
+    <sequence>
+     <element maxOccurs="unbounded" name="abgaben" nillable="true" minOccurs="0" type="impl:Abgabe"/>
+     <element maxOccurs="unbounded" name="dokumentationsInput" nillable="true" minOccurs="0" type="impl:DokumentationsInput"/>
+     <element name="geplanteMedikation" nillable="true" minOccurs="0" type="impl:MedikationsContainer"/>
+     <element maxOccurs="unbounded" name="offeneVerordnungen" nillable="true" minOccurs="0" type="impl:Verordnung"/>
+     <element name="verarbeitungsInformation" nillable="true" minOccurs="0" type="impl:VerarbeitungsInformation"/>
+    </sequence>
+   </complexType>
+   <element name="medikationsContainerFuerAbgabenVorbereiten">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="svNummer" type="xsd:string"/>
+      <element name="geplanteMedikation" type="impl:MedikationsContainer"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="medikationsContainerFuerAbgabenVorbereitenResponse">
+    <complexType>
+     <sequence>
+      <element name="medikationsContainerFuerAbgabenVorbereitenReturn" type="impl:MedContainerAbgabenVorbereitenErgebnis"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="MedContainerAbgabenVorbereitenErgebnis">
+    <sequence>
+     <element name="geplanteMedikation" nillable="true" minOccurs="0" type="impl:MedikationsContainer"/>
+     <element maxOccurs="unbounded" name="offeneVerordnungen" nillable="true" minOccurs="0" type="impl:Verordnung"/>
+     <element name="verarbeitungsInformation" nillable="true" minOccurs="0" type="impl:VerarbeitungsInformation"/>
+    </sequence>
+   </complexType>
+   <element name="abgabenSpeichern">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="svNummer" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="dokumentationsInput" nillable="true" minOccurs="0" type="impl:DokumentationsInput"/>
+      <element name="geplanteMedikation" type="impl:MedikationsContainer"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="abgabenSpeichernResponse">
+    <complexType>
+     <sequence>
+      <element name="abgabenSpeichernReturn" type="impl:AbgabenSpeichernErgebnis"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="AbgabenSpeichernErgebnis">
+    <sequence>
+     <element name="aktuelleGeplanteMedikation" nillable="true" minOccurs="0" type="impl:MedikationsContainer"/>
+     <element maxOccurs="unbounded" name="dokumentationsInput" nillable="true" minOccurs="0" type="impl:DokumentationsInput"/>
+     <element maxOccurs="unbounded" name="offeneVerordnungen" nillable="true" minOccurs="0" type="impl:Verordnung"/>
+     <element name="verarbeitungsInformation" nillable="true" minOccurs="0" type="impl:VerarbeitungsInformation"/>
+    </sequence>
+   </complexType>
+   <element name="dosierungsAenderungenVorbereiten">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="svNummer" type="xsd:string"/>
+      <element name="medikationsId" type="xsd:long"/>
+      <element maxOccurs="unbounded" name="dokumentationsInput" nillable="true" minOccurs="0" type="impl:DokumentationsInput"/>
+      <element maxOccurs="unbounded" name="dosierungsAenderung" type="impl:DosierungsAenderung"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="DosierungsAenderung">
+    <sequence>
+     <element name="aenderungsDatum" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="dosierungAbends" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="dosierungMittags" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="dosierungMorgens" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="dosierungNachts" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="einnahmeEnde" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="einnahmeEndeManuell" type="xsd:boolean"/>
+     <element name="einnahmePause" type="xsd:int"/>
+     <element name="einnahmeTage" type="xsd:int"/>
+     <element name="fehler" nillable="true" minOccurs="0" type="impl:FehlerInfo"/>
+     <element name="mengenArtManuell" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="pausenEinheit" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="tagesDosierung" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="zusatzText" nillable="true" minOccurs="0" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="dosierungsAenderungenVorbereitenResponse">
+    <complexType>
+     <sequence>
+      <element name="dosierungsAenderungenVorbereitenReturn" type="impl:DosierungsAenderungenVorbereitenErgebnis"/>
+     </sequence>
+    </complexType>
+   </element>
+   
+   <complexType name="DosierungsAenderungenVorbereitenErgebnis">
+    <sequence>
+     <element maxOccurs="unbounded" name="dokumentationsInput" nillable="true" minOccurs="0" type="impl:DokumentationsInput"/>
+     <element maxOccurs="unbounded" name="dosierungsAenderungen" nillable="true" minOccurs="0" type="impl:DosierungsAenderung"/>
+     <element name="geplanteMedikation" nillable="true" minOccurs="0" type="impl:MedikationsContainer"/>
+     <element maxOccurs="unbounded" name="offeneVerordnungen" nillable="true" minOccurs="0" type="impl:Verordnung"/>
+     <element name="verarbeitungsInformation" nillable="true" minOccurs="0" type="impl:VerarbeitungsInformation"/>
+    </sequence>
+   </complexType>
+   <element name="dosierungsAenderungenSpeichern">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="svNummer" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="dokumentationsInput" nillable="true" minOccurs="0" type="impl:DokumentationsInput"/>
+      <element name="geplanteMedikation" type="impl:MedikationsContainer"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="dosierungsAenderungenSpeichernResponse">
+    <complexType>
+     <sequence>
+      <element name="dosierungsAenderungenSpeichernReturn" type="impl:DosierungsAenderungenSpeichernErgebnis"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="DosierungsAenderungenSpeichernErgebnis">
+    <sequence>
+     <element name="aktuelleGeplanteMedikation" nillable="true" minOccurs="0" type="impl:MedikationsContainer"/>
+     <element maxOccurs="unbounded" name="dokumentationsInput" nillable="true" minOccurs="0" type="impl:DokumentationsInput"/>
+     <element name="verarbeitungsInformation" nillable="true" minOccurs="0" type="impl:VerarbeitungsInformation"/>
+    </sequence>
+   </complexType>
+   <element name="arzneiSpezialitaetAbsetzen">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="svNummer" type="xsd:string"/>
+      <element name="medikationsId" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="arzneiSpezialitaetAbsetzenResponse">
+    <complexType>
+     <sequence>
+      <element name="arzneiSpezialitaetAbsetzenReturn" type="impl:ArzneiSpezialitaetAbsetzenErgebnis"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArzneiSpezialitaetAbsetzenErgebnis">
+    <sequence>
+     <element name="aktuelleMedikation" nillable="true" minOccurs="0" type="impl:MedikationsContainer"/>
+     <element name="verarbeitungsInformation" nillable="true" minOccurs="0" type="impl:VerarbeitungsInformation"/>
+    </sequence>
+   </complexType>
+   <element name="abgabenVorbereitenCda">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="svNummer" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="abgabenCda" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="dokumentationsInput" nillable="true" minOccurs="0" type="impl:DokumentationsInput"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="abgabenVorbereitenCdaResponse">
+    <complexType>
+     <sequence>
+      <element name="abgabenVorbereitenCdaReturn" type="impl:AbgabenVorbereitenErgebnis"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="vorbelegungVerordnungenErmitteln">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="svNummer" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="pznListe" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="vorbelegungVerordnungenErmittelnResponse">
+    <complexType>
+     <sequence>
+      <element name="vorbelegungVerordnungenErmittelnReturn" type="impl:VorbelegungVerordnungenErmittelnErgebnis"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="VorbelegungVerordnungenErmittelnErgebnis">
+    <sequence>
+     <element maxOccurs="unbounded" name="pznNichtGefundenEmdb" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="verarbeitungsInformation" nillable="true" minOccurs="0" type="impl:VerarbeitungsInformation"/>
+     <element maxOccurs="unbounded" name="vorbelegungEmdb" nillable="true" minOccurs="0" type="impl:Vorbelegung"/>
+    </sequence>
+   </complexType>
+   <element name="verordnungenAnlegenVorbereiten">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="svNummer" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="geplanteVerordnungen" type="impl:Verordnung"/>
+      <element maxOccurs="unbounded" name="dokumentationsInput" nillable="true" minOccurs="0" type="impl:DokumentationsInput"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="verordnungenAnlegenVorbereitenResponse">
+    <complexType>
+     <sequence>
+      <element name="verordnungenAnlegenVorbereitenReturn" type="impl:VerordnungenAnlegenVorbereitenErgebnis"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="VerordnungenAnlegenVorbereitenErgebnis">
+    <sequence>
+     <element maxOccurs="unbounded" name="dokumentationsInput" nillable="true" minOccurs="0" type="impl:DokumentationsInput"/>
+     <element name="geplanteMedikation" nillable="true" minOccurs="0" type="impl:MedikationsContainer"/>
+     <element maxOccurs="unbounded" name="geplanteVerordnungen" nillable="true" minOccurs="0" type="impl:Verordnung"/>
+     <element maxOccurs="unbounded" name="offeneVerordnungen" nillable="true" minOccurs="0" type="impl:Verordnung"/>
+     <element name="verarbeitungsInformation" nillable="true" minOccurs="0" type="impl:VerarbeitungsInformation"/>
+    </sequence>
+   </complexType>
+   <element name="verordnungenSpeichern">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="svNummer" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="dokumentationsInput" nillable="true" minOccurs="0" type="impl:DokumentationsInput"/>
+      <element name="geplanteMedikation" type="impl:MedikationsContainer"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="verordnungenSpeichernResponse">
+    <complexType>
+     <sequence>
+      <element name="verordnungenSpeichernReturn" type="impl:VerordnungenSpeichernErgebnis"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="VerordnungenSpeichernErgebnis">
+    <sequence>
+     <element maxOccurs="unbounded" name="dokumentationsInput" nillable="true" minOccurs="0" type="impl:DokumentationsInput"/>
+     <element name="geplanteMedikation" nillable="true" minOccurs="0" type="impl:MedikationsContainer"/>
+     <element maxOccurs="unbounded" name="offeneVerordnungen" nillable="true" minOccurs="0" type="impl:Verordnung"/>
+     <element name="verarbeitungsInformation" nillable="true" minOccurs="0" type="impl:VerarbeitungsInformation"/>
+    </sequence>
+   </complexType>
+   <element name="verordnungenLoeschen">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="svNummer" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="verordnungIds" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="verordnungenLoeschenResponse">
+    <complexType>
+     <sequence>
+      <element name="verordnungenLoeschenReturn" type="impl:VerordnungenLoeschenErgebnis"/>
+     </sequence>
+    </complexType>
+   </element>
+   
+   <complexType name="VerordnungenLoeschenErgebnis">
+    <sequence>
+     <element maxOccurs="unbounded" name="fehlerInfos" nillable="true" minOccurs="0" type="impl:FehlerInfo"/>
+     <element maxOccurs="unbounded" name="offeneVerordnungen" nillable="true" minOccurs="0" type="impl:Verordnung"/>
+     <element name="verarbeitungsInformation" nillable="true" minOccurs="0" type="impl:VerarbeitungsInformation"/>
+    </sequence>
+   </complexType>
+   <element name="verordnungenAnlegenVorbereitenCda">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="svNummer" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="verordnungenCda" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="dokumentationsInput" nillable="true" minOccurs="0" type="impl:DokumentationsInput"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="verordnungenAnlegenVorbereitenCdaResponse">
+    <complexType>
+     <sequence>
+      <element name="verordnungenAnlegenVorbereitenCdaReturn" type="impl:VerordnungenAnlegenVorbereitenErgebnis"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="artikelInformationenBereitstellen">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="pzn" nillable="true" minOccurs="0" type="xsd:string"/>
+      <element name="bezeichnung" nillable="true" minOccurs="0" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="artikelInformationenBereitstellenResponse">
+    <complexType>
+     <sequence>
+      <element name="artikelInformationenBereitstellenReturn" type="impl:ArtikelInformationenBereitstellenErgebnis"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArtikelInformation">
+    <sequence>
+     <element name="bezeichnung" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="herstellerCode" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="herstellerName" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="menge" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="mengenArt" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="praeparatNummer" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="pzn" nillable="true" minOccurs="0" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   
+   <complexType name="ArtikelInformationenBereitstellenErgebnis">
+    <sequence>
+     <element maxOccurs="unbounded" name="artikelInformationen" nillable="true" minOccurs="0" type="impl:ArtikelInformation"/>
+     <element name="verarbeitungsInformation" nillable="true" minOccurs="0" type="impl:VerarbeitungsInformation"/>
+    </sequence>
+   </complexType>
+   <element name="sisKurzInformationenBereitstellen">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="praeparatNummer" nillable="true" minOccurs="0" type="xsd:string"/>
+      <element name="registerNummer" nillable="true" minOccurs="0" type="xsd:string"/>
+      <element name="pzn" nillable="true" minOccurs="0" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="sisKurzInformationenBereitstellenResponse">
+    <complexType>
+     <sequence>
+      <element name="sisKurzInformationenBereitstellenReturn" type="impl:SisKurzInformationenBereitstellenErgebnis"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="SisKurzInformation">
+    <sequence>
+     <element name="abgabenBestimmung" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="anwendung" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="apothekenPflicht" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="bezeichnung" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="bezugsGroesse" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="darreichung" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="darreichungCode" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="haltbarkeit" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="herstellerCode" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="herstellerName" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="herstellerVertriebBezeichnung" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="herstellerVertriebCode" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="hinweis" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="kombinationsPraeparat" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="lagerHinweis" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="loesen" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="mitVerfallsDatum" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="nichtLieferbar" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="praeparatNummer" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="registerNummer" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="rezeptPflicht" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="suchtHinweis" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="warnHinweis" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="wirkstoffAnzahl" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="SisKurzInformationenBereitstellenErgebnis">
+    <sequence>
+     <element name="sisKurzInformation" nillable="true" minOccurs="0" type="impl:SisKurzInformation"/>
+     <element name="verarbeitungsInformation" nillable="true" minOccurs="0" type="impl:VerarbeitungsInformation"/>
+    </sequence>
+   </complexType>
+   <element name="interaktionsInformationBereitstellen">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="interaktionsCode" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="interaktionsInformationBereitstellenResponse">
+    <complexType>
+     <sequence>
+      <element name="interaktionsInformationBereitstellenReturn" type="impl:InteraktionsInformationBereitstellenErgebnis"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="InteraktionsInformation">
+    <sequence>
+     <element name="beschreibung" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="interaktionsCode" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="kategorie" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="massname" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="monographieEffekt" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="monographieKommentar" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="monographieLiteratur" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="monographieMassnahmen" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="monographieMechanismus" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="substanzGruppe1Bezeichnung" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="substanzGruppe1Code" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="substanzGruppe2Bezeichnung" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="substanzGruppe2Code" nillable="true" minOccurs="0" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="InteraktionsInformationBereitstellenErgebnis">
+    <sequence>
+     <element name="interaktionsInformation" nillable="true" minOccurs="0" type="impl:InteraktionsInformation"/>
+     <element name="verarbeitungsInformation" nillable="true" minOccurs="0" type="impl:VerarbeitungsInformation"/>
+    </sequence>
+   </complexType>
+   <element name="atcCodeInformationenBereitstellen">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="praeparatNummer" nillable="true" minOccurs="0" type="xsd:string"/>
+      <element name="registerNummer" nillable="true" minOccurs="0" type="xsd:string"/>
+      <element name="pzn" nillable="true" minOccurs="0" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="atcCodeInformationenBereitstellenResponse">
+    <complexType>
+     <sequence>
+      <element name="atcCodeInformationenBereitstellenReturn" type="impl:AtcCodeInformationenBereitstellenErgebnis"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="AtcCodeInformation">
+    <sequence>
+     <element name="atcCodeLevel1Bezeichnung" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="atcCodeLevel2Bezeichnung" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="atcCodeLevel3Bezeichnung" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="atcCodeLevel4Bezeichnung" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="atcCodeLevel5" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="atcCodeLevel5Bezeichnung" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="bezeichnung" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="praeparatNummer" nillable="true" minOccurs="0" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="AtcCodeInformationenBereitstellenErgebnis">
+    <sequence>
+     <element name="atcCodeInformation" nillable="true" minOccurs="0" type="impl:AtcCodeInformation"/>
+     <element name="verarbeitungsInformation" nillable="true" minOccurs="0" type="impl:VerarbeitungsInformation"/>
+    </sequence>
+   </complexType>
+   <element name="arzneiStoffInformationenBereitstellen">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="arzneiStoffCode" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="arzneiStoffInformationenBereitstellenResponse">
+    <complexType>
+     <sequence>
+      <element name="arzneiStoffInformationenBereitstellenReturn" type="impl:ArzneiStoffInformationenBereitstellenErgebnis"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArzneiStoffInformation">
+    <sequence>
+     <element name="arzneiStoffCode" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="arzneistoffArt" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="bezeichnung" nillable="true" minOccurs="0" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArzneiStoffInformationenBereitstellenErgebnis">
+    <sequence>
+     <element maxOccurs="unbounded" name="arzneiStoffInformation" nillable="true" minOccurs="0" type="impl:ArzneiStoffInformation"/>
+     <element name="verarbeitungsInformation" nillable="true" minOccurs="0" type="impl:VerarbeitungsInformation"/>
+    </sequence>
+   </complexType>
+  <element name="zusammensetzungenEinerArzneiSpezialitaetBereitstellen">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="zusammensetzungSuchParameterListe" type="impl:ZusammensetzungSuchParameter"/>
+      <element name="nurWirkstoffeBereitstellen" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ZusammensetzungSuchParameter">
+    <sequence>
+     <element name="praeparatNummer" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="pzn" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="registerNummer" nillable="true" minOccurs="0" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="zusammensetzungenEinerArzneiSpezialitaetBereitstellenResponse">
+    <complexType>
+     <sequence>
+      <element name="zusammensetzungenEinerArzneiSpezialitaetBereitstellenReturn" type="impl:ZusammensetzungenEinerArzneiSpezialitaetBereitstellenErgebnis"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="Zusammensetzung">
+    <sequence>
+     <element name="arzneistoffArt" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="arzneistoffCode" nillable="true" type="xsd:string"/>
+     <element name="bezeichnung" nillable="true" type="xsd:string"/>
+     <element name="entsprichtKz" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="indivStoffCode" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="interaktionsKz" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="menge" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="mengeText" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="mengenEinheit" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="praeparatNummer" nillable="true" type="xsd:string"/>
+     <element name="zusammensetzungPosition" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ZusammensetzungenSuchErgebnis">
+    <sequence>
+     <element name="zusammensetzungSuchParameter" nillable="true" minOccurs="0" type="impl:ZusammensetzungSuchParameter"/>
+     <element name="zusammensetzung" maxOccurs="unbounded" nillable="true" minOccurs="0" type="impl:Zusammensetzung"/>
+    </sequence>
+   </complexType>
+   <complexType name="ZusammensetzungenEinerArzneiSpezialitaetBereitstellenErgebnis">
+    <sequence>
+     <element name="verarbeitungsInformation" nillable="true" type="impl:VerarbeitungsInformation"/>
+     <element name="zusammensetzungenSuchErgebnis" maxOccurs="unbounded" nillable="true" minOccurs="0" type="impl:ZusammensetzungenSuchErgebnis"/>
+    </sequence>
+   </complexType>
+   <element name="pruefrelevanteStoffListeEinerArzneiSpezialitaetBereitstellen">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="praeparatNummer" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="pruefrelevanteStoffListeEinerArzneiSpezialitaetBereitstellenResponse">
+    <complexType>
+     <sequence>
+      <element name="pruefrelevanteStoffListeEinerArzneiSpezialitaetBereitstellenReturn" type="impl:PruefrelevanteStoffListeEinerArzneiSpezialitaetBereitstellenErgebnis"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="PruefrelevanteStoffListeEinerArzneiSpezialitaetBereitstellenErgebnis">
+    <sequence>
+     <element maxOccurs="unbounded" name="stoffListe" nillable="true" minOccurs="0" type="impl:Zusammensetzung"/>
+     <element name="verarbeitungsInformation" nillable="true" minOccurs="0" type="impl:VerarbeitungsInformation"/>
+    </sequence>
+   </complexType>
+   <element name="arzneiSpezialitaetPruefen">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="pznListe" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="arzneiSpezialitaetPruefenResponse">
+    <complexType>
+     <sequence>
+      <element name="arzneiSpezialitaetPruefenReturn" type="impl:ArzneiSpezialitaetPruefenErgebnis"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArzneiSpezialitaetPruefenErgebnis">
+    <sequence>
+     <element name="geplanteMedikation" nillable="true" minOccurs="0" type="impl:MedikationsContainer"/>
+     <element name="verarbeitungsInformation" nillable="true" minOccurs="0" type="impl:VerarbeitungsInformation"/>
+    </sequence>
+   </complexType>
+   <element name="verarbeitungsAbbruchProtokollieren">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="svNummer" type="xsd:string"/>
+      <element name="kommentarZuAbbruch" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="verarbeitungsAbbruchProtokollierenResponse">
+    <complexType>
+     <sequence>
+      <element name="verarbeitungsAbbruchProtokollierenReturn" type="impl:VerarbeitungsInformation"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="emdbSystemParameterBereitstellen">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="emdbSystemParameterBereitstellenResponse">
+    <complexType>
+     <sequence>
+      <element name="emdbSystemParameterBereitstellenReturn" type="impl:EmdbSystemParameterBereitstellenErgebnis"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="EmdbSystemParameterBereitstellenErgebnis">
+    <sequence>
+     <element maxOccurs="unbounded" name="parameterName" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element maxOccurs="unbounded" name="parameterWert" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="verarbeitungsInformation" nillable="true" minOccurs="0" type="impl:VerarbeitungsInformation"/>
+    </sequence>
+   </complexType>
+   <element name="checkStatus">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="checkStatusResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="checkStatusReturn" type="tns1:Property"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://soap.base.client.chipkarte.at">
+   <import namespace="http://exceptions.soap.emedik.client.chipkarte.at"/>
+   <import namespace="http://soap.emedik.client.chipkarte.at"/>
+   <import namespace="http://exceptions.soap.base.client.chipkarte.at"/>
+   <complexType name="SvPerson">
+    <sequence>
+     <element name="geburtsdatum" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="geschlecht" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="nachname" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="svNummer" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="titelHinten" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="titelVorne" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="vorname" nillable="true" minOccurs="0" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Property">
+    <sequence>
+     <element name="key" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="value" nillable="true" minOccurs="0" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://exceptions.soap.base.client.chipkarte.at">
+   <import namespace="http://exceptions.soap.emedik.client.chipkarte.at"/>
+   <import namespace="http://soap.base.client.chipkarte.at"/>
+   <import namespace="http://soap.emedik.client.chipkarte.at"/>
+   <complexType name="BaseException">
+    <sequence>
+     <element name="code" nillable="true" minOccurs="0" type="xsd:string"/>
+     <element name="errorCode" type="xsd:int"/>
+     <element name="message" nillable="true" minOccurs="0" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="AccessException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="CardException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="DialogException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="ServiceException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+  <schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://exceptions.soap.emedik.client.chipkarte.at">
+   <import namespace="http://soap.base.client.chipkarte.at"/>
+   <import namespace="http://soap.emedik.client.chipkarte.at"/>
+   <import namespace="http://exceptions.soap.base.client.chipkarte.at"/>
+   <complexType name="EmedikException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="EmedikInvalidParameterException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="EmedikEmdbException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence>
+       <element maxOccurs="unbounded" name="argumentListe" nillable="true"  minOccurs="0" type="xsd:string"/>
+       <element maxOccurs="unbounded" name="datenFeld" nillable="true" minOccurs="0" type="xsd:string"/>
+       <element name="datenStruktur" nillable="true" type="xsd:string"/>
+       <element name="referenzId" type="xsd:long"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="EmedikCdaValidationException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence>
+       <element name="validationMessage" nillable="true" minOccurs="0" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="EmedikFormatException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence>
+       <element name="pfad" nillable="true" minOccurs="0" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="medikationsListeAbrufenRequest">
+
+      <wsdl:part element="impl:medikationsListeAbrufen" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="medikationsHistorieEinerArzneiSpezialitaetAbrufenResponse">
+
+      <wsdl:part element="impl:medikationsHistorieEinerArzneiSpezialitaetAbrufenResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="arzneiStoffInformationenBereitstellenResponse">
+
+      <wsdl:part element="impl:arzneiStoffInformationenBereitstellenResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="abgabenVorbereitenResponse">
+
+      <wsdl:part element="impl:abgabenVorbereitenResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="dosierungsAenderungenVorbereitenResponse">
+
+      <wsdl:part element="impl:dosierungsAenderungenVorbereitenResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="dosierungsAenderungenSpeichernRequest">
+
+      <wsdl:part element="impl:dosierungsAenderungenSpeichern" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="emdbSystemParameterBereitstellenResponse">
+
+      <wsdl:part element="impl:emdbSystemParameterBereitstellenResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="pruefrelevanteStoffListeEinerArzneiSpezialitaetBereitstellenResponse">
+
+      <wsdl:part element="impl:pruefrelevanteStoffListeEinerArzneiSpezialitaetBereitstellenResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="verordnungenLoeschenRequest">
+
+      <wsdl:part element="impl:verordnungenLoeschen" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="zustimmungErklaerenRequest">
+
+      <wsdl:part element="impl:zustimmungErklaeren" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="verordnungenAnlegenVorbereitenCdaResponse">
+
+      <wsdl:part element="impl:verordnungenAnlegenVorbereitenCdaResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="pruefrelevanteStoffListeEinerArzneiSpezialitaetBereitstellenRequest">
+
+      <wsdl:part element="impl:pruefrelevanteStoffListeEinerArzneiSpezialitaetBereitstellen" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="interaktionsInformationBereitstellenRequest">
+
+      <wsdl:part element="impl:interaktionsInformationBereitstellen" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="verordnungenAnlegenVorbereitenCdaRequest">
+
+      <wsdl:part element="impl:verordnungenAnlegenVorbereitenCda" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="atcCodeInformationenBereitstellenRequest">
+
+      <wsdl:part element="impl:atcCodeInformationenBereitstellen" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="abgabenSpeichernRequest">
+
+      <wsdl:part element="impl:abgabenSpeichern" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="emdbSystemParameterBereitstellenRequest">
+
+      <wsdl:part element="impl:emdbSystemParameterBereitstellen" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="einwilligungAnlegenRequest">
+
+      <wsdl:part element="impl:einwilligungAnlegen" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="interaktionsInformationBereitstellenResponse">
+
+      <wsdl:part element="impl:interaktionsInformationBereitstellenResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="patientenDatenAbfragenResponse">
+
+      <wsdl:part element="impl:patientenDatenAbfragenResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="EmedikException">
+
+      <wsdl:part element="impl:fault4" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="DialogException">
+
+      <wsdl:part element="impl:fault2" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="ServiceException">
+
+      <wsdl:part element="impl:fault3" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="checkStatusResponse">
+
+      <wsdl:part element="impl:checkStatusResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="arzneiSpezialitaetAbsetzenResponse">
+
+      <wsdl:part element="impl:arzneiSpezialitaetAbsetzenResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="historieEinerWarnungAbrufenRequest">
+
+      <wsdl:part element="impl:historieEinerWarnungAbrufen" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="abgabenVorbereitenCdaResponse">
+
+      <wsdl:part element="impl:abgabenVorbereitenCdaResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="verordnungenSpeichernRequest">
+
+      <wsdl:part element="impl:verordnungenSpeichern" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="arzneiStoffInformationenBereitstellenRequest">
+
+      <wsdl:part element="impl:arzneiStoffInformationenBereitstellen" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="verordnungenSpeichernResponse">
+
+      <wsdl:part element="impl:verordnungenSpeichernResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="atcCodeInformationenBereitstellenResponse">
+
+      <wsdl:part element="impl:atcCodeInformationenBereitstellenResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="vorbelegungVerordnungenErmittelnRequest">
+
+      <wsdl:part element="impl:vorbelegungVerordnungenErmitteln" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="zustimmungWiderrufenResponse">
+
+      <wsdl:part element="impl:zustimmungWiderrufenResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="medikationsUebersichtAbrufenRequest">
+
+      <wsdl:part element="impl:medikationsUebersichtAbrufen" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="vorbelegungAbgabenErmittelnRequest">
+
+      <wsdl:part element="impl:vorbelegungAbgabenErmitteln" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="EmedikCdaValidationException">
+
+      <wsdl:part element="impl:fault7" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="EmedikFormatException">
+
+      <wsdl:part element="impl:fault8" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="verarbeitungsAbbruchProtokollierenRequest">
+
+      <wsdl:part element="impl:verarbeitungsAbbruchProtokollieren" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="medikationsContainerFuerAbgabenVorbereitenRequest">
+
+      <wsdl:part element="impl:medikationsContainerFuerAbgabenVorbereiten" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="arzneiSpezialitaetAbsetzenRequest">
+
+      <wsdl:part element="impl:arzneiSpezialitaetAbsetzen" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="verordnungenLoeschenResponse">
+
+      <wsdl:part element="impl:verordnungenLoeschenResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="artikelInformationenBereitstellenResponse">
+
+      <wsdl:part element="impl:artikelInformationenBereitstellenResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="CardException">
+
+      <wsdl:part element="impl:fault1" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="zustimmungErklaerenResponse">
+
+      <wsdl:part element="impl:zustimmungErklaerenResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="abgabenVorbereitenCdaRequest">
+
+      <wsdl:part element="impl:abgabenVorbereitenCda" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="verordnungenAbrufenCdaResponse">
+
+      <wsdl:part element="impl:verordnungenAbrufenCdaResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="historieEinerWarnungAbrufenResponse">
+
+      <wsdl:part element="impl:historieEinerWarnungAbrufenResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="checkStatusRequest">
+
+      <wsdl:part element="impl:checkStatus" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="vorbelegungAbgabenErmittelnResponse">
+
+      <wsdl:part element="impl:vorbelegungAbgabenErmittelnResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="verordnungenAnlegenVorbereitenResponse">
+
+      <wsdl:part element="impl:verordnungenAnlegenVorbereitenResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="einwilligungAnlegenResponse">
+
+      <wsdl:part element="impl:einwilligungAnlegenResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="abgabenSpeichernResponse">
+
+      <wsdl:part element="impl:abgabenSpeichernResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="verordnungenAnlegenVorbereitenRequest">
+
+      <wsdl:part element="impl:verordnungenAnlegenVorbereiten" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="sisKurzInformationenBereitstellenRequest">
+
+      <wsdl:part element="impl:sisKurzInformationenBereitstellen" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="sisKurzInformationenBereitstellenResponse">
+
+      <wsdl:part element="impl:sisKurzInformationenBereitstellenResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="zusammensetzungenEinerArzneiSpezialitaetBereitstellenRequest">
+
+      <wsdl:part element="impl:zusammensetzungenEinerArzneiSpezialitaetBereitstellen" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="medikationsHistorieEinerArzneiSpezialitaetAbrufenRequest">
+
+      <wsdl:part element="impl:medikationsHistorieEinerArzneiSpezialitaetAbrufen" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="AccessException">
+
+      <wsdl:part element="impl:fault" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="zustimmungWiderrufenRequest">
+
+      <wsdl:part element="impl:zustimmungWiderrufen" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="vorbelegungVerordnungenErmittelnResponse">
+
+      <wsdl:part element="impl:vorbelegungVerordnungenErmittelnResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="arzneiSpezialitaetPruefenResponse">
+
+      <wsdl:part element="impl:arzneiSpezialitaetPruefenResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="verordnungenAbrufenCdaRequest">
+
+      <wsdl:part element="impl:verordnungenAbrufenCda" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="patientenDatenAbfragenRequest">
+
+      <wsdl:part element="impl:patientenDatenAbfragen" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="medikationsContainerFuerAbgabenVorbereitenResponse">
+
+      <wsdl:part element="impl:medikationsContainerFuerAbgabenVorbereitenResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="abgabenAbrufenCdaRequest">
+
+      <wsdl:part element="impl:abgabenAbrufenCda" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="zusammensetzungenEinerArzneiSpezialitaetBereitstellenResponse">
+
+      <wsdl:part element="impl:zusammensetzungenEinerArzneiSpezialitaetBereitstellenResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="dosierungsAenderungenSpeichernResponse">
+
+      <wsdl:part element="impl:dosierungsAenderungenSpeichernResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="abgabenVorbereitenRequest">
+
+      <wsdl:part element="impl:abgabenVorbereiten" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="verarbeitungsAbbruchProtokollierenResponse">
+
+      <wsdl:part element="impl:verarbeitungsAbbruchProtokollierenResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="medikationsListeAbrufenResponse">
+
+      <wsdl:part element="impl:medikationsListeAbrufenResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="dosierungsAenderungenVorbereitenRequest">
+
+      <wsdl:part element="impl:dosierungsAenderungenVorbereiten" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="arzneiSpezialitaetPruefenRequest">
+
+      <wsdl:part element="impl:arzneiSpezialitaetPruefen" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="EmedikInvalidParameterException">
+
+      <wsdl:part element="impl:fault5" name="fault"/>
+
+   </wsdl:message>
+   
+   <wsdl:message name="EmedikEmdbException">
+
+      <wsdl:part element="impl:fault6" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="medikationsUebersichtAbrufenResponse">
+
+      <wsdl:part element="impl:medikationsUebersichtAbrufenResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="abgabenAbrufenCdaResponse">
+
+      <wsdl:part element="impl:abgabenAbrufenCdaResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="artikelInformationenBereitstellenRequest">
+
+      <wsdl:part element="impl:artikelInformationenBereitstellen" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="IEmedikService">
+
+      <wsdl:operation name="zustimmungErklaeren">
+
+         <wsdl:input message="impl:zustimmungErklaerenRequest" name="zustimmungErklaerenRequest"/>
+
+         <wsdl:output message="impl:zustimmungErklaerenResponse" name="zustimmungErklaerenResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:CardException" name="CardException"/>
+
+         <wsdl:fault message="impl:EmedikInvalidParameterException" name="EmedikInvalidParameterException"/>
+
+         <wsdl:fault message="impl:EmedikException" name="EmedikException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         
+         <wsdl:fault message="impl:EmedikEmdbException" name="EmedikEmdbException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="zustimmungWiderrufen">
+
+         <wsdl:input message="impl:zustimmungWiderrufenRequest" name="zustimmungWiderrufenRequest"/>
+
+         <wsdl:output message="impl:zustimmungWiderrufenResponse" name="zustimmungWiderrufenResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:CardException" name="CardException"/>
+
+         <wsdl:fault message="impl:EmedikInvalidParameterException" name="EmedikInvalidParameterException"/>
+
+         <wsdl:fault message="impl:EmedikException" name="EmedikException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         
+         <wsdl:fault message="impl:EmedikEmdbException" name="EmedikEmdbException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="einwilligungAnlegen">
+
+         <wsdl:input message="impl:einwilligungAnlegenRequest" name="einwilligungAnlegenRequest"/>
+
+         <wsdl:output message="impl:einwilligungAnlegenResponse" name="einwilligungAnlegenResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:CardException" name="CardException"/>
+
+         <wsdl:fault message="impl:EmedikInvalidParameterException" name="EmedikInvalidParameterException"/>
+
+         <wsdl:fault message="impl:EmedikException" name="EmedikException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         
+         <wsdl:fault message="impl:EmedikEmdbException" name="EmedikEmdbException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="patientenDatenAbfragen">
+
+         <wsdl:input message="impl:patientenDatenAbfragenRequest" name="patientenDatenAbfragenRequest"/>
+
+         <wsdl:output message="impl:patientenDatenAbfragenResponse" name="patientenDatenAbfragenResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:EmedikInvalidParameterException" name="EmedikInvalidParameterException"/>
+
+         <wsdl:fault message="impl:EmedikException" name="EmedikException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         
+         <wsdl:fault message="impl:EmedikEmdbException" name="EmedikEmdbException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="medikationsUebersichtAbrufen">
+
+         <wsdl:input message="impl:medikationsUebersichtAbrufenRequest" name="medikationsUebersichtAbrufenRequest"/>
+
+         <wsdl:output message="impl:medikationsUebersichtAbrufenResponse" name="medikationsUebersichtAbrufenResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:EmedikInvalidParameterException" name="EmedikInvalidParameterException"/>
+
+         <wsdl:fault message="impl:EmedikException" name="EmedikException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         
+         <wsdl:fault message="impl:EmedikEmdbException" name="EmedikEmdbException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="medikationsListeAbrufen">
+
+         <wsdl:input message="impl:medikationsListeAbrufenRequest" name="medikationsListeAbrufenRequest"/>
+
+         <wsdl:output message="impl:medikationsListeAbrufenResponse" name="medikationsListeAbrufenResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:EmedikInvalidParameterException" name="EmedikInvalidParameterException"/>
+
+         <wsdl:fault message="impl:EmedikException" name="EmedikException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         
+         <wsdl:fault message="impl:EmedikEmdbException" name="EmedikEmdbException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="historieEinerWarnungAbrufen">
+
+         <wsdl:input message="impl:historieEinerWarnungAbrufenRequest" name="historieEinerWarnungAbrufenRequest"/>
+
+         <wsdl:output message="impl:historieEinerWarnungAbrufenResponse" name="historieEinerWarnungAbrufenResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:EmedikInvalidParameterException" name="EmedikInvalidParameterException"/>
+
+         <wsdl:fault message="impl:EmedikException" name="EmedikException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         
+         <wsdl:fault message="impl:EmedikEmdbException" name="EmedikEmdbException"/>
+         
+         <wsdl:fault message="impl:EmedikFormatException" name="EmedikFormatException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="medikationsHistorieEinerArzneiSpezialitaetAbrufen">
+
+         <wsdl:input message="impl:medikationsHistorieEinerArzneiSpezialitaetAbrufenRequest" name="medikationsHistorieEinerArzneiSpezialitaetAbrufenRequest"/>
+
+         <wsdl:output message="impl:medikationsHistorieEinerArzneiSpezialitaetAbrufenResponse" name="medikationsHistorieEinerArzneiSpezialitaetAbrufenResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:EmedikInvalidParameterException" name="EmedikInvalidParameterException"/>
+
+         <wsdl:fault message="impl:EmedikException" name="EmedikException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         
+         <wsdl:fault message="impl:EmedikEmdbException" name="EmedikEmdbException"/>
+
+         <wsdl:fault message="impl:EmedikFormatException" name="EmedikFormatException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="verordnungenAbrufenCda">
+
+         <wsdl:input message="impl:verordnungenAbrufenCdaRequest" name="verordnungenAbrufenCdaRequest"/>
+
+         <wsdl:output message="impl:verordnungenAbrufenCdaResponse" name="verordnungenAbrufenCdaResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:EmedikInvalidParameterException" name="EmedikInvalidParameterException"/>
+
+         <wsdl:fault message="impl:EmedikEmdbException" name="EmedikEmdbException"/>
+
+         <wsdl:fault message="impl:EmedikException" name="EmedikException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="abgabenAbrufenCda">
+
+         <wsdl:input message="impl:abgabenAbrufenCdaRequest" name="abgabenAbrufenCdaRequest"/>
+
+         <wsdl:output message="impl:abgabenAbrufenCdaResponse" name="abgabenAbrufenCdaResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:EmedikInvalidParameterException" name="EmedikInvalidParameterException"/>
+
+         <wsdl:fault message="impl:EmedikEmdbException" name="EmedikEmdbException"/>
+
+         <wsdl:fault message="impl:EmedikException" name="EmedikException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="vorbelegungAbgabenErmitteln">
+
+         <wsdl:input message="impl:vorbelegungAbgabenErmittelnRequest" name="vorbelegungAbgabenErmittelnRequest"/>
+
+         <wsdl:output message="impl:vorbelegungAbgabenErmittelnResponse" name="vorbelegungAbgabenErmittelnResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:EmedikInvalidParameterException" name="EmedikInvalidParameterException"/>
+
+         <wsdl:fault message="impl:EmedikException" name="EmedikException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         
+         <wsdl:fault message="impl:EmedikEmdbException" name="EmedikEmdbException"/>
+
+         <wsdl:fault message="impl:EmedikFormatException" name="EmedikFormatException"/>
+         
+      </wsdl:operation>
+
+      <wsdl:operation name="abgabenVorbereiten">
+
+         <wsdl:input message="impl:abgabenVorbereitenRequest" name="abgabenVorbereitenRequest"/>
+
+         <wsdl:output message="impl:abgabenVorbereitenResponse" name="abgabenVorbereitenResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:EmedikInvalidParameterException" name="EmedikInvalidParameterException"/>
+
+         <wsdl:fault message="impl:EmedikException" name="EmedikException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         
+         <wsdl:fault message="impl:EmedikEmdbException" name="EmedikEmdbException"/>
+
+         <wsdl:fault message="impl:EmedikFormatException" name="EmedikFormatException"/>
+         
+      </wsdl:operation>
+
+      <wsdl:operation name="medikationsContainerFuerAbgabenVorbereiten">
+
+         <wsdl:input message="impl:medikationsContainerFuerAbgabenVorbereitenRequest" name="medikationsContainerFuerAbgabenVorbereitenRequest"/>
+
+         <wsdl:output message="impl:medikationsContainerFuerAbgabenVorbereitenResponse" name="medikationsContainerFuerAbgabenVorbereitenResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:EmedikInvalidParameterException" name="EmedikInvalidParameterException"/>
+
+         <wsdl:fault message="impl:EmedikException" name="EmedikException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         
+         <wsdl:fault message="impl:EmedikEmdbException" name="EmedikEmdbException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="abgabenSpeichern">
+
+         <wsdl:input message="impl:abgabenSpeichernRequest" name="abgabenSpeichernRequest"/>
+
+         <wsdl:output message="impl:abgabenSpeichernResponse" name="abgabenSpeichernResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:EmedikInvalidParameterException" name="EmedikInvalidParameterException"/>
+
+         <wsdl:fault message="impl:EmedikException" name="EmedikException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         
+         <wsdl:fault message="impl:EmedikEmdbException" name="EmedikEmdbException"/>
+
+         <wsdl:fault message="impl:EmedikFormatException" name="EmedikFormatException"/>
+         
+      </wsdl:operation>
+
+      <wsdl:operation name="dosierungsAenderungenVorbereiten">
+
+         <wsdl:input message="impl:dosierungsAenderungenVorbereitenRequest" name="dosierungsAenderungenVorbereitenRequest"/>
+
+         <wsdl:output message="impl:dosierungsAenderungenVorbereitenResponse" name="dosierungsAenderungenVorbereitenResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:EmedikInvalidParameterException" name="EmedikInvalidParameterException"/>
+
+         <wsdl:fault message="impl:EmedikException" name="EmedikException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         
+         <wsdl:fault message="impl:EmedikEmdbException" name="EmedikEmdbException"/>
+
+         <wsdl:fault message="impl:EmedikFormatException" name="EmedikFormatException"/>
+         
+      </wsdl:operation>
+
+      <wsdl:operation name="dosierungsAenderungenSpeichern">
+
+         <wsdl:input message="impl:dosierungsAenderungenSpeichernRequest" name="dosierungsAenderungenSpeichernRequest"/>
+
+         <wsdl:output message="impl:dosierungsAenderungenSpeichernResponse" name="dosierungsAenderungenSpeichernResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:EmedikInvalidParameterException" name="EmedikInvalidParameterException"/>
+
+         <wsdl:fault message="impl:EmedikException" name="EmedikException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         
+         <wsdl:fault message="impl:EmedikEmdbException" name="EmedikEmdbException"/>
+         
+         <wsdl:fault message="impl:EmedikFormatException" name="EmedikFormatException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="arzneiSpezialitaetAbsetzen">
+
+         <wsdl:input message="impl:arzneiSpezialitaetAbsetzenRequest" name="arzneiSpezialitaetAbsetzenRequest"/>
+
+         <wsdl:output message="impl:arzneiSpezialitaetAbsetzenResponse" name="arzneiSpezialitaetAbsetzenResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:EmedikInvalidParameterException" name="EmedikInvalidParameterException"/>
+
+         <wsdl:fault message="impl:EmedikException" name="EmedikException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         
+         <wsdl:fault message="impl:EmedikEmdbException" name="EmedikEmdbException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="abgabenVorbereitenCda">
+
+         <wsdl:input message="impl:abgabenVorbereitenCdaRequest" name="abgabenVorbereitenCdaRequest"/>
+
+         <wsdl:output message="impl:abgabenVorbereitenCdaResponse" name="abgabenVorbereitenCdaResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:EmedikInvalidParameterException" name="EmedikInvalidParameterException"/>
+
+         <wsdl:fault message="impl:EmedikEmdbException" name="EmedikEmdbException"/>
+
+         <wsdl:fault message="impl:EmedikCdaValidationException" name="EmedikCdaValidationException"/>
+
+         <wsdl:fault message="impl:EmedikException" name="EmedikException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         
+         <wsdl:fault message="impl:EmedikFormatException" name="EmedikFormatException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="vorbelegungVerordnungenErmitteln">
+
+         <wsdl:input message="impl:vorbelegungVerordnungenErmittelnRequest" name="vorbelegungVerordnungenErmittelnRequest"/>
+
+         <wsdl:output message="impl:vorbelegungVerordnungenErmittelnResponse" name="vorbelegungVerordnungenErmittelnResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:EmedikInvalidParameterException" name="EmedikInvalidParameterException"/>
+
+         <wsdl:fault message="impl:EmedikException" name="EmedikException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         
+         <wsdl:fault message="impl:EmedikEmdbException" name="EmedikEmdbException"/>
+
+         <wsdl:fault message="impl:EmedikFormatException" name="EmedikFormatException"/>
+         
+      </wsdl:operation>
+
+      <wsdl:operation name="verordnungenAnlegenVorbereiten">
+
+         <wsdl:input message="impl:verordnungenAnlegenVorbereitenRequest" name="verordnungenAnlegenVorbereitenRequest"/>
+
+         <wsdl:output message="impl:verordnungenAnlegenVorbereitenResponse" name="verordnungenAnlegenVorbereitenResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:EmedikInvalidParameterException" name="EmedikInvalidParameterException"/>
+
+         <wsdl:fault message="impl:EmedikException" name="EmedikException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         
+         <wsdl:fault message="impl:EmedikEmdbException" name="EmedikEmdbException"/>
+         
+         <wsdl:fault message="impl:EmedikFormatException" name="EmedikFormatException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="verordnungenSpeichern">
+
+         <wsdl:input message="impl:verordnungenSpeichernRequest" name="verordnungenSpeichernRequest"/>
+
+         <wsdl:output message="impl:verordnungenSpeichernResponse" name="verordnungenSpeichernResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:EmedikInvalidParameterException" name="EmedikInvalidParameterException"/>
+
+         <wsdl:fault message="impl:EmedikException" name="EmedikException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         
+         <wsdl:fault message="impl:EmedikEmdbException" name="EmedikEmdbException"/>
+         
+         <wsdl:fault message="impl:EmedikFormatException" name="EmedikFormatException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="verordnungenLoeschen">
+
+         <wsdl:input message="impl:verordnungenLoeschenRequest" name="verordnungenLoeschenRequest"/>
+
+         <wsdl:output message="impl:verordnungenLoeschenResponse" name="verordnungenLoeschenResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:EmedikInvalidParameterException" name="EmedikInvalidParameterException"/>
+
+         <wsdl:fault message="impl:EmedikException" name="EmedikException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         
+         <wsdl:fault message="impl:EmedikEmdbException" name="EmedikEmdbException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="verordnungenAnlegenVorbereitenCda">
+
+         <wsdl:input message="impl:verordnungenAnlegenVorbereitenCdaRequest" name="verordnungenAnlegenVorbereitenCdaRequest"/>
+
+         <wsdl:output message="impl:verordnungenAnlegenVorbereitenCdaResponse" name="verordnungenAnlegenVorbereitenCdaResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:EmedikInvalidParameterException" name="EmedikInvalidParameterException"/>
+
+         <wsdl:fault message="impl:EmedikEmdbException" name="EmedikEmdbException"/>
+
+         <wsdl:fault message="impl:EmedikCdaValidationException" name="EmedikCdaValidationException"/>
+
+         <wsdl:fault message="impl:EmedikException" name="EmedikException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         
+         <wsdl:fault message="impl:EmedikFormatException" name="EmedikFormatException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="artikelInformationenBereitstellen">
+
+         <wsdl:input message="impl:artikelInformationenBereitstellenRequest" name="artikelInformationenBereitstellenRequest"/>
+
+         <wsdl:output message="impl:artikelInformationenBereitstellenResponse" name="artikelInformationenBereitstellenResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:EmedikInvalidParameterException" name="EmedikInvalidParameterException"/>
+
+         <wsdl:fault message="impl:EmedikException" name="EmedikException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         
+         <wsdl:fault message="impl:EmedikEmdbException" name="EmedikEmdbException"/>
+         
+         <wsdl:fault message="impl:EmedikFormatException" name="EmedikFormatException"/>         
+
+      </wsdl:operation>
+
+      <wsdl:operation name="sisKurzInformationenBereitstellen">
+
+         <wsdl:input message="impl:sisKurzInformationenBereitstellenRequest" name="sisKurzInformationenBereitstellenRequest"/>
+
+         <wsdl:output message="impl:sisKurzInformationenBereitstellenResponse" name="sisKurzInformationenBereitstellenResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:EmedikInvalidParameterException" name="EmedikInvalidParameterException"/>
+
+         <wsdl:fault message="impl:EmedikException" name="EmedikException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         
+         <wsdl:fault message="impl:EmedikEmdbException" name="EmedikEmdbException"/>
+         
+         <wsdl:fault message="impl:EmedikFormatException" name="EmedikFormatException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="interaktionsInformationBereitstellen">
+
+         <wsdl:input message="impl:interaktionsInformationBereitstellenRequest" name="interaktionsInformationBereitstellenRequest"/>
+
+         <wsdl:output message="impl:interaktionsInformationBereitstellenResponse" name="interaktionsInformationBereitstellenResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:EmedikInvalidParameterException" name="EmedikInvalidParameterException"/>
+
+         <wsdl:fault message="impl:EmedikException" name="EmedikException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         
+         <wsdl:fault message="impl:EmedikEmdbException" name="EmedikEmdbException"/>
+         
+         <wsdl:fault message="impl:EmedikFormatException" name="EmedikFormatException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="atcCodeInformationenBereitstellen">
+
+         <wsdl:input message="impl:atcCodeInformationenBereitstellenRequest" name="atcCodeInformationenBereitstellenRequest"/>
+
+         <wsdl:output message="impl:atcCodeInformationenBereitstellenResponse" name="atcCodeInformationenBereitstellenResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:EmedikInvalidParameterException" name="EmedikInvalidParameterException"/>
+
+         <wsdl:fault message="impl:EmedikException" name="EmedikException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         
+         <wsdl:fault message="impl:EmedikEmdbException" name="EmedikEmdbException"/>
+         
+         <wsdl:fault message="impl:EmedikFormatException" name="EmedikFormatException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="arzneiStoffInformationenBereitstellen">
+
+         <wsdl:input message="impl:arzneiStoffInformationenBereitstellenRequest" name="arzneiStoffInformationenBereitstellenRequest"/>
+
+         <wsdl:output message="impl:arzneiStoffInformationenBereitstellenResponse" name="arzneiStoffInformationenBereitstellenResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:EmedikInvalidParameterException" name="EmedikInvalidParameterException"/>
+
+         <wsdl:fault message="impl:EmedikException" name="EmedikException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+         <wsdl:fault message="impl:EmedikEmdbException" name="EmedikEmdbException"/>
+         
+         <wsdl:fault message="impl:EmedikFormatException" name="EmedikFormatException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="zusammensetzungenEinerArzneiSpezialitaetBereitstellen">
+
+         <wsdl:input message="impl:zusammensetzungenEinerArzneiSpezialitaetBereitstellenRequest" name="zusammensetzungenEinerArzneiSpezialitaetBereitstellenRequest"/>
+
+         <wsdl:output message="impl:zusammensetzungenEinerArzneiSpezialitaetBereitstellenResponse" name="zusammensetzungenEinerArzneiSpezialitaetBereitstellenResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:EmedikInvalidParameterException" name="EmedikInvalidParameterException"/>
+
+         <wsdl:fault message="impl:EmedikException" name="EmedikException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         
+         <wsdl:fault message="impl:EmedikEmdbException" name="EmedikEmdbException"/>
+         
+         <wsdl:fault message="impl:EmedikFormatException" name="EmedikFormatException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="pruefrelevanteStoffListeEinerArzneiSpezialitaetBereitstellen">
+
+         <wsdl:input message="impl:pruefrelevanteStoffListeEinerArzneiSpezialitaetBereitstellenRequest" name="pruefrelevanteStoffListeEinerArzneiSpezialitaetBereitstellenRequest"/>
+
+         <wsdl:output message="impl:pruefrelevanteStoffListeEinerArzneiSpezialitaetBereitstellenResponse" name="pruefrelevanteStoffListeEinerArzneiSpezialitaetBereitstellenResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:EmedikInvalidParameterException" name="EmedikInvalidParameterException"/>
+
+         <wsdl:fault message="impl:EmedikException" name="EmedikException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         
+         <wsdl:fault message="impl:EmedikEmdbException" name="EmedikEmdbException"/>
+         
+         <wsdl:fault message="impl:EmedikFormatException" name="EmedikFormatException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="arzneiSpezialitaetPruefen">
+
+         <wsdl:input message="impl:arzneiSpezialitaetPruefenRequest" name="arzneiSpezialitaetPruefenRequest"/>
+
+         <wsdl:output message="impl:arzneiSpezialitaetPruefenResponse" name="arzneiSpezialitaetPruefenResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:EmedikInvalidParameterException" name="EmedikInvalidParameterException"/>
+
+         <wsdl:fault message="impl:EmedikException" name="EmedikException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         
+         <wsdl:fault message="impl:EmedikEmdbException" name="EmedikEmdbException"/>
+         
+         <wsdl:fault message="impl:EmedikFormatException" name="EmedikFormatException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="verarbeitungsAbbruchProtokollieren">
+
+         <wsdl:input message="impl:verarbeitungsAbbruchProtokollierenRequest" name="verarbeitungsAbbruchProtokollierenRequest"/>
+
+         <wsdl:output message="impl:verarbeitungsAbbruchProtokollierenResponse" name="verarbeitungsAbbruchProtokollierenResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:EmedikInvalidParameterException" name="EmedikInvalidParameterException"/>
+
+         <wsdl:fault message="impl:EmedikException" name="EmedikException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         
+         <wsdl:fault message="impl:EmedikEmdbException" name="EmedikEmdbException"/>
+         
+         <wsdl:fault message="impl:EmedikFormatException" name="EmedikFormatException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="emdbSystemParameterBereitstellen">
+
+         <wsdl:input message="impl:emdbSystemParameterBereitstellenRequest" name="emdbSystemParameterBereitstellenRequest"/>
+
+         <wsdl:output message="impl:emdbSystemParameterBereitstellenResponse" name="emdbSystemParameterBereitstellenResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:EmedikException" name="EmedikException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         
+         <wsdl:fault message="impl:EmedikEmdbException" name="EmedikEmdbException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="checkStatus">
+
+         <wsdl:input message="impl:checkStatusRequest" name="checkStatusRequest"/>
+
+         <wsdl:output message="impl:checkStatusResponse" name="checkStatusResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="soap_emedik_1.0SoapBinding" type="impl:IEmedikService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="zustimmungErklaeren">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="zustimmungErklaerenRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="zustimmungErklaerenResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CardException">
+
+            <wsdlsoap:fault name="CardException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikInvalidParameterException">
+
+            <wsdlsoap:fault name="EmedikInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikException">
+
+            <wsdlsoap:fault name="EmedikException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+         
+         <wsdl:fault name="EmedikEmdbException">
+
+            <wsdlsoap:fault name="EmedikEmdbException" use="literal"/>
+
+         </wsdl:fault>
+         
+
+      </wsdl:operation>
+
+      <wsdl:operation name="zustimmungWiderrufen">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="zustimmungWiderrufenRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="zustimmungWiderrufenResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CardException">
+
+            <wsdlsoap:fault name="CardException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikInvalidParameterException">
+
+            <wsdlsoap:fault name="EmedikInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikException">
+
+            <wsdlsoap:fault name="EmedikException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+         
+         <wsdl:fault name="EmedikEmdbException">
+
+            <wsdlsoap:fault name="EmedikEmdbException" use="literal"/>
+
+         </wsdl:fault>
+         
+
+      </wsdl:operation>
+
+      <wsdl:operation name="einwilligungAnlegen">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="einwilligungAnlegenRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="einwilligungAnlegenResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CardException">
+
+            <wsdlsoap:fault name="CardException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikInvalidParameterException">
+
+            <wsdlsoap:fault name="EmedikInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikException">
+
+            <wsdlsoap:fault name="EmedikException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+         
+         <wsdl:fault name="EmedikEmdbException">
+
+            <wsdlsoap:fault name="EmedikEmdbException" use="literal"/>
+
+         </wsdl:fault>
+         
+
+      </wsdl:operation>
+
+      <wsdl:operation name="patientenDatenAbfragen">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="patientenDatenAbfragenRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="patientenDatenAbfragenResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikInvalidParameterException">
+
+            <wsdlsoap:fault name="EmedikInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikException">
+
+            <wsdlsoap:fault name="EmedikException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+         
+         <wsdl:fault name="EmedikEmdbException">
+
+            <wsdlsoap:fault name="EmedikEmdbException" use="literal"/>
+
+         </wsdl:fault>
+         
+
+      </wsdl:operation>
+
+      <wsdl:operation name="medikationsUebersichtAbrufen">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="medikationsUebersichtAbrufenRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="medikationsUebersichtAbrufenResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikInvalidParameterException">
+
+            <wsdlsoap:fault name="EmedikInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikException">
+
+            <wsdlsoap:fault name="EmedikException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+         
+           <wsdl:fault name="EmedikEmdbException">
+
+            <wsdlsoap:fault name="EmedikEmdbException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="medikationsListeAbrufen">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="medikationsListeAbrufenRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="medikationsListeAbrufenResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikInvalidParameterException">
+
+            <wsdlsoap:fault name="EmedikInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikException">
+
+            <wsdlsoap:fault name="EmedikException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+         
+         <wsdl:fault name="EmedikEmdbException">
+
+            <wsdlsoap:fault name="EmedikEmdbException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="historieEinerWarnungAbrufen">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="historieEinerWarnungAbrufenRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="historieEinerWarnungAbrufenResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikInvalidParameterException">
+
+            <wsdlsoap:fault name="EmedikInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikException">
+
+            <wsdlsoap:fault name="EmedikException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+         
+         <wsdl:fault name="EmedikEmdbException">
+
+            <wsdlsoap:fault name="EmedikEmdbException" use="literal"/>
+
+         </wsdl:fault>
+         
+         <wsdl:fault name="EmedikFormatException">
+
+            <wsdlsoap:fault name="EmedikFormatException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="medikationsHistorieEinerArzneiSpezialitaetAbrufen">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="medikationsHistorieEinerArzneiSpezialitaetAbrufenRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="medikationsHistorieEinerArzneiSpezialitaetAbrufenResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikInvalidParameterException">
+
+            <wsdlsoap:fault name="EmedikInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikException">
+
+            <wsdlsoap:fault name="EmedikException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+         
+         <wsdl:fault name="EmedikEmdbException">
+
+            <wsdlsoap:fault name="EmedikEmdbException" use="literal"/>
+
+         </wsdl:fault>
+         
+         <wsdl:fault name="EmedikFormatException">
+
+            <wsdlsoap:fault name="EmedikFormatException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="verordnungenAbrufenCda">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="verordnungenAbrufenCdaRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="verordnungenAbrufenCdaResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikInvalidParameterException">
+
+            <wsdlsoap:fault name="EmedikInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikEmdbException">
+
+            <wsdlsoap:fault name="EmedikEmdbException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikException">
+
+            <wsdlsoap:fault name="EmedikException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="abgabenAbrufenCda">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="abgabenAbrufenCdaRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="abgabenAbrufenCdaResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikInvalidParameterException">
+
+            <wsdlsoap:fault name="EmedikInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikEmdbException">
+
+            <wsdlsoap:fault name="EmedikEmdbException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikException">
+
+            <wsdlsoap:fault name="EmedikException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="vorbelegungAbgabenErmitteln">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="vorbelegungAbgabenErmittelnRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="vorbelegungAbgabenErmittelnResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikInvalidParameterException">
+
+            <wsdlsoap:fault name="EmedikInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikException">
+
+            <wsdlsoap:fault name="EmedikException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+         
+         <wsdl:fault name="EmedikEmdbException">
+
+            <wsdlsoap:fault name="EmedikEmdbException" use="literal"/>
+
+         </wsdl:fault>
+         
+         <wsdl:fault name="EmedikFormatException">
+
+            <wsdlsoap:fault name="EmedikFormatException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="abgabenVorbereiten">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="abgabenVorbereitenRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="abgabenVorbereitenResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikInvalidParameterException">
+
+            <wsdlsoap:fault name="EmedikInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikException">
+
+            <wsdlsoap:fault name="EmedikException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+         
+         <wsdl:fault name="EmedikEmdbException">
+
+            <wsdlsoap:fault name="EmedikEmdbException" use="literal"/>
+
+         </wsdl:fault>
+         
+         <wsdl:fault name="EmedikFormatException">
+
+            <wsdlsoap:fault name="EmedikFormatException" use="literal"/>
+
+         </wsdl:fault>
+         
+      </wsdl:operation>
+
+      <wsdl:operation name="medikationsContainerFuerAbgabenVorbereiten">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="medikationsContainerFuerAbgabenVorbereitenRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="medikationsContainerFuerAbgabenVorbereitenResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikInvalidParameterException">
+
+            <wsdlsoap:fault name="EmedikInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikException">
+
+            <wsdlsoap:fault name="EmedikException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+         
+         <wsdl:fault name="EmedikEmdbException">
+
+            <wsdlsoap:fault name="EmedikEmdbException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="abgabenSpeichern">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="abgabenSpeichernRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="abgabenSpeichernResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikInvalidParameterException">
+
+            <wsdlsoap:fault name="EmedikInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikException">
+
+            <wsdlsoap:fault name="EmedikException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+         
+         <wsdl:fault name="EmedikEmdbException">
+
+            <wsdlsoap:fault name="EmedikEmdbException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikFormatException">
+
+            <wsdlsoap:fault name="EmedikFormatException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="dosierungsAenderungenVorbereiten">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="dosierungsAenderungenVorbereitenRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="dosierungsAenderungenVorbereitenResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikInvalidParameterException">
+
+            <wsdlsoap:fault name="EmedikInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikException">
+
+            <wsdlsoap:fault name="EmedikException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+		<wsdl:fault name="EmedikEmdbException">
+
+            <wsdlsoap:fault name="EmedikEmdbException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikFormatException">
+
+            <wsdlsoap:fault name="EmedikFormatException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="dosierungsAenderungenSpeichern">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="dosierungsAenderungenSpeichernRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="dosierungsAenderungenSpeichernResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikInvalidParameterException">
+
+            <wsdlsoap:fault name="EmedikInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikException">
+
+            <wsdlsoap:fault name="EmedikException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+		<wsdl:fault name="EmedikEmdbException">
+
+            <wsdlsoap:fault name="EmedikEmdbException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikFormatException">
+
+            <wsdlsoap:fault name="EmedikFormatException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="arzneiSpezialitaetAbsetzen">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="arzneiSpezialitaetAbsetzenRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="arzneiSpezialitaetAbsetzenResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikInvalidParameterException">
+
+            <wsdlsoap:fault name="EmedikInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikException">
+
+            <wsdlsoap:fault name="EmedikException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+		<wsdl:fault name="EmedikEmdbException">
+
+            <wsdlsoap:fault name="EmedikEmdbException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="abgabenVorbereitenCda">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="abgabenVorbereitenCdaRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="abgabenVorbereitenCdaResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikInvalidParameterException">
+
+            <wsdlsoap:fault name="EmedikInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikEmdbException">
+
+            <wsdlsoap:fault name="EmedikEmdbException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikCdaValidationException">
+
+            <wsdlsoap:fault name="EmedikCdaValidationException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikException">
+
+            <wsdlsoap:fault name="EmedikException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikFormatException">
+
+            <wsdlsoap:fault name="EmedikFormatException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="vorbelegungVerordnungenErmitteln">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="vorbelegungVerordnungenErmittelnRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="vorbelegungVerordnungenErmittelnResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikInvalidParameterException">
+
+            <wsdlsoap:fault name="EmedikInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikException">
+
+            <wsdlsoap:fault name="EmedikException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+		<wsdl:fault name="EmedikEmdbException">
+
+            <wsdlsoap:fault name="EmedikEmdbException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikFormatException">
+
+            <wsdlsoap:fault name="EmedikFormatException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="verordnungenAnlegenVorbereiten">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="verordnungenAnlegenVorbereitenRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="verordnungenAnlegenVorbereitenResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikInvalidParameterException">
+
+            <wsdlsoap:fault name="EmedikInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikException">
+
+            <wsdlsoap:fault name="EmedikException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+		<wsdl:fault name="EmedikEmdbException">
+
+            <wsdlsoap:fault name="EmedikEmdbException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikFormatException">
+
+            <wsdlsoap:fault name="EmedikFormatException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="verordnungenSpeichern">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="verordnungenSpeichernRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="verordnungenSpeichernResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikInvalidParameterException">
+
+            <wsdlsoap:fault name="EmedikInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikException">
+
+            <wsdlsoap:fault name="EmedikException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+		<wsdl:fault name="EmedikEmdbException">
+
+            <wsdlsoap:fault name="EmedikEmdbException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikFormatException">
+
+            <wsdlsoap:fault name="EmedikFormatException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="verordnungenLoeschen">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="verordnungenLoeschenRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="verordnungenLoeschenResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikInvalidParameterException">
+
+            <wsdlsoap:fault name="EmedikInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikException">
+
+            <wsdlsoap:fault name="EmedikException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+		<wsdl:fault name="EmedikEmdbException">
+
+            <wsdlsoap:fault name="EmedikEmdbException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="verordnungenAnlegenVorbereitenCda">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="verordnungenAnlegenVorbereitenCdaRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="verordnungenAnlegenVorbereitenCdaResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikInvalidParameterException">
+
+            <wsdlsoap:fault name="EmedikInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikEmdbException">
+
+            <wsdlsoap:fault name="EmedikEmdbException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikCdaValidationException">
+
+            <wsdlsoap:fault name="EmedikCdaValidationException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikException">
+
+            <wsdlsoap:fault name="EmedikException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikFormatException">
+
+            <wsdlsoap:fault name="EmedikFormatException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="artikelInformationenBereitstellen">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="artikelInformationenBereitstellenRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="artikelInformationenBereitstellenResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikInvalidParameterException">
+
+            <wsdlsoap:fault name="EmedikInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikException">
+
+            <wsdlsoap:fault name="EmedikException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+		 <wsdl:fault name="EmedikEmdbException">
+
+            <wsdlsoap:fault name="EmedikEmdbException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikFormatException">
+
+            <wsdlsoap:fault name="EmedikFormatException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="sisKurzInformationenBereitstellen">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="sisKurzInformationenBereitstellenRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="sisKurzInformationenBereitstellenResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikInvalidParameterException">
+
+            <wsdlsoap:fault name="EmedikInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikException">
+
+            <wsdlsoap:fault name="EmedikException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+		 <wsdl:fault name="EmedikEmdbException">
+
+            <wsdlsoap:fault name="EmedikEmdbException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikFormatException">
+
+            <wsdlsoap:fault name="EmedikFormatException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="interaktionsInformationBereitstellen">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="interaktionsInformationBereitstellenRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="interaktionsInformationBereitstellenResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikInvalidParameterException">
+
+            <wsdlsoap:fault name="EmedikInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikException">
+
+            <wsdlsoap:fault name="EmedikException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+		 <wsdl:fault name="EmedikEmdbException">
+
+            <wsdlsoap:fault name="EmedikEmdbException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikFormatException">
+
+            <wsdlsoap:fault name="EmedikFormatException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="atcCodeInformationenBereitstellen">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="atcCodeInformationenBereitstellenRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="atcCodeInformationenBereitstellenResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikInvalidParameterException">
+
+            <wsdlsoap:fault name="EmedikInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikException">
+
+            <wsdlsoap:fault name="EmedikException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+		 <wsdl:fault name="EmedikEmdbException">
+
+            <wsdlsoap:fault name="EmedikEmdbException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikFormatException">
+
+            <wsdlsoap:fault name="EmedikFormatException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="arzneiStoffInformationenBereitstellen">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="arzneiStoffInformationenBereitstellenRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="arzneiStoffInformationenBereitstellenResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikInvalidParameterException">
+
+            <wsdlsoap:fault name="EmedikInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikException">
+
+            <wsdlsoap:fault name="EmedikException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+		 <wsdl:fault name="EmedikEmdbException">
+
+            <wsdlsoap:fault name="EmedikEmdbException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikFormatException">
+
+            <wsdlsoap:fault name="EmedikFormatException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="zusammensetzungenEinerArzneiSpezialitaetBereitstellen">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="zusammensetzungenEinerArzneiSpezialitaetBereitstellenRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="zusammensetzungenEinerArzneiSpezialitaetBereitstellenResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikInvalidParameterException">
+
+            <wsdlsoap:fault name="EmedikInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikException">
+
+            <wsdlsoap:fault name="EmedikException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+		 <wsdl:fault name="EmedikEmdbException">
+
+            <wsdlsoap:fault name="EmedikEmdbException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikFormatException">
+
+            <wsdlsoap:fault name="EmedikFormatException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="pruefrelevanteStoffListeEinerArzneiSpezialitaetBereitstellen">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="pruefrelevanteStoffListeEinerArzneiSpezialitaetBereitstellenRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="pruefrelevanteStoffListeEinerArzneiSpezialitaetBereitstellenResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikInvalidParameterException">
+
+            <wsdlsoap:fault name="EmedikInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikException">
+
+            <wsdlsoap:fault name="EmedikException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+		 <wsdl:fault name="EmedikEmdbException">
+
+            <wsdlsoap:fault name="EmedikEmdbException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikFormatException">
+
+            <wsdlsoap:fault name="EmedikFormatException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="arzneiSpezialitaetPruefen">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="arzneiSpezialitaetPruefenRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="arzneiSpezialitaetPruefenResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikInvalidParameterException">
+
+            <wsdlsoap:fault name="EmedikInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikException">
+
+            <wsdlsoap:fault name="EmedikException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+		 <wsdl:fault name="EmedikEmdbException">
+
+            <wsdlsoap:fault name="EmedikEmdbException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikFormatException">
+
+            <wsdlsoap:fault name="EmedikFormatException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="verarbeitungsAbbruchProtokollieren">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="verarbeitungsAbbruchProtokollierenRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="verarbeitungsAbbruchProtokollierenResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikInvalidParameterException">
+
+            <wsdlsoap:fault name="EmedikInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikException">
+
+            <wsdlsoap:fault name="EmedikException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+		 <wsdl:fault name="EmedikEmdbException">
+
+            <wsdlsoap:fault name="EmedikEmdbException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikFormatException">
+
+            <wsdlsoap:fault name="EmedikFormatException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="emdbSystemParameterBereitstellen">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="emdbSystemParameterBereitstellenRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="emdbSystemParameterBereitstellenResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="EmedikException">
+
+            <wsdlsoap:fault name="EmedikException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+		 <wsdl:fault name="EmedikEmdbException">
+
+            <wsdlsoap:fault name="EmedikEmdbException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="checkStatus">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="checkStatusRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="checkStatusResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="soap_emedik_1.0">
+
+      <wsdl:port binding="impl:soap_emedik_1.0SoapBinding" name="soap_emedik_1.0">
+
+         <wsdlsoap:address location="http://localhost/axis/services/soap_emedik_1.0"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

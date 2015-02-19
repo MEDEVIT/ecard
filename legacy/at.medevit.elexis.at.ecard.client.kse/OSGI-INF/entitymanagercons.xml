@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" enabled="true" name="at.medevit.elexis.at.ecard.client.kse.entitymanagercons">
+   <implementation class="at.medevit.elexis.at.ecard.client.kse.entitymanager.EntityManagerService"/>
+   <reference bind="setEntityManager" cardinality="1..1" interface="at.medevit.elexis.persistence.jpa.service.IEntityManagerService" name="IEntityManagerService" policy="static" unbind="unsetEntityManager"/>
+</scr:component>

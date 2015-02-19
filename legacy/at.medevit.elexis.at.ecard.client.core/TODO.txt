@@ -1,0 +1,8 @@
+- Timeout per call set
+- Konsultationsbelege, bzw. Daten gehören EINEM Mandanten! Bisher keine Zuordnung!
+- Zuordnung Konsultationsbeleg zu Konsultation
+- SVPerson abbilden und optional an einen lokalen Kontakt binden
+- Asynchronous initialisation of preference page
+	-> What if ginabox is not available, and yet configured?
+	-> Should consider GINA BOx Status
+- Verknüpfung Ordinationskarte zu Mandant ?

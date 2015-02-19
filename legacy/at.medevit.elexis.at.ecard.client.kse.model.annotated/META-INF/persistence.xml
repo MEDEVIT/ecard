@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="at.medevit.elexis.at.model.annotated"
+		transaction-type="RESOURCE_LOCAL">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<non-jta-data-source>elexis</non-jta-data-source>
+		<class>at.medevit.elexis.at.ecard.client.kse.model.annotated.Konsultationsdaten</class>
+		<class>at.medevit.elexis.at.ecard.client.kse.model.annotated.Konsultationsbeleg</class>
+		<properties>
+			<property name="eclipselink.ddl-generation" value="create-tables"/>
+			<property name="eclipselink.logging.level" value="FINE"/>
+			<property name="eclipselink.logging.timestamp" value="true"/>
+			<property name="eclipselink.logging.session" value="true"/>
+			<property name="eclipselink.logging.thread" value="false"/>
+			<property name="eclipselink.orm.throw.exceptions" value="false"/>
+		</properties>
+	</persistence-unit>
+</persistence>

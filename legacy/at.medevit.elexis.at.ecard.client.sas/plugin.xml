@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="at.medevit.elexis.at.ecard.client.sas.command.PatientenDatenAbfragen"
+            name="ecard: Patientendaten abfragen">
+         <commandParameter
+               id="at.medevit.elexis.at.ecard.client.sas.commandParameter1"
+               name="name"
+               optional="true">
+         </commandParameter>
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="at.medevit.elexis.at.ecard.client.sas.command.PatientenDatenAbfragen"
+            commandId="at.medevit.elexis.at.ecard.client.sas.command.PatientenDatenAbfragen">
+      </handler>
+   </extension>
+
+</plugin>

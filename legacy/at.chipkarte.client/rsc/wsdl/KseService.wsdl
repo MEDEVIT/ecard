@@ -1,0 +1,2475 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions targetNamespace="http://soap.kse.client.chipkarte.at" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://soap.kse.client.chipkarte.at" xmlns:intf="http://soap.kse.client.chipkarte.at" xmlns:tns1="http://soap.base.client.chipkarte.at" xmlns:tns2="http://exceptions.soap.base.client.chipkarte.at" xmlns:tns3="http://exceptions.soap.kse.client.chipkarte.at" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.2RC1
+Built on Sep 29, 2004 (08:29:40 EDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://soap.kse.client.chipkarte.at" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://exceptions.soap.kse.client.chipkarte.at"/>
+   <import namespace="http://soap.base.client.chipkarte.at"/>
+   <import namespace="http://exceptions.soap.base.client.chipkarte.at"/>
+   <element name="checkStatus">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="checkStatusResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="checkStatusReturn" type="tns1:Property"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="fault" type="tns2:ServiceException"/>
+   <element name="fault1" type="tns2:DialogException"/>
+   <element name="fault2" type="tns2:AccessException"/>
+   <element name="getLimit">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="zeitraum" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getLimitResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getLimitReturn" type="impl:Limit"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="LimitKonfig">
+    <sequence>
+     <element name="datumBis" nillable="true" type="xsd:string"/>
+     <element name="datumVon" nillable="true" type="xsd:string"/>
+     <element name="limitCode" nillable="true" type="xsd:string"/>
+     <element name="limitType" nillable="true" type="xsd:string"/>
+     <element name="limitValue" type="xsd:int"/>
+     <element name="limitValuePercent" type="xsd:int"/>
+     <element name="valueType" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   
+   <complexType name="LimitValue">
+    <sequence>
+     <element name="limitCode" nillable="true" type="xsd:string"/>
+     <element name="value" type="xsd:long"/>
+    </sequence>
+   </complexType>
+   
+   <complexType name="Limit">
+    <sequence>
+     <element name="fachgebietsCode" nillable="true" type="xsd:string"/>
+     <element minOccurs="0" maxOccurs="unbounded" name="limitConfig" nillable="true" type="impl:LimitKonfig"/>
+     <element maxOccurs="unbounded" name="limitValue" nillable="true" type="impl:LimitValue"/>
+     <element name="svtCode" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="fault3" type="tns3:InvalidParameterException"/>
+   <element name="doKonsultation">
+    <complexType>
+     <sequence>
+      <element name="cin" type="xsd:string"/>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="svNummer" type="xsd:string"/>
+      <element name="svtCode" type="xsd:string"/>
+      <element name="anspruchId" type="xsd:string"/>
+      <element name="fachgebietsCode" type="xsd:string"/>
+      <element name="behandlungsfallCode" type="xsd:string"/>
+      <element name="nacherfassungsgrundCode" type="xsd:string"/>
+      <element name="behandlungsdatum" type="xsd:string"/>
+      <element name="forceExecution" type="xsd:boolean"/>
+      <element name="cardReaderId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="doKonsultationResponse">
+    <complexType>
+     <sequence>
+      <element name="doKonsultationReturn" type="impl:ErgebnisKonsultation"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="KonsultationsBeleg">
+    <sequence>
+     <element name="abrechnungsPeriode" nillable="true" type="xsd:string"/>
+     <element name="abstimmungsBeleg" nillable="true" type="xsd:string"/>
+     <element name="anspruchsart" nillable="true" type="xsd:string"/>
+     <element name="bearbeitungsDatum" nillable="true" type="xsd:string"/>
+     <element name="bearbeitungsDatumClientSignatur" nillable="true" type="xsd:string"/>
+     <element name="behandlungsDatum" nillable="true" type="xsd:string"/>
+     <element name="behandlungsfallCode" nillable="true" type="xsd:string"/>
+     <element name="belegInhaltVersion" type="xsd:int"/>
+     <element name="bezugsBereich" nillable="true" type="xsd:string"/>
+     <element name="bundeslandCode" nillable="true" type="xsd:string"/>
+     <element name="clientSignatur" type="xsd:base64Binary"/>
+     <element name="fachgebietsCode" nillable="true" type="xsd:string"/>
+     <element name="id" type="xsd:long"/>
+     <element name="konsultationsartCode" nillable="true" type="xsd:string"/>
+     <element name="kostenanteilbefreit" type="xsd:boolean"/>
+     <element name="leistungsSvtCode" nillable="true" type="xsd:string"/>
+     <element name="leistungsrechtlichesLimitGeprueft" nillable="true" type="xsd:string"/>
+     <element name="ordNummer" type="xsd:int"/>
+     <element name="originalSvtCode" nillable="true" type="xsd:string"/>
+     <element name="overLimit" type="xsd:boolean"/>
+     <element name="rezeptgebbefreit" type="xsd:boolean"/>
+     <element name="serverSignatur" type="xsd:base64Binary"/>
+     <element name="signaturFormatClient" nillable="true" type="xsd:string"/>
+     <element name="signaturFormatServer" nillable="true" type="xsd:string"/>
+     <element name="status" nillable="true" type="xsd:string"/>
+     <element name="svNummer" nillable="true" type="xsd:string"/>
+     <element name="svNummerAbgeleitet" nillable="true" type="xsd:string"/>
+     <element name="txnNummer" type="xsd:long"/>
+     <element name="verrechnungsSvtCode" nillable="true" type="xsd:string"/>
+     <element name="versichertenKategorie" nillable="true" type="xsd:string"/>
+     <element name="versichertenartCode" nillable="true" type="xsd:string"/>
+     <element name="version" type="xsd:int"/>
+     <element name="vpNummer" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Konsultationsdaten">
+    <sequence>
+     <element name="angehoerigenDaten" nillable="true" type="tns1:SvPerson"/>
+     <element name="konsultationsBeleg" nillable="true" type="impl:KonsultationsBeleg"/>
+     <element name="versichertenDaten" nillable="true" type="tns1:SvPerson"/>
+    </sequence>
+   </complexType>
+   
+   <complexType name="Zusatzinformation">
+    <sequence>
+     <element name="svtCode" nillable="true" type="xsd:string"/>
+     <element name="zusatzinformationsAntwortId" type="xsd:long"/>
+     <element name="zusatzinformationsText" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   
+   <complexType name="ErgebnisKonsultation">
+    <sequence>
+     <element name="konsultationsDaten" nillable="true" type="impl:Konsultationsdaten"/>
+     <element minOccurs="0" maxOccurs="unbounded" name="kseMessageCodes" nillable="true" type="xsd:int"/>
+     <element minOccurs="0" maxOccurs="unbounded" name="nachsignKonsultationen" nillable="true" type="impl:KonsultationsBeleg"/>
+     <element minOccurs="1" maxOccurs="1" name="zusatzinformation" nillable="true" type="impl:Zusatzinformation"/>
+    </sequence>
+   </complexType>
+   <element name="fault4" type="tns2:CardException"/>
+   <element name="fault5" type="tns2:BCardException"/>
+   <complexType name="Anspruch">
+    <sequence>
+     <element name="abgeleitetNachname" nillable="true" type="xsd:string"/>
+     <element name="abgeleitetTitelHinten" nillable="true" type="xsd:string"/>
+     <element name="abgeleitetTitelVorne" nillable="true" type="xsd:string"/>
+     <element name="abgeleitetVorname" nillable="true" type="xsd:string"/>
+     <element name="ablSvNummer" nillable="true" type="xsd:string"/>
+     <element name="id" nillable="true" type="xsd:string"/>
+     <element name="svtCode" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   
+   <element name="fault6" type="tns3:KseException"/>
+   
+   <element name="sendZusatzinformationsAntwort">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="zusatzinformationsAntwortId" type="xsd:long"/>
+      <element name="zusatzinformationsAntwort" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="sendZusatzinformationsAntwortResponse">
+    <complexType/>
+   </element>
+   
+   <element name="doKonsultationOffline">
+    <complexType>
+     <sequence>
+      <element name="cin" type="xsd:string"/>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="svNummer" type="xsd:string"/>
+      <element name="svtCode" type="xsd:string"/>
+      <element name="fachgebietsCode" type="xsd:string"/>
+      <element name="behandlungsfallCode" type="xsd:string"/>
+      <element name="nacherfassungsgrundCode" type="xsd:string"/>
+      <element name="behandlungsdatum" type="xsd:string"/>
+      <element name="forceExecution" type="xsd:boolean"/>
+      <element name="cardReaderId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="doKonsultationOfflineResponse">
+    <complexType>
+     <sequence>
+      <element name="doKonsultationOfflineReturn" type="impl:OfflineRecord"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="OfflineKonsultation">
+    <sequence>
+     <element name="behandlungsDatum" nillable="true" type="xsd:string"/>
+     <element name="behandlunsfallCode" nillable="true" type="xsd:string"/>
+     <element name="fachgebietsCode" nillable="true" type="xsd:string"/>
+     <element name="konsultationsartCode" nillable="true" type="xsd:string"/>
+     <element name="svtCode" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="OfflineRecord">
+    <sequence>
+     <element name="erstellungsDatum" nillable="true" type="xsd:string"/>
+     <element name="id" nillable="true" type="xsd:string"/>
+     <element name="nachname" nillable="true" type="xsd:string"/>
+     <element name="offlineFrist" nillable="true" type="xsd:string"/>
+     <element name="offlineKonsultation" nillable="true" type="impl:OfflineKonsultation"/>
+     <element name="svNummer" nillable="true" type="xsd:string"/>
+     <element name="type" type="xsd:int"/>
+     <element name="vorname" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="stornierenKonsultation">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="konsId" type="xsd:long"/>
+      <element name="konsVersion" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="stornierenKonsultationResponse">
+    <complexType>
+     <sequence>
+      <element name="stornierenKonsultationReturn" type="impl:KonsultationsBeleg"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="wiederinkraftsetzenKonsultation">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="konsId" type="xsd:long"/>
+      <element name="konsVersion" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="wiederinkraftsetzenKonsultationResponse">
+    <complexType>
+     <sequence>
+      <element name="wiederinkraftsetzenKonsultationReturn" type="impl:ErgebnisKonsultation"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="aendernKonsultation">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="konsId" type="xsd:long"/>
+      <element name="konsVersion" type="xsd:int"/>
+      <element name="behandlungsfallCode" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="aendernKonsultationResponse">
+    <complexType>
+     <sequence>
+      <element name="aendernKonsultationReturn" type="impl:KonsultationsBeleg"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getKonsultationsdaten">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="selektionsKriterien" type="impl:SuchFilter"/>
+      <element name="selektionsart" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="SuchFilter">
+    <sequence>
+     <element name="SVNummer" nillable="true" type="xsd:string"/>
+     <element name="behandlungsfallCode" nillable="true" type="xsd:string"/>
+     <element name="datumBis" nillable="true" type="xsd:string"/>
+     <element name="datumVon" nillable="true" type="xsd:string"/>
+     <element name="fachgebietsCode" nillable="true" type="xsd:string"/>
+     <element name="konsultationsartCode" nillable="true" type="xsd:string"/>
+     <element name="ordId" nillable="true" type="xsd:string"/>
+     <element name="svtCode" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="getKonsultationsdatenResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" maxOccurs="unbounded" name="getKonsultationsdatenReturn" type="impl:Konsultationsdaten"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="sendKonsultationsdatenAnfrage">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="selektionsKriterien" type="impl:SuchFilter"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="sendKonsultationsdatenAnfrageResponse">
+    <complexType>
+     <sequence>
+      <element name="sendKonsultationsdatenAnfrageReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="downloadKonsultationsdaten">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="anfrageId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="downloadKonsultationsdatenResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="downloadKonsultationsdatenReturn" type="impl:Konsultationsdaten"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getKonsultationsdatenAnfragen">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="onlyReady" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getKonsultationsdatenAnfragenResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getKonsultationsdatenAnfragenReturn" nillable="true" type="impl:KonsultationdatenAnfrage"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="KonsultationdatenAnfrage">
+    <sequence>
+     <element name="anfrageId" nillable="true" type="xsd:string"/>
+     <element name="filter" nillable="true" type="impl:SuchFilter"/>
+     <element name="status" type="xsd:int"/>
+     <element name="timestamp" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="deleteKonsultationsdatenAnfrage">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="anfrageId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteKonsultationsdatenAnfrageResponse">
+    <complexType/>
+   </element>
+   <element name="nachsignierenKonsultationen">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="cin" type="xsd:string"/>
+      <element name="forceExecution" type="xsd:boolean"/>
+      <element name="cardReaderId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="nachsignierenKonsultationenResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" maxOccurs="unbounded" name="nachsignierenKonsultationenReturn" type="impl:KonsultationsBeleg"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="nachsignierenKonsultationenBCard">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="svNummer" type="xsd:string"/>
+      <element name="cardReaderId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="nachsignierenKonsultationenBCardResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="nachsignierenKonsultationenBCardReturn" type="impl:KonsultationsBeleg"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="nachsignierenKonsultationenOffline">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="cin" type="xsd:string"/>
+      <element name="forceExecution" type="xsd:boolean"/>
+      <element name="cardReaderId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="nachsignierenKonsultationenOfflineResponse">
+    <complexType>
+     <sequence>
+      <element name="nachsignierenKonsultationenOfflineReturn" type="impl:OfflineRecord"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getBehandlungsfaelle">
+    <complexType/>
+   </element>
+   <element name="getBehandlungsfaelleResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getBehandlungsfaelleReturn" type="tns1:BaseProperty"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getBehandlungsfaelleByFachgebiet">
+    <complexType>
+     <sequence>
+      <element name="fachgebietCode" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getBehandlungsfaelleByFachgebietResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getBehandlungsfaelleByFachgebietReturn" type="tns1:BaseProperty"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getOfflineRecords">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getOfflineRecordsResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" maxOccurs="unbounded" name="getOfflineRecordsReturn" type="impl:OfflineRecord"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getNumberOfflineKonsultationen">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getNumberOfflineKonsultationenResponse">
+    <complexType>
+     <sequence>
+      <element name="getNumberOfflineKonsultationenReturn" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getNumberOfflineNachsignaturen">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getNumberOfflineNachsignaturenResponse">
+    <complexType>
+     <sequence>
+      <element name="getNumberOfflineNachsignaturenReturn" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteOfflineRecord">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="offlineId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteOfflineRecordResponse">
+    <complexType/>
+   </element>
+   <element name="sendOfflineKonsultation">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="offlineId" type="xsd:string"/>
+      <element name="fachgebietsCode" type="xsd:string"/>
+      <element name="behandlungsfallCode" type="xsd:string"/>
+      <element name="svtCode" type="xsd:string"/>
+      <element name="anspruchId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="sendOfflineKonsultationResponse">
+    <complexType>
+     <sequence>
+      <element name="sendOfflineKonsultationReturn" type="impl:ErgebnisKonsultation"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="sendOfflineNachsignatur">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="offlineId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="sendOfflineNachsignaturResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" maxOccurs="unbounded" name="sendOfflineNachsignaturReturn" type="impl:KonsultationsBeleg"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://soap.base.client.chipkarte.at" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://soap.kse.client.chipkarte.at"/>
+   <import namespace="http://exceptions.soap.kse.client.chipkarte.at"/>
+   <import namespace="http://exceptions.soap.base.client.chipkarte.at"/>
+   <complexType name="Property">
+    <sequence>
+     <element name="key" nillable="true" type="xsd:string"/>
+     <element name="value" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="SvPerson">
+    <sequence>
+     <element name="geburtsdatum" nillable="true" type="xsd:string"/>
+     <element name="geschlecht" nillable="true" type="xsd:string"/>
+     <element name="nachname" nillable="true" type="xsd:string"/>
+     <element name="svNummer" nillable="true" type="xsd:string"/>
+     <element name="titelHinten" nillable="true" type="xsd:string"/>
+     <element name="titelVorne" nillable="true" type="xsd:string"/>
+     <element name="vorname" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="BaseProperty">
+    <sequence>
+     <element name="code" nillable="true" type="xsd:string"/>
+     <element name="nurAnzeige" type="xsd:boolean"/>
+     <element name="text" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://exceptions.soap.base.client.chipkarte.at" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://soap.kse.client.chipkarte.at"/>
+   <import namespace="http://exceptions.soap.kse.client.chipkarte.at"/>
+   <import namespace="http://soap.base.client.chipkarte.at"/>
+   <complexType name="BaseException">
+    <sequence>
+     <element name="code" nillable="true" type="xsd:string"/>
+     <element name="errorCode" type="xsd:int"/>
+     <element name="message" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ServiceException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="DialogException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="AccessException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="CardException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="BCardException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://exceptions.soap.kse.client.chipkarte.at" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://soap.kse.client.chipkarte.at"/>
+   <import namespace="http://soap.base.client.chipkarte.at"/>
+   <import namespace="http://exceptions.soap.base.client.chipkarte.at"/>
+   <complexType name="InvalidParameterException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="KseException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence>
+       <element minOccurs="0" maxOccurs="unbounded" name="anspruch" nillable="true" type="impl:Anspruch"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="sendOfflineKonsultationResponse">
+
+      <wsdl:part element="impl:sendOfflineKonsultationResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getNumberOfflineNachsignaturenRequest">
+
+      <wsdl:part element="impl:getNumberOfflineNachsignaturen" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getKonsultationsdatenAnfragenRequest">
+
+      <wsdl:part element="impl:getKonsultationsdatenAnfragen" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="stornierenKonsultationRequest">
+
+      <wsdl:part element="impl:stornierenKonsultation" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="DialogException">
+
+      <wsdl:part element="impl:fault1" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="downloadKonsultationsdatenResponse">
+
+      <wsdl:part element="impl:downloadKonsultationsdatenResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="sendOfflineKonsultationRequest">
+
+      <wsdl:part element="impl:sendOfflineKonsultation" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="aendernKonsultationRequest">
+
+      <wsdl:part element="impl:aendernKonsultation" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="checkStatusResponse">
+
+      <wsdl:part element="impl:checkStatusResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getLimitResponse">
+
+      <wsdl:part element="impl:getLimitResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getBehandlungsfaelleByFachgebietResponse">
+
+      <wsdl:part element="impl:getBehandlungsfaelleByFachgebietResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getKonsultationsdatenAnfragenResponse">
+
+      <wsdl:part element="impl:getKonsultationsdatenAnfragenResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="sendOfflineNachsignaturRequest">
+
+      <wsdl:part element="impl:sendOfflineNachsignatur" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="downloadKonsultationsdatenRequest">
+
+      <wsdl:part element="impl:downloadKonsultationsdaten" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getNumberOfflineKonsultationenResponse">
+
+      <wsdl:part element="impl:getNumberOfflineKonsultationenResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="nachsignierenKonsultationenBCardRequest">
+
+      <wsdl:part element="impl:nachsignierenKonsultationenBCard" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getKonsultationsdatenResponse">
+
+      <wsdl:part element="impl:getKonsultationsdatenResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="sendKonsultationsdatenAnfrageResponse">
+
+      <wsdl:part element="impl:sendKonsultationsdatenAnfrageResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getBehandlungsfaelleRequest">
+
+      <wsdl:part element="impl:getBehandlungsfaelle" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="nachsignierenKonsultationenResponse">
+
+      <wsdl:part element="impl:nachsignierenKonsultationenResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="aendernKonsultationResponse">
+
+      <wsdl:part element="impl:aendernKonsultationResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getKonsultationsdatenRequest">
+
+      <wsdl:part element="impl:getKonsultationsdaten" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteOfflineRecordResponse">
+
+      <wsdl:part element="impl:deleteOfflineRecordResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getOfflineRecordsRequest">
+
+      <wsdl:part element="impl:getOfflineRecords" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="stornierenKonsultationResponse">
+
+      <wsdl:part element="impl:stornierenKonsultationResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteOfflineRecordRequest">
+
+      <wsdl:part element="impl:deleteOfflineRecord" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="sendKonsultationsdatenAnfrageRequest">
+
+      <wsdl:part element="impl:sendKonsultationsdatenAnfrage" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="nachsignierenKonsultationenBCardResponse">
+
+      <wsdl:part element="impl:nachsignierenKonsultationenBCardResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="InvalidParameterException">
+
+      <wsdl:part element="impl:fault3" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getBehandlungsfaelleResponse">
+
+      <wsdl:part element="impl:getBehandlungsfaelleResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="doKonsultationOfflineRequest">
+
+      <wsdl:part element="impl:doKonsultationOffline" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="doKonsultationOfflineResponse">
+
+      <wsdl:part element="impl:doKonsultationOfflineResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="checkStatusRequest">
+
+      <wsdl:part element="impl:checkStatus" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="doKonsultationResponse">
+
+      <wsdl:part element="impl:doKonsultationResponse" name="parameters"/>
+
+   </wsdl:message>
+   
+   <wsdl:message name="sendZusatzinformationsAntwortResponse">
+
+      <wsdl:part element="impl:sendZusatzinformationsAntwortResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getNumberOfflineKonsultationenRequest">
+
+      <wsdl:part element="impl:getNumberOfflineKonsultationen" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="wiederinkraftsetzenKonsultationResponse">
+
+      <wsdl:part element="impl:wiederinkraftsetzenKonsultationResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="KseException">
+
+      <wsdl:part element="impl:fault6" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getNumberOfflineNachsignaturenResponse">
+
+      <wsdl:part element="impl:getNumberOfflineNachsignaturenResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getLimitRequest">
+
+      <wsdl:part element="impl:getLimit" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="doKonsultationRequest">
+
+      <wsdl:part element="impl:doKonsultation" name="parameters"/>
+
+   </wsdl:message>
+   
+   <wsdl:message name="sendZusatzinformationsAntwortRequest">
+
+      <wsdl:part element="impl:sendZusatzinformationsAntwort" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="CardException">
+
+      <wsdl:part element="impl:fault4" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="AccessException">
+
+      <wsdl:part element="impl:fault2" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteKonsultationsdatenAnfrageRequest">
+
+      <wsdl:part element="impl:deleteKonsultationsdatenAnfrage" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getBehandlungsfaelleByFachgebietRequest">
+
+      <wsdl:part element="impl:getBehandlungsfaelleByFachgebiet" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="sendOfflineNachsignaturResponse">
+
+      <wsdl:part element="impl:sendOfflineNachsignaturResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="ServiceException">
+
+      <wsdl:part element="impl:fault" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="nachsignierenKonsultationenRequest">
+
+      <wsdl:part element="impl:nachsignierenKonsultationen" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="nachsignierenKonsultationenOfflineRequest">
+
+      <wsdl:part element="impl:nachsignierenKonsultationenOffline" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="BCardException">
+
+      <wsdl:part element="impl:fault5" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteKonsultationsdatenAnfrageResponse">
+
+      <wsdl:part element="impl:deleteKonsultationsdatenAnfrageResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="nachsignierenKonsultationenOfflineResponse">
+
+      <wsdl:part element="impl:nachsignierenKonsultationenOfflineResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="wiederinkraftsetzenKonsultationRequest">
+
+      <wsdl:part element="impl:wiederinkraftsetzenKonsultation" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getOfflineRecordsResponse">
+
+      <wsdl:part element="impl:getOfflineRecordsResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="IKseService">
+
+      <wsdl:operation name="checkStatus">
+
+         <wsdl:input message="impl:checkStatusRequest" name="checkStatusRequest"/>
+
+         <wsdl:output message="impl:checkStatusResponse" name="checkStatusResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getLimit">
+
+         <wsdl:input message="impl:getLimitRequest" name="getLimitRequest"/>
+
+         <wsdl:output message="impl:getLimitResponse" name="getLimitResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="doKonsultation">
+
+         <wsdl:input message="impl:doKonsultationRequest" name="doKonsultationRequest"/>
+
+         <wsdl:output message="impl:doKonsultationResponse" name="doKonsultationResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:BCardException" name="BCardException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:CardException" name="CardException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+         <wsdl:fault message="impl:KseException" name="KseException"/>
+
+      </wsdl:operation>
+      
+      <wsdl:operation name="sendZusatzinformationsAntwort">
+
+         <wsdl:input message="impl:sendZusatzinformationsAntwortRequest" name="sendZusatzinformationsAntwortRequest"/>
+
+         <wsdl:output message="impl:sendZusatzinformationsAntwortResponse" name="sendZusatzinformationsAntwortResponse"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:KseException" name="KseException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="doKonsultationOffline">
+
+         <wsdl:input message="impl:doKonsultationOfflineRequest" name="doKonsultationOfflineRequest"/>
+
+         <wsdl:output message="impl:doKonsultationOfflineResponse" name="doKonsultationOfflineResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:CardException" name="CardException"/>
+
+         <wsdl:fault message="impl:KseException" name="KseException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="stornierenKonsultation">
+
+         <wsdl:input message="impl:stornierenKonsultationRequest" name="stornierenKonsultationRequest"/>
+
+         <wsdl:output message="impl:stornierenKonsultationResponse" name="stornierenKonsultationResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+         <wsdl:fault message="impl:KseException" name="KseException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="wiederinkraftsetzenKonsultation">
+
+         <wsdl:input message="impl:wiederinkraftsetzenKonsultationRequest" name="wiederinkraftsetzenKonsultationRequest"/>
+
+         <wsdl:output message="impl:wiederinkraftsetzenKonsultationResponse" name="wiederinkraftsetzenKonsultationResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+         <wsdl:fault message="impl:KseException" name="KseException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="aendernKonsultation">
+
+         <wsdl:input message="impl:aendernKonsultationRequest" name="aendernKonsultationRequest"/>
+
+         <wsdl:output message="impl:aendernKonsultationResponse" name="aendernKonsultationResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+         <wsdl:fault message="impl:KseException" name="KseException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getKonsultationsdaten">
+
+         <wsdl:input message="impl:getKonsultationsdatenRequest" name="getKonsultationsdatenRequest"/>
+
+         <wsdl:output message="impl:getKonsultationsdatenResponse" name="getKonsultationsdatenResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:KseException" name="KseException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="sendKonsultationsdatenAnfrage">
+
+         <wsdl:input message="impl:sendKonsultationsdatenAnfrageRequest" name="sendKonsultationsdatenAnfrageRequest"/>
+
+         <wsdl:output message="impl:sendKonsultationsdatenAnfrageResponse" name="sendKonsultationsdatenAnfrageResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:KseException" name="KseException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="downloadKonsultationsdaten">
+
+         <wsdl:input message="impl:downloadKonsultationsdatenRequest" name="downloadKonsultationsdatenRequest"/>
+
+         <wsdl:output message="impl:downloadKonsultationsdatenResponse" name="downloadKonsultationsdatenResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:KseException" name="KseException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getKonsultationsdatenAnfragen">
+
+         <wsdl:input message="impl:getKonsultationsdatenAnfragenRequest" name="getKonsultationsdatenAnfragenRequest"/>
+
+         <wsdl:output message="impl:getKonsultationsdatenAnfragenResponse" name="getKonsultationsdatenAnfragenResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteKonsultationsdatenAnfrage">
+
+         <wsdl:input message="impl:deleteKonsultationsdatenAnfrageRequest" name="deleteKonsultationsdatenAnfrageRequest"/>
+
+         <wsdl:output message="impl:deleteKonsultationsdatenAnfrageResponse" name="deleteKonsultationsdatenAnfrageResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="nachsignierenKonsultationen">
+
+         <wsdl:input message="impl:nachsignierenKonsultationenRequest" name="nachsignierenKonsultationenRequest"/>
+
+         <wsdl:output message="impl:nachsignierenKonsultationenResponse" name="nachsignierenKonsultationenResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:CardException" name="CardException"/>
+
+         <wsdl:fault message="impl:KseException" name="KseException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="nachsignierenKonsultationenBCard">
+
+         <wsdl:input message="impl:nachsignierenKonsultationenBCardRequest" name="nachsignierenKonsultationenBCardRequest"/>
+
+         <wsdl:output message="impl:nachsignierenKonsultationenBCardResponse" name="nachsignierenKonsultationenBCardResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:BCardException" name="BCardException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:CardException" name="CardException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+         <wsdl:fault message="impl:KseException" name="KseException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="nachsignierenKonsultationenOffline">
+
+         <wsdl:input message="impl:nachsignierenKonsultationenOfflineRequest" name="nachsignierenKonsultationenOfflineRequest"/>
+
+         <wsdl:output message="impl:nachsignierenKonsultationenOfflineResponse" name="nachsignierenKonsultationenOfflineResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:CardException" name="CardException"/>
+
+         <wsdl:fault message="impl:KseException" name="KseException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getBehandlungsfaelle">
+
+         <wsdl:input message="impl:getBehandlungsfaelleRequest" name="getBehandlungsfaelleRequest"/>
+
+         <wsdl:output message="impl:getBehandlungsfaelleResponse" name="getBehandlungsfaelleResponse"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getBehandlungsfaelleByFachgebiet">
+
+         <wsdl:input message="impl:getBehandlungsfaelleByFachgebietRequest" name="getBehandlungsfaelleByFachgebietRequest"/>
+
+         <wsdl:output message="impl:getBehandlungsfaelleByFachgebietResponse" name="getBehandlungsfaelleByFachgebietResponse"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getOfflineRecords">
+
+         <wsdl:input message="impl:getOfflineRecordsRequest" name="getOfflineRecordsRequest"/>
+
+         <wsdl:output message="impl:getOfflineRecordsResponse" name="getOfflineRecordsResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:KseException" name="KseException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getNumberOfflineKonsultationen">
+
+         <wsdl:input message="impl:getNumberOfflineKonsultationenRequest" name="getNumberOfflineKonsultationenRequest"/>
+
+         <wsdl:output message="impl:getNumberOfflineKonsultationenResponse" name="getNumberOfflineKonsultationenResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:KseException" name="KseException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getNumberOfflineNachsignaturen">
+
+         <wsdl:input message="impl:getNumberOfflineNachsignaturenRequest" name="getNumberOfflineNachsignaturenRequest"/>
+
+         <wsdl:output message="impl:getNumberOfflineNachsignaturenResponse" name="getNumberOfflineNachsignaturenResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:KseException" name="KseException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteOfflineRecord">
+
+         <wsdl:input message="impl:deleteOfflineRecordRequest" name="deleteOfflineRecordRequest"/>
+
+         <wsdl:output message="impl:deleteOfflineRecordResponse" name="deleteOfflineRecordResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:KseException" name="KseException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="sendOfflineKonsultation">
+
+         <wsdl:input message="impl:sendOfflineKonsultationRequest" name="sendOfflineKonsultationRequest"/>
+
+         <wsdl:output message="impl:sendOfflineKonsultationResponse" name="sendOfflineKonsultationResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:KseException" name="KseException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="sendOfflineNachsignatur">
+
+         <wsdl:input message="impl:sendOfflineNachsignaturRequest" name="sendOfflineNachsignaturRequest"/>
+
+         <wsdl:output message="impl:sendOfflineNachsignaturResponse" name="sendOfflineNachsignaturResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+         <wsdl:fault message="impl:KseException" name="KseException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="soap_kse_11.0SoapBinding" type="impl:IKseService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="checkStatus">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="checkStatusRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="checkStatusResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getLimit">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getLimitRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getLimitResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="doKonsultation">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="doKonsultationRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="doKonsultationResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="BCardException">
+
+            <wsdlsoap:fault name="BCardException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CardException">
+
+            <wsdlsoap:fault name="CardException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="KseException">
+
+            <wsdlsoap:fault name="KseException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+      
+      <wsdl:operation name="sendZusatzinformationsAntwort">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="sendZusatzinformationsAntwortRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="sendZusatzinformationsAntwortResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="KseException">
+
+            <wsdlsoap:fault name="KseException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="doKonsultationOffline">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="doKonsultationOfflineRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="doKonsultationOfflineResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CardException">
+
+            <wsdlsoap:fault name="CardException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="KseException">
+
+            <wsdlsoap:fault name="KseException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="stornierenKonsultation">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="stornierenKonsultationRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="stornierenKonsultationResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="KseException">
+
+            <wsdlsoap:fault name="KseException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="wiederinkraftsetzenKonsultation">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="wiederinkraftsetzenKonsultationRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="wiederinkraftsetzenKonsultationResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="KseException">
+
+            <wsdlsoap:fault name="KseException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="aendernKonsultation">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="aendernKonsultationRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="aendernKonsultationResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="KseException">
+
+            <wsdlsoap:fault name="KseException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getKonsultationsdaten">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getKonsultationsdatenRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getKonsultationsdatenResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="KseException">
+
+            <wsdlsoap:fault name="KseException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="sendKonsultationsdatenAnfrage">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="sendKonsultationsdatenAnfrageRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="sendKonsultationsdatenAnfrageResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="KseException">
+
+            <wsdlsoap:fault name="KseException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="downloadKonsultationsdaten">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="downloadKonsultationsdatenRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="downloadKonsultationsdatenResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="KseException">
+
+            <wsdlsoap:fault name="KseException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getKonsultationsdatenAnfragen">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getKonsultationsdatenAnfragenRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getKonsultationsdatenAnfragenResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteKonsultationsdatenAnfrage">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="deleteKonsultationsdatenAnfrageRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="deleteKonsultationsdatenAnfrageResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="nachsignierenKonsultationen">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="nachsignierenKonsultationenRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="nachsignierenKonsultationenResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CardException">
+
+            <wsdlsoap:fault name="CardException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="KseException">
+
+            <wsdlsoap:fault name="KseException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="nachsignierenKonsultationenBCard">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="nachsignierenKonsultationenBCardRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="nachsignierenKonsultationenBCardResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="BCardException">
+
+            <wsdlsoap:fault name="BCardException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CardException">
+
+            <wsdlsoap:fault name="CardException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="KseException">
+
+            <wsdlsoap:fault name="KseException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="nachsignierenKonsultationenOffline">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="nachsignierenKonsultationenOfflineRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="nachsignierenKonsultationenOfflineResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CardException">
+
+            <wsdlsoap:fault name="CardException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="KseException">
+
+            <wsdlsoap:fault name="KseException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getBehandlungsfaelle">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getBehandlungsfaelleRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getBehandlungsfaelleResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getBehandlungsfaelleByFachgebiet">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getBehandlungsfaelleByFachgebietRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getBehandlungsfaelleByFachgebietResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getOfflineRecords">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getOfflineRecordsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getOfflineRecordsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="KseException">
+
+            <wsdlsoap:fault name="KseException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getNumberOfflineKonsultationen">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getNumberOfflineKonsultationenRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getNumberOfflineKonsultationenResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="KseException">
+
+            <wsdlsoap:fault name="KseException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getNumberOfflineNachsignaturen">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getNumberOfflineNachsignaturenRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getNumberOfflineNachsignaturenResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="KseException">
+
+            <wsdlsoap:fault name="KseException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteOfflineRecord">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="deleteOfflineRecordRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="deleteOfflineRecordResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="KseException">
+
+            <wsdlsoap:fault name="KseException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="sendOfflineKonsultation">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="sendOfflineKonsultationRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="sendOfflineKonsultationResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="KseException">
+
+            <wsdlsoap:fault name="KseException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="sendOfflineNachsignatur">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="sendOfflineNachsignaturRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="sendOfflineNachsignaturResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="KseException">
+
+            <wsdlsoap:fault name="KseException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="soap_kse_11.0">
+
+      <wsdl:port binding="impl:soap_kse_11.0SoapBinding" name="soap_kse_11.0">
+
+         <wsdlsoap:address location="http://localhost/axis/services/soap_kse_11.0"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

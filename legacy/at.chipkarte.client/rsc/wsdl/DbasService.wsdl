@@ -1,0 +1,1174 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions targetNamespace="http://soap.dbas.client.chipkarte.at" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://soap.dbas.client.chipkarte.at" xmlns:intf="http://soap.dbas.client.chipkarte.at" xmlns:tns1="http://soap.base.client.chipkarte.at" xmlns:tns2="http://exceptions.soap.base.client.chipkarte.at" xmlns:tns3="http://exceptions.soap.dbas.client.chipkarte.at" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.2RC1
+Built on Sep 29, 2004 (08:29:40 EDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://soap.dbas.client.chipkarte.at" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://soap.base.client.chipkarte.at"/>
+   <import namespace="http://exceptions.soap.base.client.chipkarte.at"/>
+   <import namespace="http://exceptions.soap.dbas.client.chipkarte.at"/>
+   <element name="checkStatus">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="checkStatusResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="checkStatusReturn" type="tns1:Property"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="fault" type="tns2:DialogException"/>
+   <element name="fault1" type="tns2:AccessException"/>
+   <element name="fault2" type="tns2:ServiceException"/>
+   <element name="searchKonsultationData">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="cardReaderId" type="xsd:string"/>
+      <element name="datenblattTyp" type="xsd:string"/>
+      <element name="svNummer" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchKonsultationDataResponse">
+    <complexType>
+     <sequence>
+      <element name="searchKonsultationDataReturn" type="impl:KonsultationData"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="KonsultationInfo">
+    <sequence>
+     <element name="behandlungsdatum" nillable="true" type="xsd:string"/>
+     <element name="behandlungsfallCode" nillable="true" type="xsd:string"/>
+     <element name="fachgebietsCode" nillable="true" type="xsd:string"/>
+     <element name="konsultationId" type="xsd:long"/>
+     <element name="leistungsSvtCode" nillable="true" type="xsd:string"/>
+     <element name="verrechnungsSvtCode" nillable="true" type="xsd:string"/>
+     <element name="versicherungsstatus" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   
+   <complexType name="PatientInfo">
+    <sequence>
+     <element name="geburtsdatum" nillable="true" type="xsd:string"/>
+     <element name="geschlechtscode" nillable="true" type="xsd:string"/>
+     <element name="svNummer" nillable="true" type="xsd:string"/>
+     <element name="titelHinten" nillable="true" type="xsd:string"/>
+     <element name="titelVorne" nillable="true" type="xsd:string"/>
+     <element name="vorname" nillable="true" type="xsd:string"/>
+     <element name="zuname" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="KonsultationData">
+    <sequence>
+     <element minOccurs="0" maxOccurs="unbounded" name="konsultationen" nillable="true" type="impl:KonsultationInfo"/>
+     <element name="svPatient" nillable="true" type="impl:PatientInfo"/>
+    </sequence>
+   </complexType>
+   <element name="fault3" type="tns2:CardException"/>
+   <element name="fault4" type="tns3:DbasException"/>
+   <element name="fault5" type="tns3:DbasInvalidParameterException"/>
+   <element name="searchDmpData">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="cardReaderId" type="xsd:string"/>
+      <element name="datenblattTyp" type="xsd:string"/>
+      <element name="svNummer" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchDmpDataResponse">
+    <complexType>
+     <sequence>
+      <element name="searchDmpDataReturn" type="impl:DmpData"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="DmpData">
+    <sequence>
+     <element name="ersteinschreibung" nillable="true" type="xsd:string"/>
+     <element name="svPatient" nillable="true" type="impl:PatientInfo"/>
+    </sequence>
+   </complexType>
+   <element name="createDatenblattAllgemeinesProgramm">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="cardReaderId" type="xsd:string"/>
+      <element name="datenblattAllgemeinesProgramm" type="impl:DatenblattAllgemeinesProgramm"/>
+     </sequence>
+    </complexType>
+   </element>
+   
+   <complexType name="DatenblattAllgemeinesProgramm">
+    <sequence>
+     <element name="abdomen" nillable="true" type="xsd:string"/>
+     <element name="abschlussgespraech" nillable="true" type="xsd:string"/>
+     <element name="abstrichGemacht" nillable="true" type="xsd:string"/>
+     <element name="aktuellerBefund" nillable="true" type="xsd:string"/>
+     <element name="alkoholAufhoerwilleVorhanden" nillable="true" type="xsd:string"/>
+     <element name="alkoholfragebogen" nillable="true" type="xsd:string"/>
+     <element name="anamnestisch" nillable="true" type="xsd:string"/>
+     <element name="andereVorbefunde" nillable="true" type="xsd:string"/>
+     <element name="anschrift" nillable="true" type="xsd:string"/>
+     <element name="auffaelligkeiten" nillable="true" type="xsd:string"/>
+     <element name="befundVorhanden" nillable="true" type="xsd:string"/>
+     <element name="bestehenderDiabetes" nillable="true" type="xsd:string"/>
+     <element name="biradsBefundVorhanden" nillable="true" type="xsd:string"/>
+     <element name="blut" nillable="true" type="xsd:string"/>
+     <element name="blutImStuhl" nillable="true" type="xsd:string"/>
+     <element name="blutdruck1" nillable="true" type="xsd:string"/>
+     <element name="blutdruck2" nillable="true" type="xsd:string"/>
+     <element name="blutdrucksenkendesMedikamentGenommen" nillable="true" type="xsd:string"/>
+     <element name="blutzucker" nillable="true" type="xsd:string"/>
+     <element name="chol" nillable="true" type="xsd:string"/>
+     <element name="durchgefuehrt" nillable="true" type="xsd:string"/>
+     <element name="eiweiss" nillable="true" type="xsd:string"/>
+     <element name="ergebnis" nillable="true" type="xsd:string"/>
+     <element name="erkrankung1" nillable="true" type="xsd:string"/>
+     <element name="erkrankung2" nillable="true" type="xsd:string"/>
+     <element name="erkrankung3" nillable="true" type="xsd:string"/>
+     <element name="ery" nillable="true" type="xsd:string"/>
+     <element name="familiaereBelastung" nillable="true" type="xsd:string"/>
+     <element name="gammaGt" nillable="true" type="xsd:string"/>
+     <element name="geburtsdatum" nillable="true" type="xsd:string"/>
+     <element name="gesundesZahnfleisch" nillable="true" type="xsd:string"/>
+     <element name="glucose" nillable="true" type="xsd:string"/>
+     <element name="haut" nillable="true" type="xsd:string"/>
+     <element name="hb" nillable="true" type="xsd:string"/>
+     <element name="hdlChol" nillable="true" type="xsd:string"/>
+     <element name="herzLungeGefaess" nillable="true" type="xsd:string"/>
+     <element name="hkt" nillable="true" type="xsd:string"/>
+     <element name="hoerverminderung" nillable="true" type="xsd:string"/>
+     <element name="koerpergewicht" nillable="true" type="xsd:string"/>
+     <element name="koerpergroesse" nillable="true" type="xsd:string"/>
+     <element name="koerperlicheBewegung" nillable="true" type="xsd:string"/>
+     <element name="koloskopieAerztlicheBeratungAufklaerung" nillable="true" type="xsd:string"/>
+     <element name="konsultationId" type="xsd:long"/>
+     <element name="kopfHals" nillable="true" type="xsd:string"/>
+     <element name="letzteKoloskopie" nillable="true" type="xsd:string"/>
+     <element name="leukozyten" nillable="true" type="xsd:string"/>
+     <element name="mammographieAerztlicheBeratungAufklaerung" nillable="true" type="xsd:string"/>
+     <element maxOccurs="unbounded" name="massnahmeAlkohol" nillable="true" type="xsd:string"/>
+     <element maxOccurs="unbounded" name="massnahmeBewegung" nillable="true" type="xsd:string"/>
+     <element maxOccurs="unbounded" name="massnahmeBlutdruck" nillable="true" type="xsd:string"/>
+     <element maxOccurs="unbounded" name="massnahmeBlutzucker" nillable="true" type="xsd:string"/>
+     <element maxOccurs="unbounded" name="massnahmeBmi" nillable="true" type="xsd:string"/>
+     <element maxOccurs="unbounded" name="massnahmeDiabetesAb65" nillable="true" type="xsd:string"/>
+     <element maxOccurs="unbounded" name="massnahmeDiabetesBis65" nillable="true" type="xsd:string"/>
+     <element maxOccurs="unbounded" name="massnahmeHarnuntersuchung" nillable="true" type="xsd:string"/>
+     <element maxOccurs="unbounded" name="massnahmeHautkrebs" nillable="true" type="xsd:string"/>
+     <element maxOccurs="unbounded" name="massnahmeKardio" nillable="true" type="xsd:string"/>
+     <element maxOccurs="unbounded" name="massnahmeKoloskopie" nillable="true" type="xsd:string"/>
+     <element maxOccurs="unbounded" name="massnahmeMammographie" nillable="true" type="xsd:string"/>
+     <element maxOccurs="unbounded" name="massnahmePap" nillable="true" type="xsd:string"/>
+     <element maxOccurs="unbounded" name="massnahmeParodontitis" nillable="true" type="xsd:string"/>
+     <element maxOccurs="unbounded" name="massnahmeProstata" nillable="true" type="xsd:string"/>
+     <element maxOccurs="unbounded" name="massnahmeRauchverhalten" nillable="true" type="xsd:string"/>
+     <element maxOccurs="unbounded" name="massnahmeSonstiges" nillable="true" type="xsd:string"/>
+     <element name="melanom" nillable="true" type="xsd:string"/>
+     <element name="nitrit" nillable="true" type="xsd:string"/>
+     <element name="papAerztlicheBeratungAufklaerung" nillable="true" type="xsd:string"/>
+     <element name="postleitzahl" nillable="true" type="xsd:string"/>
+     <element name="prostataAerztlicheBeratung" nillable="true" type="xsd:string"/>
+     <element name="rauchenAufhoerwilleVorhanden" nillable="true" type="xsd:string"/>
+     <element name="risikoGlaukomVorhanden" nillable="true" type="xsd:string"/>
+     <element name="roetung" nillable="true" type="xsd:string"/>
+     <element name="sehverminderung" nillable="true" type="xsd:string"/>
+     <element name="sehvermoegenKontrolliert" nillable="true" type="xsd:string"/>
+     <element name="sicherNichtraucher" nillable="true" type="xsd:string"/>
+     <element name="sonstigeAuffaelligeBefunde" nillable="true" type="xsd:string"/>
+     <element name="svNummer" nillable="true" type="xsd:string"/>
+     <element name="taille" nillable="true" type="xsd:string"/>
+     <element name="triglycerideNuechtern" nillable="true" type="xsd:string"/>
+     <element name="ubg" nillable="true" type="xsd:string"/>
+     <element name="ueberweisungAugenFa" nillable="true" type="xsd:string"/>
+     <element name="ueberweisungHnoFa" nillable="true" type="xsd:string"/>
+     <element name="untersuchungGlaukomAb65" nillable="true" type="xsd:string"/>
+     <element name="untersuchungGlaukomBis65" nillable="true" type="xsd:string"/>
+     <element name="verdachtGesundheitsproblem" nillable="true" type="xsd:string"/>
+     <element name="versionsnummer" nillable="true" type="xsd:string"/>
+     <element name="wirbelsaeuleGelenke" nillable="true" type="xsd:string"/>
+     <element name="zahnstein" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="createDatenblattAllgemeinesProgrammResponse">
+    <complexType>
+     <sequence>
+      <element name="createDatenblattAllgemeinesProgrammReturn" type="impl:Quittung"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="Quittung">
+    <sequence>
+     <element name="annahmezeitpunkt" nillable="true" type="xsd:string"/>
+     <element name="datenblattTyp" nillable="true" type="xsd:string"/>
+     <element name="signatur" type="xsd:base64Binary"/>
+     <element name="svNummer" nillable="true" type="xsd:string"/>
+     <element name="svtCode" nillable="true" type="xsd:string"/>
+     <element name="untersuchungsdatum" nillable="true" type="xsd:string"/>
+     <element name="vpNummer" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="fault6" type="tns3:DbasEncryptionException"/>
+   <element name="createDatenblattMammographie">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="cardReaderId" type="xsd:string"/>
+      <element name="datenblattMammographie" type="impl:DatenblattMammographie"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="DatenblattMammographie">
+    <sequence>
+     <element name="anschrift" nillable="true" type="xsd:string"/>
+     <element name="aufklaerung" nillable="true" type="xsd:string"/>
+     <element name="ergebnisinformation" nillable="true" type="xsd:string"/>
+     <element name="geburtsdatum" nillable="true" type="xsd:string"/>
+     <element name="kategorie" nillable="true" type="xsd:string"/>
+     <element name="konsultationId" type="xsd:long"/>
+     <element name="postleitzahl" nillable="true" type="xsd:string"/>
+     <element name="svNummer" nillable="true" type="xsd:string"/>
+     <element name="versionsnummer" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="createDatenblattMammographieResponse">
+    <complexType>
+     <sequence>
+      <element name="createDatenblattMammographieReturn" type="impl:Quittung"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createDatenblattPapAbstrich">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="cardReaderId" type="xsd:string"/>
+      <element name="datenblattPapAbstrich" type="impl:DatenblattPapAbstrich"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="DatenblattPapAbstrich">
+    <sequence>
+     <element name="abstrichwiederholung" nillable="true" type="xsd:string"/>
+     <element name="anschrift" nillable="true" type="xsd:string"/>
+     <element name="auffaelligkeiten" nillable="true" type="xsd:string"/>
+     <element name="aufklaerung" nillable="true" type="xsd:string"/>
+     <element name="befund" nillable="true" type="xsd:string"/>
+     <element name="beurteilung" nillable="true" type="xsd:string"/>
+     <element name="ergebnisinformation" nillable="true" type="xsd:string"/>
+     <element name="geburtsdatum" nillable="true" type="xsd:string"/>
+     <element name="konsultationId" type="xsd:long"/>
+     <element name="massnahme" nillable="true" type="xsd:string"/>
+     <element name="papKlasse" nillable="true" type="xsd:string"/>
+     <element name="postleitzahl" nillable="true" type="xsd:string"/>
+     <element name="qualitaet" nillable="true" type="xsd:string"/>
+     <element name="svNummer" nillable="true" type="xsd:string"/>
+     <element name="versionsnummer" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="createDatenblattPapAbstrichResponse">
+    <complexType>
+     <sequence>
+      <element name="createDatenblattPapAbstrichReturn" type="impl:Quittung"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createDatenblattKoloskopie">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="cardReaderId" type="xsd:string"/>
+      <element name="datenblattKoloskopie" type="impl:DatenblattKoloskopie"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="DatenblattKoloskopie">
+    <sequence>
+     <element name="adenom" nillable="true" type="xsd:string"/>
+     <element name="adenomEntfernt" nillable="true" type="xsd:string"/>
+     <element name="anzahl" nillable="true" type="xsd:string"/>
+     <element name="ausgang" nillable="true" type="xsd:string"/>
+     <element name="behandlung" nillable="true" type="xsd:string"/>
+     <element name="biopsieEntnommen" nillable="true" type="xsd:string"/>
+     <element name="diagnose" nillable="true" type="xsd:string"/>
+     <element name="form" nillable="true" type="xsd:string"/>
+     <element name="geburtsdatum" nillable="true" type="xsd:string"/>
+     <element name="groesse" nillable="true" type="xsd:string"/>
+     <element name="grundUnvollstaendigeKolo" nillable="true" type="xsd:string"/>
+     <element name="histoKarzinom" nillable="true" type="xsd:string"/>
+     <element name="interKomplikationJa" nillable="true" type="xsd:string"/>
+     <element name="interventionspflichtig" nillable="true" type="xsd:string"/>
+     <element name="karzinomEntfernt" nillable="true" type="xsd:string"/>
+     <element name="kommentar" nillable="true" type="xsd:string"/>
+     <element name="konsultationId" nillable="false" type="xsd:long"/>
+     <element name="kontrolleMonate" nillable="true" type="xsd:string"/>
+     <element name="lokalisation" nillable="true" type="xsd:string"/>
+     <element maxOccurs="unbounded" name="makroskopischerBefund" nillable="true" type="xsd:string"/>
+     <element name="massnahmen" nillable="true" type="xsd:string"/>
+     <element name="ort" nillable="true" type="xsd:string"/>
+     <element name="patientenkontaktVerloren" nillable="true" type="xsd:string"/>
+     <element name="polyp" nillable="true" type="xsd:string"/>
+     <element name="polypEntfernt" nillable="true" type="xsd:string"/>
+     <element name="polypGeborgen" nillable="true" type="xsd:string"/>
+     <element name="polypektomie" nillable="true" type="xsd:string"/>
+     <element name="polypenabtragung" nillable="true" type="xsd:string"/>
+     <element name="postleitzahl" nillable="true" type="xsd:string"/>
+     <element name="sedierungAnalgesie" nillable="true" type="xsd:string"/>
+     <element name="sonstiges" nillable="true" type="xsd:string"/>
+     <element name="svNummer" nillable="true" type="xsd:string"/>
+     <element name="versionsnummer" nillable="true" type="xsd:string"/>
+     <element name="zangenabtragung" nillable="true" type="xsd:string"/>
+     <element name="zoekumErreicht" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="createDatenblattKoloskopieResponse">
+    <complexType>
+     <sequence>
+      <element name="createDatenblattKoloskopieReturn" type="impl:Quittung"/>
+     </sequence>
+    </complexType>
+   </element>
+   
+   <element name="createDatenblattQZKoloskopie">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="cardReaderId" type="xsd:string"/>
+      <element name="datenblattKoloskopie" type="impl:DatenblattKoloskopie"/>
+      <element name="untersuchungsdatum" type="xsd:string"/>
+      <element name="forcedQZ" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createDatenblattQZKoloskopieResponse">
+    <complexType>
+     <sequence>
+      <element name="createDatenblattQZKoloskopieReturn" type="impl:Quittung"/>
+     </sequence>
+    </complexType>
+   </element>
+   
+   <element name="createDatenblattDmpDm2">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="cardReaderId" type="xsd:string"/>
+      <element name="datenblattDmpDm2" type="impl:DatenblattDmpDm2"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="DatenblattDmpDm2">
+    <sequence>
+     <element name="akutesUlkusLinks" nillable="true" type="xsd:string"/>
+     <element name="akutesUlkusRechts" nillable="true" type="xsd:string"/>
+     <element name="amputation" nillable="true" type="xsd:string"/>
+     <element name="anginaPectoris" nillable="true" type="xsd:string"/>
+     <element name="apoplexie" nillable="true" type="xsd:string"/>
+     <element name="bewegung" nillable="true" type="xsd:string"/>
+     <element name="blindheit" nillable="true" type="xsd:string"/>
+     <element name="blutdruckTherapie" nillable="true" type="xsd:string"/>
+     <element name="blutdruckZielvereinbarung" nillable="true" type="xsd:string"/>
+     <element name="blutdruckmessung" nillable="true" type="xsd:string"/>
+     <element name="blutzuckermessung" nillable="true" type="xsd:string"/>
+     <element name="cholesterin" nillable="true" type="xsd:string"/>
+     <element name="claudicatio" nillable="true" type="xsd:string"/>
+     <element name="depression" nillable="true" type="xsd:string"/>
+     <element name="diabetesDiagnoseJahr" nillable="true" type="xsd:string"/>
+     <element name="diabetesSchulungWannJahr" nillable="true" type="xsd:string"/>
+     <element name="eq5d" nillable="true" type="xsd:string"/>
+     <element name="eq5dvas" nillable="true" type="xsd:string"/>
+     <element name="erektileDysfunktion" nillable="true" type="xsd:string"/>
+     <element name="ernaehrung" nillable="true" type="xsd:string"/>
+     <element name="fussdeformitaetLinks" nillable="true" type="xsd:string"/>
+     <element name="fussdeformitaetRechts" nillable="true" type="xsd:string"/>
+     <element name="geburtsdatum" nillable="true" type="xsd:string"/>
+     <element name="geheiltesUlkusLinks" nillable="true" type="xsd:string"/>
+     <element name="geheiltesUlkusRechts" nillable="true" type="xsd:string"/>
+     <element name="gewicht" nillable="true" type="xsd:string"/>
+     <element name="gewichtZielvereinbarung" nillable="true" type="xsd:string"/>
+     <element name="groesse" nillable="true" type="xsd:string"/>
+     <element name="harnzuckermessung" nillable="true" type="xsd:string"/>
+     <element name="hba1c" nillable="true" type="xsd:string"/>
+     <element name="hba1cZielvereinbarung" nillable="true" type="xsd:string"/>
+     <element name="hdlCholesterin" nillable="true" type="xsd:string"/>
+     <element name="herzBypassDilatation" nillable="true" type="xsd:string"/>
+     <element name="herzinfarkt" nillable="true" type="xsd:string"/>
+     <element name="herzinsuffizienz" nillable="true" type="xsd:string"/>
+     <element name="hypertonieSeitJahr" nillable="true" type="xsd:string"/>
+     <element name="innerhalb12Monaten" nillable="true" type="xsd:string"/>
+     <element name="insulin" nillable="true" type="xsd:string"/>
+     <element name="insulinIntensiviert" nillable="true" type="xsd:string"/>
+     <element name="insulinKonventionell" nillable="true" type="xsd:string"/>
+     <element name="insulinNurBasal" nillable="true" type="xsd:string"/>
+     <element name="insulinPraeprandial" nillable="true" type="xsd:string"/>
+     <element name="insulinSeitJahr" nillable="true" type="xsd:string"/>
+     <element name="khk" nillable="true" type="xsd:string"/>
+     <element name="kreatinin" nillable="true" type="xsd:string"/>
+     <element name="laserung" nillable="true" type="xsd:string"/>
+     <element name="makulopathie" nillable="true" type="xsd:string"/>
+     <element name="mikroalbuminurie" nillable="true" type="xsd:string"/>
+     <element name="neuropathie" nillable="true" type="xsd:string"/>
+     <element name="nurDiaet" nillable="true" type="xsd:string"/>
+     <element name="oad" nillable="true" type="xsd:string"/>
+     <element name="oadSeitJahr" nillable="true" type="xsd:string"/>
+     <element name="pavk" nillable="true" type="xsd:string"/>
+     <element name="pavkBypass" nillable="true" type="xsd:string"/>
+     <element name="pavkDilatation" nillable="true" type="xsd:string"/>
+     <element name="proteinurie" nillable="true" type="xsd:string"/>
+     <element name="pulsNichtTastbarLinks" nillable="true" type="xsd:string"/>
+     <element name="pulsNichtTastbarRechts" nillable="true" type="xsd:string"/>
+     <element name="rauchen" nillable="true" type="xsd:string"/>
+     <element name="retinopathie" nillable="true" type="xsd:string"/>
+     <element name="retinopathieNichtProliferativ" nillable="true" type="xsd:string"/>
+     <element name="retinopathieProliferativ" nillable="true" type="xsd:string"/>
+     <element name="rrdiaGanztagesmessung" nillable="true" type="xsd:string"/>
+     <element name="rrdiaRuhemessung" nillable="true" type="xsd:string"/>
+     <element name="rrdiaSelbstmessung" nillable="true" type="xsd:string"/>
+     <element name="rrsysGanztagesmessung" nillable="true" type="xsd:string"/>
+     <element name="rrsysRuhemessung" nillable="true" type="xsd:string"/>
+     <element name="rrsysSelbstmessung" nillable="true" type="xsd:string"/>
+     <element name="schulung" nillable="true" type="xsd:string"/>
+     <element name="schwereHypoglykaemie" nillable="true" type="xsd:string"/>
+     <element name="svNummer" nillable="true" type="xsd:string"/>
+     <element name="tabak" nillable="true" type="xsd:string"/>
+     <element name="terminalesNierenversagen" nillable="true" type="xsd:string"/>
+     <element name="tiaprind" nillable="true" type="xsd:string"/>
+     <element name="triglyceride" nillable="true" type="xsd:string"/>
+     <element name="untersuchungsdatum" nillable="true" type="xsd:string"/>
+     <element name="versionsnummer" nillable="true" type="xsd:string"/>
+     <element name="vibrationsempfindenVermindertLinks" nillable="true" type="xsd:string"/>
+     <element name="vibrationsempfindenVermindertRechts" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="createDatenblattDmpDm2Response">
+    <complexType>
+     <sequence>
+      <element name="createDatenblattDmpDm2Return" type="impl:Quittung"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createDatenblattDmpPmi">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="cardReaderId" type="xsd:string"/>
+      <element name="datenblattDmpPmi" type="impl:DatenblattDmpPmi"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="DatenblattDmpPmi">
+    <sequence>
+     <element name="acehemmer" nillable="true" type="xsd:string"/>
+     <element name="acehemmerKontraindikation" nillable="true" type="xsd:string"/>
+     <element name="anginaPectoris" nillable="true" type="xsd:string"/>
+     <element name="anzahlInfarkte" nillable="true" type="xsd:string"/>
+     <element name="aortacoronarBypass" nillable="true" type="xsd:string"/>
+     <element name="ass" nillable="true" type="xsd:string"/>
+     <element name="assKontraindikation" nillable="true" type="xsd:string"/>
+     <element name="atIIAntagonisten" nillable="true" type="xsd:string"/>
+     <element name="atIIAntagonistenKontraindikation" nillable="true" type="xsd:string"/>
+     <element name="bauchumfang" nillable="true" type="xsd:string"/>
+     <element name="betablocker" nillable="true" type="xsd:string"/>
+     <element name="betablockerKontraindikation" nillable="true" type="xsd:string"/>
+     <element name="bewegung" nillable="true" type="xsd:string"/>
+     <element name="blutdruckDiaBefund" nillable="true" type="xsd:string"/>
+     <element name="blutdruckDiaZielvereinbarung" nillable="true" type="xsd:string"/>
+     <element name="blutdruckMessart" nillable="true" type="xsd:string"/>
+     <element name="blutdruckSysBefund" nillable="true" type="xsd:string"/>
+     <element name="blutdruckSysZielvereinbarung" nillable="true" type="xsd:string"/>
+     <element name="carotisOp" nillable="true" type="xsd:string"/>
+     <element name="cholesterin" nillable="true" type="xsd:string"/>
+     <element name="depressionsscore" nillable="true" type="xsd:string"/>
+     <element name="diabetesSeit" nillable="true" type="xsd:string"/>
+     <element name="diabetikerHba1C" nillable="true" type="xsd:string"/>
+     <element name="dialysepflichtSeit" nillable="true" type="xsd:string"/>
+     <element name="eq5D" nillable="true" type="xsd:string"/>
+     <element name="eq5Dvas" nillable="true" type="xsd:string"/>
+     <element name="ernaehrung" nillable="true" type="xsd:string"/>
+     <element name="ernaehrungsBeratung" nillable="true" type="xsd:string"/>
+     <element name="geburtsdatum" nillable="true" type="xsd:string"/>
+     <element name="gesamtscore" nillable="true" type="xsd:string"/>
+     <element name="gewichtBefund" nillable="true" type="xsd:string"/>
+     <element name="gewichtZielvereinbarung" nillable="true" type="xsd:string"/>
+     <element name="grippeimpfung" nillable="true" type="xsd:string"/>
+     <element name="grippeimpfungZielvereinbarung" nillable="true" type="xsd:string"/>
+     <element name="groesse" nillable="true" type="xsd:string"/>
+     <element name="hdlCholesterin" nillable="true" type="xsd:string"/>
+     <element name="herzinfarktFamilie" nillable="true" type="xsd:string"/>
+     <element name="herzinsuffizienz" nillable="true" type="xsd:string"/>
+     <element name="hypertonieSeit" nillable="true" type="xsd:string"/>
+     <element name="infarktart" nillable="true" type="xsd:string"/>
+     <element name="insultAnamnese" nillable="true" type="xsd:string"/>
+     <element name="insultFamilie" nillable="true" type="xsd:string"/>
+     <element name="kaliumkanaloeffner" nillable="true" type="xsd:string"/>
+     <element name="kaliumkanaloeffnerKontraindikation" nillable="true" type="xsd:string"/>
+     <element name="kalziumkanalblocker" nillable="true" type="xsd:string"/>
+     <element name="kalziumkanalblockerKontraindikation" nillable="true" type="xsd:string"/>
+     <element name="koerperlicheAktivitaeten" nillable="true" type="xsd:string"/>
+     <element name="letzteKardiologischeReha" nillable="true" type="xsd:string"/>
+     <element name="letzterInfarktJahr" nillable="true" type="xsd:string"/>
+     <element name="letzterStent" nillable="true" type="xsd:string"/>
+     <element name="nichtDiabetikerNuechternBZWert" nillable="true" type="xsd:string"/>
+     <element name="nitrateMolsidomin" nillable="true" type="xsd:string"/>
+     <element name="nitrateMolsidominKontraindikation" nillable="true" type="xsd:string"/>
+     <element name="pavk" nillable="true" type="xsd:string"/>
+     <element name="periphererBypassPta" nillable="true" type="xsd:string"/>
+     <element name="pmiSchulung" nillable="true" type="xsd:string"/>
+     <element name="pmiSchulungWannJahr" nillable="true" type="xsd:string"/>
+     <element name="rauchenSeit" nillable="true" type="xsd:string"/>
+     <element name="raucherberatungEntwoehnung" nillable="true" type="xsd:string"/>
+     <element name="sonstigeTah" nillable="true" type="xsd:string"/>
+     <element name="sonstigeTahKontraindikation" nillable="true" type="xsd:string"/>
+     <element name="statine" nillable="true" type="xsd:string"/>
+     <element name="statineKontraindikation" nillable="true" type="xsd:string"/>
+     <element name="stent" nillable="true" type="xsd:string"/>
+     <element name="svNummer" nillable="true" type="xsd:string"/>
+     <element name="tabak" nillable="true" type="xsd:string"/>
+     <element name="triglyceride" nillable="true" type="xsd:string"/>
+     <element name="ueberweisungInternKardiolAmbulanz" nillable="true" type="xsd:string"/>
+     <element name="ueberweisungInternistKardiologe" nillable="true" type="xsd:string"/>
+     <element name="ueberweisungStationaereAufnahme" nillable="true" type="xsd:string"/>
+     <element name="untersuchungsdatum" nillable="true" type="xsd:string"/>
+     <element name="versionsnummer" nillable="true" type="xsd:string"/>
+     <element name="zigarettenProTag" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="createDatenblattDmpPmiResponse">
+    <complexType>
+     <sequence>
+      <element name="createDatenblattDmpPmiReturn" type="impl:Quittung"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchQuittungen">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="suchkriterien" type="impl:QuittungSearchCriteria"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="QuittungSearchCriteria">
+    <sequence>
+     <element name="bisDatum" nillable="true" type="xsd:string"/>
+     <element name="datenblattTyp" nillable="true" type="xsd:string"/>
+     <element name="svNummer" nillable="true" type="xsd:string"/>
+     <element name="svtCode" nillable="true" type="xsd:string"/>
+     <element name="vonDatum" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="searchQuittungenResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" maxOccurs="unbounded" name="searchQuittungenReturn" type="impl:Quittung"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://soap.base.client.chipkarte.at" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://soap.dbas.client.chipkarte.at"/>
+   <import namespace="http://exceptions.soap.base.client.chipkarte.at"/>
+   <import namespace="http://exceptions.soap.dbas.client.chipkarte.at"/>
+   <complexType name="Property">
+    <sequence>
+     <element name="key" nillable="true" type="xsd:string"/>
+     <element name="value" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://exceptions.soap.base.client.chipkarte.at" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://soap.dbas.client.chipkarte.at"/>
+   <import namespace="http://soap.base.client.chipkarte.at"/>
+   <import namespace="http://exceptions.soap.dbas.client.chipkarte.at"/>
+   <complexType name="BaseException">
+    <sequence>
+     <element name="code" nillable="true" type="xsd:string"/>
+     <element name="errorCode" type="xsd:int"/>
+     <element name="message" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="DialogException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="AccessException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="ServiceException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="CardException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://exceptions.soap.dbas.client.chipkarte.at" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://soap.dbas.client.chipkarte.at"/>
+   <import namespace="http://soap.base.client.chipkarte.at"/>
+   <import namespace="http://exceptions.soap.base.client.chipkarte.at"/>
+   <complexType name="DbasException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="DbasInvalidParameterException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence>
+       <element name="fieldCode" type="xsd:int"/>
+       <element name="fieldCodeSet" type="xsd:boolean"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="DbasEncryptionException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+  <wsdl:message name="searchDmpDataResponse">
+    <wsdl:part element="impl:searchDmpDataResponse" name="parameters" />
+  </wsdl:message>
+  <wsdl:message name="CardException">
+    <wsdl:part element="impl:fault3" name="fault" />
+  </wsdl:message>
+  <wsdl:message name="searchQuittungenRequest">
+    <wsdl:part element="impl:searchQuittungen" name="parameters" />
+  </wsdl:message>
+  <wsdl:message name="searchDmpDataRequest">
+    <wsdl:part element="impl:searchDmpData" name="parameters" />
+  </wsdl:message>
+   <wsdl:message name="checkStatusResponse">
+      <wsdl:part element="impl:checkStatusResponse" name="parameters"/>
+   </wsdl:message>
+   <wsdl:message name="createDatenblattPapAbstrichResponse">
+      <wsdl:part element="impl:createDatenblattPapAbstrichResponse" name="parameters"/>
+   </wsdl:message>
+   <wsdl:message name="DbasException">
+      <wsdl:part element="impl:fault4" name="fault"/>
+   </wsdl:message>
+   <wsdl:message name="DbasInvalidParameterException">
+      <wsdl:part element="impl:fault5" name="fault"/>
+   </wsdl:message>
+   <wsdl:message name="createDatenblattMammographieResponse">
+      <wsdl:part element="impl:createDatenblattMammographieResponse" name="parameters"/>
+   </wsdl:message>
+   <wsdl:message name="createDatenblattKoloskopieRequest">
+      <wsdl:part element="impl:createDatenblattKoloskopie" name="parameters"/>
+   </wsdl:message>   
+   <wsdl:message name="createDatenblattQZKoloskopieRequest">
+      <wsdl:part element="impl:createDatenblattQZKoloskopie" name="parameters"/>
+   </wsdl:message>
+   <wsdl:message name="ServiceException">
+      <wsdl:part element="impl:fault2" name="fault"/>
+   </wsdl:message>
+   <wsdl:message name="createDatenblattAllgemeinesProgrammRequest">
+      <wsdl:part element="impl:createDatenblattAllgemeinesProgramm" name="parameters"/>
+   </wsdl:message>
+   <wsdl:message name="createDatenblattDmpDm2Request">
+      <wsdl:part element="impl:createDatenblattDmpDm2" name="parameters"/>
+   </wsdl:message>
+   <wsdl:message name="createDatenblattPapAbstrichRequest">
+      <wsdl:part element="impl:createDatenblattPapAbstrich" name="parameters"/>
+   </wsdl:message>
+   <wsdl:message name="createDatenblattDmpPmiRequest">
+      <wsdl:part element="impl:createDatenblattDmpPmi" name="parameters"/>
+   </wsdl:message>
+   <wsdl:message name="createDatenblattDmpPmiResponse">
+      <wsdl:part element="impl:createDatenblattDmpPmiResponse" name="parameters"/>
+   </wsdl:message>
+   <wsdl:message name="searchQuittungenResponse">
+      <wsdl:part element="impl:searchQuittungenResponse" name="parameters"/>
+   </wsdl:message>
+   <wsdl:message name="createDatenblattDmpDm2Response">
+      <wsdl:part element="impl:createDatenblattDmpDm2Response" name="parameters"/>
+   </wsdl:message>
+   <wsdl:message name="createDatenblattMammographieRequest">
+      <wsdl:part element="impl:createDatenblattMammographie" name="parameters"/>
+   </wsdl:message>
+   <wsdl:message name="checkStatusRequest">
+      <wsdl:part element="impl:checkStatus" name="parameters"/>
+   </wsdl:message>
+   <wsdl:message name="createDatenblattAllgemeinesProgrammResponse">
+      <wsdl:part element="impl:createDatenblattAllgemeinesProgrammResponse" name="parameters"/>
+   </wsdl:message>
+   <wsdl:message name="searchKonsultationDataResponse">
+      <wsdl:part element="impl:searchKonsultationDataResponse" name="parameters"/>
+   </wsdl:message>
+   <wsdl:message name="DialogException">
+      <wsdl:part element="impl:fault" name="fault"/>
+   </wsdl:message>
+   <wsdl:message name="searchKonsultationDataRequest">
+      <wsdl:part element="impl:searchKonsultationData" name="parameters"/>
+   </wsdl:message>
+   <wsdl:message name="createDatenblattKoloskopieResponse">
+      <wsdl:part element="impl:createDatenblattKoloskopieResponse" name="parameters"/>
+   </wsdl:message>   
+   <wsdl:message name="createDatenblattQZKoloskopieResponse">
+      <wsdl:part element="impl:createDatenblattQZKoloskopieResponse" name="parameters"/>
+   </wsdl:message>
+   <wsdl:message name="AccessException">
+      <wsdl:part element="impl:fault1" name="fault"/>
+   </wsdl:message>
+   <wsdl:message name="DbasEncryptionException">
+      <wsdl:part element="impl:fault6" name="fault"/>
+   </wsdl:message>
+   <wsdl:portType name="IDbasService">
+      <wsdl:operation name="checkStatus">
+         <wsdl:input message="impl:checkStatusRequest" name="checkStatusRequest"/>
+         <wsdl:output message="impl:checkStatusResponse" name="checkStatusResponse"/>
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+      </wsdl:operation>
+      <wsdl:operation name="searchKonsultationData">
+         <wsdl:input message="impl:searchKonsultationDataRequest" name="searchKonsultationDataRequest"/>
+         <wsdl:output message="impl:searchKonsultationDataResponse" name="searchKonsultationDataResponse"/>
+         <wsdl:fault message="impl:DbasException" name="DbasException"/>
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         <wsdl:fault message="impl:DbasInvalidParameterException" name="DbasInvalidParameterException"/>
+         <wsdl:fault message="impl:CardException" name="CardException"/>
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+      </wsdl:operation>
+      <wsdl:operation name="searchDmpData">
+         <wsdl:input message="impl:searchDmpDataRequest" name="searchDmpDataRequest"/>
+         <wsdl:output message="impl:searchDmpDataResponse" name="searchDmpDataResponse"/>
+         <wsdl:fault message="impl:DbasException" name="DbasException"/>
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         <wsdl:fault message="impl:DbasInvalidParameterException" name="DbasInvalidParameterException"/>
+         <wsdl:fault message="impl:CardException" name="CardException"/>
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+      </wsdl:operation>
+      <wsdl:operation name="createDatenblattAllgemeinesProgramm">
+         <wsdl:input message="impl:createDatenblattAllgemeinesProgrammRequest" name="createDatenblattAllgemeinesProgrammRequest"/>
+         <wsdl:output message="impl:createDatenblattAllgemeinesProgrammResponse" name="createDatenblattAllgemeinesProgrammResponse"/>
+         <wsdl:fault message="impl:DbasException" name="DbasException"/>
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+         <wsdl:fault message="impl:DbasEncryptionException" name="DbasEncryptionException"/>
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         <wsdl:fault message="impl:DbasInvalidParameterException" name="DbasInvalidParameterException"/>
+         <wsdl:fault message="impl:CardException" name="CardException"/>
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+      </wsdl:operation>
+      <wsdl:operation name="createDatenblattMammographie">
+         <wsdl:input message="impl:createDatenblattMammographieRequest" name="createDatenblattMammographieRequest"/>
+         <wsdl:output message="impl:createDatenblattMammographieResponse" name="createDatenblattMammographieResponse"/>
+         <wsdl:fault message="impl:DbasException" name="DbasException"/>
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+         <wsdl:fault message="impl:DbasEncryptionException" name="DbasEncryptionException"/>
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         <wsdl:fault message="impl:DbasInvalidParameterException" name="DbasInvalidParameterException"/>
+         <wsdl:fault message="impl:CardException" name="CardException"/>
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+      </wsdl:operation>
+      <wsdl:operation name="createDatenblattPapAbstrich">
+         <wsdl:input message="impl:createDatenblattPapAbstrichRequest" name="createDatenblattPapAbstrichRequest"/>
+         <wsdl:output message="impl:createDatenblattPapAbstrichResponse" name="createDatenblattPapAbstrichResponse"/>
+         <wsdl:fault message="impl:DbasException" name="DbasException"/>
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+         <wsdl:fault message="impl:DbasEncryptionException" name="DbasEncryptionException"/>
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         <wsdl:fault message="impl:DbasInvalidParameterException" name="DbasInvalidParameterException"/>
+         <wsdl:fault message="impl:CardException" name="CardException"/>
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+      </wsdl:operation>
+      <wsdl:operation name="createDatenblattKoloskopie">
+         <wsdl:input message="impl:createDatenblattKoloskopieRequest" name="createDatenblattKoloskopieRequest"/>
+         <wsdl:output message="impl:createDatenblattKoloskopieResponse" name="createDatenblattKoloskopieResponse"/>
+         <wsdl:fault message="impl:DbasException" name="DbasException"/>
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+         <wsdl:fault message="impl:DbasEncryptionException" name="DbasEncryptionException"/>
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         <wsdl:fault message="impl:DbasInvalidParameterException" name="DbasInvalidParameterException"/>
+         <wsdl:fault message="impl:CardException" name="CardException"/>
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+      </wsdl:operation>      
+      <wsdl:operation name="createDatenblattQZKoloskopie">
+         <wsdl:input message="impl:createDatenblattQZKoloskopieRequest" name="createDatenblattQZKoloskopieRequest"/>
+         <wsdl:output message="impl:createDatenblattQZKoloskopieResponse" name="createDatenblattQZKoloskopieResponse"/>
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+         <wsdl:fault message="impl:DbasEncryptionException" name="DbasEncryptionException"/>
+         <wsdl:fault message="impl:DbasInvalidParameterException" name="DbasInvalidParameterException"/>
+         <wsdl:fault message="impl:CardException" name="CardException"/>
+         <wsdl:fault message="impl:DbasException" name="DbasException"/>
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+      </wsdl:operation>
+      <wsdl:operation name="createDatenblattDmpDm2">
+         <wsdl:input message="impl:createDatenblattDmpDm2Request" name="createDatenblattDmpDm2Request"/>
+         <wsdl:output message="impl:createDatenblattDmpDm2Response" name="createDatenblattDmpDm2Response"/>
+         <wsdl:fault message="impl:DbasException" name="DbasException"/>
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+         <wsdl:fault message="impl:DbasEncryptionException" name="DbasEncryptionException"/>
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         <wsdl:fault message="impl:DbasInvalidParameterException" name="DbasInvalidParameterException"/>
+         <wsdl:fault message="impl:CardException" name="CardException"/>
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+      </wsdl:operation>
+      <wsdl:operation name="createDatenblattDmpPmi">
+         <wsdl:input message="impl:createDatenblattDmpPmiRequest" name="createDatenblattDmpPmiRequest"/>
+         <wsdl:output message="impl:createDatenblattDmpPmiResponse" name="createDatenblattDmpPmiResponse"/>
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+         <wsdl:fault message="impl:DbasEncryptionException" name="DbasEncryptionException"/>
+         <wsdl:fault message="impl:DbasInvalidParameterException" name="DbasInvalidParameterException"/>
+         <wsdl:fault message="impl:CardException" name="CardException"/>
+         <wsdl:fault message="impl:DbasException" name="DbasException"/>
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+      </wsdl:operation>
+      <wsdl:operation name="searchQuittungen">
+         <wsdl:input message="impl:searchQuittungenRequest" name="searchQuittungenRequest"/>
+         <wsdl:output message="impl:searchQuittungenResponse" name="searchQuittungenResponse"/>
+         <wsdl:fault message="impl:DbasException" name="DbasException"/>
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+         <wsdl:fault message="impl:DbasInvalidParameterException" name="DbasInvalidParameterException"/>
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+      </wsdl:operation>
+   </wsdl:portType>
+   <wsdl:binding name="soap_dbas_5.0SoapBinding" type="impl:IDbasService">
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+      <wsdl:operation name="checkStatus">
+         <wsdlsoap:operation soapAction=""/>
+         <wsdl:input name="checkStatusRequest">
+            <wsdlsoap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="checkStatusResponse">
+            <wsdlsoap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="AccessException">
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="DialogException">
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="ServiceException">
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="searchKonsultationData">
+         <wsdlsoap:operation soapAction=""/>
+         <wsdl:input name="searchKonsultationDataRequest">
+            <wsdlsoap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="searchKonsultationDataResponse">
+            <wsdlsoap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="DbasException">
+            <wsdlsoap:fault name="DbasException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="AccessException">
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="DialogException">
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="DbasInvalidParameterException">
+            <wsdlsoap:fault name="DbasInvalidParameterException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="CardException">
+            <wsdlsoap:fault name="CardException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="ServiceException">
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="searchDmpData">
+         <wsdlsoap:operation soapAction=""/>
+         <wsdl:input name="searchDmpDataRequest">
+            <wsdlsoap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="searchDmpDataResponse">
+            <wsdlsoap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="DbasException">
+            <wsdlsoap:fault name="DbasException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="AccessException">
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="DialogException">
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="DbasInvalidParameterException">
+            <wsdlsoap:fault name="DbasInvalidParameterException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="CardException">
+            <wsdlsoap:fault name="CardException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="ServiceException">
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="createDatenblattAllgemeinesProgramm">
+         <wsdlsoap:operation soapAction=""/>
+         <wsdl:input name="createDatenblattAllgemeinesProgrammRequest">
+            <wsdlsoap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="createDatenblattAllgemeinesProgrammResponse">
+            <wsdlsoap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="DbasException">
+            <wsdlsoap:fault name="DbasException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="AccessException">
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="DbasEncryptionException">
+            <wsdlsoap:fault name="DbasEncryptionException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="DialogException">
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="DbasInvalidParameterException">
+            <wsdlsoap:fault name="DbasInvalidParameterException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="CardException">
+            <wsdlsoap:fault name="CardException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="ServiceException">
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="createDatenblattMammographie">
+         <wsdlsoap:operation soapAction=""/>
+         <wsdl:input name="createDatenblattMammographieRequest">
+            <wsdlsoap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="createDatenblattMammographieResponse">
+            <wsdlsoap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="DbasException">
+            <wsdlsoap:fault name="DbasException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="AccessException">
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="DbasEncryptionException">
+            <wsdlsoap:fault name="DbasEncryptionException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="DialogException">
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="DbasInvalidParameterException">
+            <wsdlsoap:fault name="DbasInvalidParameterException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="CardException">
+            <wsdlsoap:fault name="CardException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="ServiceException">
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="createDatenblattPapAbstrich">
+         <wsdlsoap:operation soapAction=""/>
+         <wsdl:input name="createDatenblattPapAbstrichRequest">
+            <wsdlsoap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="createDatenblattPapAbstrichResponse">
+            <wsdlsoap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="DbasException">
+            <wsdlsoap:fault name="DbasException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="AccessException">
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="DbasEncryptionException">
+            <wsdlsoap:fault name="DbasEncryptionException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="DialogException">
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="DbasInvalidParameterException">
+            <wsdlsoap:fault name="DbasInvalidParameterException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="CardException">
+            <wsdlsoap:fault name="CardException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="ServiceException">
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="createDatenblattKoloskopie">
+         <wsdlsoap:operation soapAction=""/>
+         <wsdl:input name="createDatenblattKoloskopieRequest">
+            <wsdlsoap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="createDatenblattKoloskopieResponse">
+            <wsdlsoap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="DbasException">
+            <wsdlsoap:fault name="DbasException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="AccessException">
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="DbasEncryptionException">
+            <wsdlsoap:fault name="DbasEncryptionException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="DialogException">
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="DbasInvalidParameterException">
+            <wsdlsoap:fault name="DbasInvalidParameterException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="CardException">
+            <wsdlsoap:fault name="CardException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="ServiceException">
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>      
+      <wsdl:operation name="createDatenblattQZKoloskopie">
+         <wsdlsoap:operation soapAction=""/>
+         <wsdl:input name="createDatenblattQZKoloskopieRequest">
+            <wsdlsoap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="createDatenblattQZKoloskopieResponse">
+            <wsdlsoap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="AccessException">
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="DbasEncryptionException">
+            <wsdlsoap:fault name="DbasEncryptionException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="DbasInvalidParameterException">
+            <wsdlsoap:fault name="DbasInvalidParameterException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="CardException">
+            <wsdlsoap:fault name="CardException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="DbasException">
+            <wsdlsoap:fault name="DbasException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="ServiceException">
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="DialogException">
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="createDatenblattDmpDm2">
+         <wsdlsoap:operation soapAction=""/>
+         <wsdl:input name="createDatenblattDmpDm2Request">
+            <wsdlsoap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="createDatenblattDmpDm2Response">
+            <wsdlsoap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="DbasException">
+            <wsdlsoap:fault name="DbasException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="AccessException">
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="DbasEncryptionException">
+            <wsdlsoap:fault name="DbasEncryptionException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="DialogException">
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="DbasInvalidParameterException">
+            <wsdlsoap:fault name="DbasInvalidParameterException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="CardException">
+            <wsdlsoap:fault name="CardException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="ServiceException">
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="createDatenblattDmpPmi">
+         <wsdlsoap:operation soapAction=""/>
+         <wsdl:input name="createDatenblattDmpPmiRequest">
+            <wsdlsoap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="createDatenblattDmpPmiResponse">
+            <wsdlsoap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="AccessException">
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="DbasEncryptionException">
+            <wsdlsoap:fault name="DbasEncryptionException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="DbasInvalidParameterException">
+            <wsdlsoap:fault name="DbasInvalidParameterException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="CardException">
+            <wsdlsoap:fault name="CardException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="DbasException">
+            <wsdlsoap:fault name="DbasException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="ServiceException">
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="DialogException">
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="searchQuittungen">
+         <wsdlsoap:operation soapAction=""/>
+         <wsdl:input name="searchQuittungenRequest">
+            <wsdlsoap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="searchQuittungenResponse">
+            <wsdlsoap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="DbasException">
+            <wsdlsoap:fault name="DbasException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="AccessException">
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="DialogException">
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="DbasInvalidParameterException">
+            <wsdlsoap:fault name="DbasInvalidParameterException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="ServiceException">
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+   </wsdl:binding>
+   <wsdl:service name="soap_dbas_5.0">
+      <wsdl:port binding="impl:soap_dbas_5.0SoapBinding" name="soap_dbas_5.0">
+         <wsdlsoap:address location="http://localhost/axis/services/soap_dbas_5.0"/>
+      </wsdl:port>
+   </wsdl:service>
+
+</wsdl:definitions>

@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: e-card Anbindung Client Basis-Funktionen Dokumentation
+Bundle-SymbolicName: at.medevit.elexis.at.ecard.client.base.doc; singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: medevit.at

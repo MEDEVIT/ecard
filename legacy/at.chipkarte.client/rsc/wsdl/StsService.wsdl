@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions targetNamespace="http://soap.sts.client.chipkarte.at" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://soap.sts.client.chipkarte.at" xmlns:intf="http://soap.sts.client.chipkarte.at" xmlns:tns1="http://soap.base.client.chipkarte.at" xmlns:tns2="http://exceptions.soap.base.client.chipkarte.at" xmlns:tns3="http://exceptions.soap.sts.client.chipkarte.at" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.2RC1
+Built on Sep 29, 2004 (08:29:40 EDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://soap.sts.client.chipkarte.at" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://exceptions.soap.sts.client.chipkarte.at"/>
+   <import namespace="http://soap.base.client.chipkarte.at"/>
+   <import namespace="http://exceptions.soap.base.client.chipkarte.at"/>
+   <element name="checkStatus">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="checkStatusResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="checkStatusReturn" type="tns1:Property"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="fault" type="tns2:DialogException"/>
+   <element name="fault1" type="tns2:AccessException"/>
+   <element name="fault2" type="tns2:ServiceException"/>
+   <element name="requestSamlAssertion">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="requestSamlAssertionReq" type="impl:RequestSamlAssertionReq"/>
+      <element name="cardReaderId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   
+   <complexType name="RequestSamlAssertionReq">
+    <sequence>
+     <element name="ticketSubject" nillable="true" type="xsd:string"/>
+     <element name="responseURL" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="requestSamlAssertionResponse">
+    <complexType>
+     <sequence>
+      <element name="requestSamlAssertionReturn" type="impl:RequestSamlAssertionResp"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="RequestSamlAssertionResp">
+    <sequence>
+     <element name="samlTicket" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="fault3" type="tns2:CardException"/>
+   <element name="fault4" type="tns3:StsException"/>
+   <element name="fault5" type="tns3:InvalidParameterStsException"/>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://soap.base.client.chipkarte.at" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://exceptions.soap.sts.client.chipkarte.at"/>
+   <import namespace="http://exceptions.soap.base.client.chipkarte.at"/>
+   <import namespace="http://soap.sts.client.chipkarte.at"/>
+   <complexType name="Property">
+    <sequence>
+     <element name="key" nillable="true" type="xsd:string"/>
+     <element name="value" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://exceptions.soap.base.client.chipkarte.at" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://exceptions.soap.sts.client.chipkarte.at"/>
+   <import namespace="http://soap.base.client.chipkarte.at"/>
+   <import namespace="http://soap.sts.client.chipkarte.at"/>
+   <complexType name="BaseException">
+    <sequence>
+     <element name="code" nillable="true" type="xsd:string"/>
+     <element name="errorCode" type="xsd:int"/>
+     <element name="message" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="DialogException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="AccessException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="ServiceException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="CardException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://exceptions.soap.sts.client.chipkarte.at" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://soap.base.client.chipkarte.at"/>
+   <import namespace="http://exceptions.soap.base.client.chipkarte.at"/>
+   <import namespace="http://soap.sts.client.chipkarte.at"/>
+   <complexType name="StsException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="InvalidParameterStsException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="CardException">
+
+      <wsdl:part element="impl:fault3" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="checkStatusRequest">
+
+      <wsdl:part element="impl:checkStatus" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="ServiceException">
+
+      <wsdl:part element="impl:fault2" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="requestSamlAssertionRequest">
+
+      <wsdl:part element="impl:requestSamlAssertion" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="AccessException">
+
+      <wsdl:part element="impl:fault1" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="DialogException">
+
+      <wsdl:part element="impl:fault" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="requestSamlAssertionResponse">
+
+      <wsdl:part element="impl:requestSamlAssertionResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="InvalidParameterStsException">
+
+      <wsdl:part element="impl:fault5" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="checkStatusResponse">
+
+      <wsdl:part element="impl:checkStatusResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="StsException">
+
+      <wsdl:part element="impl:fault4" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="IStsService">
+
+      <wsdl:operation name="checkStatus">
+
+         <wsdl:input message="impl:checkStatusRequest" name="checkStatusRequest"/>
+
+         <wsdl:output message="impl:checkStatusResponse" name="checkStatusResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="requestSamlAssertion">
+
+         <wsdl:input message="impl:requestSamlAssertionRequest" name="requestSamlAssertionRequest"/>
+
+         <wsdl:output message="impl:requestSamlAssertionResponse" name="requestSamlAssertionResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+         <wsdl:fault message="impl:InvalidParameterStsException" name="InvalidParameterStsException"/>
+
+         <wsdl:fault message="impl:StsException" name="StsException"/>
+
+         <wsdl:fault message="impl:CardException" name="CardException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="soap_sts_2.0SoapBinding" type="impl:IStsService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="checkStatus">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="checkStatusRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="checkStatusResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="requestSamlAssertion">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="requestSamlAssertionRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="requestSamlAssertionResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterStsException">
+
+            <wsdlsoap:fault name="InvalidParameterStsException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="StsException">
+
+            <wsdlsoap:fault name="StsException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CardException">
+
+            <wsdlsoap:fault name="CardException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="soap_sts_2.0">
+
+      <wsdl:port binding="impl:soap_sts_2.0SoapBinding" name="soap_sts_2.0">
+
+         <wsdlsoap:address location="http://localhost/axis/services/soap_sts_2.0"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

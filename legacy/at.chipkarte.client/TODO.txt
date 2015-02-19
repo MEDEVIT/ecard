@@ -1,0 +1,6 @@
+Timeout per call set:
+
+e.g.
+
+SoapServiceManagerStub#method:
+	_call.setTimeout(MILLISECONDS);

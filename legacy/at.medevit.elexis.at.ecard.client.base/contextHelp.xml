@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contexts>
+   <context id="PINAendern">
+      <description>Personal Identification Number (PIN) Ihrer o-Card ändern</description>
+      <topic href="contextHelp/PINAendern.html" label="PIN Ändern"/>
+   </context>
+</contexts>

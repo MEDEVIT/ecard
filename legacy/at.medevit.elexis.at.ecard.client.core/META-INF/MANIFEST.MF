@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: e-card Anbindung Client Service Manager
+Bundle-SymbolicName: at.medevit.elexis.at.ecard.client.core;singleton:=true
+Bundle-Version: 11.0.0.qualifier
+Bundle-Vendor: medevit.at
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ at.medevit.elexis.at;bundle-version="1.0.0",
+ org.apache.commons.logging;bundle-version="1.0.4"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ClassPath: .
+Export-Package: at.medevit.elexis.at.ecard.client
+Import-Package: at.chipkarte.client.base.soap.vp,
+ at.chipkarte.client.kse.soap,
+ at.chipkarte.client.sas.soap,
+ at.chipkarte.client.soap,
+ at.chipkarte.client.soap.constants

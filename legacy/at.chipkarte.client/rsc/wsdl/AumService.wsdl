@@ -1,0 +1,1383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://soap.aum.client.chipkarte.at" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://soap.aum.client.chipkarte.at" xmlns:intf="http://soap.aum.client.chipkarte.at" xmlns:tns1="http://soap.base.client.chipkarte.at" xmlns:tns2="http://exceptions.soap.base.client.chipkarte.at" xmlns:tns3="http://exceptions.soap.aum.client.chipkarte.at" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.2RC1
+Built on Sep 29, 2004 (08:29:40 EDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://soap.aum.client.chipkarte.at" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://exceptions.soap.aum.client.chipkarte.at"/>
+   <import namespace="http://soap.base.client.chipkarte.at"/>
+   <import namespace="http://exceptions.soap.base.client.chipkarte.at"/>
+   <element name="checkStatus">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="checkStatusResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="checkStatusReturn" type="tns1:Property"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="fault" type="tns2:DialogException"/>
+   <element name="fault1" type="tns2:AccessException"/>
+   <element name="fault2" type="tns2:ServiceException"/>
+   <element name="getSVTs">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getSVTsResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getSVTsReturn" type="impl:AufSvtProperty"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="AufSvtProperty">
+    <sequence>
+     <element name="asvg" type="xsd:boolean"/>
+     <element name="ausgehzeitBis1" nillable="true" type="xsd:string"/>
+     <element name="ausgehzeitBis2" nillable="true" type="xsd:string"/>
+     <element name="ausgehzeitVon1" nillable="true" type="xsd:string"/>
+     <element name="ausgehzeitVon2" nillable="true" type="xsd:string"/>
+     <element name="ekvkCode" nillable="true" type="xsd:string"/>
+     <element name="ekvkName" nillable="true" type="xsd:string"/>
+     <element name="kurzbezeichnung" nillable="true" type="xsd:string"/>
+     <element name="svtCode" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="fault3" type="tns3:AumException"/>
+   <element name="erfassenAUMeldung">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="meldungsdaten" type="impl:Meldungsdaten"/>
+      <element name="person" type="impl:Person"/>
+      <element name="cardReaderId" type="xsd:string"/>
+      <element name="forceExecution" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="Meldungsdaten">
+    <sequence>
+     <element name="abweichendeAusgehzeitBis1" nillable="true" type="xsd:string"/>
+     <element name="abweichendeAusgehzeitBis2" nillable="true" type="xsd:string"/>
+     <element name="abweichendeAusgehzeitVon1" nillable="true" type="xsd:string"/>
+     <element name="abweichendeAusgehzeitVon2" nillable="true" type="xsd:string"/>
+     <element name="arbeitsunfaehigBis" nillable="true" type="xsd:string"/>
+     <element name="arbeitsunfaehigVon" nillable="true" type="xsd:string"/>
+     <element name="behandlungsDatum" nillable="true" type="xsd:string"/>
+     <element name="berufskrankheit" type="xsd:int"/>
+     <element name="besondereArbeitsunfaehigkeitsursacheCode" nillable="true" type="xsd:string"/>
+     <element name="besondereMitteilungAnSVT" nillable="true" type="xsd:string"/>
+     <element name="bettruhe" type="xsd:boolean"/>
+     <element name="diagnose" nillable="true" type="xsd:string"/>
+     <element name="diagnoseCode" nillable="true" type="xsd:string"/>
+     <element name="diagnoseCodeTyp" nillable="true" type="xsd:string"/>
+     <element name="gehunfaehigBis" nillable="true" type="xsd:string"/>
+     <element name="gipsBis" nillable="true" type="xsd:string"/>
+     <element name="krankenhausaufenthaltBis" nillable="true" type="xsd:string"/>
+     <element name="krankenhausaufenthaltVon" nillable="true" type="xsd:string"/>
+     <element name="ort" nillable="true" type="xsd:string"/>
+     <element name="plz" nillable="true" type="xsd:string"/>
+     <element name="rueckdatierungsgrundCode" nillable="true" type="xsd:string"/>
+     <element name="strasse" nillable="true" type="xsd:string"/>
+     <element name="stromunfall" type="xsd:boolean"/>
+     <element name="svtCode" nillable="true" type="xsd:string"/>
+     <element name="voraussichtlichArbeitsunfaehigBis" nillable="true" type="xsd:string"/>
+     <element name="wiederbestellung" nillable="true" type="xsd:string"/>
+     <element name="zusatzdiagnoseCode" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Person">
+    <sequence>
+     <element name="ekvkNummer" nillable="true" type="xsd:string"/>
+     <element name="ekvkTraeger" nillable="true" type="xsd:string"/>
+     <element name="geburtsdatum" nillable="true" type="xsd:string"/>
+     <element name="geschlecht" nillable="true" type="xsd:string"/>
+     <element name="nachname" nillable="true" type="xsd:string"/>
+     <element name="svNummer" nillable="true" type="xsd:string"/>
+     <element name="ungeprueft" type="xsd:boolean"/>
+     <element name="vorname" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="erfassenAUMeldungResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="erfassenAUMeldungReturn" type="impl:Quittung"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="Quittung">
+    <sequence>
+     <element name="ausstellungsDatum" minOccurs="0" nillable="true" type="xsd:string"/>
+     <element name="id" type="xsd:long"/>
+     <element name="meldungsart" minOccurs="0" nillable="true" type="xsd:string"/>
+     <element name="meldungsdaten" minOccurs="0" nillable="true" type="impl:Meldungsdaten"/>
+     <element name="personendaten" minOccurs="0" nillable="true" type="impl:Person"/>
+     <element name="version" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <element name="fault4" type="tns2:CardException"/>
+   <element name="fault5" type="tns3:AumInvalidParameterException"/>
+   <element name="erfassenAFMeldung">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="meldungsdaten" type="impl:Meldungsdaten"/>
+      <element name="person" type="impl:Person"/>
+      <element name="cardReaderId" type="xsd:string"/>
+      <element name="forceExecution" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="erfassenAFMeldungResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="erfassenAFMeldungReturn" type="impl:Quittung"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="erfassenAFMeldungAufBasisAU">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="aufId" type="xsd:long"/>
+      <element name="aufIdVersion" type="xsd:int"/>
+      <element name="arbeitsunfaehigBis" type="xsd:string"/>
+      <element name="diagnose" type="xsd:string"/>
+      <element name="diagnoseCode" type="xsd:string"/>
+      <element name="diagnoseCodeTyp" type="xsd:string"/>
+      <element name="besondereMitteilungAnSVT" type="xsd:string"/>
+      <element name="forceExecution" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="erfassenAFMeldungAufBasisAUResponse">
+    <complexType>
+     <sequence>
+      <element name="erfassenAFMeldungAufBasisAUReturn" type="impl:Quittung"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="aendernMeldung">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="aufId" type="xsd:long"/>
+      <element name="aufIdVersion" type="xsd:int"/>
+      <element name="meldungsart" type="xsd:string"/>
+      <element name="meldungNeu" type="impl:Meldungsdaten"/>
+      <element name="forceExecution" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="aendernMeldungResponse">
+    <complexType>
+     <sequence>
+      <element name="aendernMeldungReturn" type="impl:Quittung"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="suchenMeldungen">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="suche" type="impl:Suchkriterien"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="Suchkriterien">
+    <sequence>
+     <element name="meldungsart" nillable="true" type="xsd:string"/>
+     <element name="nachname" nillable="true" type="xsd:string"/>
+     <element name="nurAenderbare" type="xsd:boolean"/>
+     <element name="svNummer" nillable="true" type="xsd:string"/>
+     <element name="vorname" nillable="true" type="xsd:string"/>
+     <element name="zeitraumBis" nillable="true" type="xsd:string"/>
+     <element name="zeitraumVon" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="suchenMeldungenResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" maxOccurs="unbounded" name="suchenMeldungenReturn" type="impl:AufSuchergebnis"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="AufSuchergebnis">
+    <sequence>
+     <element name="arbeitsunfaehigBis" nillable="true" type="xsd:string"/>
+     <element name="arbeitsunfaehigVon" nillable="true" type="xsd:string"/>
+     <element name="aufID" type="xsd:long"/>
+     <element name="ausstellungsdatum" nillable="true" type="xsd:string"/>
+     <element name="geburtsDatum" nillable="true" type="xsd:string"/>
+     <element name="meldungsart" nillable="true" type="xsd:string"/>
+     <element name="nachname" nillable="true" type="xsd:string"/>
+     <element name="svNummer" nillable="true" type="xsd:string"/>
+     <element name="svtCode" nillable="true" type="xsd:string"/>
+     <element name="ungeprueft" type="xsd:boolean"/>
+     <element name="vorname" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="downloadMeldung">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="aufId" type="xsd:long"/>
+      <element name="meldungsart" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="downloadMeldungResponse">
+    <complexType>
+     <sequence>
+      <element name="downloadMeldungReturn" nillable="true" type="impl:Quittung"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="stornierenMeldung">
+    <complexType>
+     <sequence>
+      <element name="dialogId" type="xsd:string"/>
+      <element name="aufId" type="xsd:long"/>
+      <element name="aufIdVersion" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="stornierenMeldungResponse">
+    <complexType/>
+   </element>
+   <element name="getZusatzdiagnoseCodes">
+    <complexType/>
+   </element>
+   <element name="getZusatzdiagnoseCodesResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getZusatzdiagnoseCodesReturn" type="impl:Zusatzdiagnose"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="Zusatzdiagnose">
+    <sequence>
+     <element name="bezeichnung" nillable="true" type="xsd:string"/>
+     <element name="code" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="getRueckdatierungsgrundCodes">
+    <complexType/>
+   </element>
+   <element name="getRueckdatierungsgrundCodesResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getRueckdatierungsgrundCodesReturn" type="impl:Rueckdatierungsgrund"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="Rueckdatierungsgrund">
+    <sequence>
+     <element name="beschreibung" nillable="true" type="xsd:string"/>
+     <element name="code" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="getBesondereArbeitsunfaehigkeitsursacheCodes">
+    <complexType/>
+   </element>
+   <element name="getBesondereArbeitsunfaehigkeitsursacheCodesResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getBesondereArbeitsunfaehigkeitsursacheCodesReturn" type="impl:BesondereArbeitsunfaehigkeitsursache"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="BesondereArbeitsunfaehigkeitsursache">
+    <sequence>
+     <element name="bezeichnung" nillable="true" type="xsd:string"/>
+     <element name="code" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="getDiagnoseCodeTyp">
+    <complexType/>
+   </element>
+   <element name="getDiagnoseCodeTypResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getDiagnoseCodeTypReturn" type="impl:DiagnoseCodeTyp"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="DiagnoseCodeTyp">
+    <sequence>
+     <element name="bezeichnung" nillable="true" type="xsd:string"/>
+     <element name="code" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="downloadFormblatt">
+    <complexType/>
+   </element>
+   <element name="downloadFormblattResponse">
+    <complexType>
+     <sequence>
+      <element name="downloadFormblattReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://soap.base.client.chipkarte.at" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://exceptions.soap.aum.client.chipkarte.at"/>
+   <import namespace="http://exceptions.soap.base.client.chipkarte.at"/>
+   <import namespace="http://soap.aum.client.chipkarte.at"/>
+   <complexType name="Property">
+    <sequence>
+     <element name="key" nillable="true" type="xsd:string"/>
+     <element name="value" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://exceptions.soap.base.client.chipkarte.at" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://exceptions.soap.aum.client.chipkarte.at"/>
+   <import namespace="http://soap.base.client.chipkarte.at"/>
+   <import namespace="http://soap.aum.client.chipkarte.at"/>
+   <complexType name="BaseException">
+    <sequence>
+     <element name="code" nillable="true" type="xsd:string"/>
+     <element name="errorCode" type="xsd:int"/>
+     <element name="message" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="DialogException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="AccessException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="ServiceException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="CardException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://exceptions.soap.aum.client.chipkarte.at" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://soap.base.client.chipkarte.at"/>
+   <import namespace="http://exceptions.soap.base.client.chipkarte.at"/>
+   <import namespace="http://soap.aum.client.chipkarte.at"/>
+   <complexType name="AumException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="AumInvalidParameterException">
+    <complexContent>
+     <extension base="tns2:BaseException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="erfassenAUMeldungResponse">
+
+      <wsdl:part element="impl:erfassenAUMeldungResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getRueckdatierungsgrundCodesResponse">
+
+      <wsdl:part element="impl:getRueckdatierungsgrundCodesResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="checkStatusRequest">
+
+      <wsdl:part element="impl:checkStatus" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="ServiceException">
+
+      <wsdl:part element="impl:fault2" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="downloadMeldungRequest">
+
+      <wsdl:part element="impl:downloadMeldung" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="suchenMeldungenResponse">
+
+      <wsdl:part element="impl:suchenMeldungenResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="downloadMeldungResponse">
+
+      <wsdl:part element="impl:downloadMeldungResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="CardException">
+
+      <wsdl:part element="impl:fault4" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="DialogException">
+
+      <wsdl:part element="impl:fault" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="aendernMeldungResponse">
+
+      <wsdl:part element="impl:aendernMeldungResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="erfassenAFMeldungAufBasisAURequest">
+
+      <wsdl:part element="impl:erfassenAFMeldungAufBasisAU" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="downloadFormblattResponse">
+
+      <wsdl:part element="impl:downloadFormblattResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getRueckdatierungsgrundCodesRequest">
+
+      <wsdl:part element="impl:getRueckdatierungsgrundCodes" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="AccessException">
+
+      <wsdl:part element="impl:fault1" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getZusatzdiagnoseCodesResponse">
+
+      <wsdl:part element="impl:getZusatzdiagnoseCodesResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDiagnoseCodeTypResponse">
+
+      <wsdl:part element="impl:getDiagnoseCodeTypResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="checkStatusResponse">
+
+      <wsdl:part element="impl:checkStatusResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="erfassenAUMeldungRequest">
+
+      <wsdl:part element="impl:erfassenAUMeldung" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="erfassenAFMeldungRequest">
+
+      <wsdl:part element="impl:erfassenAFMeldung" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="downloadFormblattRequest">
+
+      <wsdl:part element="impl:downloadFormblatt" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getSVTsResponse">
+
+      <wsdl:part element="impl:getSVTsResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="suchenMeldungenRequest">
+
+      <wsdl:part element="impl:suchenMeldungen" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="stornierenMeldungRequest">
+
+      <wsdl:part element="impl:stornierenMeldung" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="AumInvalidParameterException">
+
+      <wsdl:part element="impl:fault5" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="stornierenMeldungResponse">
+
+      <wsdl:part element="impl:stornierenMeldungResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="AumException">
+
+      <wsdl:part element="impl:fault3" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="erfassenAFMeldungAufBasisAUResponse">
+
+      <wsdl:part element="impl:erfassenAFMeldungAufBasisAUResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getZusatzdiagnoseCodesRequest">
+
+      <wsdl:part element="impl:getZusatzdiagnoseCodes" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDiagnoseCodeTypRequest">
+
+      <wsdl:part element="impl:getDiagnoseCodeTyp" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="aendernMeldungRequest">
+
+      <wsdl:part element="impl:aendernMeldung" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getBesondereArbeitsunfaehigkeitsursacheCodesResponse">
+
+      <wsdl:part element="impl:getBesondereArbeitsunfaehigkeitsursacheCodesResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getBesondereArbeitsunfaehigkeitsursacheCodesRequest">
+
+      <wsdl:part element="impl:getBesondereArbeitsunfaehigkeitsursacheCodes" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getSVTsRequest">
+
+      <wsdl:part element="impl:getSVTs" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="erfassenAFMeldungResponse">
+
+      <wsdl:part element="impl:erfassenAFMeldungResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="IAumService">
+
+      <wsdl:operation name="checkStatus">
+
+         <wsdl:input message="impl:checkStatusRequest" name="checkStatusRequest"/>
+
+         <wsdl:output message="impl:checkStatusResponse" name="checkStatusResponse"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getSVTs">
+
+         <wsdl:input message="impl:getSVTsRequest" name="getSVTsRequest"/>
+
+         <wsdl:output message="impl:getSVTsResponse" name="getSVTsResponse"/>
+
+         <wsdl:fault message="impl:AumException" name="AumException"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="erfassenAUMeldung">
+
+         <wsdl:input message="impl:erfassenAUMeldungRequest" name="erfassenAUMeldungRequest"/>
+
+         <wsdl:output message="impl:erfassenAUMeldungResponse" name="erfassenAUMeldungResponse"/>
+
+         <wsdl:fault message="impl:AumException" name="AumException"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:AumInvalidParameterException" name="AumInvalidParameterException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+         <wsdl:fault message="impl:CardException" name="CardException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="erfassenAFMeldung">
+
+         <wsdl:input message="impl:erfassenAFMeldungRequest" name="erfassenAFMeldungRequest"/>
+
+         <wsdl:output message="impl:erfassenAFMeldungResponse" name="erfassenAFMeldungResponse"/>
+
+         <wsdl:fault message="impl:AumException" name="AumException"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:AumInvalidParameterException" name="AumInvalidParameterException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+         <wsdl:fault message="impl:CardException" name="CardException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="erfassenAFMeldungAufBasisAU">
+
+         <wsdl:input message="impl:erfassenAFMeldungAufBasisAURequest" name="erfassenAFMeldungAufBasisAURequest"/>
+
+         <wsdl:output message="impl:erfassenAFMeldungAufBasisAUResponse" name="erfassenAFMeldungAufBasisAUResponse"/>
+
+         <wsdl:fault message="impl:AumException" name="AumException"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:AumInvalidParameterException" name="AumInvalidParameterException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="aendernMeldung">
+
+         <wsdl:input message="impl:aendernMeldungRequest" name="aendernMeldungRequest"/>
+
+         <wsdl:output message="impl:aendernMeldungResponse" name="aendernMeldungResponse"/>
+
+         <wsdl:fault message="impl:AumException" name="AumException"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:AumInvalidParameterException" name="AumInvalidParameterException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="suchenMeldungen">
+
+         <wsdl:input message="impl:suchenMeldungenRequest" name="suchenMeldungenRequest"/>
+
+         <wsdl:output message="impl:suchenMeldungenResponse" name="suchenMeldungenResponse"/>
+
+         <wsdl:fault message="impl:AumException" name="AumException"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:AumInvalidParameterException" name="AumInvalidParameterException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="downloadMeldung">
+
+         <wsdl:input message="impl:downloadMeldungRequest" name="downloadMeldungRequest"/>
+
+         <wsdl:output message="impl:downloadMeldungResponse" name="downloadMeldungResponse"/>
+
+         <wsdl:fault message="impl:AumException" name="AumException"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:AumInvalidParameterException" name="AumInvalidParameterException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="stornierenMeldung">
+
+         <wsdl:input message="impl:stornierenMeldungRequest" name="stornierenMeldungRequest"/>
+
+         <wsdl:output message="impl:stornierenMeldungResponse" name="stornierenMeldungResponse"/>
+
+         <wsdl:fault message="impl:AumException" name="AumException"/>
+
+         <wsdl:fault message="impl:AccessException" name="AccessException"/>
+
+         <wsdl:fault message="impl:AumInvalidParameterException" name="AumInvalidParameterException"/>
+
+         <wsdl:fault message="impl:DialogException" name="DialogException"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getZusatzdiagnoseCodes">
+
+         <wsdl:input message="impl:getZusatzdiagnoseCodesRequest" name="getZusatzdiagnoseCodesRequest"/>
+
+         <wsdl:output message="impl:getZusatzdiagnoseCodesResponse" name="getZusatzdiagnoseCodesResponse"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getRueckdatierungsgrundCodes">
+
+         <wsdl:input message="impl:getRueckdatierungsgrundCodesRequest" name="getRueckdatierungsgrundCodesRequest"/>
+
+         <wsdl:output message="impl:getRueckdatierungsgrundCodesResponse" name="getRueckdatierungsgrundCodesResponse"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getBesondereArbeitsunfaehigkeitsursacheCodes">
+
+         <wsdl:input message="impl:getBesondereArbeitsunfaehigkeitsursacheCodesRequest" name="getBesondereArbeitsunfaehigkeitsursacheCodesRequest"/>
+
+         <wsdl:output message="impl:getBesondereArbeitsunfaehigkeitsursacheCodesResponse" name="getBesondereArbeitsunfaehigkeitsursacheCodesResponse"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDiagnoseCodeTyp">
+
+         <wsdl:input message="impl:getDiagnoseCodeTypRequest" name="getDiagnoseCodeTypRequest"/>
+
+         <wsdl:output message="impl:getDiagnoseCodeTypResponse" name="getDiagnoseCodeTypResponse"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="downloadFormblatt">
+
+         <wsdl:input message="impl:downloadFormblattRequest" name="downloadFormblattRequest"/>
+
+         <wsdl:output message="impl:downloadFormblattResponse" name="downloadFormblattResponse"/>
+
+         <wsdl:fault message="impl:ServiceException" name="ServiceException"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="soap_aum_3.0SoapBinding" type="impl:IAumService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="checkStatus">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="checkStatusRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="checkStatusResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getSVTs">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getSVTsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getSVTsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AumException">
+
+            <wsdlsoap:fault name="AumException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="erfassenAUMeldung">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="erfassenAUMeldungRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="erfassenAUMeldungResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AumException">
+
+            <wsdlsoap:fault name="AumException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AumInvalidParameterException">
+
+            <wsdlsoap:fault name="AumInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CardException">
+
+            <wsdlsoap:fault name="CardException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="erfassenAFMeldung">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="erfassenAFMeldungRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="erfassenAFMeldungResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AumException">
+
+            <wsdlsoap:fault name="AumException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AumInvalidParameterException">
+
+            <wsdlsoap:fault name="AumInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CardException">
+
+            <wsdlsoap:fault name="CardException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="erfassenAFMeldungAufBasisAU">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="erfassenAFMeldungAufBasisAURequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="erfassenAFMeldungAufBasisAUResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AumException">
+
+            <wsdlsoap:fault name="AumException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AumInvalidParameterException">
+
+            <wsdlsoap:fault name="AumInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="aendernMeldung">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="aendernMeldungRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="aendernMeldungResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AumException">
+
+            <wsdlsoap:fault name="AumException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AumInvalidParameterException">
+
+            <wsdlsoap:fault name="AumInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="suchenMeldungen">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="suchenMeldungenRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="suchenMeldungenResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AumException">
+
+            <wsdlsoap:fault name="AumException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AumInvalidParameterException">
+
+            <wsdlsoap:fault name="AumInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="downloadMeldung">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="downloadMeldungRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="downloadMeldungResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AumException">
+
+            <wsdlsoap:fault name="AumException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AumInvalidParameterException">
+
+            <wsdlsoap:fault name="AumInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="stornierenMeldung">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="stornierenMeldungRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="stornierenMeldungResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AumException">
+
+            <wsdlsoap:fault name="AumException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AccessException">
+
+            <wsdlsoap:fault name="AccessException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AumInvalidParameterException">
+
+            <wsdlsoap:fault name="AumInvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="DialogException">
+
+            <wsdlsoap:fault name="DialogException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getZusatzdiagnoseCodes">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getZusatzdiagnoseCodesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getZusatzdiagnoseCodesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getRueckdatierungsgrundCodes">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getRueckdatierungsgrundCodesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getRueckdatierungsgrundCodesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getBesondereArbeitsunfaehigkeitsursacheCodes">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getBesondereArbeitsunfaehigkeitsursacheCodesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getBesondereArbeitsunfaehigkeitsursacheCodesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDiagnoseCodeTyp">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getDiagnoseCodeTypRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getDiagnoseCodeTypResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="downloadFormblatt">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="downloadFormblattRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="downloadFormblattResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="ServiceException">
+
+            <wsdlsoap:fault name="ServiceException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="soap_aum_3.0">
+
+      <wsdl:port binding="impl:soap_aum_3.0SoapBinding" name="soap_aum_3.0">
+
+         <wsdlsoap:address location="http://localhost/axis/services/soap_aum_3.0"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

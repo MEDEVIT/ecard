@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: e-card Anbindung Client SV-Nummern-Abfrage-Service
+Bundle-SymbolicName: at.medevit.elexis.at.ecard.client.sas;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: at.medevit.elexis.at.ecard.client.sas.Activator
+Bundle-Vendor: medevit.at
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.ui;bundle-version="3.6.0",
+ at.medevit.elexis.at.ecard.client.core;bundle-version="11.0.0",
+ at.medevit.elexis.at.ecard.client.base;bundle-version="1.0.0",
+ at.medevit.elexis.model;bundle-version="0.1.1"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Import-Package: at.chipkarte.client.base.soap,
+ at.chipkarte.client.base.soap.constants,
+ at.chipkarte.client.base.soap.exceptions,
+ at.chipkarte.client.sas.soap,
+ at.chipkarte.client.sas.soap.constants,
+ at.chipkarte.client.sas.soap.exceptions
+Service-Component: OSGI-INF/component.xml
+Export-Package: at.medevit.elexis.at.ecard.client.sas.sasserviceimpl

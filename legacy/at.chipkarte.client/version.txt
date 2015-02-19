@@ -1,0 +1,8 @@
+R11a: vp-sw-0.80.02.27-ASWH
+
+Steps done:
+
+1. Generated Code from ServiceManager.wsdl
+2. Generated Code from BaseServiceWP.wsdl
+3. Manually added at.chipkarte.client.base.soap.constants from R11a interface release
+4. Manually added at.chipkarte.client.soap.constants from R11a interface release

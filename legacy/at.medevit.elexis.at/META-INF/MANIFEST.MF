@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Elexis Adaptionen Österreich
+Bundle-SymbolicName: at.medevit.elexis.at;singleton:=true
+Bundle-Version: 1.1.0
+Bundle-Vendor: medevit.at
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ ch.elexis;bundle-version="2.1.5",
+ ch.rgw.utility;bundle-version="2.0.4",
+ ch.elexis.core;bundle-version="0.0.2"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: at.medevit.elexis.at.XID,
+ at.medevit.elexis.at.data,
+ at.medevit.elexis.at.dynamicdata,
+ at.medevit.elexis.at.validator
+Import-Package: org.eclipse.core.databinding.validation
