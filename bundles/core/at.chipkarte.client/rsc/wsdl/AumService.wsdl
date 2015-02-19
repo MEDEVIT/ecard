@@ -1,0 +1,889 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://soap.aum.client.chipkarte.at" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://soap.aum.client.chipkarte.at" name="AumService">
+  <types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" xmlns:tns="http://exceptions.soap.aum.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://exceptions.soap.aum.client.chipkarte.at" version="1.0">
+      <xs:import namespace="http://exceptions.soap.base.client.chipkarte.at" />
+      <xs:element name="AumException" type="tns:aumExceptionContent" />
+      <xs:element name="AumInvalidParameterException" type="tns:aumInvalidParameterExceptionContent" />
+      <xs:complexType name="aumExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="baseexc:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="aumInvalidParameterExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="baseexc:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://exceptions.soap.base.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://exceptions.soap.base.client.chipkarte.at" version="1.0">
+      <xs:element name="AccessException" type="tns:accessExceptionContent" />
+      <xs:element name="CardException" type="tns:cardExceptionContent" />
+      <xs:element name="DialogException" type="tns:dialogExceptionContent" />
+      <xs:element name="ServiceException" type="tns:serviceExceptionContent" />
+      <xs:complexType name="accessExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="baseExceptionContent">
+        <xs:sequence>
+          <xs:element name="code" type="xs:string" minOccurs="0" />
+          <xs:element name="errorCode" type="xs:int" minOccurs="0" />
+          <xs:element name="message" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="cardExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="dialogExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="serviceExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:aumexc="http://exceptions.soap.aum.client.chipkarte.at" xmlns:base="http://soap.base.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://soap.aum.client.chipkarte.at" version="1.0">
+      <xs:import namespace="http://soap.base.client.chipkarte.at" />
+      <xs:element name="auEndeBearbeiten" type="tns:auEndeBearbeiten" />
+      <xs:element name="auEndeBearbeitenResponse" type="tns:auEndeBearbeitenResponse" />
+      <xs:element name="checkStatus" type="tns:checkStatus" />
+      <xs:element name="checkStatusResponse" type="tns:checkStatusResponse" />
+      <xs:element name="detailDatenAbfragen" type="tns:detailDatenAbfragen" />
+      <xs:element name="detailDatenAbfragenResponse" type="tns:detailDatenAbfragenResponse" />
+      <xs:element name="downloadFormblatt" type="tns:downloadFormblatt" />
+      <xs:element name="downloadFormblattResponse" type="tns:downloadFormblattResponse" />
+      <xs:element name="getBesondereArbeitsunfaehigkeitsursacheCodes" type="tns:getBesondereArbeitsunfaehigkeitsursacheCodes" />
+      <xs:element name="getBesondereArbeitsunfaehigkeitsursacheCodesResponse" type="tns:getBesondereArbeitsunfaehigkeitsursacheCodesResponse" />
+      <xs:element name="getDiagnoseCodeTyp" type="tns:getDiagnoseCodeTyp" />
+      <xs:element name="getDiagnoseCodeTypResponse" type="tns:getDiagnoseCodeTypResponse" />
+      <xs:element name="getRueckdatierungsgrundCodes" type="tns:getRueckdatierungsgrundCodes" />
+      <xs:element name="getRueckdatierungsgrundCodesResponse" type="tns:getRueckdatierungsgrundCodesResponse" />
+      <xs:element name="getSVTs" type="tns:getSVTs" />
+      <xs:element name="getSVTsResponse" type="tns:getSVTsResponse" />
+      <xs:element name="getZusatzdiagnoseCodes" type="tns:getZusatzdiagnoseCodes" />
+      <xs:element name="getZusatzdiagnoseCodesResponse" type="tns:getZusatzdiagnoseCodesResponse" />
+      <xs:element name="meldungAendern" type="tns:meldungAendern" />
+      <xs:element name="meldungAendernResponse" type="tns:meldungAendernResponse" />
+      <xs:element name="meldungAnlegen" type="tns:meldungAnlegen" />
+      <xs:element name="meldungAnlegenResponse" type="tns:meldungAnlegenResponse" />
+      <xs:element name="meldungStornieren" type="tns:meldungStornieren" />
+      <xs:element name="meldungStornierenResponse" type="tns:meldungStornierenResponse" />
+      <xs:element name="meldungenFuerSvPersonSuchen" type="tns:meldungenFuerSvPersonSuchen" />
+      <xs:element name="meldungenFuerSvPersonSuchenResponse" type="tns:meldungenFuerSvPersonSuchenResponse" />
+      <xs:element name="selbstErstellteMeldungenSuchen" type="tns:selbstErstellteMeldungenSuchen" />
+      <xs:element name="selbstErstellteMeldungenSuchenResponse" type="tns:selbstErstellteMeldungenSuchenResponse" />
+      <xs:complexType name="auEndeBearbeiten">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="aufId" type="xs:long" minOccurs="0" />
+          <xs:element name="aufIdVersion" type="xs:int" minOccurs="0" />
+          <xs:element name="arbeitsunfaehigBis" type="xs:string" minOccurs="0" />
+          <xs:element name="forceExecution" type="xs:boolean" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="auEndeBearbeitenResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:aufSuchergebnis" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="aufSuchergebnis">
+        <xs:sequence>
+          <xs:element name="abweichendeAusgehzeitBis1" type="xs:string" minOccurs="0" />
+          <xs:element name="abweichendeAusgehzeitBis2" type="xs:string" minOccurs="0" />
+          <xs:element name="abweichendeAusgehzeitVon1" type="xs:string" minOccurs="0" />
+          <xs:element name="abweichendeAusgehzeitVon2" type="xs:string" minOccurs="0" />
+          <xs:element name="afMelder" type="xs:string" minOccurs="0" />
+          <xs:element name="arbeitsunfaehigBis" type="xs:string" minOccurs="0" />
+          <xs:element name="arbeitsunfaehigVon" type="xs:string" minOccurs="0" />
+          <xs:element name="auErgaenzer" type="xs:string" minOccurs="0" />
+          <xs:element name="aufID" type="xs:long" minOccurs="0" />
+          <xs:element name="aufVersion" type="xs:int" minOccurs="0" />
+          <xs:element name="ausstellungsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="bettruhe" type="xs:boolean" minOccurs="0" />
+          <xs:element name="editierbar" type="xs:boolean" minOccurs="0" />
+          <xs:element name="geburtsDatum" type="xs:string" minOccurs="0" />
+          <xs:element name="meldungsart" type="xs:string" minOccurs="0" />
+          <xs:element name="selbsterstelltAF" type="xs:boolean" minOccurs="0" />
+          <xs:element name="selbsterstelltAU" type="xs:boolean" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="svtCode" type="xs:string" minOccurs="0" />
+          <xs:element name="ungeprueft" type="xs:boolean" minOccurs="0" />
+          <xs:element name="vorname" type="xs:string" minOccurs="0" />
+          <xs:element name="zuname" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="aufSvtProperty">
+        <xs:sequence>
+          <xs:element name="asvg" type="xs:boolean" minOccurs="0" />
+          <xs:element name="ausgehzeitBis1" type="xs:string" minOccurs="0" />
+          <xs:element name="ausgehzeitBis2" type="xs:string" minOccurs="0" />
+          <xs:element name="ausgehzeitVon1" type="xs:string" minOccurs="0" />
+          <xs:element name="ausgehzeitVon2" type="xs:string" minOccurs="0" />
+          <xs:element name="ekvkCode" type="xs:string" minOccurs="0" />
+          <xs:element name="ekvkName" type="xs:string" minOccurs="0" />
+          <xs:element name="kurzbezeichnung" type="xs:string" minOccurs="0" />
+          <xs:element name="svtCode" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="besondereArbeitsunfaehigkeitsursache">
+        <xs:sequence>
+          <xs:element name="bezeichnung" type="xs:string" minOccurs="0" />
+          <xs:element name="code" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="checkStatus">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="checkStatusResponse">
+        <xs:sequence>
+          <xs:element name="return" type="base:property" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="detailDatenAbfragen">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="aufId" type="xs:long" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="detailDatenAbfragenResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:quittung" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="diagnoseCodeTyp">
+        <xs:sequence>
+          <xs:element name="bezeichnung" type="xs:string" minOccurs="0" />
+          <xs:element name="code" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="downloadFormblatt">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="downloadFormblattResponse">
+        <xs:sequence>
+          <xs:element name="return" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getBesondereArbeitsunfaehigkeitsursacheCodes">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="getBesondereArbeitsunfaehigkeitsursacheCodesResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:besondereArbeitsunfaehigkeitsursache" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getDiagnoseCodeTyp">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="getDiagnoseCodeTypResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:diagnoseCodeTyp" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getRueckdatierungsgrundCodes">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="getRueckdatierungsgrundCodesResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:rueckdatierungsgrund" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getSVTs">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getSVTsResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:aufSvtProperty" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getZusatzdiagnoseCodes">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="getZusatzdiagnoseCodesResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:zusatzdiagnose" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="meldungAendern">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="aufId" type="xs:long" minOccurs="0" />
+          <xs:element name="aufIdVersion" type="xs:int" minOccurs="0" />
+          <xs:element name="meldungNeu" type="tns:meldungsdaten" minOccurs="0" />
+          <xs:element name="meldungsArt" type="xs:string" minOccurs="0" />
+          <xs:element name="forceExecution" type="xs:boolean" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="meldungAendernResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:quittung" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="meldungAnlegen">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="meldungsdaten" type="tns:meldungsdaten" minOccurs="0" />
+          <xs:element name="meldungsArt" type="xs:string" minOccurs="0" />
+          <xs:element name="person" type="tns:person" minOccurs="0" />
+          <xs:element name="forceExecution" type="xs:boolean" minOccurs="0" />
+          <xs:element name="ungeprueft" type="xs:boolean" minOccurs="0" />
+          <xs:element name="offeneMeldungenSuchen" type="xs:boolean" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="meldungAnlegenResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:quittung" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="meldungStornieren">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="aufId" type="xs:long" minOccurs="0" />
+          <xs:element name="aufIdVersion" type="xs:int" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="meldungStornierenResponse">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="meldungenFuerSvPersonSuchen">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="suchparameterSvPerson" type="tns:suchparameterSvPerson" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="meldungenFuerSvPersonSuchenResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:aufSuchergebnis" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="meldungsdaten">
+        <xs:sequence>
+          <xs:element name="abweichendeAusgehzeitBis1" type="xs:string" minOccurs="0" />
+          <xs:element name="abweichendeAusgehzeitBis2" type="xs:string" minOccurs="0" />
+          <xs:element name="abweichendeAusgehzeitVon1" type="xs:string" minOccurs="0" />
+          <xs:element name="abweichendeAusgehzeitVon2" type="xs:string" minOccurs="0" />
+          <xs:element name="arbeitsunfaehigBis" type="xs:string" minOccurs="0" />
+          <xs:element name="arbeitsunfaehigVon" type="xs:string" minOccurs="0" />
+          <xs:element name="behandlungsDatum" type="xs:string" minOccurs="0" />
+          <xs:element name="berufskrankheit" type="xs:int" minOccurs="0" />
+          <xs:element name="besondereArbeitsunfaehigkeitsursacheCode" type="xs:string" minOccurs="0" />
+          <xs:element name="besondereMitteilungAnSVT" type="xs:string" minOccurs="0" />
+          <xs:element name="bettruhe" type="xs:boolean" minOccurs="0" />
+          <xs:element name="diagnose" type="xs:string" minOccurs="0" />
+          <xs:element name="diagnoseCode" type="xs:string" minOccurs="0" />
+          <xs:element name="diagnoseCodeTyp" type="xs:string" minOccurs="0" />
+          <xs:element name="gehunfaehigBis" type="xs:string" minOccurs="0" />
+          <xs:element name="gipsBis" type="xs:string" minOccurs="0" />
+          <xs:element name="krankenhausaufenthaltBis" type="xs:string" minOccurs="0" />
+          <xs:element name="krankenhausaufenthaltVon" type="xs:string" minOccurs="0" />
+          <xs:element name="ort" type="xs:string" minOccurs="0" />
+          <xs:element name="plz" type="xs:string" minOccurs="0" />
+          <xs:element name="rueckdatierungsgrundCode" type="xs:string" minOccurs="0" />
+          <xs:element name="strasse" type="xs:string" minOccurs="0" />
+          <xs:element name="stromunfall" type="xs:boolean" minOccurs="0" />
+          <xs:element name="svtCode" type="xs:string" minOccurs="0" />
+          <xs:element name="voraussichtlichArbeitsunfaehigBis" type="xs:string" minOccurs="0" />
+          <xs:element name="wiederbestellung" type="xs:string" minOccurs="0" />
+          <xs:element name="zusatzdiagnoseCode" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="person">
+        <xs:sequence>
+          <xs:element name="druckVorname" type="xs:string" minOccurs="0" />
+          <xs:element name="druckZuname" type="xs:string" minOccurs="0" />
+          <xs:element name="ekvkNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="ekvkTraeger" type="xs:string" minOccurs="0" />
+          <xs:element name="geburtsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="geschlecht" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="vorname" type="xs:string" minOccurs="0" />
+          <xs:element name="zuname" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="quittung">
+        <xs:sequence>
+          <xs:element name="afMelder" type="xs:string" minOccurs="0" />
+          <xs:element name="auErgaenzer" type="xs:string" minOccurs="0" />
+          <xs:element name="ausstellungsDatum" type="xs:string" minOccurs="0" />
+          <xs:element name="editierbar" type="xs:boolean" minOccurs="0" />
+          <xs:element name="id" type="xs:long" minOccurs="0" />
+          <xs:element name="meldungsart" type="xs:string" minOccurs="0" />
+          <xs:element name="meldungsdaten" type="tns:meldungsdaten" minOccurs="0" />
+          <xs:element name="personendaten" type="tns:person" minOccurs="0" />
+          <xs:element name="selbsterstelltAF" type="xs:boolean" minOccurs="0" />
+          <xs:element name="selbsterstelltAU" type="xs:boolean" minOccurs="0" />
+          <xs:element name="ungeprueft" type="xs:boolean" minOccurs="0" />
+          <xs:element name="version" type="xs:int" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="rueckdatierungsgrund">
+        <xs:sequence>
+          <xs:element name="beschreibung" type="xs:string" minOccurs="0" />
+          <xs:element name="code" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="selbstErstellteMeldungenSuchen">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="suche" type="tns:suchkriterien" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="selbstErstellteMeldungenSuchenResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:aufSuchergebnis" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="suchkriterien">
+        <xs:sequence>
+          <xs:element name="erstellungAb" type="xs:string" minOccurs="0" />
+          <xs:element name="erstellungBis" type="xs:string" minOccurs="0" />
+          <xs:element name="meldungsart" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="vorname" type="xs:string" minOccurs="0" />
+          <xs:element name="zuname" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="suchparameterSvPerson">
+        <xs:sequence>
+          <xs:element name="erstellungAb" type="xs:string" minOccurs="0" />
+          <xs:element name="erstellungBis" type="xs:string" minOccurs="0" />
+          <xs:element name="meldungsart" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="zusatzdiagnose">
+        <xs:sequence>
+          <xs:element name="bezeichnung" type="xs:string" minOccurs="0" />
+          <xs:element name="code" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://soap.base.client.chipkarte.at" version="1.0">
+      <xs:complexType name="property">
+        <xs:sequence>
+          <xs:element name="key" type="xs:string" minOccurs="0" />
+          <xs:element name="value" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </types>
+  <message name="AccessException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:AccessException" />
+  </message>
+  <message name="AumException">
+    <part xmlns:aumexc="http://exceptions.soap.aum.client.chipkarte.at" name="fault" element="aumexc:AumException" />
+  </message>
+  <message name="AumInvalidParameterException">
+    <part xmlns:aumexc="http://exceptions.soap.aum.client.chipkarte.at" name="fault" element="aumexc:AumInvalidParameterException" />
+  </message>
+  <message name="CardException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:CardException" />
+  </message>
+  <message name="DialogException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:DialogException" />
+  </message>
+  <message name="ServiceException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:ServiceException" />
+  </message>
+  <message name="auEndeBearbeiten">
+    <part name="parameters" element="tns:auEndeBearbeiten" />
+  </message>
+  <message name="auEndeBearbeitenResponse">
+    <part name="parameters" element="tns:auEndeBearbeitenResponse" />
+  </message>
+  <message name="checkStatus">
+    <part name="parameters" element="tns:checkStatus" />
+  </message>
+  <message name="checkStatusResponse">
+    <part name="parameters" element="tns:checkStatusResponse" />
+  </message>
+  <message name="detailDatenAbfragen">
+    <part name="parameters" element="tns:detailDatenAbfragen" />
+  </message>
+  <message name="detailDatenAbfragenResponse">
+    <part name="parameters" element="tns:detailDatenAbfragenResponse" />
+  </message>
+  <message name="downloadFormblatt">
+    <part name="parameters" element="tns:downloadFormblatt" />
+  </message>
+  <message name="downloadFormblattResponse">
+    <part name="parameters" element="tns:downloadFormblattResponse" />
+  </message>
+  <message name="getBesondereArbeitsunfaehigkeitsursacheCodes">
+    <part name="parameters" element="tns:getBesondereArbeitsunfaehigkeitsursacheCodes" />
+  </message>
+  <message name="getBesondereArbeitsunfaehigkeitsursacheCodesResponse">
+    <part name="parameters" element="tns:getBesondereArbeitsunfaehigkeitsursacheCodesResponse" />
+  </message>
+  <message name="getDiagnoseCodeTyp">
+    <part name="parameters" element="tns:getDiagnoseCodeTyp" />
+  </message>
+  <message name="getDiagnoseCodeTypResponse">
+    <part name="parameters" element="tns:getDiagnoseCodeTypResponse" />
+  </message>
+  <message name="getRueckdatierungsgrundCodes">
+    <part name="parameters" element="tns:getRueckdatierungsgrundCodes" />
+  </message>
+  <message name="getRueckdatierungsgrundCodesResponse">
+    <part name="parameters" element="tns:getRueckdatierungsgrundCodesResponse" />
+  </message>
+  <message name="getSVTs">
+    <part name="parameters" element="tns:getSVTs" />
+  </message>
+  <message name="getSVTsResponse">
+    <part name="parameters" element="tns:getSVTsResponse" />
+  </message>
+  <message name="getZusatzdiagnoseCodes">
+    <part name="parameters" element="tns:getZusatzdiagnoseCodes" />
+  </message>
+  <message name="getZusatzdiagnoseCodesResponse">
+    <part name="parameters" element="tns:getZusatzdiagnoseCodesResponse" />
+  </message>
+  <message name="meldungAendern">
+    <part name="parameters" element="tns:meldungAendern" />
+  </message>
+  <message name="meldungAendernResponse">
+    <part name="parameters" element="tns:meldungAendernResponse" />
+  </message>
+  <message name="meldungAnlegen">
+    <part name="parameters" element="tns:meldungAnlegen" />
+  </message>
+  <message name="meldungAnlegenResponse">
+    <part name="parameters" element="tns:meldungAnlegenResponse" />
+  </message>
+  <message name="meldungStornieren">
+    <part name="parameters" element="tns:meldungStornieren" />
+  </message>
+  <message name="meldungStornierenResponse">
+    <part name="parameters" element="tns:meldungStornierenResponse" />
+  </message>
+  <message name="meldungenFuerSvPersonSuchen">
+    <part name="parameters" element="tns:meldungenFuerSvPersonSuchen" />
+  </message>
+  <message name="meldungenFuerSvPersonSuchenResponse">
+    <part name="parameters" element="tns:meldungenFuerSvPersonSuchenResponse" />
+  </message>
+  <message name="selbstErstellteMeldungenSuchen">
+    <part name="parameters" element="tns:selbstErstellteMeldungenSuchen" />
+  </message>
+  <message name="selbstErstellteMeldungenSuchenResponse">
+    <part name="parameters" element="tns:selbstErstellteMeldungenSuchenResponse" />
+  </message>
+  <portType name="IAumService">
+    <operation name="auEndeBearbeiten">
+      <input wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/auEndeBearbeitenRequest" message="tns:auEndeBearbeiten" />
+      <output wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/auEndeBearbeitenResponse" message="tns:auEndeBearbeitenResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/auEndeBearbeiten/Fault/AccessException" message="tns:AccessException" />
+      <fault name="AumException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/auEndeBearbeiten/Fault/AumException" message="tns:AumException" />
+      <fault name="AumInvalidParameterException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/auEndeBearbeiten/Fault/AumInvalidParameterException" message="tns:AumInvalidParameterException" />
+      <fault name="CardException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/auEndeBearbeiten/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/auEndeBearbeiten/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/auEndeBearbeiten/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="checkStatus">
+      <input wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/checkStatusRequest" message="tns:checkStatus" />
+      <output wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/checkStatusResponse" message="tns:checkStatusResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/checkStatus/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/checkStatus/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/checkStatus/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="detailDatenAbfragen">
+      <input wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/detailDatenAbfragenRequest" message="tns:detailDatenAbfragen" />
+      <output wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/detailDatenAbfragenResponse" message="tns:detailDatenAbfragenResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/detailDatenAbfragen/Fault/AccessException" message="tns:AccessException" />
+      <fault name="AumException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/detailDatenAbfragen/Fault/AumException" message="tns:AumException" />
+      <fault name="AumInvalidParameterException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/detailDatenAbfragen/Fault/AumInvalidParameterException" message="tns:AumInvalidParameterException" />
+      <fault name="DialogException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/detailDatenAbfragen/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/detailDatenAbfragen/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="downloadFormblatt">
+      <input wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/downloadFormblattRequest" message="tns:downloadFormblatt" />
+      <output wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/downloadFormblattResponse" message="tns:downloadFormblattResponse" />
+      <fault name="ServiceException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/downloadFormblatt/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getBesondereArbeitsunfaehigkeitsursacheCodes">
+      <input wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/getBesondereArbeitsunfaehigkeitsursacheCodesRequest" message="tns:getBesondereArbeitsunfaehigkeitsursacheCodes" />
+      <output wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/getBesondereArbeitsunfaehigkeitsursacheCodesResponse" message="tns:getBesondereArbeitsunfaehigkeitsursacheCodesResponse" />
+      <fault name="ServiceException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/getBesondereArbeitsunfaehigkeitsursacheCodes/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getDiagnoseCodeTyp">
+      <input wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/getDiagnoseCodeTypRequest" message="tns:getDiagnoseCodeTyp" />
+      <output wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/getDiagnoseCodeTypResponse" message="tns:getDiagnoseCodeTypResponse" />
+      <fault name="ServiceException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/getDiagnoseCodeTyp/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getRueckdatierungsgrundCodes">
+      <input wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/getRueckdatierungsgrundCodesRequest" message="tns:getRueckdatierungsgrundCodes" />
+      <output wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/getRueckdatierungsgrundCodesResponse" message="tns:getRueckdatierungsgrundCodesResponse" />
+      <fault name="ServiceException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/getRueckdatierungsgrundCodes/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getSVTs">
+      <input wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/getSVTsRequest" message="tns:getSVTs" />
+      <output wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/getSVTsResponse" message="tns:getSVTsResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/getSVTs/Fault/AccessException" message="tns:AccessException" />
+      <fault name="AumException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/getSVTs/Fault/AumException" message="tns:AumException" />
+      <fault name="DialogException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/getSVTs/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/getSVTs/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getZusatzdiagnoseCodes">
+      <input wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/getZusatzdiagnoseCodesRequest" message="tns:getZusatzdiagnoseCodes" />
+      <output wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/getZusatzdiagnoseCodesResponse" message="tns:getZusatzdiagnoseCodesResponse" />
+      <fault name="ServiceException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/getZusatzdiagnoseCodes/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="meldungAendern">
+      <input wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/meldungAendernRequest" message="tns:meldungAendern" />
+      <output wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/meldungAendernResponse" message="tns:meldungAendernResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/meldungAendern/Fault/AccessException" message="tns:AccessException" />
+      <fault name="AumException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/meldungAendern/Fault/AumException" message="tns:AumException" />
+      <fault name="AumInvalidParameterException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/meldungAendern/Fault/AumInvalidParameterException" message="tns:AumInvalidParameterException" />
+      <fault name="DialogException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/meldungAendern/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/meldungAendern/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="meldungAnlegen">
+      <input wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/meldungAnlegenRequest" message="tns:meldungAnlegen" />
+      <output wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/meldungAnlegenResponse" message="tns:meldungAnlegenResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/meldungAnlegen/Fault/AccessException" message="tns:AccessException" />
+      <fault name="AumException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/meldungAnlegen/Fault/AumException" message="tns:AumException" />
+      <fault name="AumInvalidParameterException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/meldungAnlegen/Fault/AumInvalidParameterException" message="tns:AumInvalidParameterException" />
+      <fault name="CardException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/meldungAnlegen/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/meldungAnlegen/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/meldungAnlegen/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="meldungStornieren">
+      <input wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/meldungStornierenRequest" message="tns:meldungStornieren" />
+      <output wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/meldungStornierenResponse" message="tns:meldungStornierenResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/meldungStornieren/Fault/AccessException" message="tns:AccessException" />
+      <fault name="AumException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/meldungStornieren/Fault/AumException" message="tns:AumException" />
+      <fault name="AumInvalidParameterException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/meldungStornieren/Fault/AumInvalidParameterException" message="tns:AumInvalidParameterException" />
+      <fault name="DialogException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/meldungStornieren/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/meldungStornieren/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="meldungenFuerSvPersonSuchen">
+      <input wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/meldungenFuerSvPersonSuchenRequest" message="tns:meldungenFuerSvPersonSuchen" />
+      <output wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/meldungenFuerSvPersonSuchenResponse" message="tns:meldungenFuerSvPersonSuchenResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/meldungenFuerSvPersonSuchen/Fault/AccessException" message="tns:AccessException" />
+      <fault name="AumException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/meldungenFuerSvPersonSuchen/Fault/AumException" message="tns:AumException" />
+      <fault name="AumInvalidParameterException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/meldungenFuerSvPersonSuchen/Fault/AumInvalidParameterException" message="tns:AumInvalidParameterException" />
+      <fault name="CardException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/meldungenFuerSvPersonSuchen/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/meldungenFuerSvPersonSuchen/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/meldungenFuerSvPersonSuchen/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="selbstErstellteMeldungenSuchen">
+      <input wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/selbstErstellteMeldungenSuchenRequest" message="tns:selbstErstellteMeldungenSuchen" />
+      <output wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/selbstErstellteMeldungenSuchenResponse" message="tns:selbstErstellteMeldungenSuchenResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/selbstErstellteMeldungenSuchen/Fault/AccessException" message="tns:AccessException" />
+      <fault name="AumException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/selbstErstellteMeldungenSuchen/Fault/AumException" message="tns:AumException" />
+      <fault name="AumInvalidParameterException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/selbstErstellteMeldungenSuchen/Fault/AumInvalidParameterException" message="tns:AumInvalidParameterException" />
+      <fault name="DialogException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/selbstErstellteMeldungenSuchen/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.aum.client.chipkarte.at/IAumService/selbstErstellteMeldungenSuchen/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+  </portType>
+  <binding name="aum_5Binding" type="tns:IAumService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="auEndeBearbeiten">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="AumException">
+        <soap:fault name="AumException" use="literal" />
+      </fault>
+      <fault name="AumInvalidParameterException">
+        <soap:fault name="AumInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="checkStatus">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="detailDatenAbfragen">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="AumException">
+        <soap:fault name="AumException" use="literal" />
+      </fault>
+      <fault name="AumInvalidParameterException">
+        <soap:fault name="AumInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="downloadFormblatt">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getBesondereArbeitsunfaehigkeitsursacheCodes">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getDiagnoseCodeTyp">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getRueckdatierungsgrundCodes">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getSVTs">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="AumException">
+        <soap:fault name="AumException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getZusatzdiagnoseCodes">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="meldungAendern">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="AumException">
+        <soap:fault name="AumException" use="literal" />
+      </fault>
+      <fault name="AumInvalidParameterException">
+        <soap:fault name="AumInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="meldungAnlegen">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="AumException">
+        <soap:fault name="AumException" use="literal" />
+      </fault>
+      <fault name="AumInvalidParameterException">
+        <soap:fault name="AumInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="meldungStornieren">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="AumException">
+        <soap:fault name="AumException" use="literal" />
+      </fault>
+      <fault name="AumInvalidParameterException">
+        <soap:fault name="AumInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="meldungenFuerSvPersonSuchen">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="AumException">
+        <soap:fault name="AumException" use="literal" />
+      </fault>
+      <fault name="AumInvalidParameterException">
+        <soap:fault name="AumInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="selbstErstellteMeldungenSuchen">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="AumException">
+        <soap:fault name="AumException" use="literal" />
+      </fault>
+      <fault name="AumInvalidParameterException">
+        <soap:fault name="AumInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+  </binding>
+  <service name="AumService">
+    <port name="aum_5" binding="tns:aum_5Binding">
+      <soap:address location="http://localhost/aum/5" />
+    </port>
+  </service>
+</definitions>

@@ -1,0 +1,1218 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://soap.bkf.client.chipkarte.at" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://soap.bkf.client.chipkarte.at" name="BkfService">
+  <types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://exceptions.soap.base.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://exceptions.soap.base.client.chipkarte.at" version="1.0">
+      <xs:element name="AccessException" type="tns:accessExceptionContent" />
+      <xs:element name="CardException" type="tns:cardExceptionContent" />
+      <xs:element name="DialogException" type="tns:dialogExceptionContent" />
+      <xs:element name="ServiceException" type="tns:serviceExceptionContent" />
+      <xs:complexType name="accessExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="baseExceptionContent">
+        <xs:sequence>
+          <xs:element name="code" type="xs:string" minOccurs="0" />
+          <xs:element name="errorCode" type="xs:int" minOccurs="0" />
+          <xs:element name="message" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="cardExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="dialogExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="serviceExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" xmlns:tns="http://exceptions.soap.bkf.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://exceptions.soap.bkf.client.chipkarte.at" version="1.0">
+      <xs:import namespace="http://exceptions.soap.base.client.chipkarte.at" />
+      <xs:element name="BkfEncryptionException" type="tns:bkfEncryptionExceptionContent" />
+      <xs:element name="BkfException" type="tns:bkfExceptionContent" />
+      <xs:element name="BkfInvalidParameterException" type="tns:bkfInvalidParameterExceptionContent" />
+      <xs:complexType name="bkfEncryptionExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="baseexc:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="bkfExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="baseexc:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="bkfInvalidParameterExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="baseexc:baseExceptionContent">
+            <xs:sequence>
+              <xs:element name="fieldCode" type="xs:int" minOccurs="0" />
+              <xs:element name="fieldCodeSet" type="xs:boolean" minOccurs="0" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://soap.base.client.chipkarte.at" version="1.0">
+      <xs:complexType name="property">
+        <xs:sequence>
+          <xs:element name="key" type="xs:string" minOccurs="0" />
+          <xs:element name="value" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://soap.base.client.chipkarte.at" xmlns:bkfexc="http://exceptions.soap.bkf.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://soap.bkf.client.chipkarte.at" version="1.0">
+      <xs:import namespace="http://soap.base.client.chipkarte.at" />
+      <xs:element name="checkBkfToken" type="tns:checkBkfToken" />
+      <xs:element name="checkBkfTokenResponse" type="tns:checkBkfTokenResponse" />
+      <xs:element name="checkStatus" type="tns:checkStatus" />
+      <xs:element name="checkStatusResponse" type="tns:checkStatusResponse" />
+      <xs:element name="createAssessmentBildgebendeDiagnostikDoku" type="tns:createAssessmentBildgebendeDiagnostikDoku" />
+      <xs:element name="createAssessmentBildgebendeDiagnostikDokuResponse" type="tns:createAssessmentBildgebendeDiagnostikDokuResponse" />
+      <xs:element name="createAssessmentInvasiveDiagnostikDoku" type="tns:createAssessmentInvasiveDiagnostikDoku" />
+      <xs:element name="createAssessmentInvasiveDiagnostikDokuResponse" type="tns:createAssessmentInvasiveDiagnostikDokuResponse" />
+      <xs:element name="createKurativeMammoLeermeldungDoku" type="tns:createKurativeMammoLeermeldungDoku" />
+      <xs:element name="createKurativeMammoLeermeldungDokuResponse" type="tns:createKurativeMammoLeermeldungDokuResponse" />
+      <xs:element name="createKurativeMammographieDoku" type="tns:createKurativeMammographieDoku" />
+      <xs:element name="createKurativeMammographieDokuResponse" type="tns:createKurativeMammographieDokuResponse" />
+      <xs:element name="createKurativeUltraschallDoku" type="tns:createKurativeUltraschallDoku" />
+      <xs:element name="createKurativeUltraschallDokuResponse" type="tns:createKurativeUltraschallDokuResponse" />
+      <xs:element name="createScreeningDoku" type="tns:createScreeningDoku" />
+      <xs:element name="createScreeningDokuResponse" type="tns:createScreeningDokuResponse" />
+      <xs:element name="createScreeningUltraschallDoku" type="tns:createScreeningUltraschallDoku" />
+      <xs:element name="createScreeningUltraschallDokuResponse" type="tns:createScreeningUltraschallDokuResponse" />
+      <xs:element name="createTherapiePathologieDoku" type="tns:createTherapiePathologieDoku" />
+      <xs:element name="createTherapiePathologieDokuResponse" type="tns:createTherapiePathologieDokuResponse" />
+      <xs:element name="createTherapieTumorDoku" type="tns:createTherapieTumorDoku" />
+      <xs:element name="createTherapieTumorDokuResponse" type="tns:createTherapieTumorDokuResponse" />
+      <xs:element name="searchBkfArzt" type="tns:searchBkfArzt" />
+      <xs:element name="searchBkfArztResponse" type="tns:searchBkfArztResponse" />
+      <xs:element name="searchBkfKonsultationData" type="tns:searchBkfKonsultationData" />
+      <xs:element name="searchBkfKonsultationDataResponse" type="tns:searchBkfKonsultationDataResponse" />
+      <xs:element name="searchBkfQuittungen" type="tns:searchBkfQuittungen" />
+      <xs:element name="searchBkfQuittungenResponse" type="tns:searchBkfQuittungenResponse" />
+      <xs:complexType name="assessmentBildgebendeDiagnostikDoku">
+        <xs:sequence>
+          <xs:element name="ergebnisKlinisch" type="xs:string" minOccurs="0" />
+          <xs:element name="ergebnisMRT" type="xs:string" minOccurs="0" />
+          <xs:element name="ergebnisMammo" type="xs:string" minOccurs="0" />
+          <xs:element name="ergebnisUS" type="xs:string" minOccurs="0" />
+          <xs:element name="gesamtbeurteilung" type="xs:string" minOccurs="0" />
+          <xs:element name="infoDatum" type="xs:string" minOccurs="0" />
+          <xs:element name="leistungsanfang" type="xs:string" minOccurs="0" />
+          <xs:element name="mammoDurchgefuehrt" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="versionsnummer" type="xs:string" minOccurs="0" />
+          <xs:element name="zusatzaufnahme" type="xs:string" minOccurs="0" />
+          <xs:element name="zustimmungFeedback" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="assessmentInvasiveDiagnostikDoku">
+        <xs:sequence>
+          <xs:element name="biopsieMethode" type="xs:string" minOccurs="0" />
+          <xs:element name="biopsieModalitaet" type="xs:string" minOccurs="0" />
+          <xs:element name="ergebnisHistologie" type="xs:string" minOccurs="0" />
+          <xs:element name="ergebnisKlinisch" type="xs:string" minOccurs="0" />
+          <xs:element name="infoDatum" type="xs:string" minOccurs="0" />
+          <xs:element name="leistungsanfang" type="xs:string" minOccurs="0" />
+          <xs:element name="seite" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="versionsnummer" type="xs:string" minOccurs="0" />
+          <xs:element name="zustimmungFeedback" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="bkfArzt">
+        <xs:sequence>
+          <xs:element name="arztID" type="xs:string" minOccurs="0" />
+          <xs:element name="titelHinten" type="xs:string" minOccurs="0" />
+          <xs:element name="titelVorne" type="xs:string" minOccurs="0" />
+          <xs:element name="vorname" type="xs:string" minOccurs="0" />
+          <xs:element name="zertifikatsart" type="xs:string" minOccurs="0" />
+          <xs:element name="zuname" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="bkfKonsultationInfo">
+        <xs:sequence>
+          <xs:element name="behandlungsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="behandlungsfallCode" type="xs:string" minOccurs="0" />
+          <xs:element name="fachgebietsCode" type="xs:string" minOccurs="0" />
+          <xs:element name="folgeDokumentation" type="xs:boolean" minOccurs="0" />
+          <xs:element name="konsultationsID" type="xs:long" minOccurs="0" />
+          <xs:element name="leistungsSvtCode" type="xs:string" minOccurs="0" />
+          <xs:element name="verrechnungsSvtCode" type="xs:string" minOccurs="0" />
+          <xs:element name="versicherungsstatus" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="bkfPatientInfo">
+        <xs:sequence>
+          <xs:element name="druckTitelHinten" type="xs:string" minOccurs="0" />
+          <xs:element name="druckTitelVorne" type="xs:string" minOccurs="0" />
+          <xs:element name="druckVorname" type="xs:string" minOccurs="0" />
+          <xs:element name="druckZuname" type="xs:string" minOccurs="0" />
+          <xs:element name="geburtsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="geschlechtscode" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="titelHinten" type="xs:string" minOccurs="0" />
+          <xs:element name="titelVorne" type="xs:string" minOccurs="0" />
+          <xs:element name="vorname" type="xs:string" minOccurs="0" />
+          <xs:element name="zuname" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="bkfQuittung">
+        <xs:sequence>
+          <xs:element name="annahmezeitpunkt" type="xs:string" minOccurs="0" />
+          <xs:element name="dokumentationstyp" type="xs:string" minOccurs="0" />
+          <xs:element name="folgedokumentation" type="xs:boolean" minOccurs="0" />
+          <xs:element name="leistungsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="signatur" type="xs:base64Binary" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="versicherungstraeger" type="xs:string" minOccurs="0" />
+          <xs:element name="vpNummer" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="checkBkfToken">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="svnr" type="xs:string" minOccurs="0" />
+          <xs:element name="konsultationsID" type="xs:long" minOccurs="0" />
+          <xs:element name="leistungsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="dokumentationstyp" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="checkBkfTokenErgebnis">
+        <xs:sequence>
+          <xs:element name="einladungsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="folgeDokumentation" type="xs:boolean" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="checkBkfTokenResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:checkBkfTokenErgebnis" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="checkStatus">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="checkStatusResponse">
+        <xs:sequence>
+          <xs:element name="return" type="base:property" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createAssessmentBildgebendeDiagnostikDoku">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="abd" type="tns:assessmentBildgebendeDiagnostikDoku" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createAssessmentBildgebendeDiagnostikDokuResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:bkfQuittung" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createAssessmentInvasiveDiagnostikDoku">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="aid" type="tns:assessmentInvasiveDiagnostikDoku" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createAssessmentInvasiveDiagnostikDokuResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:bkfQuittung" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createKurativeMammoLeermeldungDoku">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="kml" type="tns:kurativeMammoLeermeldung" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createKurativeMammoLeermeldungDokuResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:bkfQuittung" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createKurativeMammographieDoku">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="kum" type="tns:kurativeMammographieDoku" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createKurativeMammographieDokuResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:bkfQuittung" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createKurativeUltraschallDoku">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="kus" type="tns:kurativeUltraschallDoku" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createKurativeUltraschallDokuResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:bkfQuittung" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createScreeningDoku">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="screening" type="tns:screeningDoku" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createScreeningDokuResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:bkfQuittung" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createScreeningUltraschallDoku">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="sus" type="tns:screeningUltraschallDoku" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createScreeningUltraschallDokuResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:bkfQuittung" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createTherapiePathologieDoku">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="pat" type="tns:therapiePathologieDoku" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createTherapiePathologieDokuResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:bkfQuittung" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createTherapieTumorDoku">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="tum" type="tns:therapieTumorDoku" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createTherapieTumorDokuResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:bkfQuittung" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="kumEndergebnis">
+        <xs:sequence>
+          <xs:element name="befundungsZeitstempel" type="xs:string" minOccurs="0" />
+          <xs:element name="dichte" type="xs:string" minOccurs="0" />
+          <xs:element name="endergebnis" type="xs:string" minOccurs="0" />
+          <xs:element name="groesseLinks" type="xs:string" minOccurs="0" />
+          <xs:element name="groesseRechts" type="xs:string" minOccurs="0" />
+          <xs:element name="inakzeptabel" type="xs:string" minOccurs="0" />
+          <xs:element name="infoDatum" type="xs:string" minOccurs="0" />
+          <xs:element name="patientID" type="xs:string" minOccurs="0" />
+          <xs:element name="technZusatzaufnahme" type="xs:string" minOccurs="0" />
+          <xs:element name="wiederbestellung" type="xs:string" minOccurs="0" />
+          <xs:element name="zusatzaufnahmen" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="kumMammographieErstbefunder">
+        <xs:sequence>
+          <xs:element name="arztID" type="xs:string" minOccurs="0" />
+          <xs:element name="befundungsZeitstempel" type="xs:string" minOccurs="0" />
+          <xs:element name="dichte" type="xs:string" minOccurs="0" />
+          <xs:element name="ergebnis" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="kumMammographieZweitbefunder">
+        <xs:sequence>
+          <xs:element name="arztID" type="xs:string" minOccurs="0" />
+          <xs:element name="befundungsZeitstempel" type="xs:string" minOccurs="0" />
+          <xs:element name="dichte" type="xs:string" minOccurs="0" />
+          <xs:element name="ergebnis" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="kumUltraschall">
+        <xs:sequence>
+          <xs:element name="befundungsZeitstempel" type="xs:string" minOccurs="0" />
+          <xs:element name="ergebnis" type="xs:string" minOccurs="0" />
+          <xs:element name="grund" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="kurativeMammoLeermeldung">
+        <xs:sequence>
+          <xs:element name="erstbefunderArztID" type="xs:string" minOccurs="0" />
+          <xs:element name="konsultationsID" type="xs:long" minOccurs="0" />
+          <xs:element name="leistungsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="versionsnummer" type="xs:string" minOccurs="0" />
+          <xs:element name="zweitbefunderArztID" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="kurativeMammographieDoku">
+        <xs:sequence>
+          <xs:element name="endergebnis" type="tns:kumEndergebnis" minOccurs="0" />
+          <xs:element name="konsultationsID" type="xs:long" minOccurs="0" />
+          <xs:element name="leistungsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="mamErstbefunder" type="tns:kumMammographieErstbefunder" minOccurs="0" />
+          <xs:element name="mamZweitbefunder" type="tns:kumMammographieZweitbefunder" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="ultraschall" type="tns:kumUltraschall" minOccurs="0" />
+          <xs:element name="versionsnummer" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="kurativeUltraschallDoku">
+        <xs:sequence>
+          <xs:element name="befundungsZeitstempel" type="xs:string" minOccurs="0" />
+          <xs:element name="ergebnis" type="xs:string" minOccurs="0" />
+          <xs:element name="groesseLinks" type="xs:string" minOccurs="0" />
+          <xs:element name="groesseRechts" type="xs:string" minOccurs="0" />
+          <xs:element name="infoDatum" type="xs:string" minOccurs="0" />
+          <xs:element name="konsultationsID" type="xs:long" minOccurs="0" />
+          <xs:element name="leistungsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="patientID" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="versionsnummer" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="scrEndergebnis">
+        <xs:sequence>
+          <xs:element name="befundungsZeitstempel" type="xs:string" minOccurs="0" />
+          <xs:element name="dichte" type="xs:string" minOccurs="0" />
+          <xs:element name="doppelbefundung" type="xs:string" minOccurs="0" />
+          <xs:element name="endergebnis" type="xs:string" minOccurs="0" />
+          <xs:element name="groesseLinks" type="xs:string" minOccurs="0" />
+          <xs:element name="groesseRechts" type="xs:string" minOccurs="0" />
+          <xs:element name="inakzeptabel" type="xs:string" minOccurs="0" />
+          <xs:element name="infoDatum" type="xs:string" minOccurs="0" />
+          <xs:element name="patientID" type="xs:string" minOccurs="0" />
+          <xs:element name="technZusatzaufnahme" type="xs:string" minOccurs="0" />
+          <xs:element name="vorgehen" type="xs:string" minOccurs="0" />
+          <xs:element name="wiederbestellung" type="xs:string" minOccurs="0" />
+          <xs:element name="zusatzaufnahmen" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="scrMammographieErstbefunder">
+        <xs:sequence>
+          <xs:element name="arztID" type="xs:string" minOccurs="0" />
+          <xs:element name="befundungsZeitstempel" type="xs:string" minOccurs="0" />
+          <xs:element name="dichte" type="xs:string" minOccurs="0" />
+          <xs:element name="ergebnis" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="scrMammographieZweitbefunder">
+        <xs:sequence>
+          <xs:element name="arztID" type="xs:string" minOccurs="0" />
+          <xs:element name="befundungsZeitstempel" type="xs:string" minOccurs="0" />
+          <xs:element name="dichte" type="xs:string" minOccurs="0" />
+          <xs:element name="ergebnis" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="scrUltraschall">
+        <xs:sequence>
+          <xs:element name="befundungsZeitstempel" type="xs:string" minOccurs="0" />
+          <xs:element name="ergebnis" type="xs:string" minOccurs="0" />
+          <xs:element name="grund" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="screeningDoku">
+        <xs:sequence>
+          <xs:element name="endergebnis" type="tns:scrEndergebnis" minOccurs="0" />
+          <xs:element name="konsultationsID" type="xs:long" minOccurs="0" />
+          <xs:element name="leistungsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="mamErstbefunder" type="tns:scrMammographieErstbefunder" minOccurs="0" />
+          <xs:element name="mamZweitbefunder" type="tns:scrMammographieZweitbefunder" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="ultraschall" type="tns:scrUltraschall" minOccurs="0" />
+          <xs:element name="versionsnummer" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="screeningUltraschallDoku">
+        <xs:sequence>
+          <xs:element name="arztID" type="xs:string" minOccurs="0" />
+          <xs:element name="befundungsZeitstempel" type="xs:string" minOccurs="0" />
+          <xs:element name="ergebnis" type="xs:string" minOccurs="0" />
+          <xs:element name="groesseLinks" type="xs:string" minOccurs="0" />
+          <xs:element name="groesseRechts" type="xs:string" minOccurs="0" />
+          <xs:element name="infoDatum" type="xs:string" minOccurs="0" />
+          <xs:element name="konsultationsID" type="xs:long" minOccurs="0" />
+          <xs:element name="leistungsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="patientID" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="versionsnummer" type="xs:string" minOccurs="0" />
+          <xs:element name="vorgehen" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchBkfArzt">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="arztID" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchBkfArztResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:bkfArzt" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchBkfKonsultationData">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="svnr" type="xs:string" minOccurs="0" />
+          <xs:element name="dokumentationstyp" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchBkfKonsultationDataErgebnis">
+        <xs:sequence>
+          <xs:element name="konsultationen" type="tns:bkfKonsultationInfo" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="svPatient" type="tns:bkfPatientInfo" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchBkfKonsultationDataResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:searchBkfKonsultationDataErgebnis" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchBkfQuittungen">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="dokumentationstyp" type="xs:string" minOccurs="0" />
+          <xs:element name="svnr" type="xs:string" minOccurs="0" />
+          <xs:element name="kvt" type="xs:string" minOccurs="0" />
+          <xs:element name="ohneAnspruch" type="xs:string" minOccurs="0" />
+          <xs:element name="vonDatum" type="xs:string" minOccurs="0" />
+          <xs:element name="bisDatum" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchBkfQuittungenResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:bkfQuittung" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="therapiePathologieDoku">
+        <xs:sequence>
+          <xs:element name="befundungszeitstempel" type="xs:string" minOccurs="0" />
+          <xs:element name="blutgefaesseinbruch" type="xs:string" minOccurs="0" />
+          <xs:element name="dcis" type="xs:string" minOccurs="0" />
+          <xs:element name="diagnoseHistologie" type="xs:string" minOccurs="0" />
+          <xs:element name="diameter" type="xs:string" minOccurs="0" />
+          <xs:element name="gefrierschnitt" type="xs:string" minOccurs="0" />
+          <xs:element name="her2" type="xs:string" minOccurs="0" />
+          <xs:element name="intraduktaleKomponente" type="xs:string" minOccurs="0" />
+          <xs:element name="invasivPureSpecial" type="xs:string" minOccurs="0" />
+          <xs:element name="invasivTyp" type="xs:string" minOccurs="0" />
+          <xs:element name="lcis" type="xs:string" minOccurs="0" />
+          <xs:element name="lymphgefaesseinbruch" type="xs:string" minOccurs="0" />
+          <xs:element name="microinvasion" type="xs:string" minOccurs="0" />
+          <xs:element name="multifokal" type="xs:string" minOccurs="0" />
+          <xs:element name="oestrogen" type="xs:string" minOccurs="0" />
+          <xs:element name="operationsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="progesteron" type="xs:string" minOccurs="0" />
+          <xs:element name="proliferationsindex" type="xs:string" minOccurs="0" />
+          <xs:element name="resektionsraender" type="xs:string" minOccurs="0" />
+          <xs:element name="rezidiv" type="xs:string" minOccurs="0" />
+          <xs:element name="seite" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="tumorgrad" type="xs:string" minOccurs="0" />
+          <xs:element name="versionsnummer" type="xs:string" minOccurs="0" />
+          <xs:element name="pNStadium" type="xs:string" minOccurs="0" />
+          <xs:element name="pTStadium" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="therapieTumorDoku">
+        <xs:sequence>
+          <xs:element name="ablatio" type="xs:string" minOccurs="0" />
+          <xs:element name="gefrierschnitt" type="xs:string" minOccurs="0" />
+          <xs:element name="multifokal" type="xs:string" minOccurs="0" />
+          <xs:element name="neoadjuvanteTherapie" type="xs:string" minOccurs="0" />
+          <xs:element name="offeneBiopsie" type="xs:string" minOccurs="0" />
+          <xs:element name="operationsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="seite" type="xs:string" minOccurs="0" />
+          <xs:element name="stadiumUICC" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="tumorEntfernt" type="xs:string" minOccurs="0" />
+          <xs:element name="tumordurchmesser" type="xs:string" minOccurs="0" />
+          <xs:element name="tumoreTastbar" type="xs:string" minOccurs="0" />
+          <xs:element name="tumorstadium" type="xs:string" minOccurs="0" />
+          <xs:element name="versionsnummer" type="xs:string" minOccurs="0" />
+          <xs:element name="zustimmungFeedback" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </types>
+  <message name="AccessException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:AccessException" />
+  </message>
+  <message name="BkfEncryptionException">
+    <part xmlns:bkfexc="http://exceptions.soap.bkf.client.chipkarte.at" name="fault" element="bkfexc:BkfEncryptionException" />
+  </message>
+  <message name="BkfException">
+    <part xmlns:bkfexc="http://exceptions.soap.bkf.client.chipkarte.at" name="fault" element="bkfexc:BkfException" />
+  </message>
+  <message name="BkfInvalidParameterException">
+    <part xmlns:bkfexc="http://exceptions.soap.bkf.client.chipkarte.at" name="fault" element="bkfexc:BkfInvalidParameterException" />
+  </message>
+  <message name="CardException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:CardException" />
+  </message>
+  <message name="DialogException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:DialogException" />
+  </message>
+  <message name="ServiceException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:ServiceException" />
+  </message>
+  <message name="checkBkfToken">
+    <part name="parameters" element="tns:checkBkfToken" />
+  </message>
+  <message name="checkBkfTokenResponse">
+    <part name="parameters" element="tns:checkBkfTokenResponse" />
+  </message>
+  <message name="checkStatus">
+    <part name="parameters" element="tns:checkStatus" />
+  </message>
+  <message name="checkStatusResponse">
+    <part name="parameters" element="tns:checkStatusResponse" />
+  </message>
+  <message name="createAssessmentBildgebendeDiagnostikDoku">
+    <part name="parameters" element="tns:createAssessmentBildgebendeDiagnostikDoku" />
+  </message>
+  <message name="createAssessmentBildgebendeDiagnostikDokuResponse">
+    <part name="parameters" element="tns:createAssessmentBildgebendeDiagnostikDokuResponse" />
+  </message>
+  <message name="createAssessmentInvasiveDiagnostikDoku">
+    <part name="parameters" element="tns:createAssessmentInvasiveDiagnostikDoku" />
+  </message>
+  <message name="createAssessmentInvasiveDiagnostikDokuResponse">
+    <part name="parameters" element="tns:createAssessmentInvasiveDiagnostikDokuResponse" />
+  </message>
+  <message name="createKurativeMammoLeermeldungDoku">
+    <part name="parameters" element="tns:createKurativeMammoLeermeldungDoku" />
+  </message>
+  <message name="createKurativeMammoLeermeldungDokuResponse">
+    <part name="parameters" element="tns:createKurativeMammoLeermeldungDokuResponse" />
+  </message>
+  <message name="createKurativeMammographieDoku">
+    <part name="parameters" element="tns:createKurativeMammographieDoku" />
+  </message>
+  <message name="createKurativeMammographieDokuResponse">
+    <part name="parameters" element="tns:createKurativeMammographieDokuResponse" />
+  </message>
+  <message name="createKurativeUltraschallDoku">
+    <part name="parameters" element="tns:createKurativeUltraschallDoku" />
+  </message>
+  <message name="createKurativeUltraschallDokuResponse">
+    <part name="parameters" element="tns:createKurativeUltraschallDokuResponse" />
+  </message>
+  <message name="createScreeningDoku">
+    <part name="parameters" element="tns:createScreeningDoku" />
+  </message>
+  <message name="createScreeningDokuResponse">
+    <part name="parameters" element="tns:createScreeningDokuResponse" />
+  </message>
+  <message name="createScreeningUltraschallDoku">
+    <part name="parameters" element="tns:createScreeningUltraschallDoku" />
+  </message>
+  <message name="createScreeningUltraschallDokuResponse">
+    <part name="parameters" element="tns:createScreeningUltraschallDokuResponse" />
+  </message>
+  <message name="createTherapiePathologieDoku">
+    <part name="parameters" element="tns:createTherapiePathologieDoku" />
+  </message>
+  <message name="createTherapiePathologieDokuResponse">
+    <part name="parameters" element="tns:createTherapiePathologieDokuResponse" />
+  </message>
+  <message name="createTherapieTumorDoku">
+    <part name="parameters" element="tns:createTherapieTumorDoku" />
+  </message>
+  <message name="createTherapieTumorDokuResponse">
+    <part name="parameters" element="tns:createTherapieTumorDokuResponse" />
+  </message>
+  <message name="searchBkfArzt">
+    <part name="parameters" element="tns:searchBkfArzt" />
+  </message>
+  <message name="searchBkfArztResponse">
+    <part name="parameters" element="tns:searchBkfArztResponse" />
+  </message>
+  <message name="searchBkfKonsultationData">
+    <part name="parameters" element="tns:searchBkfKonsultationData" />
+  </message>
+  <message name="searchBkfKonsultationDataResponse">
+    <part name="parameters" element="tns:searchBkfKonsultationDataResponse" />
+  </message>
+  <message name="searchBkfQuittungen">
+    <part name="parameters" element="tns:searchBkfQuittungen" />
+  </message>
+  <message name="searchBkfQuittungenResponse">
+    <part name="parameters" element="tns:searchBkfQuittungenResponse" />
+  </message>
+  <portType name="IBkfService">
+    <operation name="checkBkfToken">
+      <input wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/checkBkfTokenRequest" message="tns:checkBkfToken" />
+      <output wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/checkBkfTokenResponse" message="tns:checkBkfTokenResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/checkBkfToken/Fault/AccessException" message="tns:AccessException" />
+      <fault name="BkfException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/checkBkfToken/Fault/BkfException" message="tns:BkfException" />
+      <fault name="BkfInvalidParameterException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/checkBkfToken/Fault/BkfInvalidParameterException" message="tns:BkfInvalidParameterException" />
+      <fault name="CardException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/checkBkfToken/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/checkBkfToken/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/checkBkfToken/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="checkStatus">
+      <input wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/checkStatusRequest" message="tns:checkStatus" />
+      <output wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/checkStatusResponse" message="tns:checkStatusResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/checkStatus/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/checkStatus/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/checkStatus/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="createAssessmentBildgebendeDiagnostikDoku">
+      <input wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createAssessmentBildgebendeDiagnostikDokuRequest" message="tns:createAssessmentBildgebendeDiagnostikDoku" />
+      <output wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createAssessmentBildgebendeDiagnostikDokuResponse" message="tns:createAssessmentBildgebendeDiagnostikDokuResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createAssessmentBildgebendeDiagnostikDoku/Fault/AccessException" message="tns:AccessException" />
+      <fault name="BkfEncryptionException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createAssessmentBildgebendeDiagnostikDoku/Fault/BkfEncryptionException" message="tns:BkfEncryptionException" />
+      <fault name="BkfException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createAssessmentBildgebendeDiagnostikDoku/Fault/BkfException" message="tns:BkfException" />
+      <fault name="BkfInvalidParameterException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createAssessmentBildgebendeDiagnostikDoku/Fault/BkfInvalidParameterException" message="tns:BkfInvalidParameterException" />
+      <fault name="CardException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createAssessmentBildgebendeDiagnostikDoku/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createAssessmentBildgebendeDiagnostikDoku/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createAssessmentBildgebendeDiagnostikDoku/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="createAssessmentInvasiveDiagnostikDoku">
+      <input wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createAssessmentInvasiveDiagnostikDokuRequest" message="tns:createAssessmentInvasiveDiagnostikDoku" />
+      <output wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createAssessmentInvasiveDiagnostikDokuResponse" message="tns:createAssessmentInvasiveDiagnostikDokuResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createAssessmentInvasiveDiagnostikDoku/Fault/AccessException" message="tns:AccessException" />
+      <fault name="BkfEncryptionException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createAssessmentInvasiveDiagnostikDoku/Fault/BkfEncryptionException" message="tns:BkfEncryptionException" />
+      <fault name="BkfException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createAssessmentInvasiveDiagnostikDoku/Fault/BkfException" message="tns:BkfException" />
+      <fault name="BkfInvalidParameterException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createAssessmentInvasiveDiagnostikDoku/Fault/BkfInvalidParameterException" message="tns:BkfInvalidParameterException" />
+      <fault name="CardException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createAssessmentInvasiveDiagnostikDoku/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createAssessmentInvasiveDiagnostikDoku/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createAssessmentInvasiveDiagnostikDoku/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="createKurativeMammoLeermeldungDoku">
+      <input wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createKurativeMammoLeermeldungDokuRequest" message="tns:createKurativeMammoLeermeldungDoku" />
+      <output wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createKurativeMammoLeermeldungDokuResponse" message="tns:createKurativeMammoLeermeldungDokuResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createKurativeMammoLeermeldungDoku/Fault/AccessException" message="tns:AccessException" />
+      <fault name="BkfEncryptionException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createKurativeMammoLeermeldungDoku/Fault/BkfEncryptionException" message="tns:BkfEncryptionException" />
+      <fault name="BkfException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createKurativeMammoLeermeldungDoku/Fault/BkfException" message="tns:BkfException" />
+      <fault name="BkfInvalidParameterException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createKurativeMammoLeermeldungDoku/Fault/BkfInvalidParameterException" message="tns:BkfInvalidParameterException" />
+      <fault name="CardException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createKurativeMammoLeermeldungDoku/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createKurativeMammoLeermeldungDoku/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createKurativeMammoLeermeldungDoku/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="createKurativeMammographieDoku">
+      <input wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createKurativeMammographieDokuRequest" message="tns:createKurativeMammographieDoku" />
+      <output wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createKurativeMammographieDokuResponse" message="tns:createKurativeMammographieDokuResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createKurativeMammographieDoku/Fault/AccessException" message="tns:AccessException" />
+      <fault name="BkfEncryptionException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createKurativeMammographieDoku/Fault/BkfEncryptionException" message="tns:BkfEncryptionException" />
+      <fault name="BkfException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createKurativeMammographieDoku/Fault/BkfException" message="tns:BkfException" />
+      <fault name="BkfInvalidParameterException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createKurativeMammographieDoku/Fault/BkfInvalidParameterException" message="tns:BkfInvalidParameterException" />
+      <fault name="CardException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createKurativeMammographieDoku/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createKurativeMammographieDoku/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createKurativeMammographieDoku/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="createKurativeUltraschallDoku">
+      <input wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createKurativeUltraschallDokuRequest" message="tns:createKurativeUltraschallDoku" />
+      <output wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createKurativeUltraschallDokuResponse" message="tns:createKurativeUltraschallDokuResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createKurativeUltraschallDoku/Fault/AccessException" message="tns:AccessException" />
+      <fault name="BkfEncryptionException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createKurativeUltraschallDoku/Fault/BkfEncryptionException" message="tns:BkfEncryptionException" />
+      <fault name="BkfException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createKurativeUltraschallDoku/Fault/BkfException" message="tns:BkfException" />
+      <fault name="BkfInvalidParameterException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createKurativeUltraschallDoku/Fault/BkfInvalidParameterException" message="tns:BkfInvalidParameterException" />
+      <fault name="CardException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createKurativeUltraschallDoku/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createKurativeUltraschallDoku/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createKurativeUltraschallDoku/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="createScreeningDoku">
+      <input wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createScreeningDokuRequest" message="tns:createScreeningDoku" />
+      <output wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createScreeningDokuResponse" message="tns:createScreeningDokuResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createScreeningDoku/Fault/AccessException" message="tns:AccessException" />
+      <fault name="BkfEncryptionException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createScreeningDoku/Fault/BkfEncryptionException" message="tns:BkfEncryptionException" />
+      <fault name="BkfException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createScreeningDoku/Fault/BkfException" message="tns:BkfException" />
+      <fault name="BkfInvalidParameterException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createScreeningDoku/Fault/BkfInvalidParameterException" message="tns:BkfInvalidParameterException" />
+      <fault name="CardException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createScreeningDoku/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createScreeningDoku/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createScreeningDoku/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="createScreeningUltraschallDoku">
+      <input wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createScreeningUltraschallDokuRequest" message="tns:createScreeningUltraschallDoku" />
+      <output wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createScreeningUltraschallDokuResponse" message="tns:createScreeningUltraschallDokuResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createScreeningUltraschallDoku/Fault/AccessException" message="tns:AccessException" />
+      <fault name="BkfEncryptionException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createScreeningUltraschallDoku/Fault/BkfEncryptionException" message="tns:BkfEncryptionException" />
+      <fault name="BkfException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createScreeningUltraschallDoku/Fault/BkfException" message="tns:BkfException" />
+      <fault name="BkfInvalidParameterException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createScreeningUltraschallDoku/Fault/BkfInvalidParameterException" message="tns:BkfInvalidParameterException" />
+      <fault name="CardException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createScreeningUltraschallDoku/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createScreeningUltraschallDoku/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createScreeningUltraschallDoku/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="createTherapiePathologieDoku">
+      <input wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createTherapiePathologieDokuRequest" message="tns:createTherapiePathologieDoku" />
+      <output wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createTherapiePathologieDokuResponse" message="tns:createTherapiePathologieDokuResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createTherapiePathologieDoku/Fault/AccessException" message="tns:AccessException" />
+      <fault name="BkfEncryptionException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createTherapiePathologieDoku/Fault/BkfEncryptionException" message="tns:BkfEncryptionException" />
+      <fault name="BkfException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createTherapiePathologieDoku/Fault/BkfException" message="tns:BkfException" />
+      <fault name="BkfInvalidParameterException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createTherapiePathologieDoku/Fault/BkfInvalidParameterException" message="tns:BkfInvalidParameterException" />
+      <fault name="CardException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createTherapiePathologieDoku/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createTherapiePathologieDoku/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createTherapiePathologieDoku/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="createTherapieTumorDoku">
+      <input wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createTherapieTumorDokuRequest" message="tns:createTherapieTumorDoku" />
+      <output wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createTherapieTumorDokuResponse" message="tns:createTherapieTumorDokuResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createTherapieTumorDoku/Fault/AccessException" message="tns:AccessException" />
+      <fault name="BkfEncryptionException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createTherapieTumorDoku/Fault/BkfEncryptionException" message="tns:BkfEncryptionException" />
+      <fault name="BkfException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createTherapieTumorDoku/Fault/BkfException" message="tns:BkfException" />
+      <fault name="BkfInvalidParameterException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createTherapieTumorDoku/Fault/BkfInvalidParameterException" message="tns:BkfInvalidParameterException" />
+      <fault name="CardException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createTherapieTumorDoku/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createTherapieTumorDoku/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/createTherapieTumorDoku/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="searchBkfArzt">
+      <input wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/searchBkfArztRequest" message="tns:searchBkfArzt" />
+      <output wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/searchBkfArztResponse" message="tns:searchBkfArztResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/searchBkfArzt/Fault/AccessException" message="tns:AccessException" />
+      <fault name="BkfException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/searchBkfArzt/Fault/BkfException" message="tns:BkfException" />
+      <fault name="BkfInvalidParameterException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/searchBkfArzt/Fault/BkfInvalidParameterException" message="tns:BkfInvalidParameterException" />
+      <fault name="DialogException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/searchBkfArzt/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/searchBkfArzt/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="searchBkfKonsultationData">
+      <input wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/searchBkfKonsultationDataRequest" message="tns:searchBkfKonsultationData" />
+      <output wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/searchBkfKonsultationDataResponse" message="tns:searchBkfKonsultationDataResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/searchBkfKonsultationData/Fault/AccessException" message="tns:AccessException" />
+      <fault name="BkfException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/searchBkfKonsultationData/Fault/BkfException" message="tns:BkfException" />
+      <fault name="BkfInvalidParameterException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/searchBkfKonsultationData/Fault/BkfInvalidParameterException" message="tns:BkfInvalidParameterException" />
+      <fault name="CardException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/searchBkfKonsultationData/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/searchBkfKonsultationData/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/searchBkfKonsultationData/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="searchBkfQuittungen">
+      <input wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/searchBkfQuittungenRequest" message="tns:searchBkfQuittungen" />
+      <output wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/searchBkfQuittungenResponse" message="tns:searchBkfQuittungenResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/searchBkfQuittungen/Fault/AccessException" message="tns:AccessException" />
+      <fault name="BkfException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/searchBkfQuittungen/Fault/BkfException" message="tns:BkfException" />
+      <fault name="BkfInvalidParameterException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/searchBkfQuittungen/Fault/BkfInvalidParameterException" message="tns:BkfInvalidParameterException" />
+      <fault name="DialogException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/searchBkfQuittungen/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.bkf.client.chipkarte.at/IBkfService/searchBkfQuittungen/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+  </portType>
+  <binding name="bkf_2Binding" type="tns:IBkfService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="checkBkfToken">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="BkfException">
+        <soap:fault name="BkfException" use="literal" />
+      </fault>
+      <fault name="BkfInvalidParameterException">
+        <soap:fault name="BkfInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="checkStatus">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="createAssessmentBildgebendeDiagnostikDoku">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="BkfEncryptionException">
+        <soap:fault name="BkfEncryptionException" use="literal" />
+      </fault>
+      <fault name="BkfException">
+        <soap:fault name="BkfException" use="literal" />
+      </fault>
+      <fault name="BkfInvalidParameterException">
+        <soap:fault name="BkfInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="createAssessmentInvasiveDiagnostikDoku">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="BkfEncryptionException">
+        <soap:fault name="BkfEncryptionException" use="literal" />
+      </fault>
+      <fault name="BkfException">
+        <soap:fault name="BkfException" use="literal" />
+      </fault>
+      <fault name="BkfInvalidParameterException">
+        <soap:fault name="BkfInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="createKurativeMammoLeermeldungDoku">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="BkfEncryptionException">
+        <soap:fault name="BkfEncryptionException" use="literal" />
+      </fault>
+      <fault name="BkfException">
+        <soap:fault name="BkfException" use="literal" />
+      </fault>
+      <fault name="BkfInvalidParameterException">
+        <soap:fault name="BkfInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="createKurativeMammographieDoku">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="BkfEncryptionException">
+        <soap:fault name="BkfEncryptionException" use="literal" />
+      </fault>
+      <fault name="BkfException">
+        <soap:fault name="BkfException" use="literal" />
+      </fault>
+      <fault name="BkfInvalidParameterException">
+        <soap:fault name="BkfInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="createKurativeUltraschallDoku">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="BkfEncryptionException">
+        <soap:fault name="BkfEncryptionException" use="literal" />
+      </fault>
+      <fault name="BkfException">
+        <soap:fault name="BkfException" use="literal" />
+      </fault>
+      <fault name="BkfInvalidParameterException">
+        <soap:fault name="BkfInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="createScreeningDoku">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="BkfEncryptionException">
+        <soap:fault name="BkfEncryptionException" use="literal" />
+      </fault>
+      <fault name="BkfException">
+        <soap:fault name="BkfException" use="literal" />
+      </fault>
+      <fault name="BkfInvalidParameterException">
+        <soap:fault name="BkfInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="createScreeningUltraschallDoku">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="BkfEncryptionException">
+        <soap:fault name="BkfEncryptionException" use="literal" />
+      </fault>
+      <fault name="BkfException">
+        <soap:fault name="BkfException" use="literal" />
+      </fault>
+      <fault name="BkfInvalidParameterException">
+        <soap:fault name="BkfInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="createTherapiePathologieDoku">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="BkfEncryptionException">
+        <soap:fault name="BkfEncryptionException" use="literal" />
+      </fault>
+      <fault name="BkfException">
+        <soap:fault name="BkfException" use="literal" />
+      </fault>
+      <fault name="BkfInvalidParameterException">
+        <soap:fault name="BkfInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="createTherapieTumorDoku">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="BkfEncryptionException">
+        <soap:fault name="BkfEncryptionException" use="literal" />
+      </fault>
+      <fault name="BkfException">
+        <soap:fault name="BkfException" use="literal" />
+      </fault>
+      <fault name="BkfInvalidParameterException">
+        <soap:fault name="BkfInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="searchBkfArzt">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="BkfException">
+        <soap:fault name="BkfException" use="literal" />
+      </fault>
+      <fault name="BkfInvalidParameterException">
+        <soap:fault name="BkfInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="searchBkfKonsultationData">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="BkfException">
+        <soap:fault name="BkfException" use="literal" />
+      </fault>
+      <fault name="BkfInvalidParameterException">
+        <soap:fault name="BkfInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="searchBkfQuittungen">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="BkfException">
+        <soap:fault name="BkfException" use="literal" />
+      </fault>
+      <fault name="BkfInvalidParameterException">
+        <soap:fault name="BkfInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+  </binding>
+  <service name="BkfService">
+    <port name="bkf_2" binding="tns:bkf_2Binding">
+      <soap:address location="http://localhost/bkf/2" />
+    </port>
+  </service>
+</definitions>

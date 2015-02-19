@@ -1,0 +1,329 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://soap.vdas.client.chipkarte.at" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://soap.vdas.client.chipkarte.at" name="VdasService">
+  <types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://exceptions.soap.base.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://exceptions.soap.base.client.chipkarte.at" version="1.0">
+      <xs:element name="AccessException" type="tns:accessExceptionContent" />
+      <xs:element name="CardException" type="tns:cardExceptionContent" />
+      <xs:element name="DialogException" type="tns:dialogExceptionContent" />
+      <xs:element name="ServiceException" type="tns:serviceExceptionContent" />
+      <xs:complexType name="accessExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="baseExceptionContent">
+        <xs:sequence>
+          <xs:element name="code" type="xs:string" minOccurs="0" />
+          <xs:element name="errorCode" type="xs:int" minOccurs="0" />
+          <xs:element name="message" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="cardExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="dialogExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="serviceExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" xmlns:tns="http://exceptions.soap.vdas.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://exceptions.soap.vdas.client.chipkarte.at" version="1.0">
+      <xs:import namespace="http://exceptions.soap.base.client.chipkarte.at" />
+      <xs:element name="InvalidParameterVdasException" type="tns:invalidParameterVdasExceptionContent" />
+      <xs:element name="VdasException" type="tns:vdasExceptionContent" />
+      <xs:complexType name="invalidParameterVdasExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="baseexc:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="vdasExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="baseexc:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://soap.base.client.chipkarte.at" version="1.0">
+      <xs:complexType name="property">
+        <xs:sequence>
+          <xs:element name="key" type="xs:string" minOccurs="0" />
+          <xs:element name="value" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="svPersonV2">
+        <xs:sequence>
+          <xs:element name="druckNachname" type="xs:string" minOccurs="0" />
+          <xs:element name="druckTitelHinten" type="xs:string" minOccurs="0" />
+          <xs:element name="druckTitelVorne" type="xs:string" minOccurs="0" />
+          <xs:element name="druckVorname" type="xs:string" minOccurs="0" />
+          <xs:element name="geburtsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="geschlecht" type="xs:string" minOccurs="0" />
+          <xs:element name="nachname" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="titelHinten" type="xs:string" minOccurs="0" />
+          <xs:element name="titelVorne" type="xs:string" minOccurs="0" />
+          <xs:element name="vorname" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://soap.base.client.chipkarte.at" xmlns:vdasexc="http://exceptions.soap.vdas.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://soap.vdas.client.chipkarte.at" version="1.0">
+      <xs:import namespace="http://soap.base.client.chipkarte.at" />
+      <xs:element name="checkStatus" type="tns:checkStatus" />
+      <xs:element name="checkStatusResponse" type="tns:checkStatusResponse" />
+      <xs:element name="getVersichertenDaten" type="tns:getVersichertenDaten" />
+      <xs:element name="getVersichertenDatenResponse" type="tns:getVersichertenDatenResponse" />
+      <xs:element name="retrieveVersichertendatenPerStichtag" type="tns:retrieveVersichertendatenPerStichtag" />
+      <xs:element name="retrieveVersichertendatenPerStichtagResponse" type="tns:retrieveVersichertendatenPerStichtagResponse" />
+      <xs:complexType name="anspruchsdaten">
+        <xs:sequence>
+          <xs:element name="abgeleiteteDaten" type="base:svPersonV2" minOccurs="0" />
+          <xs:element name="anspruchsart" type="xs:string" minOccurs="0" />
+          <xs:element name="kostenanteilbefreit" type="xs:boolean" minOccurs="0" />
+          <xs:element name="rezeptgebbefreit" type="xs:boolean" minOccurs="0" />
+          <xs:element name="svtCode" type="xs:string" minOccurs="0" />
+          <xs:element name="versichertenKategorie" type="xs:string" minOccurs="0" />
+          <xs:element name="versichertenartCode" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="checkStatus">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="checkStatusResponse">
+        <xs:sequence>
+          <xs:element name="return" type="base:property" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getVersichertenDaten">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="suchKriterien" type="tns:versichertendatenAbfrage" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getVersichertenDatenResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:versichertendatenAbfrageErgebnis" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="retrieveVersichertendatenPerStichtag">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="suchKriterien" type="tns:versichertendatenAbfragePerStichtag" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="retrieveVersichertendatenPerStichtagResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:versichertendatenAbfrageErgebnis" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="versichertendatenAbfrage">
+        <xs:sequence>
+          <xs:element name="abteilungsFunktionsCode" type="xs:string" minOccurs="0" />
+          <xs:element name="cin" type="xs:string" minOccurs="0" />
+          <xs:element name="forceExecution" type="xs:boolean" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummerAbgeleitet" type="xs:string" minOccurs="0" />
+          <xs:element name="svtCode" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="versichertendatenAbfrageErgebnis">
+        <xs:sequence>
+          <xs:element name="anspruchsDaten" type="tns:anspruchsdaten" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="vdasMessageCodes" type="xs:int" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="versichertenDaten" type="tns:versichertendatenSvPerson" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="versichertendatenAbfragePerStichtag">
+        <xs:complexContent>
+          <xs:extension base="tns:versichertendatenAbfrage">
+            <xs:sequence>
+              <xs:element name="stichtagsdatum" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="versichertendatenSvPerson">
+        <xs:sequence>
+          <xs:element name="druckNachname" type="xs:string" minOccurs="0" />
+          <xs:element name="druckTitelHinten" type="xs:string" minOccurs="0" />
+          <xs:element name="druckTitelVorne" type="xs:string" minOccurs="0" />
+          <xs:element name="druckVorname" type="xs:string" minOccurs="0" />
+          <xs:element name="geburtsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="geschlecht" type="xs:string" minOccurs="0" />
+          <xs:element name="nachname" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="titelHinten" type="xs:string" minOccurs="0" />
+          <xs:element name="titelVorne" type="xs:string" minOccurs="0" />
+          <xs:element name="todesdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="todesdatumBestaetigt" type="xs:string" minOccurs="0" />
+          <xs:element name="vorname" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </types>
+  <message name="AccessException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:AccessException" />
+  </message>
+  <message name="CardException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:CardException" />
+  </message>
+  <message name="DialogException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:DialogException" />
+  </message>
+  <message name="InvalidParameterVdasException">
+    <part xmlns:vdasexc="http://exceptions.soap.vdas.client.chipkarte.at" name="fault" element="vdasexc:InvalidParameterVdasException" />
+  </message>
+  <message name="ServiceException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:ServiceException" />
+  </message>
+  <message name="VdasException">
+    <part xmlns:vdasexc="http://exceptions.soap.vdas.client.chipkarte.at" name="fault" element="vdasexc:VdasException" />
+  </message>
+  <message name="checkStatus">
+    <part name="parameters" element="tns:checkStatus" />
+  </message>
+  <message name="checkStatusResponse">
+    <part name="parameters" element="tns:checkStatusResponse" />
+  </message>
+  <message name="getVersichertenDaten">
+    <part name="parameters" element="tns:getVersichertenDaten" />
+  </message>
+  <message name="getVersichertenDatenResponse">
+    <part name="parameters" element="tns:getVersichertenDatenResponse" />
+  </message>
+  <message name="retrieveVersichertendatenPerStichtag">
+    <part name="parameters" element="tns:retrieveVersichertendatenPerStichtag" />
+  </message>
+  <message name="retrieveVersichertendatenPerStichtagResponse">
+    <part name="parameters" element="tns:retrieveVersichertendatenPerStichtagResponse" />
+  </message>
+  <portType name="IVdasService">
+    <operation name="checkStatus">
+      <input wsam:Action="http://soap.vdas.client.chipkarte.at/IVdasService/checkStatusRequest" message="tns:checkStatus" />
+      <output wsam:Action="http://soap.vdas.client.chipkarte.at/IVdasService/checkStatusResponse" message="tns:checkStatusResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.vdas.client.chipkarte.at/IVdasService/checkStatus/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.vdas.client.chipkarte.at/IVdasService/checkStatus/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.vdas.client.chipkarte.at/IVdasService/checkStatus/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getVersichertenDaten">
+      <input wsam:Action="http://soap.vdas.client.chipkarte.at/IVdasService/getVersichertenDatenRequest" message="tns:getVersichertenDaten" />
+      <output wsam:Action="http://soap.vdas.client.chipkarte.at/IVdasService/getVersichertenDatenResponse" message="tns:getVersichertenDatenResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.vdas.client.chipkarte.at/IVdasService/getVersichertenDaten/Fault/AccessException" message="tns:AccessException" />
+      <fault name="CardException" wsam:Action="http://soap.vdas.client.chipkarte.at/IVdasService/getVersichertenDaten/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.vdas.client.chipkarte.at/IVdasService/getVersichertenDaten/Fault/DialogException" message="tns:DialogException" />
+      <fault name="InvalidParameterVdasException" wsam:Action="http://soap.vdas.client.chipkarte.at/IVdasService/getVersichertenDaten/Fault/InvalidParameterVdasException" message="tns:InvalidParameterVdasException" />
+      <fault name="ServiceException" wsam:Action="http://soap.vdas.client.chipkarte.at/IVdasService/getVersichertenDaten/Fault/ServiceException" message="tns:ServiceException" />
+      <fault name="VdasException" wsam:Action="http://soap.vdas.client.chipkarte.at/IVdasService/getVersichertenDaten/Fault/VdasException" message="tns:VdasException" />
+    </operation>
+    <operation name="retrieveVersichertendatenPerStichtag">
+      <input wsam:Action="http://soap.vdas.client.chipkarte.at/IVdasService/retrieveVersichertendatenPerStichtagRequest" message="tns:retrieveVersichertendatenPerStichtag" />
+      <output wsam:Action="http://soap.vdas.client.chipkarte.at/IVdasService/retrieveVersichertendatenPerStichtagResponse" message="tns:retrieveVersichertendatenPerStichtagResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.vdas.client.chipkarte.at/IVdasService/retrieveVersichertendatenPerStichtag/Fault/AccessException" message="tns:AccessException" />
+      <fault name="CardException" wsam:Action="http://soap.vdas.client.chipkarte.at/IVdasService/retrieveVersichertendatenPerStichtag/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.vdas.client.chipkarte.at/IVdasService/retrieveVersichertendatenPerStichtag/Fault/DialogException" message="tns:DialogException" />
+      <fault name="InvalidParameterVdasException" wsam:Action="http://soap.vdas.client.chipkarte.at/IVdasService/retrieveVersichertendatenPerStichtag/Fault/InvalidParameterVdasException" message="tns:InvalidParameterVdasException" />
+      <fault name="ServiceException" wsam:Action="http://soap.vdas.client.chipkarte.at/IVdasService/retrieveVersichertendatenPerStichtag/Fault/ServiceException" message="tns:ServiceException" />
+      <fault name="VdasException" wsam:Action="http://soap.vdas.client.chipkarte.at/IVdasService/retrieveVersichertendatenPerStichtag/Fault/VdasException" message="tns:VdasException" />
+    </operation>
+  </portType>
+  <binding name="vdas_13Binding" type="tns:IVdasService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="checkStatus">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getVersichertenDaten">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="InvalidParameterVdasException">
+        <soap:fault name="InvalidParameterVdasException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+      <fault name="VdasException">
+        <soap:fault name="VdasException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="retrieveVersichertendatenPerStichtag">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="InvalidParameterVdasException">
+        <soap:fault name="InvalidParameterVdasException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+      <fault name="VdasException">
+        <soap:fault name="VdasException" use="literal" />
+      </fault>
+    </operation>
+  </binding>
+  <service name="VdasService">
+    <port name="vdas_13" binding="tns:vdas_13Binding">
+      <soap:address location="http://localhost/vdas/13" />
+    </port>
+  </service>
+</definitions>

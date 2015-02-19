@@ -1,0 +1,247 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://soap.das.client.chipkarte.at" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://soap.das.client.chipkarte.at" name="DasService">
+  <types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://exceptions.soap.base.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://exceptions.soap.base.client.chipkarte.at" version="1.0">
+      <xs:element name="AccessException" type="tns:accessExceptionContent" />
+      <xs:element name="DialogException" type="tns:dialogExceptionContent" />
+      <xs:element name="ServiceException" type="tns:serviceExceptionContent" />
+      <xs:complexType name="accessExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="baseExceptionContent">
+        <xs:sequence>
+          <xs:element name="code" type="xs:string" minOccurs="0" />
+          <xs:element name="errorCode" type="xs:int" minOccurs="0" />
+          <xs:element name="message" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="dialogExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="serviceExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" xmlns:tns="http://exceptions.soap.das.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://exceptions.soap.das.client.chipkarte.at" version="1.0">
+      <xs:import namespace="http://exceptions.soap.base.client.chipkarte.at" />
+      <xs:element name="DasException" type="tns:dasExceptionContent" />
+      <xs:element name="DasInvalidParameterException" type="tns:dasInvalidParameterExceptionContent" />
+      <xs:complexType name="dasExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="baseexc:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="dasInvalidParameterExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="baseexc:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://soap.base.client.chipkarte.at" version="1.0">
+      <xs:complexType name="property">
+        <xs:sequence>
+          <xs:element name="key" type="xs:string" minOccurs="0" />
+          <xs:element name="value" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://soap.base.client.chipkarte.at" xmlns:dasexc="http://exceptions.soap.das.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://soap.das.client.chipkarte.at" version="1.0">
+      <xs:import namespace="http://soap.base.client.chipkarte.at" />
+      <xs:element name="checkStatus" type="tns:checkStatus" />
+      <xs:element name="checkStatusResponse" type="tns:checkStatusResponse" />
+      <xs:element name="retrieveIEKOEconomicGrouping" type="tns:retrieveIEKOEconomicGrouping" />
+      <xs:element name="retrieveIEKOEconomicGroupingResponse" type="tns:retrieveIEKOEconomicGroupingResponse" />
+      <xs:complexType name="checkStatus">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="checkStatusResponse">
+        <xs:sequence>
+          <xs:element name="return" type="base:property" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="iekoComparison">
+        <xs:sequence>
+          <xs:element name="comparisonCode" type="xs:string" minOccurs="0" />
+          <xs:element name="comparisonPosition" type="xs:string" minOccurs="0" />
+          <xs:element name="IEKOMedicament" type="tns:iekoMedicament" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="iekoEconomicGrouping">
+        <xs:sequence>
+          <xs:element name="IEKOComparison" type="tns:iekoComparison" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="identIngredient" type="tns:iekoIngredientReference" minOccurs="0" />
+          <xs:element name="medicamentName" type="xs:string" minOccurs="0" />
+          <xs:element name="pharmaNumber" type="xs:string" minOccurs="0" />
+          <xs:element name="similarIngredient" type="tns:iekoIngredientReference" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="iekoIngredient">
+        <xs:sequence>
+          <xs:element name="atcCode" type="xs:string" minOccurs="0" />
+          <xs:element name="ingredientDimension" type="xs:string" minOccurs="0" />
+          <xs:element name="ingredientName" type="xs:string" minOccurs="0" />
+          <xs:element name="ingredientStrength" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="iekoIngredientReference">
+        <xs:sequence>
+          <xs:element name="atcCode" type="xs:string" minOccurs="0" />
+          <xs:element name="ingredientName" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="iekoMedicament">
+        <xs:sequence>
+          <xs:element name="amount" type="xs:string" minOccurs="0" />
+          <xs:element name="atcCode" type="xs:string" minOccurs="0" />
+          <xs:element name="box" type="xs:string" minOccurs="0" />
+          <xs:element name="dispensingCount" type="xs:string" minOccurs="0" />
+          <xs:element name="divisibility" type="xs:string" minOccurs="0" />
+          <xs:element name="dosageForm" type="xs:string" minOccurs="0" />
+          <xs:element name="healthInsuranceSign" type="xs:string" minOccurs="0" />
+          <xs:element name="IEKOIngredient" type="tns:iekoIngredient" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="indicationText" type="xs:string" minOccurs="0" />
+          <xs:element name="indicationTextHTMLFormatted" type="xs:string" minOccurs="0" />
+          <xs:element name="informationText" type="xs:string" minOccurs="0" />
+          <xs:element name="ingredientInformation" type="xs:string" minOccurs="0" />
+          <xs:element name="ingredientName" type="xs:string" minOccurs="0" />
+          <xs:element name="ingredientNarcoticSign" type="xs:string" minOccurs="0" />
+          <xs:element name="longTermPermission" type="xs:string" minOccurs="0" />
+          <xs:element name="medicamentName" type="xs:string" minOccurs="0" />
+          <xs:element name="packageInformation" type="xs:string" minOccurs="0" />
+          <xs:element name="packageNumber" type="xs:string" minOccurs="0" />
+          <xs:element name="pharmaNumber" type="xs:string" minOccurs="0" />
+          <xs:element name="price" type="xs:string" minOccurs="0" />
+          <xs:element name="pricePerUnit" type="xs:string" minOccurs="0" />
+          <xs:element name="refaktie" type="xs:string" minOccurs="0" />
+          <xs:element name="registerNumber" type="xs:string" minOccurs="0" />
+          <xs:element name="registerNumberPrefix" type="xs:string" minOccurs="0" />
+          <xs:element name="ruleText" type="xs:string" minOccurs="0" />
+          <xs:element name="ruleTextHTMLFormatted" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="retrieveIEKOEconomicGrouping">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="pharmaNumber" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="retrieveIEKOEconomicGroupingResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:iekoEconomicGrouping" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </types>
+  <message name="AccessException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:AccessException" />
+  </message>
+  <message name="DasException">
+    <part xmlns:dasexc="http://exceptions.soap.das.client.chipkarte.at" name="fault" element="dasexc:DasException" />
+  </message>
+  <message name="DasInvalidParameterException">
+    <part xmlns:dasexc="http://exceptions.soap.das.client.chipkarte.at" name="fault" element="dasexc:DasInvalidParameterException" />
+  </message>
+  <message name="DialogException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:DialogException" />
+  </message>
+  <message name="ServiceException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:ServiceException" />
+  </message>
+  <message name="checkStatus">
+    <part name="parameters" element="tns:checkStatus" />
+  </message>
+  <message name="checkStatusResponse">
+    <part name="parameters" element="tns:checkStatusResponse" />
+  </message>
+  <message name="retrieveIEKOEconomicGrouping">
+    <part name="parameters" element="tns:retrieveIEKOEconomicGrouping" />
+  </message>
+  <message name="retrieveIEKOEconomicGroupingResponse">
+    <part name="parameters" element="tns:retrieveIEKOEconomicGroupingResponse" />
+  </message>
+  <portType name="IDasService">
+    <operation name="checkStatus">
+      <input wsam:Action="http://soap.das.client.chipkarte.at/IDasService/checkStatusRequest" message="tns:checkStatus" />
+      <output wsam:Action="http://soap.das.client.chipkarte.at/IDasService/checkStatusResponse" message="tns:checkStatusResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.das.client.chipkarte.at/IDasService/checkStatus/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.das.client.chipkarte.at/IDasService/checkStatus/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.das.client.chipkarte.at/IDasService/checkStatus/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="retrieveIEKOEconomicGrouping">
+      <input wsam:Action="http://soap.das.client.chipkarte.at/IDasService/retrieveIEKOEconomicGroupingRequest" message="tns:retrieveIEKOEconomicGrouping" />
+      <output wsam:Action="http://soap.das.client.chipkarte.at/IDasService/retrieveIEKOEconomicGroupingResponse" message="tns:retrieveIEKOEconomicGroupingResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.das.client.chipkarte.at/IDasService/retrieveIEKOEconomicGrouping/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DasException" wsam:Action="http://soap.das.client.chipkarte.at/IDasService/retrieveIEKOEconomicGrouping/Fault/DasException" message="tns:DasException" />
+      <fault name="DasInvalidParameterException" wsam:Action="http://soap.das.client.chipkarte.at/IDasService/retrieveIEKOEconomicGrouping/Fault/DasInvalidParameterException" message="tns:DasInvalidParameterException" />
+      <fault name="DialogException" wsam:Action="http://soap.das.client.chipkarte.at/IDasService/retrieveIEKOEconomicGrouping/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.das.client.chipkarte.at/IDasService/retrieveIEKOEconomicGrouping/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+  </portType>
+  <binding name="das_4Binding" type="tns:IDasService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="checkStatus">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="retrieveIEKOEconomicGrouping">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DasException">
+        <soap:fault name="DasException" use="literal" />
+      </fault>
+      <fault name="DasInvalidParameterException">
+        <soap:fault name="DasInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+  </binding>
+  <service name="DasService">
+    <port name="das_4" binding="tns:das_4Binding">
+      <soap:address location="http://localhost/das/4" />
+    </port>
+  </service>
+</definitions>

@@ -1,0 +1,54 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://soap.client.chipkarte.at" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://soap.client.chipkarte.at" name="ServiceManager">
+  <types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://soap.client.chipkarte.at" version="1.0">
+      <xs:element name="getServices" type="tns:getServices" />
+      <xs:element name="getServicesResponse" type="tns:getServicesResponse" />
+      <xs:complexType name="getServices">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="getServicesResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:service" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="service">
+        <xs:sequence>
+          <xs:element name="description" type="xs:string" minOccurs="0" />
+          <xs:element name="endPointURL" type="xs:string" minOccurs="0" />
+          <xs:element name="name" type="xs:string" minOccurs="0" />
+          <xs:element name="type" type="xs:string" minOccurs="0" />
+          <xs:element name="version" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </types>
+  <message name="getServices">
+    <part name="parameters" element="tns:getServices" />
+  </message>
+  <message name="getServicesResponse">
+    <part name="parameters" element="tns:getServicesResponse" />
+  </message>
+  <portType name="IServiceManager">
+    <operation name="getServices">
+      <input wsam:Action="http://soap.client.chipkarte.at/IServiceManager/getServicesRequest" message="tns:getServices" />
+      <output wsam:Action="http://soap.client.chipkarte.at/IServiceManager/getServicesResponse" message="tns:getServicesResponse" />
+    </operation>
+  </portType>
+  <binding name="servicemanager_1Binding" type="tns:IServiceManager">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="getServices">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="ServiceManager">
+    <port name="servicemanager_1" binding="tns:servicemanager_1Binding">
+      <soap:address location="http://localhost/servicemanager/1" />
+    </port>
+  </service>
+</definitions>

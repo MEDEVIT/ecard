@@ -1,0 +1,1152 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://soap.dbas.client.chipkarte.at" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://soap.dbas.client.chipkarte.at" name="DbasService">
+  <types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://exceptions.soap.base.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://exceptions.soap.base.client.chipkarte.at" version="1.0">
+      <xs:element name="AccessException" type="tns:accessExceptionContent" />
+      <xs:element name="CardException" type="tns:cardExceptionContent" />
+      <xs:element name="DialogException" type="tns:dialogExceptionContent" />
+      <xs:element name="ServiceException" type="tns:serviceExceptionContent" />
+      <xs:complexType name="accessExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="baseExceptionContent">
+        <xs:sequence>
+          <xs:element name="code" type="xs:string" minOccurs="0" />
+          <xs:element name="errorCode" type="xs:int" minOccurs="0" />
+          <xs:element name="message" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="cardExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="dialogExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="serviceExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://soap.base.client.chipkarte.at" xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" xmlns:dbasexc="http://exceptions.soap.dbas.client.chipkarte.at" xmlns:tns="http://exceptions.soap.dbas.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://exceptions.soap.dbas.client.chipkarte.at" version="1.0">
+      <xs:import namespace="http://exceptions.soap.base.client.chipkarte.at" />
+      <xs:element name="DbasEncryptionException" type="tns:dbasEncryptionExceptionContent" />
+      <xs:element name="DbasException" type="tns:dbasExceptionContent" />
+      <xs:element name="DbasInvalidParameterException" type="tns:dbasInvalidParameterExceptionContent" />
+      <xs:complexType name="dbasEncryptionExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="baseexc:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="dbasExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="baseexc:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="dbasInvalidParameterExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="baseexc:baseExceptionContent">
+            <xs:sequence>
+              <xs:element name="fieldCode" type="xs:int" minOccurs="0" />
+              <xs:element name="fieldCodeSet" type="xs:boolean" minOccurs="0" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://soap.base.client.chipkarte.at" version="1.0">
+      <xs:complexType name="property">
+        <xs:sequence>
+          <xs:element name="key" type="xs:string" minOccurs="0" />
+          <xs:element name="value" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://soap.base.client.chipkarte.at" xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://soap.dbas.client.chipkarte.at" version="1.0">
+      <xs:import namespace="http://soap.base.client.chipkarte.at" />
+      <xs:element name="checkStatus" type="tns:checkStatus" />
+      <xs:element name="checkStatusResponse" type="tns:checkStatusResponse" />
+      <xs:element name="createDatenblattAllgemeinesProgramm" type="tns:createDatenblattAllgemeinesProgramm" />
+      <xs:element name="createDatenblattAllgemeinesProgrammResponse" type="tns:createDatenblattAllgemeinesProgrammResponse" />
+      <xs:element name="createDatenblattDmpDm2" type="tns:createDatenblattDmpDm2" />
+      <xs:element name="createDatenblattDmpDm2Response" type="tns:createDatenblattDmpDm2Response" />
+      <xs:element name="createDatenblattDmpPmi" type="tns:createDatenblattDmpPmi" />
+      <xs:element name="createDatenblattDmpPmiResponse" type="tns:createDatenblattDmpPmiResponse" />
+      <xs:element name="createDatenblattKoloskopie" type="tns:createDatenblattKoloskopie" />
+      <xs:element name="createDatenblattKoloskopieResponse" type="tns:createDatenblattKoloskopieResponse" />
+      <xs:element name="createDatenblattMammographie" type="tns:createDatenblattMammographie" />
+      <xs:element name="createDatenblattMammographieResponse" type="tns:createDatenblattMammographieResponse" />
+      <xs:element name="createDatenblattPapAbstrich" type="tns:createDatenblattPapAbstrich" />
+      <xs:element name="createDatenblattPapAbstrichResponse" type="tns:createDatenblattPapAbstrichResponse" />
+      <xs:element name="createDatenblattQZKoloskopie" type="tns:createDatenblattQZKoloskopie" />
+      <xs:element name="createDatenblattQZKoloskopieResponse" type="tns:createDatenblattQZKoloskopieResponse" />
+      <xs:element name="searchDmpData" type="tns:searchDmpData" />
+      <xs:element name="searchDmpDataResponse" type="tns:searchDmpDataResponse" />
+      <xs:element name="searchKonsultationData" type="tns:searchKonsultationData" />
+      <xs:element name="searchKonsultationDataResponse" type="tns:searchKonsultationDataResponse" />
+      <xs:element name="searchQuittungen" type="tns:searchQuittungen" />
+      <xs:element name="searchQuittungenResponse" type="tns:searchQuittungenResponse" />
+      <xs:complexType name="betreuung">
+        <xs:sequence>
+          <xs:element name="antragsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="ausschreibedatum" type="xs:string" minOccurs="0" />
+          <xs:element name="bvId" type="xs:long" minOccurs="0" />
+          <xs:element name="fachgebietsCode" type="xs:string" minOccurs="0" />
+          <xs:element name="svtCode" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="checkStatus">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="checkStatusResponse">
+        <xs:sequence>
+          <xs:element name="return" type="base:property" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createDatenblattAllgemeinesProgramm">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="datenblattAllgemeinesProgramm" type="tns:datenblattAllgemeinesProgramm" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createDatenblattAllgemeinesProgrammResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:quittung" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createDatenblattDmpDm2">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="datenblattDmpDm2" type="tns:datenblattDmpDm2" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createDatenblattDmpDm2Response">
+        <xs:sequence>
+          <xs:element name="return" type="tns:quittung" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createDatenblattDmpPmi">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="datenblattDmpPmi" type="tns:datenblattDmpPmi" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createDatenblattDmpPmiResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:quittung" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createDatenblattKoloskopie">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="datenblattKoloskopie" type="tns:datenblattKoloskopie" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createDatenblattKoloskopieResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:quittung" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createDatenblattMammographie">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="datenblattMammographie" type="tns:datenblattMammographie" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createDatenblattMammographieResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:quittung" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createDatenblattPapAbstrich">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="datenblattPapAbstrich" type="tns:datenblattPapAbstrich" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createDatenblattPapAbstrichResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:quittung" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createDatenblattQZKoloskopie">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="datenblattKoloskopie" type="tns:datenblattKoloskopie" minOccurs="0" />
+          <xs:element name="untersuchungsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="forcedQZ" type="xs:boolean" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createDatenblattQZKoloskopieResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:quittung" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="datenblattAllgemeinesProgramm">
+        <xs:sequence>
+          <xs:element name="abdomen" type="xs:string" minOccurs="0" />
+          <xs:element name="abschlussgespraech" type="xs:string" minOccurs="0" />
+          <xs:element name="abstrichGemacht" type="xs:string" minOccurs="0" />
+          <xs:element name="aktuellerBefund" type="xs:string" minOccurs="0" />
+          <xs:element name="alkoholAufhoerwilleVorhanden" type="xs:string" minOccurs="0" />
+          <xs:element name="alkoholfragebogen" type="xs:string" minOccurs="0" />
+          <xs:element name="anamnestisch" type="xs:string" minOccurs="0" />
+          <xs:element name="andereVorbefunde" type="xs:string" minOccurs="0" />
+          <xs:element name="anschrift" type="xs:string" minOccurs="0" />
+          <xs:element name="auffaelligkeiten" type="xs:string" minOccurs="0" />
+          <xs:element name="befundVorhanden" type="xs:string" minOccurs="0" />
+          <xs:element name="bestehenderDiabetes" type="xs:string" minOccurs="0" />
+          <xs:element name="biradsBefundVorhanden" type="xs:string" minOccurs="0" />
+          <xs:element name="blut" type="xs:string" minOccurs="0" />
+          <xs:element name="blutImStuhl" type="xs:string" minOccurs="0" />
+          <xs:element name="blutdruck1" type="xs:string" minOccurs="0" />
+          <xs:element name="blutdruck2" type="xs:string" minOccurs="0" />
+          <xs:element name="blutdrucksenkendesMedikamentGenommen" type="xs:string" minOccurs="0" />
+          <xs:element name="blutzucker" type="xs:string" minOccurs="0" />
+          <xs:element name="chol" type="xs:string" minOccurs="0" />
+          <xs:element name="durchgefuehrt" type="xs:string" minOccurs="0" />
+          <xs:element name="eiweiss" type="xs:string" minOccurs="0" />
+          <xs:element name="ergebnis" type="xs:string" minOccurs="0" />
+          <xs:element name="erkrankung1" type="xs:string" minOccurs="0" />
+          <xs:element name="erkrankung2" type="xs:string" minOccurs="0" />
+          <xs:element name="erkrankung3" type="xs:string" minOccurs="0" />
+          <xs:element name="ery" type="xs:string" minOccurs="0" />
+          <xs:element name="familiaereBelastung" type="xs:string" minOccurs="0" />
+          <xs:element name="gammaGt" type="xs:string" minOccurs="0" />
+          <xs:element name="geburtsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="gesundesZahnfleisch" type="xs:string" minOccurs="0" />
+          <xs:element name="glucose" type="xs:string" minOccurs="0" />
+          <xs:element name="haut" type="xs:string" minOccurs="0" />
+          <xs:element name="hb" type="xs:string" minOccurs="0" />
+          <xs:element name="hdlChol" type="xs:string" minOccurs="0" />
+          <xs:element name="herzLungeGefaess" type="xs:string" minOccurs="0" />
+          <xs:element name="hkt" type="xs:string" minOccurs="0" />
+          <xs:element name="hoerverminderung" type="xs:string" minOccurs="0" />
+          <xs:element name="koerpergewicht" type="xs:string" minOccurs="0" />
+          <xs:element name="koerpergroesse" type="xs:string" minOccurs="0" />
+          <xs:element name="koerperlicheBewegung" type="xs:string" minOccurs="0" />
+          <xs:element name="koloskopieAerztlicheBeratungAufklaerung" type="xs:string" minOccurs="0" />
+          <xs:element name="konsultationId" type="xs:long" minOccurs="0" />
+          <xs:element name="kopfHals" type="xs:string" minOccurs="0" />
+          <xs:element name="letzteKoloskopie" type="xs:string" minOccurs="0" />
+          <xs:element name="leukozyten" type="xs:string" minOccurs="0" />
+          <xs:element name="mammographieAerztlicheBeratungAufklaerung" type="xs:string" minOccurs="0" />
+          <xs:element name="massnahmeAlkohol" type="xs:string" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="massnahmeBewegung" type="xs:string" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="massnahmeBlutdruck" type="xs:string" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="massnahmeBlutzucker" type="xs:string" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="massnahmeBmi" type="xs:string" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="massnahmeDiabetesAb65" type="xs:string" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="massnahmeDiabetesBis65" type="xs:string" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="massnahmeHarnuntersuchung" type="xs:string" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="massnahmeHautkrebs" type="xs:string" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="massnahmeKardio" type="xs:string" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="massnahmeKoloskopie" type="xs:string" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="massnahmeMammographie" type="xs:string" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="massnahmePap" type="xs:string" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="massnahmeParodontitis" type="xs:string" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="massnahmeProstata" type="xs:string" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="massnahmeRauchverhalten" type="xs:string" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="massnahmeSonstiges" type="xs:string" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="melanom" type="xs:string" minOccurs="0" />
+          <xs:element name="nitrit" type="xs:string" minOccurs="0" />
+          <xs:element name="papAerztlicheBeratungAufklaerung" type="xs:string" minOccurs="0" />
+          <xs:element name="postleitzahl" type="xs:string" minOccurs="0" />
+          <xs:element name="prostataAerztlicheBeratung" type="xs:string" minOccurs="0" />
+          <xs:element name="rauchenAufhoerwilleVorhanden" type="xs:string" minOccurs="0" />
+          <xs:element name="risikoGlaukomVorhanden" type="xs:string" minOccurs="0" />
+          <xs:element name="roetung" type="xs:string" minOccurs="0" />
+          <xs:element name="sehverminderung" type="xs:string" minOccurs="0" />
+          <xs:element name="sehvermoegenKontrolliert" type="xs:string" minOccurs="0" />
+          <xs:element name="sicherNichtraucher" type="xs:string" minOccurs="0" />
+          <xs:element name="sonstigeAuffaelligeBefunde" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="taille" type="xs:string" minOccurs="0" />
+          <xs:element name="triglycerideNuechtern" type="xs:string" minOccurs="0" />
+          <xs:element name="ubg" type="xs:string" minOccurs="0" />
+          <xs:element name="ueberweisungAugenFa" type="xs:string" minOccurs="0" />
+          <xs:element name="ueberweisungHnoFa" type="xs:string" minOccurs="0" />
+          <xs:element name="untersuchungGlaukomAb65" type="xs:string" minOccurs="0" />
+          <xs:element name="untersuchungGlaukomBis65" type="xs:string" minOccurs="0" />
+          <xs:element name="verdachtGesundheitsproblem" type="xs:string" minOccurs="0" />
+          <xs:element name="versionsnummer" type="xs:string" minOccurs="0" />
+          <xs:element name="wirbelsaeuleGelenke" type="xs:string" minOccurs="0" />
+          <xs:element name="zahnstein" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="datenblattDmpDm2">
+        <xs:sequence>
+          <xs:element name="akutesUlkusLinks" type="xs:string" minOccurs="0" />
+          <xs:element name="akutesUlkusRechts" type="xs:string" minOccurs="0" />
+          <xs:element name="amputation" type="xs:string" minOccurs="0" />
+          <xs:element name="anginaPectoris" type="xs:string" minOccurs="0" />
+          <xs:element name="apoplexie" type="xs:string" minOccurs="0" />
+          <xs:element name="bewegung" type="xs:string" minOccurs="0" />
+          <xs:element name="blindheit" type="xs:string" minOccurs="0" />
+          <xs:element name="blutdruckTherapie" type="xs:string" minOccurs="0" />
+          <xs:element name="blutdruckZielvereinbarung" type="xs:string" minOccurs="0" />
+          <xs:element name="blutdruckmessung" type="xs:string" minOccurs="0" />
+          <xs:element name="blutzuckermessung" type="xs:string" minOccurs="0" />
+          <xs:element name="bvId" type="xs:long" minOccurs="0" />
+          <xs:element name="cholesterin" type="xs:string" minOccurs="0" />
+          <xs:element name="claudicatio" type="xs:string" minOccurs="0" />
+          <xs:element name="depression" type="xs:string" minOccurs="0" />
+          <xs:element name="diabetesDiagnoseJahr" type="xs:string" minOccurs="0" />
+          <xs:element name="diabetesSchulungWannJahr" type="xs:string" minOccurs="0" />
+          <xs:element name="eq5d" type="xs:string" minOccurs="0" />
+          <xs:element name="eq5dvas" type="xs:string" minOccurs="0" />
+          <xs:element name="erektileDysfunktion" type="xs:string" minOccurs="0" />
+          <xs:element name="ernaehrung" type="xs:string" minOccurs="0" />
+          <xs:element name="fussdeformitaetLinks" type="xs:string" minOccurs="0" />
+          <xs:element name="fussdeformitaetRechts" type="xs:string" minOccurs="0" />
+          <xs:element name="geburtsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="geheiltesUlkusLinks" type="xs:string" minOccurs="0" />
+          <xs:element name="geheiltesUlkusRechts" type="xs:string" minOccurs="0" />
+          <xs:element name="gewicht" type="xs:string" minOccurs="0" />
+          <xs:element name="gewichtZielvereinbarung" type="xs:string" minOccurs="0" />
+          <xs:element name="groesse" type="xs:string" minOccurs="0" />
+          <xs:element name="harnzuckermessung" type="xs:string" minOccurs="0" />
+          <xs:element name="hba1c" type="xs:string" minOccurs="0" />
+          <xs:element name="hba1cMol" type="xs:string" minOccurs="0" />
+          <xs:element name="hba1cMolZielvereinbarung" type="xs:string" minOccurs="0" />
+          <xs:element name="hba1cZielvereinbarung" type="xs:string" minOccurs="0" />
+          <xs:element name="hdlCholesterin" type="xs:string" minOccurs="0" />
+          <xs:element name="herzBypassDilatation" type="xs:string" minOccurs="0" />
+          <xs:element name="herzinfarkt" type="xs:string" minOccurs="0" />
+          <xs:element name="herzinsuffizienz" type="xs:string" minOccurs="0" />
+          <xs:element name="hypertonieSeitJahr" type="xs:string" minOccurs="0" />
+          <xs:element name="innerhalb12Monaten" type="xs:string" minOccurs="0" />
+          <xs:element name="insulin" type="xs:string" minOccurs="0" />
+          <xs:element name="insulinIntensiviert" type="xs:string" minOccurs="0" />
+          <xs:element name="insulinKonventionell" type="xs:string" minOccurs="0" />
+          <xs:element name="insulinNurBasal" type="xs:string" minOccurs="0" />
+          <xs:element name="insulinPraeprandial" type="xs:string" minOccurs="0" />
+          <xs:element name="insulinSeitJahr" type="xs:string" minOccurs="0" />
+          <xs:element name="khk" type="xs:string" minOccurs="0" />
+          <xs:element name="kreatinin" type="xs:string" minOccurs="0" />
+          <xs:element name="laserung" type="xs:string" minOccurs="0" />
+          <xs:element name="makulopathie" type="xs:string" minOccurs="0" />
+          <xs:element name="mikroalbuminurie" type="xs:string" minOccurs="0" />
+          <xs:element name="neuropathie" type="xs:string" minOccurs="0" />
+          <xs:element name="nurDiaet" type="xs:string" minOccurs="0" />
+          <xs:element name="oad" type="xs:string" minOccurs="0" />
+          <xs:element name="oadSeitJahr" type="xs:string" minOccurs="0" />
+          <xs:element name="pavk" type="xs:string" minOccurs="0" />
+          <xs:element name="pavkBypass" type="xs:string" minOccurs="0" />
+          <xs:element name="pavkDilatation" type="xs:string" minOccurs="0" />
+          <xs:element name="proteinurie" type="xs:string" minOccurs="0" />
+          <xs:element name="pulsNichtTastbarLinks" type="xs:string" minOccurs="0" />
+          <xs:element name="pulsNichtTastbarRechts" type="xs:string" minOccurs="0" />
+          <xs:element name="rauchen" type="xs:string" minOccurs="0" />
+          <xs:element name="retinopathie" type="xs:string" minOccurs="0" />
+          <xs:element name="retinopathieNichtProliferativ" type="xs:string" minOccurs="0" />
+          <xs:element name="retinopathieProliferativ" type="xs:string" minOccurs="0" />
+          <xs:element name="rrdiaRuhemessung" type="xs:string" minOccurs="0" />
+          <xs:element name="rrsysRuhemessung" type="xs:string" minOccurs="0" />
+          <xs:element name="schulung" type="xs:string" minOccurs="0" />
+          <xs:element name="schwereHypoglykaemie" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="tabak" type="xs:string" minOccurs="0" />
+          <xs:element name="terminalesNierenversagen" type="xs:string" minOccurs="0" />
+          <xs:element name="tiaprind" type="xs:string" minOccurs="0" />
+          <xs:element name="triglyceride" type="xs:string" minOccurs="0" />
+          <xs:element name="untersuchungsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="versionsnummer" type="xs:string" minOccurs="0" />
+          <xs:element name="vibrationsempfindenVermindertLinks" type="xs:string" minOccurs="0" />
+          <xs:element name="vibrationsempfindenVermindertRechts" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="datenblattDmpPmi">
+        <xs:sequence>
+          <xs:element name="acehemmer" type="xs:string" minOccurs="0" />
+          <xs:element name="acehemmerKontraindikation" type="xs:string" minOccurs="0" />
+          <xs:element name="anginaPectoris" type="xs:string" minOccurs="0" />
+          <xs:element name="anzahlInfarkte" type="xs:string" minOccurs="0" />
+          <xs:element name="aortacoronarBypass" type="xs:string" minOccurs="0" />
+          <xs:element name="ass" type="xs:string" minOccurs="0" />
+          <xs:element name="assKontraindikation" type="xs:string" minOccurs="0" />
+          <xs:element name="atIIAntagonisten" type="xs:string" minOccurs="0" />
+          <xs:element name="atIIAntagonistenKontraindikation" type="xs:string" minOccurs="0" />
+          <xs:element name="bauchumfang" type="xs:string" minOccurs="0" />
+          <xs:element name="betablocker" type="xs:string" minOccurs="0" />
+          <xs:element name="betablockerKontraindikation" type="xs:string" minOccurs="0" />
+          <xs:element name="bewegung" type="xs:string" minOccurs="0" />
+          <xs:element name="blutdruckDiaBefund" type="xs:string" minOccurs="0" />
+          <xs:element name="blutdruckDiaZielvereinbarung" type="xs:string" minOccurs="0" />
+          <xs:element name="blutdruckMessart" type="xs:string" minOccurs="0" />
+          <xs:element name="blutdruckSysBefund" type="xs:string" minOccurs="0" />
+          <xs:element name="blutdruckSysZielvereinbarung" type="xs:string" minOccurs="0" />
+          <xs:element name="bvId" type="xs:long" minOccurs="0" />
+          <xs:element name="carotisOp" type="xs:string" minOccurs="0" />
+          <xs:element name="cholesterin" type="xs:string" minOccurs="0" />
+          <xs:element name="depressionsscore" type="xs:string" minOccurs="0" />
+          <xs:element name="diabetesSeit" type="xs:string" minOccurs="0" />
+          <xs:element name="diabetikerHba1C" type="xs:string" minOccurs="0" />
+          <xs:element name="dialysepflichtSeit" type="xs:string" minOccurs="0" />
+          <xs:element name="eq5D" type="xs:string" minOccurs="0" />
+          <xs:element name="eq5Dvas" type="xs:string" minOccurs="0" />
+          <xs:element name="ernaehrung" type="xs:string" minOccurs="0" />
+          <xs:element name="ernaehrungsBeratung" type="xs:string" minOccurs="0" />
+          <xs:element name="geburtsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="gesamtscore" type="xs:string" minOccurs="0" />
+          <xs:element name="gewichtBefund" type="xs:string" minOccurs="0" />
+          <xs:element name="gewichtZielvereinbarung" type="xs:string" minOccurs="0" />
+          <xs:element name="grippeimpfung" type="xs:string" minOccurs="0" />
+          <xs:element name="grippeimpfungZielvereinbarung" type="xs:string" minOccurs="0" />
+          <xs:element name="groesse" type="xs:string" minOccurs="0" />
+          <xs:element name="hdlCholesterin" type="xs:string" minOccurs="0" />
+          <xs:element name="herzinfarktFamilie" type="xs:string" minOccurs="0" />
+          <xs:element name="herzinsuffizienz" type="xs:string" minOccurs="0" />
+          <xs:element name="hypertonieSeit" type="xs:string" minOccurs="0" />
+          <xs:element name="infarktart" type="xs:string" minOccurs="0" />
+          <xs:element name="insultAnamnese" type="xs:string" minOccurs="0" />
+          <xs:element name="insultFamilie" type="xs:string" minOccurs="0" />
+          <xs:element name="kaliumkanaloeffner" type="xs:string" minOccurs="0" />
+          <xs:element name="kaliumkanaloeffnerKontraindikation" type="xs:string" minOccurs="0" />
+          <xs:element name="kalziumkanalblocker" type="xs:string" minOccurs="0" />
+          <xs:element name="kalziumkanalblockerKontraindikation" type="xs:string" minOccurs="0" />
+          <xs:element name="koerperlicheAktivitaeten" type="xs:string" minOccurs="0" />
+          <xs:element name="letzteKardiologischeReha" type="xs:string" minOccurs="0" />
+          <xs:element name="letzterInfarktJahr" type="xs:string" minOccurs="0" />
+          <xs:element name="letzterStent" type="xs:string" minOccurs="0" />
+          <xs:element name="nichtDiabetikerNuechternBZWert" type="xs:string" minOccurs="0" />
+          <xs:element name="nitrateMolsidomin" type="xs:string" minOccurs="0" />
+          <xs:element name="nitrateMolsidominKontraindikation" type="xs:string" minOccurs="0" />
+          <xs:element name="pavk" type="xs:string" minOccurs="0" />
+          <xs:element name="periphererBypassPta" type="xs:string" minOccurs="0" />
+          <xs:element name="pmiSchulung" type="xs:string" minOccurs="0" />
+          <xs:element name="pmiSchulungWannJahr" type="xs:string" minOccurs="0" />
+          <xs:element name="rauchenSeit" type="xs:string" minOccurs="0" />
+          <xs:element name="raucherberatungEntwoehnung" type="xs:string" minOccurs="0" />
+          <xs:element name="sonstigeTah" type="xs:string" minOccurs="0" />
+          <xs:element name="sonstigeTahKontraindikation" type="xs:string" minOccurs="0" />
+          <xs:element name="statine" type="xs:string" minOccurs="0" />
+          <xs:element name="statineKontraindikation" type="xs:string" minOccurs="0" />
+          <xs:element name="stent" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="tabak" type="xs:string" minOccurs="0" />
+          <xs:element name="triglyceride" type="xs:string" minOccurs="0" />
+          <xs:element name="ueberweisungInternKardiolAmbulanz" type="xs:string" minOccurs="0" />
+          <xs:element name="ueberweisungInternistKardiologe" type="xs:string" minOccurs="0" />
+          <xs:element name="ueberweisungStationaereAufnahme" type="xs:string" minOccurs="0" />
+          <xs:element name="untersuchungsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="versionsnummer" type="xs:string" minOccurs="0" />
+          <xs:element name="zigarettenProTag" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="datenblattKoloskopie">
+        <xs:sequence>
+          <xs:element name="adenom" type="xs:string" minOccurs="0" />
+          <xs:element name="adenomEntfernt" type="xs:string" minOccurs="0" />
+          <xs:element name="anzahl" type="xs:string" minOccurs="0" />
+          <xs:element name="anzahlAdenome" type="xs:string" minOccurs="0" />
+          <xs:element name="ausgang" type="xs:string" minOccurs="0" />
+          <xs:element name="behandlung" type="xs:string" minOccurs="0" />
+          <xs:element name="biopsieEntnommen" type="xs:string" minOccurs="0" />
+          <xs:element name="diagnose" type="xs:string" minOccurs="0" />
+          <xs:element name="dysplasie" type="xs:string" minOccurs="0" />
+          <xs:element name="form" type="xs:string" minOccurs="0" />
+          <xs:element name="geburtsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="groesse" type="xs:string" minOccurs="0" />
+          <xs:element name="grundUnvollstaendigeKolo" type="xs:string" minOccurs="0" />
+          <xs:element name="histoKarzinom" type="xs:string" minOccurs="0" />
+          <xs:element name="interKomplikationJa" type="xs:string" minOccurs="0" />
+          <xs:element name="interventionspflichtig" type="xs:string" minOccurs="0" />
+          <xs:element name="karzinomEntfernt" type="xs:string" minOccurs="0" />
+          <xs:element name="kommentar" type="xs:string" minOccurs="0" />
+          <xs:element name="konsultationId" type="xs:long" minOccurs="0" />
+          <xs:element name="kontrolleMonate" type="xs:string" minOccurs="0" />
+          <xs:element name="lokalisation" type="xs:string" minOccurs="0" />
+          <xs:element name="makroskopischerBefund" type="xs:string" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="massnahmen" type="xs:string" minOccurs="0" />
+          <xs:element name="ort" type="xs:string" minOccurs="0" />
+          <xs:element name="patientenkontaktVerloren" type="xs:string" minOccurs="0" />
+          <xs:element name="patientenzustimmung" type="xs:string" minOccurs="0" />
+          <xs:element name="polyp" type="xs:string" minOccurs="0" />
+          <xs:element name="polypEntfernt" type="xs:string" minOccurs="0" />
+          <xs:element name="polypGeborgen" type="xs:string" minOccurs="0" />
+          <xs:element name="polypektomie" type="xs:string" minOccurs="0" />
+          <xs:element name="polypenabtragung" type="xs:string" minOccurs="0" />
+          <xs:element name="postleitzahl" type="xs:string" minOccurs="0" />
+          <xs:element name="sedierungAnalgesie" type="xs:string" minOccurs="0" />
+          <xs:element name="sonstiges" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="untersuchung" type="xs:string" minOccurs="0" />
+          <xs:element name="versionsnummer" type="xs:string" minOccurs="0" />
+          <xs:element name="vorbereitungsqualitaet" type="xs:string" minOccurs="0" />
+          <xs:element name="zangenabtragung" type="xs:string" minOccurs="0" />
+          <xs:element name="zoekumErreicht" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="datenblattMammographie">
+        <xs:sequence>
+          <xs:element name="anschrift" type="xs:string" minOccurs="0" />
+          <xs:element name="aufklaerung" type="xs:string" minOccurs="0" />
+          <xs:element name="ergebnisinformation" type="xs:string" minOccurs="0" />
+          <xs:element name="geburtsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="kategorie" type="xs:string" minOccurs="0" />
+          <xs:element name="konsultationId" type="xs:long" minOccurs="0" />
+          <xs:element name="postleitzahl" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="versionsnummer" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="datenblattPapAbstrich">
+        <xs:sequence>
+          <xs:element name="abstrichwiederholung" type="xs:string" minOccurs="0" />
+          <xs:element name="anschrift" type="xs:string" minOccurs="0" />
+          <xs:element name="auffaelligkeiten" type="xs:string" minOccurs="0" />
+          <xs:element name="aufklaerung" type="xs:string" minOccurs="0" />
+          <xs:element name="befund" type="xs:string" minOccurs="0" />
+          <xs:element name="beurteilung" type="xs:string" minOccurs="0" />
+          <xs:element name="ergebnisinformation" type="xs:string" minOccurs="0" />
+          <xs:element name="geburtsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="konsultationId" type="xs:long" minOccurs="0" />
+          <xs:element name="massnahme" type="xs:string" minOccurs="0" />
+          <xs:element name="papKlasse" type="xs:string" minOccurs="0" />
+          <xs:element name="postleitzahl" type="xs:string" minOccurs="0" />
+          <xs:element name="qualitaet" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="versionsnummer" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="dmpData">
+        <xs:sequence>
+          <xs:element name="betreuungen" type="tns:betreuung" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="svPatient" type="tns:patientInfo" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="konsultationData">
+        <xs:sequence>
+          <xs:element name="konsultationen" type="tns:konsultationInfo" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="svPatient" type="tns:patientInfo" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="konsultationInfo">
+        <xs:sequence>
+          <xs:element name="behandlungsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="behandlungsfallCode" type="xs:string" minOccurs="0" />
+          <xs:element name="fachgebietsCode" type="xs:string" minOccurs="0" />
+          <xs:element name="konsultationId" type="xs:long" minOccurs="0" />
+          <xs:element name="leistungsSvtCode" type="xs:string" minOccurs="0" />
+          <xs:element name="verrechnungsSvtCode" type="xs:string" minOccurs="0" />
+          <xs:element name="versicherungsstatus" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="patientInfo">
+        <xs:sequence>
+          <xs:element name="druckTitelHinten" type="xs:string" minOccurs="0" />
+          <xs:element name="druckTitelVorne" type="xs:string" minOccurs="0" />
+          <xs:element name="druckVorname" type="xs:string" minOccurs="0" />
+          <xs:element name="druckZuname" type="xs:string" minOccurs="0" />
+          <xs:element name="geburtsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="geschlechtscode" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="titelHinten" type="xs:string" minOccurs="0" />
+          <xs:element name="titelVorne" type="xs:string" minOccurs="0" />
+          <xs:element name="vorname" type="xs:string" minOccurs="0" />
+          <xs:element name="zuname" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="quittung">
+        <xs:sequence>
+          <xs:element name="annahmezeitpunkt" type="xs:string" minOccurs="0" />
+          <xs:element name="datenblattTyp" type="xs:string" minOccurs="0" />
+          <xs:element name="signatur" type="xs:base64Binary" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="svtCode" type="xs:string" minOccurs="0" />
+          <xs:element name="untersuchungsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="vpNummer" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="quittungSearchCriteria">
+        <xs:sequence>
+          <xs:element name="bisDatum" type="xs:string" minOccurs="0" />
+          <xs:element name="datenblattTyp" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="svtCode" type="xs:string" minOccurs="0" />
+          <xs:element name="vonDatum" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchDmpData">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="datenblattTyp" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchDmpDataResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:dmpData" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchKonsultationData">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="datenblattTyp" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchKonsultationDataResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:konsultationData" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchQuittungen">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="suchkriterien" type="tns:quittungSearchCriteria" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchQuittungenResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:quittung" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </types>
+  <message name="AccessException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:AccessException" />
+  </message>
+  <message name="CardException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:CardException" />
+  </message>
+  <message name="DbasEncryptionException">
+    <part xmlns:dbasexc="http://exceptions.soap.dbas.client.chipkarte.at" name="fault" element="dbasexc:DbasEncryptionException" />
+  </message>
+  <message name="DbasException">
+    <part xmlns:dbasexc="http://exceptions.soap.dbas.client.chipkarte.at" name="fault" element="dbasexc:DbasException" />
+  </message>
+  <message name="DbasInvalidParameterException">
+    <part xmlns:dbasexc="http://exceptions.soap.dbas.client.chipkarte.at" name="fault" element="dbasexc:DbasInvalidParameterException" />
+  </message>
+  <message name="DialogException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:DialogException" />
+  </message>
+  <message name="ServiceException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:ServiceException" />
+  </message>
+  <message name="checkStatus">
+    <part name="parameters" element="tns:checkStatus" />
+  </message>
+  <message name="checkStatusResponse">
+    <part name="parameters" element="tns:checkStatusResponse" />
+  </message>
+  <message name="createDatenblattAllgemeinesProgramm">
+    <part name="parameters" element="tns:createDatenblattAllgemeinesProgramm" />
+  </message>
+  <message name="createDatenblattAllgemeinesProgrammResponse">
+    <part name="parameters" element="tns:createDatenblattAllgemeinesProgrammResponse" />
+  </message>
+  <message name="createDatenblattDmpDm2">
+    <part name="parameters" element="tns:createDatenblattDmpDm2" />
+  </message>
+  <message name="createDatenblattDmpDm2Response">
+    <part name="parameters" element="tns:createDatenblattDmpDm2Response" />
+  </message>
+  <message name="createDatenblattDmpPmi">
+    <part name="parameters" element="tns:createDatenblattDmpPmi" />
+  </message>
+  <message name="createDatenblattDmpPmiResponse">
+    <part name="parameters" element="tns:createDatenblattDmpPmiResponse" />
+  </message>
+  <message name="createDatenblattKoloskopie">
+    <part name="parameters" element="tns:createDatenblattKoloskopie" />
+  </message>
+  <message name="createDatenblattKoloskopieResponse">
+    <part name="parameters" element="tns:createDatenblattKoloskopieResponse" />
+  </message>
+  <message name="createDatenblattMammographie">
+    <part name="parameters" element="tns:createDatenblattMammographie" />
+  </message>
+  <message name="createDatenblattMammographieResponse">
+    <part name="parameters" element="tns:createDatenblattMammographieResponse" />
+  </message>
+  <message name="createDatenblattPapAbstrich">
+    <part name="parameters" element="tns:createDatenblattPapAbstrich" />
+  </message>
+  <message name="createDatenblattPapAbstrichResponse">
+    <part name="parameters" element="tns:createDatenblattPapAbstrichResponse" />
+  </message>
+  <message name="createDatenblattQZKoloskopie">
+    <part name="parameters" element="tns:createDatenblattQZKoloskopie" />
+  </message>
+  <message name="createDatenblattQZKoloskopieResponse">
+    <part name="parameters" element="tns:createDatenblattQZKoloskopieResponse" />
+  </message>
+  <message name="searchDmpData">
+    <part name="parameters" element="tns:searchDmpData" />
+  </message>
+  <message name="searchDmpDataResponse">
+    <part name="parameters" element="tns:searchDmpDataResponse" />
+  </message>
+  <message name="searchKonsultationData">
+    <part name="parameters" element="tns:searchKonsultationData" />
+  </message>
+  <message name="searchKonsultationDataResponse">
+    <part name="parameters" element="tns:searchKonsultationDataResponse" />
+  </message>
+  <message name="searchQuittungen">
+    <part name="parameters" element="tns:searchQuittungen" />
+  </message>
+  <message name="searchQuittungenResponse">
+    <part name="parameters" element="tns:searchQuittungenResponse" />
+  </message>
+  <portType name="IDbasService">
+    <operation name="checkStatus">
+      <input wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/checkStatusRequest" message="tns:checkStatus" />
+      <output wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/checkStatusResponse" message="tns:checkStatusResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/checkStatus/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/checkStatus/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/checkStatus/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="createDatenblattAllgemeinesProgramm">
+      <input wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattAllgemeinesProgrammRequest" message="tns:createDatenblattAllgemeinesProgramm" />
+      <output wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattAllgemeinesProgrammResponse" message="tns:createDatenblattAllgemeinesProgrammResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattAllgemeinesProgramm/Fault/AccessException" message="tns:AccessException" />
+      <fault name="CardException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattAllgemeinesProgramm/Fault/CardException" message="tns:CardException" />
+      <fault name="DbasEncryptionException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattAllgemeinesProgramm/Fault/DbasEncryptionException" message="tns:DbasEncryptionException" />
+      <fault name="DbasException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattAllgemeinesProgramm/Fault/DbasException" message="tns:DbasException" />
+      <fault name="DbasInvalidParameterException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattAllgemeinesProgramm/Fault/DbasInvalidParameterException" message="tns:DbasInvalidParameterException" />
+      <fault name="DialogException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattAllgemeinesProgramm/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattAllgemeinesProgramm/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="createDatenblattDmpDm2">
+      <input wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattDmpDm2Request" message="tns:createDatenblattDmpDm2" />
+      <output wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattDmpDm2Response" message="tns:createDatenblattDmpDm2Response" />
+      <fault name="AccessException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattDmpDm2/Fault/AccessException" message="tns:AccessException" />
+      <fault name="CardException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattDmpDm2/Fault/CardException" message="tns:CardException" />
+      <fault name="DbasEncryptionException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattDmpDm2/Fault/DbasEncryptionException" message="tns:DbasEncryptionException" />
+      <fault name="DbasException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattDmpDm2/Fault/DbasException" message="tns:DbasException" />
+      <fault name="DbasInvalidParameterException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattDmpDm2/Fault/DbasInvalidParameterException" message="tns:DbasInvalidParameterException" />
+      <fault name="DialogException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattDmpDm2/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattDmpDm2/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="createDatenblattDmpPmi">
+      <input wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattDmpPmiRequest" message="tns:createDatenblattDmpPmi" />
+      <output wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattDmpPmiResponse" message="tns:createDatenblattDmpPmiResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattDmpPmi/Fault/AccessException" message="tns:AccessException" />
+      <fault name="CardException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattDmpPmi/Fault/CardException" message="tns:CardException" />
+      <fault name="DbasEncryptionException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattDmpPmi/Fault/DbasEncryptionException" message="tns:DbasEncryptionException" />
+      <fault name="DbasException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattDmpPmi/Fault/DbasException" message="tns:DbasException" />
+      <fault name="DbasInvalidParameterException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattDmpPmi/Fault/DbasInvalidParameterException" message="tns:DbasInvalidParameterException" />
+      <fault name="DialogException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattDmpPmi/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattDmpPmi/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="createDatenblattKoloskopie">
+      <input wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattKoloskopieRequest" message="tns:createDatenblattKoloskopie" />
+      <output wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattKoloskopieResponse" message="tns:createDatenblattKoloskopieResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattKoloskopie/Fault/AccessException" message="tns:AccessException" />
+      <fault name="CardException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattKoloskopie/Fault/CardException" message="tns:CardException" />
+      <fault name="DbasEncryptionException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattKoloskopie/Fault/DbasEncryptionException" message="tns:DbasEncryptionException" />
+      <fault name="DbasException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattKoloskopie/Fault/DbasException" message="tns:DbasException" />
+      <fault name="DbasInvalidParameterException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattKoloskopie/Fault/DbasInvalidParameterException" message="tns:DbasInvalidParameterException" />
+      <fault name="DialogException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattKoloskopie/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattKoloskopie/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="createDatenblattMammographie">
+      <input wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattMammographieRequest" message="tns:createDatenblattMammographie" />
+      <output wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattMammographieResponse" message="tns:createDatenblattMammographieResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattMammographie/Fault/AccessException" message="tns:AccessException" />
+      <fault name="CardException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattMammographie/Fault/CardException" message="tns:CardException" />
+      <fault name="DbasEncryptionException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattMammographie/Fault/DbasEncryptionException" message="tns:DbasEncryptionException" />
+      <fault name="DbasException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattMammographie/Fault/DbasException" message="tns:DbasException" />
+      <fault name="DbasInvalidParameterException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattMammographie/Fault/DbasInvalidParameterException" message="tns:DbasInvalidParameterException" />
+      <fault name="DialogException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattMammographie/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattMammographie/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="createDatenblattPapAbstrich">
+      <input wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattPapAbstrichRequest" message="tns:createDatenblattPapAbstrich" />
+      <output wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattPapAbstrichResponse" message="tns:createDatenblattPapAbstrichResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattPapAbstrich/Fault/AccessException" message="tns:AccessException" />
+      <fault name="CardException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattPapAbstrich/Fault/CardException" message="tns:CardException" />
+      <fault name="DbasEncryptionException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattPapAbstrich/Fault/DbasEncryptionException" message="tns:DbasEncryptionException" />
+      <fault name="DbasException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattPapAbstrich/Fault/DbasException" message="tns:DbasException" />
+      <fault name="DbasInvalidParameterException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattPapAbstrich/Fault/DbasInvalidParameterException" message="tns:DbasInvalidParameterException" />
+      <fault name="DialogException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattPapAbstrich/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattPapAbstrich/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="createDatenblattQZKoloskopie">
+      <input wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattQZKoloskopieRequest" message="tns:createDatenblattQZKoloskopie" />
+      <output wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattQZKoloskopieResponse" message="tns:createDatenblattQZKoloskopieResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattQZKoloskopie/Fault/AccessException" message="tns:AccessException" />
+      <fault name="CardException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattQZKoloskopie/Fault/CardException" message="tns:CardException" />
+      <fault name="DbasEncryptionException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattQZKoloskopie/Fault/DbasEncryptionException" message="tns:DbasEncryptionException" />
+      <fault name="DbasException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattQZKoloskopie/Fault/DbasException" message="tns:DbasException" />
+      <fault name="DbasInvalidParameterException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattQZKoloskopie/Fault/DbasInvalidParameterException" message="tns:DbasInvalidParameterException" />
+      <fault name="DialogException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattQZKoloskopie/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/createDatenblattQZKoloskopie/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="searchDmpData">
+      <input wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/searchDmpDataRequest" message="tns:searchDmpData" />
+      <output wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/searchDmpDataResponse" message="tns:searchDmpDataResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/searchDmpData/Fault/AccessException" message="tns:AccessException" />
+      <fault name="CardException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/searchDmpData/Fault/CardException" message="tns:CardException" />
+      <fault name="DbasException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/searchDmpData/Fault/DbasException" message="tns:DbasException" />
+      <fault name="DbasInvalidParameterException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/searchDmpData/Fault/DbasInvalidParameterException" message="tns:DbasInvalidParameterException" />
+      <fault name="DialogException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/searchDmpData/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/searchDmpData/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="searchKonsultationData">
+      <input wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/searchKonsultationDataRequest" message="tns:searchKonsultationData" />
+      <output wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/searchKonsultationDataResponse" message="tns:searchKonsultationDataResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/searchKonsultationData/Fault/AccessException" message="tns:AccessException" />
+      <fault name="CardException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/searchKonsultationData/Fault/CardException" message="tns:CardException" />
+      <fault name="DbasException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/searchKonsultationData/Fault/DbasException" message="tns:DbasException" />
+      <fault name="DbasInvalidParameterException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/searchKonsultationData/Fault/DbasInvalidParameterException" message="tns:DbasInvalidParameterException" />
+      <fault name="DialogException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/searchKonsultationData/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/searchKonsultationData/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="searchQuittungen">
+      <input wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/searchQuittungenRequest" message="tns:searchQuittungen" />
+      <output wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/searchQuittungenResponse" message="tns:searchQuittungenResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/searchQuittungen/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DbasException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/searchQuittungen/Fault/DbasException" message="tns:DbasException" />
+      <fault name="DbasInvalidParameterException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/searchQuittungen/Fault/DbasInvalidParameterException" message="tns:DbasInvalidParameterException" />
+      <fault name="DialogException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/searchQuittungen/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.dbas.client.chipkarte.at/IDbasService/searchQuittungen/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+  </portType>
+  <binding name="dbas_9Binding" type="tns:IDbasService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="checkStatus">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="createDatenblattAllgemeinesProgramm">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DbasEncryptionException">
+        <soap:fault name="DbasEncryptionException" use="literal" />
+      </fault>
+      <fault name="DbasException">
+        <soap:fault name="DbasException" use="literal" />
+      </fault>
+      <fault name="DbasInvalidParameterException">
+        <soap:fault name="DbasInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="createDatenblattDmpDm2">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DbasEncryptionException">
+        <soap:fault name="DbasEncryptionException" use="literal" />
+      </fault>
+      <fault name="DbasException">
+        <soap:fault name="DbasException" use="literal" />
+      </fault>
+      <fault name="DbasInvalidParameterException">
+        <soap:fault name="DbasInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="createDatenblattDmpPmi">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DbasEncryptionException">
+        <soap:fault name="DbasEncryptionException" use="literal" />
+      </fault>
+      <fault name="DbasException">
+        <soap:fault name="DbasException" use="literal" />
+      </fault>
+      <fault name="DbasInvalidParameterException">
+        <soap:fault name="DbasInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="createDatenblattKoloskopie">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DbasEncryptionException">
+        <soap:fault name="DbasEncryptionException" use="literal" />
+      </fault>
+      <fault name="DbasException">
+        <soap:fault name="DbasException" use="literal" />
+      </fault>
+      <fault name="DbasInvalidParameterException">
+        <soap:fault name="DbasInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="createDatenblattMammographie">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DbasEncryptionException">
+        <soap:fault name="DbasEncryptionException" use="literal" />
+      </fault>
+      <fault name="DbasException">
+        <soap:fault name="DbasException" use="literal" />
+      </fault>
+      <fault name="DbasInvalidParameterException">
+        <soap:fault name="DbasInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="createDatenblattPapAbstrich">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DbasEncryptionException">
+        <soap:fault name="DbasEncryptionException" use="literal" />
+      </fault>
+      <fault name="DbasException">
+        <soap:fault name="DbasException" use="literal" />
+      </fault>
+      <fault name="DbasInvalidParameterException">
+        <soap:fault name="DbasInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="createDatenblattQZKoloskopie">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DbasEncryptionException">
+        <soap:fault name="DbasEncryptionException" use="literal" />
+      </fault>
+      <fault name="DbasException">
+        <soap:fault name="DbasException" use="literal" />
+      </fault>
+      <fault name="DbasInvalidParameterException">
+        <soap:fault name="DbasInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="searchDmpData">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DbasException">
+        <soap:fault name="DbasException" use="literal" />
+      </fault>
+      <fault name="DbasInvalidParameterException">
+        <soap:fault name="DbasInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="searchKonsultationData">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DbasException">
+        <soap:fault name="DbasException" use="literal" />
+      </fault>
+      <fault name="DbasInvalidParameterException">
+        <soap:fault name="DbasInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="searchQuittungen">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DbasException">
+        <soap:fault name="DbasException" use="literal" />
+      </fault>
+      <fault name="DbasInvalidParameterException">
+        <soap:fault name="DbasInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+  </binding>
+  <service name="DbasService">
+    <port name="dbas_9" binding="tns:dbas_9Binding">
+      <soap:address location="http://localhost/dbas/9" />
+    </port>
+  </service>
+</definitions>

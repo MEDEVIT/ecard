@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: e-Card Vertragspartner-Software SOAP Schnittstelle
-Bundle-SymbolicName: at.chipkarte.client
+Bundle-SymbolicName: at.chipkarte.client.legacy
 Bundle-Version: 11.0.0.a_qualifier
 Bundle-Vendor: chipkarte.at
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

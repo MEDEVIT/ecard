@@ -1,0 +1,803 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://soap.prop.client.chipkarte.at" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://soap.prop.client.chipkarte.at" name="PropService">
+  <types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://exceptions.soap.base.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://exceptions.soap.base.client.chipkarte.at" version="1.0">
+      <xs:element name="AccessException" type="tns:accessExceptionContent" />
+      <xs:element name="CardException" type="tns:cardExceptionContent" />
+      <xs:element name="DialogException" type="tns:dialogExceptionContent" />
+      <xs:element name="ServiceException" type="tns:serviceExceptionContent" />
+      <xs:complexType name="accessExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="baseExceptionContent">
+        <xs:sequence>
+          <xs:element name="code" type="xs:string" minOccurs="0" />
+          <xs:element name="errorCode" type="xs:int" minOccurs="0" />
+          <xs:element name="message" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="cardExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="dialogExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="serviceExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" xmlns:tns="http://exceptions.soap.prop.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://exceptions.soap.prop.client.chipkarte.at" version="1.0">
+      <xs:import namespace="http://exceptions.soap.base.client.chipkarte.at" />
+      <xs:element name="PropException" type="tns:propExceptionContent" />
+      <xs:element name="PropInvalidParameterException" type="tns:propInvalidParameterExceptionContent" />
+      <xs:complexType name="propExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="baseexc:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="propInvalidParameterExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="baseexc:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://soap.base.client.chipkarte.at" version="1.0">
+      <xs:complexType name="property">
+        <xs:sequence>
+          <xs:element name="key" type="xs:string" minOccurs="0" />
+          <xs:element name="value" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://soap.base.client.chipkarte.at" xmlns:propexc="http://exceptions.soap.prop.client.chipkarte.at" xmlns:xmime="http://www.w3.org/2005/05/xmlmime" elementFormDefault="qualified" targetNamespace="http://soap.prop.client.chipkarte.at" version="1.0">
+      <xs:import namespace="http://soap.base.client.chipkarte.at" />
+      <xs:import namespace="http://www.w3.org/2005/05/xmlmime" schemaLocation="http://www.w3.org/2005/05/xmlmime" />
+      <xs:element name="checkStatus" type="tns:checkStatus" />
+      <xs:element name="checkStatusResponse" type="tns:checkStatusResponse" />
+      <xs:element name="createBefund" type="tns:createBefund" />
+      <xs:element name="createBefundResponse" type="tns:createBefundResponse" />
+      <xs:element name="getAnamneseFachinformation" type="tns:getAnamneseFachinformation" />
+      <xs:element name="getAnamneseFachinformationResponse" type="tns:getAnamneseFachinformationResponse" />
+      <xs:element name="getPatientenfragebogen" type="tns:getPatientenfragebogen" />
+      <xs:element name="getPatientenfragebogenResponse" type="tns:getPatientenfragebogenResponse" />
+      <xs:element name="getPatientenfragebogenSprachenFachinformation" type="tns:getPatientenfragebogenSprachenFachinformation" />
+      <xs:element name="getPatientenfragebogenSprachenFachinformationResponse" type="tns:getPatientenfragebogenSprachenFachinformationResponse" />
+      <xs:element name="getPropFgsAndRelatedBfs" type="tns:getPropFgsAndRelatedBfs" />
+      <xs:element name="getPropFgsAndRelatedBfsResponse" type="tns:getPropFgsAndRelatedBfsResponse" />
+      <xs:element name="getPropSvts" type="tns:getPropSvts" />
+      <xs:element name="getPropSvtsResponse" type="tns:getPropSvtsResponse" />
+      <xs:element name="searchBefundByIdentifier" type="tns:searchBefundByIdentifier" />
+      <xs:element name="searchBefundByIdentifierResponse" type="tns:searchBefundByIdentifierResponse" />
+      <xs:element name="searchBefunde" type="tns:searchBefunde" />
+      <xs:element name="searchBefundeResponse" type="tns:searchBefundeResponse" />
+      <xs:element name="searchSvPatientData" type="tns:searchSvPatientData" />
+      <xs:element name="searchSvPatientDataResponse" type="tns:searchSvPatientDataResponse" />
+      <xs:complexType name="anamnese">
+        <xs:sequence>
+          <xs:element name="anamneseData" type="tns:anamneseData" minOccurs="0" />
+          <xs:element name="ekvkPatient" type="tns:ekvkPatient" minOccurs="0" />
+          <xs:element name="erstellerId" type="xs:string" minOccurs="0" />
+          <xs:element name="erstellerName" type="xs:string" minOccurs="0" />
+          <xs:element name="konsultationId" type="xs:long" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="anamneseData">
+        <xs:sequence>
+          <xs:element name="anamneseRisikogruppen" type="tns:anamneseRisikogruppe" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="version" type="xs:int" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="anamneseGruppe">
+        <xs:sequence>
+          <xs:element name="anamneseGruppeCode" type="xs:string" minOccurs="0" />
+          <xs:element name="anamneseGruppeText" type="xs:string" minOccurs="0" />
+          <xs:element name="risikoGruppe" type="tns:risikoGruppe" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="anamneseRisikogruppe">
+        <xs:sequence>
+          <xs:element name="risikofaktorCode" type="xs:string" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="risikogruppeCode" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="befund">
+        <xs:sequence>
+          <xs:element name="ausstellung" type="xs:string" minOccurs="0" />
+          <xs:element name="ekvkPatient" type="tns:ekvkPatient" minOccurs="0" />
+          <xs:element name="ergebnis" type="tns:befundData" minOccurs="0" />
+          <xs:element name="ersteller" type="tns:ersteller" minOccurs="0" />
+          <xs:element name="kennung" type="xs:string" minOccurs="0" />
+          <xs:element name="konsultation" type="tns:konsultation" minOccurs="0" />
+          <xs:element name="protokollnummer" type="xs:string" minOccurs="0" />
+          <xs:element name="selbsterstellt" type="xs:boolean" minOccurs="0" />
+          <xs:element name="svPatient" type="tns:svPatient" minOccurs="0" />
+          <xs:element name="version" type="xs:int" minOccurs="0" />
+          <xs:element name="versionGiltSeit" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="befundData">
+        <xs:sequence>
+          <xs:element name="angaben" type="tns:risikoFaktor" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="befundkommentare" type="tns:befundKommentare" minOccurs="0" />
+          <xs:element name="untersuchungData" type="tns:untersuchungData" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="befundKommentare">
+        <xs:sequence>
+          <xs:element name="generellerText" type="xs:string" minOccurs="0" />
+          <xs:element name="gruppenkommentar" type="tns:gruppenKommentar" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="befundReferenz">
+        <xs:sequence>
+          <xs:element name="ausstellung" type="xs:string" minOccurs="0" />
+          <xs:element name="ekvkPatient" type="tns:ekvkPatient" minOccurs="0" />
+          <xs:element name="kennung" type="xs:string" minOccurs="0" />
+          <xs:element name="protokollnummer" type="xs:string" minOccurs="0" />
+          <xs:element name="svPatient" type="tns:svPatient" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="checkStatus">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="checkStatusResponse">
+        <xs:sequence>
+          <xs:element name="return" type="base:property" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createBefund">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="anamnese" type="tns:anamnese" minOccurs="0" />
+          <xs:element name="save" type="xs:boolean" minOccurs="0" />
+          <xs:element name="befundkommentare" type="tns:befundKommentare" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createBefundResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:befund" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ekvkPatient">
+        <xs:sequence>
+          <xs:element name="ekvkNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="geburtsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="geschlechtscode" type="xs:string" minOccurs="0" />
+          <xs:element name="vorname" type="xs:string" minOccurs="0" />
+          <xs:element name="zuname" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ersteller">
+        <xs:sequence>
+          <xs:element name="erstellerId" type="xs:string" minOccurs="0" />
+          <xs:element name="erstellerName" type="xs:string" minOccurs="0" />
+          <xs:element name="vertragspartnerDruckVorname" type="xs:string" minOccurs="0" />
+          <xs:element name="vertragspartnerDruckZuname" type="xs:string" minOccurs="0" />
+          <xs:element name="vertragspartnerDrucktitelHinten" type="xs:string" minOccurs="0" />
+          <xs:element name="vertragspartnerDrucktitelVorne" type="xs:string" minOccurs="0" />
+          <xs:element name="vertragspartnerTitelHinten" type="xs:string" minOccurs="0" />
+          <xs:element name="vertragspartnerTitelVorne" type="xs:string" minOccurs="0" />
+          <xs:element name="vertragspartnerVorname" type="xs:string" minOccurs="0" />
+          <xs:element name="vertragspartnerZuname" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="fachinformation">
+        <xs:sequence>
+          <xs:element name="anamneseGruppe" type="tns:anamneseGruppe" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="version" type="xs:int" minOccurs="0" />
+          <xs:element name="versionGiltSeit" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getAnamneseFachinformation">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getAnamneseFachinformationResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:fachinformation" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getPatientenfragebogen">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="spracheCode" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getPatientenfragebogenResponse">
+        <xs:sequence>
+          <xs:element name="return" type="xs:base64Binary" xmime:expectedContentTypes="application/octet-stream" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getPatientenfragebogenSprachenFachinformation">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getPatientenfragebogenSprachenFachinformationResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:sprachePatientenfragebogen" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getPropFgsAndRelatedBfs">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="fachgebiet" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getPropFgsAndRelatedBfsResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:propFachgebiet" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getPropSvts">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getPropSvtsResponse">
+        <xs:sequence>
+          <xs:element name="return" type="xs:string" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="gruppenKommentar">
+        <xs:sequence>
+          <xs:element name="code" type="xs:string" minOccurs="0" />
+          <xs:element name="text" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="konsultation">
+        <xs:sequence>
+          <xs:element name="behandlungsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="behandlungsfallCode" type="xs:string" minOccurs="0" />
+          <xs:element name="fachgebietsCode" type="xs:string" minOccurs="0" />
+          <xs:element name="konsultationId" type="xs:long" minOccurs="0" />
+          <xs:element name="leistungsSvtCode" type="xs:string" minOccurs="0" />
+          <xs:element name="verrechnungsSvtCode" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="patientData">
+        <xs:sequence>
+          <xs:element name="konsultationen" type="tns:konsultation" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="svPatient" type="tns:svPatient" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="propFachgebiet">
+        <xs:sequence>
+          <xs:element name="behandlungsfall" type="xs:string" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="fachgebiet" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="risikoFaktor">
+        <xs:sequence>
+          <xs:element name="risikoFaktorCode" type="xs:string" minOccurs="0" />
+          <xs:element name="risikoFaktorText" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="risikoGruppe">
+        <xs:sequence>
+          <xs:element name="risikoFaktor" type="tns:risikoFaktor" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="risikoGruppeBedingung" type="xs:string" minOccurs="0" />
+          <xs:element name="risikoGruppeCode" type="xs:string" minOccurs="0" />
+          <xs:element name="risikoGruppeText" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchBefundByIdentifier">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="kennung" type="xs:string" minOccurs="0" />
+          <xs:element name="protokollnummer" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchBefundByIdentifierResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:befund" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchBefunde">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="kennung" type="xs:string" minOccurs="0" />
+          <xs:element name="vonDatum" type="xs:string" minOccurs="0" />
+          <xs:element name="bisDatum" type="xs:string" minOccurs="0" />
+          <xs:element name="vorname" type="xs:string" minOccurs="0" />
+          <xs:element name="zuname" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchBefundeResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:befundReferenz" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchSvPatientData">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchSvPatientDataResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:patientData" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="sprachePatientenfragebogen">
+        <xs:sequence>
+          <xs:element name="spracheCode" type="xs:string" minOccurs="0" />
+          <xs:element name="spracheText" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="svPatient">
+        <xs:sequence>
+          <xs:element name="druckTitelHinten" type="xs:string" minOccurs="0" />
+          <xs:element name="druckTitelVorne" type="xs:string" minOccurs="0" />
+          <xs:element name="druckVorname" type="xs:string" minOccurs="0" />
+          <xs:element name="druckZuname" type="xs:string" minOccurs="0" />
+          <xs:element name="geburtsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="geschlechtscode" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="titelHinten" type="xs:string" minOccurs="0" />
+          <xs:element name="titelVorne" type="xs:string" minOccurs="0" />
+          <xs:element name="vorname" type="xs:string" minOccurs="0" />
+          <xs:element name="zuname" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="untersuchungData">
+        <xs:sequence>
+          <xs:element name="untersuchung" type="tns:untersuchungen" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="untersuchungGruppeCode" type="xs:string" minOccurs="0" />
+          <xs:element name="untersuchungGruppeText" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="untersuchungen">
+        <xs:sequence>
+          <xs:element name="untersuchungCode" type="xs:string" minOccurs="0" />
+          <xs:element name="untersuchungsText" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </types>
+  <message name="AccessException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:AccessException" />
+  </message>
+  <message name="CardException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:CardException" />
+  </message>
+  <message name="DialogException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:DialogException" />
+  </message>
+  <message name="PropException">
+    <part xmlns:propexc="http://exceptions.soap.prop.client.chipkarte.at" name="fault" element="propexc:PropException" />
+  </message>
+  <message name="PropInvalidParameterException">
+    <part xmlns:propexc="http://exceptions.soap.prop.client.chipkarte.at" name="fault" element="propexc:PropInvalidParameterException" />
+  </message>
+  <message name="ServiceException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:ServiceException" />
+  </message>
+  <message name="checkStatus">
+    <part name="parameters" element="tns:checkStatus" />
+  </message>
+  <message name="checkStatusResponse">
+    <part name="parameters" element="tns:checkStatusResponse" />
+  </message>
+  <message name="createBefund">
+    <part name="parameters" element="tns:createBefund" />
+  </message>
+  <message name="createBefundResponse">
+    <part name="parameters" element="tns:createBefundResponse" />
+  </message>
+  <message name="getAnamneseFachinformation">
+    <part name="parameters" element="tns:getAnamneseFachinformation" />
+  </message>
+  <message name="getAnamneseFachinformationResponse">
+    <part name="parameters" element="tns:getAnamneseFachinformationResponse" />
+  </message>
+  <message name="getPatientenfragebogen">
+    <part name="parameters" element="tns:getPatientenfragebogen" />
+  </message>
+  <message name="getPatientenfragebogenResponse">
+    <part name="parameters" element="tns:getPatientenfragebogenResponse" />
+  </message>
+  <message name="getPatientenfragebogenSprachenFachinformation">
+    <part name="parameters" element="tns:getPatientenfragebogenSprachenFachinformation" />
+  </message>
+  <message name="getPatientenfragebogenSprachenFachinformationResponse">
+    <part name="parameters" element="tns:getPatientenfragebogenSprachenFachinformationResponse" />
+  </message>
+  <message name="getPropFgsAndRelatedBfs">
+    <part name="parameters" element="tns:getPropFgsAndRelatedBfs" />
+  </message>
+  <message name="getPropFgsAndRelatedBfsResponse">
+    <part name="parameters" element="tns:getPropFgsAndRelatedBfsResponse" />
+  </message>
+  <message name="getPropSvts">
+    <part name="parameters" element="tns:getPropSvts" />
+  </message>
+  <message name="getPropSvtsResponse">
+    <part name="parameters" element="tns:getPropSvtsResponse" />
+  </message>
+  <message name="searchBefundByIdentifier">
+    <part name="parameters" element="tns:searchBefundByIdentifier" />
+  </message>
+  <message name="searchBefundByIdentifierResponse">
+    <part name="parameters" element="tns:searchBefundByIdentifierResponse" />
+  </message>
+  <message name="searchBefunde">
+    <part name="parameters" element="tns:searchBefunde" />
+  </message>
+  <message name="searchBefundeResponse">
+    <part name="parameters" element="tns:searchBefundeResponse" />
+  </message>
+  <message name="searchSvPatientData">
+    <part name="parameters" element="tns:searchSvPatientData" />
+  </message>
+  <message name="searchSvPatientDataResponse">
+    <part name="parameters" element="tns:searchSvPatientDataResponse" />
+  </message>
+  <portType name="IPropService">
+    <operation name="checkStatus">
+      <input wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/checkStatusRequest" message="tns:checkStatus" />
+      <output wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/checkStatusResponse" message="tns:checkStatusResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/checkStatus/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/checkStatus/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/checkStatus/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="createBefund">
+      <input wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/createBefundRequest" message="tns:createBefund" />
+      <output wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/createBefundResponse" message="tns:createBefundResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/createBefund/Fault/AccessException" message="tns:AccessException" />
+      <fault name="CardException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/createBefund/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/createBefund/Fault/DialogException" message="tns:DialogException" />
+      <fault name="PropException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/createBefund/Fault/PropException" message="tns:PropException" />
+      <fault name="PropInvalidParameterException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/createBefund/Fault/PropInvalidParameterException" message="tns:PropInvalidParameterException" />
+      <fault name="ServiceException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/createBefund/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getAnamneseFachinformation">
+      <input wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getAnamneseFachinformationRequest" message="tns:getAnamneseFachinformation" />
+      <output wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getAnamneseFachinformationResponse" message="tns:getAnamneseFachinformationResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getAnamneseFachinformation/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getAnamneseFachinformation/Fault/DialogException" message="tns:DialogException" />
+      <fault name="PropException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getAnamneseFachinformation/Fault/PropException" message="tns:PropException" />
+      <fault name="PropInvalidParameterException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getAnamneseFachinformation/Fault/PropInvalidParameterException" message="tns:PropInvalidParameterException" />
+      <fault name="ServiceException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getAnamneseFachinformation/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getPatientenfragebogen">
+      <input wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getPatientenfragebogenRequest" message="tns:getPatientenfragebogen" />
+      <output wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getPatientenfragebogenResponse" message="tns:getPatientenfragebogenResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getPatientenfragebogen/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getPatientenfragebogen/Fault/DialogException" message="tns:DialogException" />
+      <fault name="PropException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getPatientenfragebogen/Fault/PropException" message="tns:PropException" />
+      <fault name="PropInvalidParameterException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getPatientenfragebogen/Fault/PropInvalidParameterException" message="tns:PropInvalidParameterException" />
+      <fault name="ServiceException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getPatientenfragebogen/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getPatientenfragebogenSprachenFachinformation">
+      <input wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getPatientenfragebogenSprachenFachinformationRequest" message="tns:getPatientenfragebogenSprachenFachinformation" />
+      <output wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getPatientenfragebogenSprachenFachinformationResponse" message="tns:getPatientenfragebogenSprachenFachinformationResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getPatientenfragebogenSprachenFachinformation/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getPatientenfragebogenSprachenFachinformation/Fault/DialogException" message="tns:DialogException" />
+      <fault name="PropException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getPatientenfragebogenSprachenFachinformation/Fault/PropException" message="tns:PropException" />
+      <fault name="PropInvalidParameterException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getPatientenfragebogenSprachenFachinformation/Fault/PropInvalidParameterException" message="tns:PropInvalidParameterException" />
+      <fault name="ServiceException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getPatientenfragebogenSprachenFachinformation/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getPropFgsAndRelatedBfs">
+      <input wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getPropFgsAndRelatedBfsRequest" message="tns:getPropFgsAndRelatedBfs" />
+      <output wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getPropFgsAndRelatedBfsResponse" message="tns:getPropFgsAndRelatedBfsResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getPropFgsAndRelatedBfs/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getPropFgsAndRelatedBfs/Fault/DialogException" message="tns:DialogException" />
+      <fault name="PropException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getPropFgsAndRelatedBfs/Fault/PropException" message="tns:PropException" />
+      <fault name="PropInvalidParameterException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getPropFgsAndRelatedBfs/Fault/PropInvalidParameterException" message="tns:PropInvalidParameterException" />
+      <fault name="ServiceException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getPropFgsAndRelatedBfs/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getPropSvts">
+      <input wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getPropSvtsRequest" message="tns:getPropSvts" />
+      <output wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getPropSvtsResponse" message="tns:getPropSvtsResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getPropSvts/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getPropSvts/Fault/DialogException" message="tns:DialogException" />
+      <fault name="PropException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getPropSvts/Fault/PropException" message="tns:PropException" />
+      <fault name="PropInvalidParameterException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getPropSvts/Fault/PropInvalidParameterException" message="tns:PropInvalidParameterException" />
+      <fault name="ServiceException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/getPropSvts/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="searchBefundByIdentifier">
+      <input wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/searchBefundByIdentifierRequest" message="tns:searchBefundByIdentifier" />
+      <output wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/searchBefundByIdentifierResponse" message="tns:searchBefundByIdentifierResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/searchBefundByIdentifier/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/searchBefundByIdentifier/Fault/DialogException" message="tns:DialogException" />
+      <fault name="PropException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/searchBefundByIdentifier/Fault/PropException" message="tns:PropException" />
+      <fault name="PropInvalidParameterException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/searchBefundByIdentifier/Fault/PropInvalidParameterException" message="tns:PropInvalidParameterException" />
+      <fault name="ServiceException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/searchBefundByIdentifier/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="searchBefunde">
+      <input wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/searchBefundeRequest" message="tns:searchBefunde" />
+      <output wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/searchBefundeResponse" message="tns:searchBefundeResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/searchBefunde/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/searchBefunde/Fault/DialogException" message="tns:DialogException" />
+      <fault name="PropException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/searchBefunde/Fault/PropException" message="tns:PropException" />
+      <fault name="PropInvalidParameterException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/searchBefunde/Fault/PropInvalidParameterException" message="tns:PropInvalidParameterException" />
+      <fault name="ServiceException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/searchBefunde/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="searchSvPatientData">
+      <input wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/searchSvPatientDataRequest" message="tns:searchSvPatientData" />
+      <output wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/searchSvPatientDataResponse" message="tns:searchSvPatientDataResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/searchSvPatientData/Fault/AccessException" message="tns:AccessException" />
+      <fault name="CardException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/searchSvPatientData/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/searchSvPatientData/Fault/DialogException" message="tns:DialogException" />
+      <fault name="PropException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/searchSvPatientData/Fault/PropException" message="tns:PropException" />
+      <fault name="PropInvalidParameterException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/searchSvPatientData/Fault/PropInvalidParameterException" message="tns:PropInvalidParameterException" />
+      <fault name="ServiceException" wsam:Action="http://soap.prop.client.chipkarte.at/IPropService/searchSvPatientData/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+  </portType>
+  <binding name="prop_2Binding" type="tns:IPropService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="checkStatus">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="createBefund">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="PropException">
+        <soap:fault name="PropException" use="literal" />
+      </fault>
+      <fault name="PropInvalidParameterException">
+        <soap:fault name="PropInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getAnamneseFachinformation">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="PropException">
+        <soap:fault name="PropException" use="literal" />
+      </fault>
+      <fault name="PropInvalidParameterException">
+        <soap:fault name="PropInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getPatientenfragebogen">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="PropException">
+        <soap:fault name="PropException" use="literal" />
+      </fault>
+      <fault name="PropInvalidParameterException">
+        <soap:fault name="PropInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getPatientenfragebogenSprachenFachinformation">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="PropException">
+        <soap:fault name="PropException" use="literal" />
+      </fault>
+      <fault name="PropInvalidParameterException">
+        <soap:fault name="PropInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getPropFgsAndRelatedBfs">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="PropException">
+        <soap:fault name="PropException" use="literal" />
+      </fault>
+      <fault name="PropInvalidParameterException">
+        <soap:fault name="PropInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getPropSvts">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="PropException">
+        <soap:fault name="PropException" use="literal" />
+      </fault>
+      <fault name="PropInvalidParameterException">
+        <soap:fault name="PropInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="searchBefundByIdentifier">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="PropException">
+        <soap:fault name="PropException" use="literal" />
+      </fault>
+      <fault name="PropInvalidParameterException">
+        <soap:fault name="PropInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="searchBefunde">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="PropException">
+        <soap:fault name="PropException" use="literal" />
+      </fault>
+      <fault name="PropInvalidParameterException">
+        <soap:fault name="PropInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="searchSvPatientData">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="PropException">
+        <soap:fault name="PropException" use="literal" />
+      </fault>
+      <fault name="PropInvalidParameterException">
+        <soap:fault name="PropInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+  </binding>
+  <service name="PropService">
+    <port name="prop_2" binding="tns:prop_2Binding">
+      <soap:address location="http://localhost/prop/2" />
+    </port>
+  </service>
+</definitions>

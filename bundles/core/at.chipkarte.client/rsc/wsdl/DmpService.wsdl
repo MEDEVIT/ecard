@@ -1,0 +1,733 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://soap.dmp.client.chipkarte.at" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://soap.dmp.client.chipkarte.at" name="DmpService">
+  <types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://exceptions.soap.base.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://exceptions.soap.base.client.chipkarte.at" version="1.0">
+      <xs:element name="AccessException" type="tns:accessExceptionContent" />
+      <xs:element name="CardException" type="tns:cardExceptionContent" />
+      <xs:element name="DialogException" type="tns:dialogExceptionContent" />
+      <xs:element name="ServiceException" type="tns:serviceExceptionContent" />
+      <xs:complexType name="accessExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="baseExceptionContent">
+        <xs:sequence>
+          <xs:element name="code" type="xs:string" minOccurs="0" />
+          <xs:element name="errorCode" type="xs:int" minOccurs="0" />
+          <xs:element name="message" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="cardExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="dialogExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="serviceExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" xmlns:tns="http://exceptions.soap.dmp.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://exceptions.soap.dmp.client.chipkarte.at" version="1.0">
+      <xs:import namespace="http://exceptions.soap.base.client.chipkarte.at" />
+      <xs:element name="DmpException" type="tns:dmpExceptionContent" />
+      <xs:element name="DmpInvalidParameterException" type="tns:dmpInvalidParameterExceptionContent" />
+      <xs:complexType name="dmpExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="baseexc:baseExceptionContent">
+            <xs:sequence>
+              <xs:element name="svtCodes" type="xs:string" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="dmpInvalidParameterExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="baseexc:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://soap.base.client.chipkarte.at" version="1.0">
+      <xs:complexType name="baseProperty">
+        <xs:sequence>
+          <xs:element name="code" type="xs:string" minOccurs="0" />
+          <xs:element name="nurAnzeige" type="xs:boolean" minOccurs="0" />
+          <xs:element name="text" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="property">
+        <xs:sequence>
+          <xs:element name="key" type="xs:string" minOccurs="0" />
+          <xs:element name="value" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://soap.base.client.chipkarte.at" xmlns:dmpexc="http://exceptions.soap.dmp.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://soap.dmp.client.chipkarte.at" version="1.0">
+      <xs:import namespace="http://soap.base.client.chipkarte.at" />
+      <xs:element name="checkStatus" type="tns:checkStatus" />
+      <xs:element name="checkStatusResponse" type="tns:checkStatusResponse" />
+      <xs:element name="doAusschreibung" type="tns:doAusschreibung" />
+      <xs:element name="doAusschreibungResponse" type="tns:doAusschreibungResponse" />
+      <xs:element name="doEingabe" type="tns:doEingabe" />
+      <xs:element name="doEingabeResponse" type="tns:doEingabeResponse" />
+      <xs:element name="getAdminPatientenInformationen" type="tns:getAdminPatientenInformationen" />
+      <xs:element name="getAdminPatientenInformationenResponse" type="tns:getAdminPatientenInformationenResponse" />
+      <xs:element name="getBetreutePatienten" type="tns:getBetreutePatienten" />
+      <xs:element name="getBetreutePatientenResponse" type="tns:getBetreutePatientenResponse" />
+      <xs:element name="getDMPs" type="tns:getDMPs" />
+      <xs:element name="getDMPsResponse" type="tns:getDMPsResponse" />
+      <xs:element name="getMedPatientenInformationen" type="tns:getMedPatientenInformationen" />
+      <xs:element name="getMedPatientenInformationenResponse" type="tns:getMedPatientenInformationenResponse" />
+      <xs:element name="isDMPPatient" type="tns:isDMPPatient" />
+      <xs:element name="isDMPPatientResponse" type="tns:isDMPPatientResponse" />
+      <xs:element name="searchAnfragen" type="tns:searchAnfragen" />
+      <xs:element name="searchAnfragenResponse" type="tns:searchAnfragenResponse" />
+      <xs:element name="searchBetreuungsverhaeltnisseForPatient" type="tns:searchBetreuungsverhaeltnisseForPatient" />
+      <xs:element name="searchBetreuungsverhaeltnisseForPatientResponse" type="tns:searchBetreuungsverhaeltnisseForPatientResponse" />
+      <xs:complexType name="anfrage">
+        <xs:sequence>
+          <xs:element name="anfrageStatus" type="xs:string" minOccurs="0" />
+          <xs:element name="anfrageZeitstempel" type="xs:string" minOccurs="0" />
+          <xs:element name="ausschreibeGrund" type="xs:string" minOccurs="0" />
+          <xs:element name="beMeldung" type="xs:string" minOccurs="0" />
+          <xs:element name="dmpCode" type="xs:string" minOccurs="0" />
+          <xs:element name="eingabeArt" type="xs:string" minOccurs="0" />
+          <xs:element name="patient" type="tns:svPerson" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ausschreibeErgebnis">
+        <xs:sequence>
+          <xs:element name="ausschreibeStatus" type="xs:string" minOccurs="0" />
+          <xs:element name="ausschreibeZeitstempel" type="xs:string" minOccurs="0" />
+          <xs:element name="dmpCode" type="xs:string" minOccurs="0" />
+          <xs:element name="patient" type="tns:svPerson" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ausschreibeParameter">
+        <xs:sequence>
+          <xs:element name="ausschreibeGrund" type="xs:string" minOccurs="0" />
+          <xs:element name="dmpCode" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="betreuterPatient">
+        <xs:sequence>
+          <xs:element name="ausschreibungSeit" type="xs:string" minOccurs="0" />
+          <xs:element name="dmpCode" type="xs:string" minOccurs="0" />
+          <xs:element name="einschreibungSeit" type="xs:string" minOccurs="0" />
+          <xs:element name="fachgebietsCode" type="xs:string" minOccurs="0" />
+          <xs:element name="patient" type="tns:svPerson" minOccurs="0" />
+          <xs:element name="svtCode" type="xs:string" minOccurs="0" />
+          <xs:element name="untersuchungsdatum" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="betreuungsverhaeltnis">
+        <xs:sequence>
+          <xs:element name="ausschreibungSeit" type="xs:string" minOccurs="0" />
+          <xs:element name="begruendung" type="xs:string" minOccurs="0" />
+          <xs:element name="betreuungsStatus" type="xs:string" minOccurs="0" />
+          <xs:element name="dmpCode" type="xs:string" minOccurs="0" />
+          <xs:element name="einschreibungSeit" type="xs:string" minOccurs="0" />
+          <xs:element name="fachgebietsCode" type="xs:string" minOccurs="0" />
+          <xs:element name="patient" type="tns:svPerson" minOccurs="0" />
+          <xs:element name="svtCode" type="xs:string" minOccurs="0" />
+          <xs:element name="untersuchungsdatum" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="checkStatus">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="checkStatusResponse">
+        <xs:sequence>
+          <xs:element name="return" type="base:property" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="doAusschreibung">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="ausschreibeParameter" type="tns:ausschreibeParameter" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="doAusschreibungResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:ausschreibeErgebnis" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="doEingabe">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="eingabeParameter" type="tns:eingabeParameter" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="doEingabeResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:eingabeErgebnis" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="eingabeErgebnis">
+        <xs:sequence>
+          <xs:element name="dmpCode" type="xs:string" minOccurs="0" />
+          <xs:element name="eingabeStatus" type="xs:string" minOccurs="0" />
+          <xs:element name="eingabeZeitstempel" type="xs:string" minOccurs="0" />
+          <xs:element name="emailAdresse" type="xs:string" minOccurs="0" />
+          <xs:element name="fachgebietsCode" type="xs:string" minOccurs="0" />
+          <xs:element name="patient" type="tns:svPerson" minOccurs="0" />
+          <xs:element name="svtCode" type="xs:string" minOccurs="0" />
+          <xs:element name="telefonNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="uebersteuert" type="xs:boolean" minOccurs="0" />
+          <xs:element name="zustellAdresse" type="tns:zustelladresse" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="eingabeParameter">
+        <xs:sequence>
+          <xs:element name="dmpCode" type="xs:string" minOccurs="0" />
+          <xs:element name="eingabeArt" type="xs:string" minOccurs="0" />
+          <xs:element name="eingabeZusatz" type="xs:string" minOccurs="0" />
+          <xs:element name="emailAdresse" type="xs:string" minOccurs="0" />
+          <xs:element name="fachgebietsCode" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="svtCode" type="xs:string" minOccurs="0" />
+          <xs:element name="telefonNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="zustellAdresse" type="tns:zustelladresse" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getAdminPatientenInformationen">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="strukturierteMeldung" type="xs:boolean" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getAdminPatientenInformationenResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:patientenInformation" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getBetreutePatienten">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="dmpCode" type="xs:string" minOccurs="0" />
+          <xs:element name="betreuungsStatus" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getBetreutePatientenResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:betreuterPatient" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getDMPs">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="getDMPsResponse">
+        <xs:sequence>
+          <xs:element name="return" type="base:baseProperty" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getMedPatientenInformationen">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="strukturierteMeldung" type="xs:boolean" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getMedPatientenInformationenResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:patientenInformation" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="isDMPPatient">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="isDMPPatientResponse">
+        <xs:sequence>
+          <xs:element name="return" type="xs:boolean" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="patientenInformation">
+        <xs:sequence>
+          <xs:element name="patient" type="tns:svPerson" minOccurs="0" />
+          <xs:element name="textmeldung" type="tns:textmeldung" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchAnfragen">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="dmpCode" type="xs:string" minOccurs="0" />
+          <xs:element name="anfrageArt" type="xs:string" minOccurs="0" />
+          <xs:element name="anfrageStatus" type="xs:string" minOccurs="0" />
+          <xs:element name="datumBeginn" type="xs:string" minOccurs="0" />
+          <xs:element name="datumEnde" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchAnfragenResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:anfrage" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchBetreuungsverhaeltnisseForPatient">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="dmpCode" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchBetreuungsverhaeltnisseForPatientResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:betreuungsverhaeltnis" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="svPerson">
+        <xs:sequence>
+          <xs:element name="druckNachname" type="xs:string" minOccurs="0" />
+          <xs:element name="druckTitelHinten" type="xs:string" minOccurs="0" />
+          <xs:element name="druckTitelVorne" type="xs:string" minOccurs="0" />
+          <xs:element name="druckVorname" type="xs:string" minOccurs="0" />
+          <xs:element name="geburtsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="geschlecht" type="xs:string" minOccurs="0" />
+          <xs:element name="nachname" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="titelHinten" type="xs:string" minOccurs="0" />
+          <xs:element name="titelVorne" type="xs:string" minOccurs="0" />
+          <xs:element name="vorname" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="textmeldung">
+        <xs:sequence>
+          <xs:element name="dmpCode" type="xs:string" minOccurs="0" />
+          <xs:element name="erzeugungsZeitstempel" type="xs:string" minOccurs="0" />
+          <xs:element name="freieMeldung" type="xs:string" minOccurs="0" />
+          <xs:element name="strukturierteMeldung" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="zustelladresse">
+        <xs:sequence>
+          <xs:element name="adresszusatz" type="xs:string" minOccurs="0" />
+          <xs:element name="hausnummer" type="xs:string" minOccurs="0" />
+          <xs:element name="ort" type="xs:string" minOccurs="0" />
+          <xs:element name="plz" type="xs:string" minOccurs="0" />
+          <xs:element name="postfachNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="postfachText" type="xs:string" minOccurs="0" />
+          <xs:element name="stockTuerNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="strasse" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </types>
+  <message name="AccessException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:AccessException" />
+  </message>
+  <message name="CardException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:CardException" />
+  </message>
+  <message name="DialogException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:DialogException" />
+  </message>
+  <message name="DmpException">
+    <part xmlns:dmpexc="http://exceptions.soap.dmp.client.chipkarte.at" name="fault" element="dmpexc:DmpException" />
+  </message>
+  <message name="DmpInvalidParameterException">
+    <part xmlns:dmpexc="http://exceptions.soap.dmp.client.chipkarte.at" name="fault" element="dmpexc:DmpInvalidParameterException" />
+  </message>
+  <message name="ServiceException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:ServiceException" />
+  </message>
+  <message name="checkStatus">
+    <part name="parameters" element="tns:checkStatus" />
+  </message>
+  <message name="checkStatusResponse">
+    <part name="parameters" element="tns:checkStatusResponse" />
+  </message>
+  <message name="doAusschreibung">
+    <part name="parameters" element="tns:doAusschreibung" />
+  </message>
+  <message name="doAusschreibungResponse">
+    <part name="parameters" element="tns:doAusschreibungResponse" />
+  </message>
+  <message name="doEingabe">
+    <part name="parameters" element="tns:doEingabe" />
+  </message>
+  <message name="doEingabeResponse">
+    <part name="parameters" element="tns:doEingabeResponse" />
+  </message>
+  <message name="getAdminPatientenInformationen">
+    <part name="parameters" element="tns:getAdminPatientenInformationen" />
+  </message>
+  <message name="getAdminPatientenInformationenResponse">
+    <part name="parameters" element="tns:getAdminPatientenInformationenResponse" />
+  </message>
+  <message name="getBetreutePatienten">
+    <part name="parameters" element="tns:getBetreutePatienten" />
+  </message>
+  <message name="getBetreutePatientenResponse">
+    <part name="parameters" element="tns:getBetreutePatientenResponse" />
+  </message>
+  <message name="getDMPs">
+    <part name="parameters" element="tns:getDMPs" />
+  </message>
+  <message name="getDMPsResponse">
+    <part name="parameters" element="tns:getDMPsResponse" />
+  </message>
+  <message name="getMedPatientenInformationen">
+    <part name="parameters" element="tns:getMedPatientenInformationen" />
+  </message>
+  <message name="getMedPatientenInformationenResponse">
+    <part name="parameters" element="tns:getMedPatientenInformationenResponse" />
+  </message>
+  <message name="isDMPPatient">
+    <part name="parameters" element="tns:isDMPPatient" />
+  </message>
+  <message name="isDMPPatientResponse">
+    <part name="parameters" element="tns:isDMPPatientResponse" />
+  </message>
+  <message name="searchAnfragen">
+    <part name="parameters" element="tns:searchAnfragen" />
+  </message>
+  <message name="searchAnfragenResponse">
+    <part name="parameters" element="tns:searchAnfragenResponse" />
+  </message>
+  <message name="searchBetreuungsverhaeltnisseForPatient">
+    <part name="parameters" element="tns:searchBetreuungsverhaeltnisseForPatient" />
+  </message>
+  <message name="searchBetreuungsverhaeltnisseForPatientResponse">
+    <part name="parameters" element="tns:searchBetreuungsverhaeltnisseForPatientResponse" />
+  </message>
+  <portType name="IDmpService">
+    <operation name="checkStatus">
+      <input wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/checkStatusRequest" message="tns:checkStatus" />
+      <output wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/checkStatusResponse" message="tns:checkStatusResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/checkStatus/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/checkStatus/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/checkStatus/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="doAusschreibung">
+      <input wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/doAusschreibungRequest" message="tns:doAusschreibung" />
+      <output wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/doAusschreibungResponse" message="tns:doAusschreibungResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/doAusschreibung/Fault/AccessException" message="tns:AccessException" />
+      <fault name="CardException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/doAusschreibung/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/doAusschreibung/Fault/DialogException" message="tns:DialogException" />
+      <fault name="DmpException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/doAusschreibung/Fault/DmpException" message="tns:DmpException" />
+      <fault name="DmpInvalidParameterException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/doAusschreibung/Fault/DmpInvalidParameterException" message="tns:DmpInvalidParameterException" />
+      <fault name="ServiceException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/doAusschreibung/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="doEingabe">
+      <input wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/doEingabeRequest" message="tns:doEingabe" />
+      <output wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/doEingabeResponse" message="tns:doEingabeResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/doEingabe/Fault/AccessException" message="tns:AccessException" />
+      <fault name="CardException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/doEingabe/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/doEingabe/Fault/DialogException" message="tns:DialogException" />
+      <fault name="DmpException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/doEingabe/Fault/DmpException" message="tns:DmpException" />
+      <fault name="DmpInvalidParameterException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/doEingabe/Fault/DmpInvalidParameterException" message="tns:DmpInvalidParameterException" />
+      <fault name="ServiceException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/doEingabe/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getAdminPatientenInformationen">
+      <input wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/getAdminPatientenInformationenRequest" message="tns:getAdminPatientenInformationen" />
+      <output wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/getAdminPatientenInformationenResponse" message="tns:getAdminPatientenInformationenResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/getAdminPatientenInformationen/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/getAdminPatientenInformationen/Fault/DialogException" message="tns:DialogException" />
+      <fault name="DmpInvalidParameterException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/getAdminPatientenInformationen/Fault/DmpInvalidParameterException" message="tns:DmpInvalidParameterException" />
+      <fault name="ServiceException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/getAdminPatientenInformationen/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getBetreutePatienten">
+      <input wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/getBetreutePatientenRequest" message="tns:getBetreutePatienten" />
+      <output wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/getBetreutePatientenResponse" message="tns:getBetreutePatientenResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/getBetreutePatienten/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/getBetreutePatienten/Fault/DialogException" message="tns:DialogException" />
+      <fault name="DmpException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/getBetreutePatienten/Fault/DmpException" message="tns:DmpException" />
+      <fault name="DmpInvalidParameterException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/getBetreutePatienten/Fault/DmpInvalidParameterException" message="tns:DmpInvalidParameterException" />
+      <fault name="ServiceException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/getBetreutePatienten/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getDMPs">
+      <input wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/getDMPsRequest" message="tns:getDMPs" />
+      <output wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/getDMPsResponse" message="tns:getDMPsResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/getDMPs/Fault/AccessException" message="tns:AccessException" />
+      <fault name="ServiceException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/getDMPs/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getMedPatientenInformationen">
+      <input wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/getMedPatientenInformationenRequest" message="tns:getMedPatientenInformationen" />
+      <output wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/getMedPatientenInformationenResponse" message="tns:getMedPatientenInformationenResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/getMedPatientenInformationen/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/getMedPatientenInformationen/Fault/DialogException" message="tns:DialogException" />
+      <fault name="DmpInvalidParameterException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/getMedPatientenInformationen/Fault/DmpInvalidParameterException" message="tns:DmpInvalidParameterException" />
+      <fault name="ServiceException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/getMedPatientenInformationen/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="isDMPPatient">
+      <input wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/isDMPPatientRequest" message="tns:isDMPPatient" />
+      <output wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/isDMPPatientResponse" message="tns:isDMPPatientResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/isDMPPatient/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/isDMPPatient/Fault/DialogException" message="tns:DialogException" />
+      <fault name="DmpInvalidParameterException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/isDMPPatient/Fault/DmpInvalidParameterException" message="tns:DmpInvalidParameterException" />
+      <fault name="ServiceException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/isDMPPatient/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="searchAnfragen">
+      <input wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/searchAnfragenRequest" message="tns:searchAnfragen" />
+      <output wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/searchAnfragenResponse" message="tns:searchAnfragenResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/searchAnfragen/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/searchAnfragen/Fault/DialogException" message="tns:DialogException" />
+      <fault name="DmpInvalidParameterException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/searchAnfragen/Fault/DmpInvalidParameterException" message="tns:DmpInvalidParameterException" />
+      <fault name="ServiceException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/searchAnfragen/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="searchBetreuungsverhaeltnisseForPatient">
+      <input wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/searchBetreuungsverhaeltnisseForPatientRequest" message="tns:searchBetreuungsverhaeltnisseForPatient" />
+      <output wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/searchBetreuungsverhaeltnisseForPatientResponse" message="tns:searchBetreuungsverhaeltnisseForPatientResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/searchBetreuungsverhaeltnisseForPatient/Fault/AccessException" message="tns:AccessException" />
+      <fault name="CardException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/searchBetreuungsverhaeltnisseForPatient/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/searchBetreuungsverhaeltnisseForPatient/Fault/DialogException" message="tns:DialogException" />
+      <fault name="DmpException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/searchBetreuungsverhaeltnisseForPatient/Fault/DmpException" message="tns:DmpException" />
+      <fault name="DmpInvalidParameterException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/searchBetreuungsverhaeltnisseForPatient/Fault/DmpInvalidParameterException" message="tns:DmpInvalidParameterException" />
+      <fault name="ServiceException" wsam:Action="http://soap.dmp.client.chipkarte.at/IDmpService/searchBetreuungsverhaeltnisseForPatient/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+  </portType>
+  <binding name="dmp_8Binding" type="tns:IDmpService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="checkStatus">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="doAusschreibung">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="DmpException">
+        <soap:fault name="DmpException" use="literal" />
+      </fault>
+      <fault name="DmpInvalidParameterException">
+        <soap:fault name="DmpInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="doEingabe">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="DmpException">
+        <soap:fault name="DmpException" use="literal" />
+      </fault>
+      <fault name="DmpInvalidParameterException">
+        <soap:fault name="DmpInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getAdminPatientenInformationen">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="DmpInvalidParameterException">
+        <soap:fault name="DmpInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getBetreutePatienten">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="DmpException">
+        <soap:fault name="DmpException" use="literal" />
+      </fault>
+      <fault name="DmpInvalidParameterException">
+        <soap:fault name="DmpInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getDMPs">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getMedPatientenInformationen">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="DmpInvalidParameterException">
+        <soap:fault name="DmpInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="isDMPPatient">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="DmpInvalidParameterException">
+        <soap:fault name="DmpInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="searchAnfragen">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="DmpInvalidParameterException">
+        <soap:fault name="DmpInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="searchBetreuungsverhaeltnisseForPatient">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="DmpException">
+        <soap:fault name="DmpException" use="literal" />
+      </fault>
+      <fault name="DmpInvalidParameterException">
+        <soap:fault name="DmpInvalidParameterException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+  </binding>
+  <service name="DmpService">
+    <port name="dmp_8" binding="tns:dmp_8Binding">
+      <soap:address location="http://localhost/dmp/8" />
+    </port>
+  </service>
+</definitions>

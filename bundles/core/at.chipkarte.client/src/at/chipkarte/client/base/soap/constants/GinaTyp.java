@@ -1,0 +1,27 @@
+/*
+ * Sämtliche Werknutzungs-und Verwertungsrechte an dieser Software liegen beim Hauptverband der österreichischen
+ * Sozialversicherungsträger. Insbesondere ist die Veränderung der Software oder einzelner Teile untersagt.
+ */
+
+package at.chipkarte.client.base.soap.constants;
+
+/**
+ * Konstanten für den GINA-Typ.
+ */
+public final class GinaTyp {
+
+  private GinaTyp() {
+    // nothing to do
+  }
+  
+  /**
+   * WIRK-GINA.
+   */
+  public static final String WIRK = "1";
+  
+  /**
+   * VPSWH-GINA.
+   */
+  public static final String VPSWH = "2";
+
+}

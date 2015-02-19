@@ -1,0 +1,1591 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://soap.uze.client.chipkarte.at" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://soap.uze.client.chipkarte.at" name="UzeService">
+  <types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://exceptions.soap.base.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://exceptions.soap.base.client.chipkarte.at" version="1.0">
+      <xs:element name="AccessException" type="tns:accessExceptionContent" />
+      <xs:element name="CardException" type="tns:cardExceptionContent" />
+      <xs:element name="DialogException" type="tns:dialogExceptionContent" />
+      <xs:element name="ServiceException" type="tns:serviceExceptionContent" />
+      <xs:complexType name="accessExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="baseExceptionContent">
+        <xs:sequence>
+          <xs:element name="code" type="xs:string" minOccurs="0" />
+          <xs:element name="errorCode" type="xs:int" minOccurs="0" />
+          <xs:element name="message" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="cardExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="dialogExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="serviceExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://soap.base.client.chipkarte.at" xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" xmlns:tns="http://exceptions.soap.uze.client.chipkarte.at" xmlns:uze="http://soap.uze.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://exceptions.soap.uze.client.chipkarte.at" version="1.0">
+      <xs:import namespace="http://exceptions.soap.base.client.chipkarte.at" />
+      <xs:import namespace="http://soap.base.client.chipkarte.at" />
+      <xs:import namespace="http://soap.uze.client.chipkarte.at" />
+      <xs:element name="UzeAnspruchException" type="tns:uzeAnspruchExceptionContent" />
+      <xs:element name="UzeException" type="tns:uzeExceptionContent" />
+      <xs:element name="UzeFachgebietException" type="tns:uzeFachgebietExceptionContent" />
+      <xs:element name="UzeInvalidParameterException" type="tns:uzeInvalidParameterExceptionContent" />
+      <xs:complexType name="uzeAnspruchExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="baseexc:baseExceptionContent">
+            <xs:sequence>
+              <xs:element name="anspruch" type="uze:anspruch" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="uzeExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="baseexc:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="uzeFachgebietExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="baseexc:baseExceptionContent">
+            <xs:sequence>
+              <xs:element name="fachgebiete" type="base:baseProperty" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="uzeInvalidParameterExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="baseexc:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://soap.base.client.chipkarte.at" version="1.0">
+      <xs:complexType name="baseProperty">
+        <xs:sequence>
+          <xs:element name="code" type="xs:string" minOccurs="0" />
+          <xs:element name="nurAnzeige" type="xs:boolean" minOccurs="0" />
+          <xs:element name="text" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="property">
+        <xs:sequence>
+          <xs:element name="key" type="xs:string" minOccurs="0" />
+          <xs:element name="value" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://soap.base.client.chipkarte.at" xmlns:uzeexc="http://exceptions.soap.uze.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://soap.uze.client.chipkarte.at" version="1.0">
+      <xs:import namespace="http://soap.base.client.chipkarte.at" />
+      <xs:element name="acquireAnspruchSvPerson" type="tns:acquireAnspruchSvPerson" />
+      <xs:element name="acquireAnspruchSvPersonResponse" type="tns:acquireAnspruchSvPersonResponse" />
+      <xs:element name="cancelUzeLa" type="tns:cancelUzeLa" />
+      <xs:element name="cancelUzeLaResponse" type="tns:cancelUzeLaResponse" />
+      <xs:element name="cancelUzeLe" type="tns:cancelUzeLe" />
+      <xs:element name="cancelUzeLeResponse" type="tns:cancelUzeLeResponse" />
+      <xs:element name="changeUzeLa" type="tns:changeUzeLa" />
+      <xs:element name="changeUzeLaResponse" type="tns:changeUzeLaResponse" />
+      <xs:element name="checkStatus" type="tns:checkStatus" />
+      <xs:element name="checkStatusResponse" type="tns:checkStatusResponse" />
+      <xs:element name="getAllUzeStatus" type="tns:getAllUzeStatus" />
+      <xs:element name="getAllUzeStatusResponse" type="tns:getAllUzeStatusResponse" />
+      <xs:element name="getBehandlungskontexte" type="tns:getBehandlungskontexte" />
+      <xs:element name="getBehandlungskontexteResponse" type="tns:getBehandlungskontexteResponse" />
+      <xs:element name="getFachgebieteZo" type="tns:getFachgebieteZo" />
+      <xs:element name="getFachgebieteZoResponse" type="tns:getFachgebieteZoResponse" />
+      <xs:element name="getMedikamentCodierungsysteme" type="tns:getMedikamentCodierungsysteme" />
+      <xs:element name="getMedikamentCodierungsystemeResponse" type="tns:getMedikamentCodierungsystemeResponse" />
+      <xs:element name="getModifyUzeStatusLa" type="tns:getModifyUzeStatusLa" />
+      <xs:element name="getModifyUzeStatusLaResponse" type="tns:getModifyUzeStatusLaResponse" />
+      <xs:element name="getWeisungstypenLa" type="tns:getWeisungstypenLa" />
+      <xs:element name="getWeisungstypenLaResponse" type="tns:getWeisungstypenLaResponse" />
+      <xs:element name="getWeisungstypenLe" type="tns:getWeisungstypenLe" />
+      <xs:element name="getWeisungstypenLeResponse" type="tns:getWeisungstypenLeResponse" />
+      <xs:element name="preparePatientenInformationsBlatt" type="tns:preparePatientenInformationsBlatt" />
+      <xs:element name="preparePatientenInformationsBlattResponse" type="tns:preparePatientenInformationsBlattResponse" />
+      <xs:element name="realizeUze" type="tns:realizeUze" />
+      <xs:element name="realizeUzeResponse" type="tns:realizeUzeResponse" />
+      <xs:element name="restoreUzeLa" type="tns:restoreUzeLa" />
+      <xs:element name="restoreUzeLaResponse" type="tns:restoreUzeLaResponse" />
+      <xs:element name="searchLeForZo" type="tns:searchLeForZo" />
+      <xs:element name="searchLeForZoResponse" type="tns:searchLeForZoResponse" />
+      <xs:element name="searchModifiableUzeLa" type="tns:searchModifiableUzeLa" />
+      <xs:element name="searchModifiableUzeLaResponse" type="tns:searchModifiableUzeLaResponse" />
+      <xs:element name="searchModifiableUzeLe" type="tns:searchModifiableUzeLe" />
+      <xs:element name="searchModifiableUzeLeResponse" type="tns:searchModifiableUzeLeResponse" />
+      <xs:element name="searchRealizableUze" type="tns:searchRealizableUze" />
+      <xs:element name="searchRealizableUzeResponse" type="tns:searchRealizableUzeResponse" />
+      <xs:element name="searchRealizableZo" type="tns:searchRealizableZo" />
+      <xs:element name="searchRealizableZoResponse" type="tns:searchRealizableZoResponse" />
+      <xs:element name="searchUzeLa" type="tns:searchUzeLa" />
+      <xs:element name="searchUzeLaResponse" type="tns:searchUzeLaResponse" />
+      <xs:element name="searchUzeLe" type="tns:searchUzeLe" />
+      <xs:element name="searchUzeLeResponse" type="tns:searchUzeLeResponse" />
+      <xs:element name="storeUze" type="tns:storeUze" />
+      <xs:element name="storeUzeResponse" type="tns:storeUzeResponse" />
+      <xs:complexType name="acquireAnspruchSvPerson">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="anspruchSvPersonReq" type="tns:anspruchSvPersonReq" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="acquireAnspruchSvPersonResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:anspruchSvPersonResp" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="adresse">
+        <xs:sequence>
+          <xs:element name="landbezeichnung" type="xs:string" minOccurs="0" />
+          <xs:element name="ort" type="xs:string" minOccurs="0" />
+          <xs:element name="PLZ" type="xs:string" minOccurs="0" />
+          <xs:element name="strasse" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="anspruch">
+        <xs:sequence>
+          <xs:element name="abgeleitetDruckTitelHinten" type="xs:string" minOccurs="0" />
+          <xs:element name="abgeleitetDruckTitelVorne" type="xs:string" minOccurs="0" />
+          <xs:element name="abgeleitetDruckVorname" type="xs:string" minOccurs="0" />
+          <xs:element name="abgeleitetDruckZuname" type="xs:string" minOccurs="0" />
+          <xs:element name="abgeleitetSvNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="abgeleitetTitelHinten" type="xs:string" minOccurs="0" />
+          <xs:element name="abgeleitetTitelVorne" type="xs:string" minOccurs="0" />
+          <xs:element name="abgeleitetVorname" type="xs:string" minOccurs="0" />
+          <xs:element name="abgeleitetZuname" type="xs:string" minOccurs="0" />
+          <xs:element name="anspruchId" type="xs:string" minOccurs="0" />
+          <xs:element name="svtCode" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="anspruchSvPersonReq">
+        <xs:sequence>
+          <xs:element name="anspruchId" type="xs:string" minOccurs="0" />
+          <xs:element name="behandlungsKontext" type="xs:string" minOccurs="0" />
+          <xs:element name="fachgebietLe" type="xs:string" minOccurs="0" />
+          <xs:element name="kblKennzeichen" type="xs:boolean" minOccurs="0" />
+          <xs:element name="ordinationsIdLe" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="svtCode" type="xs:string" minOccurs="0" />
+          <xs:element name="taetigkeitsbereichIdLe" type="xs:string" minOccurs="0" />
+          <xs:element name="weisungsTyp" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="anspruchSvPersonResp">
+        <xs:sequence>
+          <xs:element name="anspruch" type="tns:anspruch" minOccurs="0" />
+          <xs:element name="svPatient" type="tns:svPatientInfo" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="cancelUzeLa">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="uzeId" type="xs:long" minOccurs="0" />
+          <xs:element name="version" type="xs:int" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="cancelUzeLaResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:uzeWeisung" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="cancelUzeLe">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="uzeId" type="xs:long" minOccurs="0" />
+          <xs:element name="version" type="xs:int" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="cancelUzeLeResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:uzeWeisung" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="changeUzeLa">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="uzeLaChangeReq" type="tns:uzeLaChangeReq" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="changeUzeLaResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:uzeWeisung" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="checkStatus">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="checkStatusResponse">
+        <xs:sequence>
+          <xs:element name="return" type="base:property" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="eCardTicket">
+        <xs:sequence>
+          <xs:element name="clientSignatur" type="xs:base64Binary" minOccurs="0" />
+          <xs:element name="signaturFormatCode" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="vpNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="zeitStempel" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getAllUzeStatus">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="getAllUzeStatusResponse">
+        <xs:sequence>
+          <xs:element name="return" type="base:baseProperty" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getBehandlungskontexte">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="getBehandlungskontexteResponse">
+        <xs:sequence>
+          <xs:element name="return" type="base:baseProperty" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getFachgebieteZo">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="getFachgebieteZoResponse">
+        <xs:sequence>
+          <xs:element name="return" type="base:baseProperty" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getMedikamentCodierungsysteme">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="getMedikamentCodierungsystemeResponse">
+        <xs:sequence>
+          <xs:element name="return" type="base:baseProperty" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getModifyUzeStatusLa">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="getModifyUzeStatusLaResponse">
+        <xs:sequence>
+          <xs:element name="return" type="base:baseProperty" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getWeisungstypenLa">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="getWeisungstypenLaResponse">
+        <xs:sequence>
+          <xs:element name="return" type="base:baseProperty" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getWeisungstypenLe">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getWeisungstypenLeResponse">
+        <xs:sequence>
+          <xs:element name="return" type="base:baseProperty" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="kontakt">
+        <xs:sequence>
+          <xs:element name="adresse" type="tns:adresse" minOccurs="0" />
+          <xs:element name="telefon" type="xs:string" minOccurs="0" />
+          <xs:element name="titelHinten" type="xs:string" minOccurs="0" />
+          <xs:element name="titelVorne" type="xs:string" minOccurs="0" />
+          <xs:element name="vorname" type="xs:string" minOccurs="0" />
+          <xs:element name="zuname" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="leForZoSearchReq">
+        <xs:sequence>
+          <xs:element name="fachgebiet" type="xs:string" minOccurs="0" />
+          <xs:element name="vornameVp" type="xs:string" minOccurs="0" />
+          <xs:element name="vpNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="zunameVp" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="medDaten">
+        <xs:sequence>
+          <xs:element name="akutTherapie" type="xs:string" minOccurs="0" />
+          <xs:element name="allergieMuInfo" type="xs:string" minOccurs="0" />
+          <xs:element name="antikoaguliert" type="xs:string" minOccurs="0" />
+          <xs:element name="gewuenschteLeistung" type="xs:string" minOccurs="0" />
+          <xs:element name="medikation" type="tns:medikament" minOccurs="0" />
+          <xs:element name="notizLa" type="xs:string" minOccurs="0" />
+          <xs:element name="symptomBeschreibung" type="xs:string" minOccurs="0" />
+          <xs:element name="verdachtsDiagnose" type="xs:string" minOccurs="0" />
+          <xs:element name="vorgeschichte" type="xs:string" minOccurs="0" />
+          <xs:element name="weitereMedizinischeInformationen" type="tns:medDatenErweiterung" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="wesentlicheNebenDiagnosen" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="medDatenErweiterung">
+        <xs:sequence>
+          <xs:element name="datenBezeichner" type="xs:string" minOccurs="0" />
+          <xs:element name="datenInhalt" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="medikament">
+        <xs:sequence>
+          <xs:element name="beschreibung" type="xs:string" minOccurs="0" />
+          <xs:element name="codierungen" type="tns:medikamentCode" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="medikamentCode">
+        <xs:sequence>
+          <xs:element name="codebeschreibung" type="xs:string" minOccurs="0" />
+          <xs:element name="codebezeichner" type="xs:string" minOccurs="0" />
+          <xs:element name="codierungsystem" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="modifiableUze">
+        <xs:sequence>
+          <xs:element name="modifizierbarBis" type="xs:string" minOccurs="0" />
+          <xs:element name="uze" type="tns:uzeWeisung" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="modifiableUzeLaSearchReq">
+        <xs:sequence>
+          <xs:element name="status" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="uzeCode" type="xs:string" minOccurs="0" />
+          <xs:element name="weisungsTyp" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="modifiableUzeLeSearchReq">
+        <xs:sequence>
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="uzeCode" type="xs:string" minOccurs="0" />
+          <xs:element name="weisungsTyp" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="modifiableUzeSearchResp">
+        <xs:sequence>
+          <xs:element name="modifizierbareUze" type="tns:modifiableUze" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="serverZeitstempel" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="pibPrepareResp">
+        <xs:sequence>
+          <xs:element name="pib" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="preparePatientenInformationsBlatt">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="vpOrdinationInfoPIB" type="tns:vpOrdinationInfoPIB" minOccurs="0" />
+          <xs:element name="uze" type="tns:uzeWeisung" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="preparePatientenInformationsBlattResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:pibPrepareResp" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="realizableUzeSearchReq">
+        <xs:sequence>
+          <xs:element name="fachgebiet" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="uzeCode" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="realizableUzeSearchResp">
+        <xs:sequence>
+          <xs:element name="ecardTicket" type="tns:eCardTicket" minOccurs="0" />
+          <xs:element name="uze" type="tns:uzeWeisung" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="realizableZoSearchReq">
+        <xs:sequence>
+          <xs:element name="suchzeitraumBis" type="xs:string" minOccurs="0" />
+          <xs:element name="suchzeitraumVon" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="uzeCode" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="realizeUze">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="realizeUzeReq" type="tns:realizeUzeReq" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="realizeUzeReq">
+        <xs:sequence>
+          <xs:element name="anspruchId" type="xs:string" minOccurs="0" />
+          <xs:element name="bewilligungVorliegend" type="xs:boolean" minOccurs="0" />
+          <xs:element name="bewilligungsPflichtig" type="xs:string" minOccurs="0" />
+          <xs:element name="ecardTicket" type="tns:eCardTicket" minOccurs="0" />
+          <xs:element name="fachgebietEinloesung" type="xs:string" minOccurs="0" />
+          <xs:element name="kblKennzeichen" type="xs:boolean" minOccurs="0" />
+          <xs:element name="svtCode" type="xs:string" minOccurs="0" />
+          <xs:element name="uzeCode" type="xs:string" minOccurs="0" />
+          <xs:element name="uzeId" type="xs:long" minOccurs="0" />
+          <xs:element name="version" type="xs:int" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="realizeUzeResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:uzeWeisung" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="restoreUzeLa">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="uzeId" type="xs:long" minOccurs="0" />
+          <xs:element name="version" type="xs:int" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="restoreUzeLaResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:uzeWeisung" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchLeForZo">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="leForZoSearchReq" type="tns:leForZoSearchReq" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchLeForZoResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:vpOrdinationInfo" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchModifiableUzeLa">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="modifiableUzeLaSearchReq" type="tns:modifiableUzeLaSearchReq" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchModifiableUzeLaResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:modifiableUzeSearchResp" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchModifiableUzeLe">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="modifiableUzeLeSearchReq" type="tns:modifiableUzeLeSearchReq" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchModifiableUzeLeResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:modifiableUzeSearchResp" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchRealizableUze">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="realizableUzeSearchReq" type="tns:realizableUzeSearchReq" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchRealizableUzeResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:realizableUzeSearchResp" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchRealizableZo">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="realizableZoSearchReq" type="tns:realizableZoSearchReq" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchRealizableZoResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:uzeWeisung" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchUzeLa">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="uzeLaSearchReq" type="tns:uzeLaSearchReq" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchUzeLaResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:uzeWeisung" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchUzeLe">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="uzeLeSearchReq" type="tns:uzeLeSearchReq" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchUzeLeResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:uzeWeisung" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="storeUze">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="storeUzeReq" type="tns:storeUzeReq" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="storeUzeMedDaten">
+        <xs:sequence>
+          <xs:element name="akutTherapie" type="xs:string" minOccurs="0" />
+          <xs:element name="allergieMuInfo" type="xs:string" minOccurs="0" />
+          <xs:element name="antikoaguliert" type="xs:string" minOccurs="0" />
+          <xs:element name="gewuenschteLeistung" type="xs:string" minOccurs="0" />
+          <xs:element name="medikation" type="tns:medikament" minOccurs="0" />
+          <xs:element name="notizLa" type="xs:string" minOccurs="0" />
+          <xs:element name="symptomBeschreibung" type="xs:string" minOccurs="0" />
+          <xs:element name="verdachtsDiagnose" type="xs:string" minOccurs="0" />
+          <xs:element name="vorgeschichte" type="xs:string" minOccurs="0" />
+          <xs:element name="wesentlicheNebenDiagnosen" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="storeUzeReq">
+        <xs:sequence>
+          <xs:element name="administrativeVermerke" type="xs:string" minOccurs="0" />
+          <xs:element name="adressePatient" type="tns:adresse" minOccurs="0" />
+          <xs:element name="anspruchId" type="xs:string" minOccurs="0" />
+          <xs:element name="behandlungsKontext" type="xs:string" minOccurs="0" />
+          <xs:element name="bewilligungsPflichtig" type="xs:string" minOccurs="0" />
+          <xs:element name="dringend" type="xs:boolean" minOccurs="0" />
+          <xs:element name="emailLa" type="xs:string" minOccurs="0" />
+          <xs:element name="fachabteilungLe" type="xs:string" minOccurs="0" />
+          <xs:element name="fachgebietLe" type="xs:string" minOccurs="0" />
+          <xs:element name="hausarzt" type="tns:kontakt" minOccurs="0" />
+          <xs:element name="kblKennzeichen" type="xs:boolean" minOccurs="0" />
+          <xs:element name="medVertrauensPerson" type="tns:kontakt" minOccurs="0" />
+          <xs:element name="medizinischeDaten" type="tns:storeUzeMedDaten" minOccurs="0" />
+          <xs:element name="ordinationsIdLe" type="xs:string" minOccurs="0" />
+          <xs:element name="ordinationszeitenLa" type="xs:string" minOccurs="0" />
+          <xs:element name="patientenVerfuegung" type="xs:string" minOccurs="0" />
+          <xs:element name="privateKontaktPerson" type="tns:kontakt" minOccurs="0" />
+          <xs:element name="sachwalter" type="tns:kontakt" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="svtCode" type="xs:string" minOccurs="0" />
+          <xs:element name="taetigkeitsbereichIdLe" type="xs:string" minOccurs="0" />
+          <xs:element name="telefonLa" type="xs:string" minOccurs="0" />
+          <xs:element name="telefonPatient" type="xs:string" minOccurs="0" />
+          <xs:element name="weisungsTyp" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="storeUzeResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:uzeWeisung" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="svPatientInfo">
+        <xs:sequence>
+          <xs:element name="druckTitelHinten" type="xs:string" minOccurs="0" />
+          <xs:element name="druckTitelVorne" type="xs:string" minOccurs="0" />
+          <xs:element name="druckVorname" type="xs:string" minOccurs="0" />
+          <xs:element name="druckZuname" type="xs:string" minOccurs="0" />
+          <xs:element name="geburtsDatum" type="xs:string" minOccurs="0" />
+          <xs:element name="geschlechtCode" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="titelHinten" type="xs:string" minOccurs="0" />
+          <xs:element name="titelVorne" type="xs:string" minOccurs="0" />
+          <xs:element name="vorname" type="xs:string" minOccurs="0" />
+          <xs:element name="zuname" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="uzeLaChangeReq">
+        <xs:sequence>
+          <xs:element name="administrativeVermerke" type="xs:string" minOccurs="0" />
+          <xs:element name="adressePatient" type="tns:adresse" minOccurs="0" />
+          <xs:element name="emailLa" type="xs:string" minOccurs="0" />
+          <xs:element name="hausarzt" type="tns:kontakt" minOccurs="0" />
+          <xs:element name="medVertrauensPerson" type="tns:kontakt" minOccurs="0" />
+          <xs:element name="notizLa" type="xs:string" minOccurs="0" />
+          <xs:element name="ordinationsIdLe" type="xs:string" minOccurs="0" />
+          <xs:element name="ordinationszeitenLa" type="xs:string" minOccurs="0" />
+          <xs:element name="patientenVerfuegung" type="xs:string" minOccurs="0" />
+          <xs:element name="privateKontaktPerson" type="tns:kontakt" minOccurs="0" />
+          <xs:element name="sachwalter" type="tns:kontakt" minOccurs="0" />
+          <xs:element name="taetigkeitsbereichIdLe" type="xs:string" minOccurs="0" />
+          <xs:element name="telefonPatient" type="xs:string" minOccurs="0" />
+          <xs:element name="uzeId" type="xs:long" minOccurs="0" />
+          <xs:element name="version" type="xs:int" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="uzeLaSearchReq">
+        <xs:sequence>
+          <xs:element name="ordinationsIdLa" type="xs:string" minOccurs="0" />
+          <xs:element name="status" type="xs:string" minOccurs="0" />
+          <xs:element name="suchzeitraumBis" type="xs:string" minOccurs="0" />
+          <xs:element name="suchzeitraumVon" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="uzeCode" type="xs:string" minOccurs="0" />
+          <xs:element name="weisungsTyp" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="uzeLeSearchReq">
+        <xs:sequence>
+          <xs:element name="ordinationsIdLe" type="xs:string" minOccurs="0" />
+          <xs:element name="suchzeitraumBis" type="xs:string" minOccurs="0" />
+          <xs:element name="suchzeitraumVon" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="uzeCode" type="xs:string" minOccurs="0" />
+          <xs:element name="weisungsTyp" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="uzeWeisung">
+        <xs:sequence>
+          <xs:element name="administrativeVermerke" type="xs:string" minOccurs="0" />
+          <xs:element name="adressePatient" type="tns:adresse" minOccurs="0" />
+          <xs:element name="anspruch" type="tns:anspruch" minOccurs="0" />
+          <xs:element name="ausstellungsZeitpunkt" type="xs:string" minOccurs="0" />
+          <xs:element name="behandlungsKontext" type="xs:string" minOccurs="0" />
+          <xs:element name="bewilligungVorliegend" type="xs:boolean" minOccurs="0" />
+          <xs:element name="bewilligungsPflichtig" type="xs:string" minOccurs="0" />
+          <xs:element name="dringlich" type="xs:boolean" minOccurs="0" />
+          <xs:element name="einloeseZeitpunkt" type="xs:string" minOccurs="0" />
+          <xs:element name="emailLa" type="xs:string" minOccurs="0" />
+          <xs:element name="fachabteilungLe" type="xs:string" minOccurs="0" />
+          <xs:element name="fachgebietLe" type="xs:string" minOccurs="0" />
+          <xs:element name="gueltigBis" type="xs:string" minOccurs="0" />
+          <xs:element name="hausarzt" type="tns:kontakt" minOccurs="0" />
+          <xs:element name="kblKennzeichen" type="xs:boolean" minOccurs="0" />
+          <xs:element name="medVertrauensPerson" type="tns:kontakt" minOccurs="0" />
+          <xs:element name="medizinischeDaten" type="tns:medDaten" minOccurs="0" />
+          <xs:element name="ordinationLa" type="tns:vpOrdinationInfo" minOccurs="0" />
+          <xs:element name="ordinationLe" type="tns:vpOrdinationInfo" minOccurs="0" />
+          <xs:element name="ordinationszeitenLa" type="xs:string" minOccurs="0" />
+          <xs:element name="patientenVerfuegung" type="xs:string" minOccurs="0" />
+          <xs:element name="privateKontaktPerson" type="tns:kontakt" minOccurs="0" />
+          <xs:element name="sachwalter" type="tns:kontakt" minOccurs="0" />
+          <xs:element name="status" type="xs:string" minOccurs="0" />
+          <xs:element name="svPatient" type="tns:svPatientInfo" minOccurs="0" />
+          <xs:element name="telefonLa" type="xs:string" minOccurs="0" />
+          <xs:element name="telefonPatient" type="xs:string" minOccurs="0" />
+          <xs:element name="uzeCode" type="xs:string" minOccurs="0" />
+          <xs:element name="uzeId" type="xs:long" minOccurs="0" />
+          <xs:element name="version" type="xs:int" minOccurs="0" />
+          <xs:element name="weisungsTyp" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="vpOrdinationInfo">
+        <xs:sequence>
+          <xs:element name="anredeCode" type="xs:string" minOccurs="0" />
+          <xs:element name="druckTitelHinten" type="xs:string" minOccurs="0" />
+          <xs:element name="druckTitelVorne" type="xs:string" minOccurs="0" />
+          <xs:element name="druckVorname" type="xs:string" minOccurs="0" />
+          <xs:element name="druckZuname" type="xs:string" minOccurs="0" />
+          <xs:element name="fachgebiete" type="xs:string" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="ordinationsId" type="xs:long" minOccurs="0" />
+          <xs:element name="ort" type="xs:string" minOccurs="0" />
+          <xs:element name="PLZ" type="xs:string" minOccurs="0" />
+          <xs:element name="strasse" type="xs:string" minOccurs="0" />
+          <xs:element name="taetigkeitsbereichId" type="xs:long" minOccurs="0" />
+          <xs:element name="titelHinten" type="xs:string" minOccurs="0" />
+          <xs:element name="titelVorne" type="xs:string" minOccurs="0" />
+          <xs:element name="vorname" type="xs:string" minOccurs="0" />
+          <xs:element name="vpNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="zuname" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="vpOrdinationInfoPIB">
+        <xs:sequence>
+          <xs:element name="adresse" type="xs:string" minOccurs="0" />
+          <xs:element name="ordinationsZeiten" type="xs:string" minOccurs="0" />
+          <xs:element name="vornameVp" type="xs:string" minOccurs="0" />
+          <xs:element name="zunameVp" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </types>
+  <message name="AccessException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:AccessException" />
+  </message>
+  <message name="CardException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:CardException" />
+  </message>
+  <message name="DialogException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:DialogException" />
+  </message>
+  <message name="ServiceException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:ServiceException" />
+  </message>
+  <message name="UzeAnspruchException">
+    <part xmlns:uzeexc="http://exceptions.soap.uze.client.chipkarte.at" name="fault" element="uzeexc:UzeAnspruchException" />
+  </message>
+  <message name="UzeException">
+    <part xmlns:uzeexc="http://exceptions.soap.uze.client.chipkarte.at" name="fault" element="uzeexc:UzeException" />
+  </message>
+  <message name="UzeFachgebietException">
+    <part xmlns:uzeexc="http://exceptions.soap.uze.client.chipkarte.at" name="fault" element="uzeexc:UzeFachgebietException" />
+  </message>
+  <message name="UzeInvalidParameterException">
+    <part xmlns:uzeexc="http://exceptions.soap.uze.client.chipkarte.at" name="fault" element="uzeexc:UzeInvalidParameterException" />
+  </message>
+  <message name="acquireAnspruchSvPerson">
+    <part name="parameters" element="tns:acquireAnspruchSvPerson" />
+  </message>
+  <message name="acquireAnspruchSvPersonResponse">
+    <part name="parameters" element="tns:acquireAnspruchSvPersonResponse" />
+  </message>
+  <message name="cancelUzeLa">
+    <part name="parameters" element="tns:cancelUzeLa" />
+  </message>
+  <message name="cancelUzeLaResponse">
+    <part name="parameters" element="tns:cancelUzeLaResponse" />
+  </message>
+  <message name="cancelUzeLe">
+    <part name="parameters" element="tns:cancelUzeLe" />
+  </message>
+  <message name="cancelUzeLeResponse">
+    <part name="parameters" element="tns:cancelUzeLeResponse" />
+  </message>
+  <message name="changeUzeLa">
+    <part name="parameters" element="tns:changeUzeLa" />
+  </message>
+  <message name="changeUzeLaResponse">
+    <part name="parameters" element="tns:changeUzeLaResponse" />
+  </message>
+  <message name="checkStatus">
+    <part name="parameters" element="tns:checkStatus" />
+  </message>
+  <message name="checkStatusResponse">
+    <part name="parameters" element="tns:checkStatusResponse" />
+  </message>
+  <message name="getAllUzeStatus">
+    <part name="parameters" element="tns:getAllUzeStatus" />
+  </message>
+  <message name="getAllUzeStatusResponse">
+    <part name="parameters" element="tns:getAllUzeStatusResponse" />
+  </message>
+  <message name="getBehandlungskontexte">
+    <part name="parameters" element="tns:getBehandlungskontexte" />
+  </message>
+  <message name="getBehandlungskontexteResponse">
+    <part name="parameters" element="tns:getBehandlungskontexteResponse" />
+  </message>
+  <message name="getFachgebieteZo">
+    <part name="parameters" element="tns:getFachgebieteZo" />
+  </message>
+  <message name="getFachgebieteZoResponse">
+    <part name="parameters" element="tns:getFachgebieteZoResponse" />
+  </message>
+  <message name="getMedikamentCodierungsysteme">
+    <part name="parameters" element="tns:getMedikamentCodierungsysteme" />
+  </message>
+  <message name="getMedikamentCodierungsystemeResponse">
+    <part name="parameters" element="tns:getMedikamentCodierungsystemeResponse" />
+  </message>
+  <message name="getModifyUzeStatusLa">
+    <part name="parameters" element="tns:getModifyUzeStatusLa" />
+  </message>
+  <message name="getModifyUzeStatusLaResponse">
+    <part name="parameters" element="tns:getModifyUzeStatusLaResponse" />
+  </message>
+  <message name="getWeisungstypenLa">
+    <part name="parameters" element="tns:getWeisungstypenLa" />
+  </message>
+  <message name="getWeisungstypenLaResponse">
+    <part name="parameters" element="tns:getWeisungstypenLaResponse" />
+  </message>
+  <message name="getWeisungstypenLe">
+    <part name="parameters" element="tns:getWeisungstypenLe" />
+  </message>
+  <message name="getWeisungstypenLeResponse">
+    <part name="parameters" element="tns:getWeisungstypenLeResponse" />
+  </message>
+  <message name="preparePatientenInformationsBlatt">
+    <part name="parameters" element="tns:preparePatientenInformationsBlatt" />
+  </message>
+  <message name="preparePatientenInformationsBlattResponse">
+    <part name="parameters" element="tns:preparePatientenInformationsBlattResponse" />
+  </message>
+  <message name="realizeUze">
+    <part name="parameters" element="tns:realizeUze" />
+  </message>
+  <message name="realizeUzeResponse">
+    <part name="parameters" element="tns:realizeUzeResponse" />
+  </message>
+  <message name="restoreUzeLa">
+    <part name="parameters" element="tns:restoreUzeLa" />
+  </message>
+  <message name="restoreUzeLaResponse">
+    <part name="parameters" element="tns:restoreUzeLaResponse" />
+  </message>
+  <message name="searchLeForZo">
+    <part name="parameters" element="tns:searchLeForZo" />
+  </message>
+  <message name="searchLeForZoResponse">
+    <part name="parameters" element="tns:searchLeForZoResponse" />
+  </message>
+  <message name="searchModifiableUzeLa">
+    <part name="parameters" element="tns:searchModifiableUzeLa" />
+  </message>
+  <message name="searchModifiableUzeLaResponse">
+    <part name="parameters" element="tns:searchModifiableUzeLaResponse" />
+  </message>
+  <message name="searchModifiableUzeLe">
+    <part name="parameters" element="tns:searchModifiableUzeLe" />
+  </message>
+  <message name="searchModifiableUzeLeResponse">
+    <part name="parameters" element="tns:searchModifiableUzeLeResponse" />
+  </message>
+  <message name="searchRealizableUze">
+    <part name="parameters" element="tns:searchRealizableUze" />
+  </message>
+  <message name="searchRealizableUzeResponse">
+    <part name="parameters" element="tns:searchRealizableUzeResponse" />
+  </message>
+  <message name="searchRealizableZo">
+    <part name="parameters" element="tns:searchRealizableZo" />
+  </message>
+  <message name="searchRealizableZoResponse">
+    <part name="parameters" element="tns:searchRealizableZoResponse" />
+  </message>
+  <message name="searchUzeLa">
+    <part name="parameters" element="tns:searchUzeLa" />
+  </message>
+  <message name="searchUzeLaResponse">
+    <part name="parameters" element="tns:searchUzeLaResponse" />
+  </message>
+  <message name="searchUzeLe">
+    <part name="parameters" element="tns:searchUzeLe" />
+  </message>
+  <message name="searchUzeLeResponse">
+    <part name="parameters" element="tns:searchUzeLeResponse" />
+  </message>
+  <message name="storeUze">
+    <part name="parameters" element="tns:storeUze" />
+  </message>
+  <message name="storeUzeResponse">
+    <part name="parameters" element="tns:storeUzeResponse" />
+  </message>
+  <portType name="IUzeService">
+    <operation name="acquireAnspruchSvPerson">
+      <input wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/acquireAnspruchSvPersonRequest" message="tns:acquireAnspruchSvPerson" />
+      <output wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/acquireAnspruchSvPersonResponse" message="tns:acquireAnspruchSvPersonResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/acquireAnspruchSvPerson/Fault/AccessException" message="tns:AccessException" />
+      <fault name="CardException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/acquireAnspruchSvPerson/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/acquireAnspruchSvPerson/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/acquireAnspruchSvPerson/Fault/ServiceException" message="tns:ServiceException" />
+      <fault name="UzeAnspruchException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/acquireAnspruchSvPerson/Fault/UzeAnspruchException" message="tns:UzeAnspruchException" />
+      <fault name="UzeException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/acquireAnspruchSvPerson/Fault/UzeException" message="tns:UzeException" />
+      <fault name="UzeInvalidParameterException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/acquireAnspruchSvPerson/Fault/UzeInvalidParameterException" message="tns:UzeInvalidParameterException" />
+    </operation>
+    <operation name="cancelUzeLa">
+      <input wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/cancelUzeLaRequest" message="tns:cancelUzeLa" />
+      <output wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/cancelUzeLaResponse" message="tns:cancelUzeLaResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/cancelUzeLa/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/cancelUzeLa/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/cancelUzeLa/Fault/ServiceException" message="tns:ServiceException" />
+      <fault name="UzeException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/cancelUzeLa/Fault/UzeException" message="tns:UzeException" />
+      <fault name="UzeInvalidParameterException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/cancelUzeLa/Fault/UzeInvalidParameterException" message="tns:UzeInvalidParameterException" />
+    </operation>
+    <operation name="cancelUzeLe">
+      <input wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/cancelUzeLeRequest" message="tns:cancelUzeLe" />
+      <output wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/cancelUzeLeResponse" message="tns:cancelUzeLeResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/cancelUzeLe/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/cancelUzeLe/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/cancelUzeLe/Fault/ServiceException" message="tns:ServiceException" />
+      <fault name="UzeException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/cancelUzeLe/Fault/UzeException" message="tns:UzeException" />
+      <fault name="UzeInvalidParameterException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/cancelUzeLe/Fault/UzeInvalidParameterException" message="tns:UzeInvalidParameterException" />
+    </operation>
+    <operation name="changeUzeLa">
+      <input wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/changeUzeLaRequest" message="tns:changeUzeLa" />
+      <output wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/changeUzeLaResponse" message="tns:changeUzeLaResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/changeUzeLa/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/changeUzeLa/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/changeUzeLa/Fault/ServiceException" message="tns:ServiceException" />
+      <fault name="UzeException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/changeUzeLa/Fault/UzeException" message="tns:UzeException" />
+      <fault name="UzeInvalidParameterException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/changeUzeLa/Fault/UzeInvalidParameterException" message="tns:UzeInvalidParameterException" />
+    </operation>
+    <operation name="checkStatus">
+      <input wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/checkStatusRequest" message="tns:checkStatus" />
+      <output wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/checkStatusResponse" message="tns:checkStatusResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/checkStatus/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/checkStatus/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/checkStatus/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getAllUzeStatus">
+      <input wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/getAllUzeStatusRequest" message="tns:getAllUzeStatus" />
+      <output wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/getAllUzeStatusResponse" message="tns:getAllUzeStatusResponse" />
+      <fault name="ServiceException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/getAllUzeStatus/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getBehandlungskontexte">
+      <input wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/getBehandlungskontexteRequest" message="tns:getBehandlungskontexte" />
+      <output wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/getBehandlungskontexteResponse" message="tns:getBehandlungskontexteResponse" />
+      <fault name="ServiceException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/getBehandlungskontexte/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getFachgebieteZo">
+      <input wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/getFachgebieteZoRequest" message="tns:getFachgebieteZo" />
+      <output wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/getFachgebieteZoResponse" message="tns:getFachgebieteZoResponse" />
+      <fault name="ServiceException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/getFachgebieteZo/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getMedikamentCodierungsysteme">
+      <input wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/getMedikamentCodierungsystemeRequest" message="tns:getMedikamentCodierungsysteme" />
+      <output wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/getMedikamentCodierungsystemeResponse" message="tns:getMedikamentCodierungsystemeResponse" />
+      <fault name="ServiceException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/getMedikamentCodierungsysteme/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getModifyUzeStatusLa">
+      <input wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/getModifyUzeStatusLaRequest" message="tns:getModifyUzeStatusLa" />
+      <output wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/getModifyUzeStatusLaResponse" message="tns:getModifyUzeStatusLaResponse" />
+      <fault name="ServiceException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/getModifyUzeStatusLa/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getWeisungstypenLa">
+      <input wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/getWeisungstypenLaRequest" message="tns:getWeisungstypenLa" />
+      <output wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/getWeisungstypenLaResponse" message="tns:getWeisungstypenLaResponse" />
+      <fault name="ServiceException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/getWeisungstypenLa/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getWeisungstypenLe">
+      <input wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/getWeisungstypenLeRequest" message="tns:getWeisungstypenLe" />
+      <output wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/getWeisungstypenLeResponse" message="tns:getWeisungstypenLeResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/getWeisungstypenLe/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/getWeisungstypenLe/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/getWeisungstypenLe/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="preparePatientenInformationsBlatt">
+      <input wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/preparePatientenInformationsBlattRequest" message="tns:preparePatientenInformationsBlatt" />
+      <output wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/preparePatientenInformationsBlattResponse" message="tns:preparePatientenInformationsBlattResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/preparePatientenInformationsBlatt/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/preparePatientenInformationsBlatt/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/preparePatientenInformationsBlatt/Fault/ServiceException" message="tns:ServiceException" />
+      <fault name="UzeException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/preparePatientenInformationsBlatt/Fault/UzeException" message="tns:UzeException" />
+      <fault name="UzeInvalidParameterException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/preparePatientenInformationsBlatt/Fault/UzeInvalidParameterException" message="tns:UzeInvalidParameterException" />
+    </operation>
+    <operation name="realizeUze">
+      <input wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/realizeUzeRequest" message="tns:realizeUze" />
+      <output wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/realizeUzeResponse" message="tns:realizeUzeResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/realizeUze/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/realizeUze/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/realizeUze/Fault/ServiceException" message="tns:ServiceException" />
+      <fault name="UzeAnspruchException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/realizeUze/Fault/UzeAnspruchException" message="tns:UzeAnspruchException" />
+      <fault name="UzeException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/realizeUze/Fault/UzeException" message="tns:UzeException" />
+      <fault name="UzeFachgebietException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/realizeUze/Fault/UzeFachgebietException" message="tns:UzeFachgebietException" />
+      <fault name="UzeInvalidParameterException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/realizeUze/Fault/UzeInvalidParameterException" message="tns:UzeInvalidParameterException" />
+    </operation>
+    <operation name="restoreUzeLa">
+      <input wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/restoreUzeLaRequest" message="tns:restoreUzeLa" />
+      <output wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/restoreUzeLaResponse" message="tns:restoreUzeLaResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/restoreUzeLa/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/restoreUzeLa/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/restoreUzeLa/Fault/ServiceException" message="tns:ServiceException" />
+      <fault name="UzeException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/restoreUzeLa/Fault/UzeException" message="tns:UzeException" />
+      <fault name="UzeInvalidParameterException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/restoreUzeLa/Fault/UzeInvalidParameterException" message="tns:UzeInvalidParameterException" />
+    </operation>
+    <operation name="searchLeForZo">
+      <input wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchLeForZoRequest" message="tns:searchLeForZo" />
+      <output wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchLeForZoResponse" message="tns:searchLeForZoResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchLeForZo/Fault/AccessException" message="tns:AccessException" />
+      <fault name="CardException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchLeForZo/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchLeForZo/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchLeForZo/Fault/ServiceException" message="tns:ServiceException" />
+      <fault name="UzeException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchLeForZo/Fault/UzeException" message="tns:UzeException" />
+      <fault name="UzeInvalidParameterException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchLeForZo/Fault/UzeInvalidParameterException" message="tns:UzeInvalidParameterException" />
+    </operation>
+    <operation name="searchModifiableUzeLa">
+      <input wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchModifiableUzeLaRequest" message="tns:searchModifiableUzeLa" />
+      <output wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchModifiableUzeLaResponse" message="tns:searchModifiableUzeLaResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchModifiableUzeLa/Fault/AccessException" message="tns:AccessException" />
+      <fault name="CardException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchModifiableUzeLa/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchModifiableUzeLa/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchModifiableUzeLa/Fault/ServiceException" message="tns:ServiceException" />
+      <fault name="UzeException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchModifiableUzeLa/Fault/UzeException" message="tns:UzeException" />
+      <fault name="UzeInvalidParameterException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchModifiableUzeLa/Fault/UzeInvalidParameterException" message="tns:UzeInvalidParameterException" />
+    </operation>
+    <operation name="searchModifiableUzeLe">
+      <input wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchModifiableUzeLeRequest" message="tns:searchModifiableUzeLe" />
+      <output wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchModifiableUzeLeResponse" message="tns:searchModifiableUzeLeResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchModifiableUzeLe/Fault/AccessException" message="tns:AccessException" />
+      <fault name="CardException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchModifiableUzeLe/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchModifiableUzeLe/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchModifiableUzeLe/Fault/ServiceException" message="tns:ServiceException" />
+      <fault name="UzeException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchModifiableUzeLe/Fault/UzeException" message="tns:UzeException" />
+      <fault name="UzeInvalidParameterException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchModifiableUzeLe/Fault/UzeInvalidParameterException" message="tns:UzeInvalidParameterException" />
+    </operation>
+    <operation name="searchRealizableUze">
+      <input wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchRealizableUzeRequest" message="tns:searchRealizableUze" />
+      <output wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchRealizableUzeResponse" message="tns:searchRealizableUzeResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchRealizableUze/Fault/AccessException" message="tns:AccessException" />
+      <fault name="CardException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchRealizableUze/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchRealizableUze/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchRealizableUze/Fault/ServiceException" message="tns:ServiceException" />
+      <fault name="UzeException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchRealizableUze/Fault/UzeException" message="tns:UzeException" />
+      <fault name="UzeInvalidParameterException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchRealizableUze/Fault/UzeInvalidParameterException" message="tns:UzeInvalidParameterException" />
+    </operation>
+    <operation name="searchRealizableZo">
+      <input wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchRealizableZoRequest" message="tns:searchRealizableZo" />
+      <output wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchRealizableZoResponse" message="tns:searchRealizableZoResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchRealizableZo/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchRealizableZo/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchRealizableZo/Fault/ServiceException" message="tns:ServiceException" />
+      <fault name="UzeException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchRealizableZo/Fault/UzeException" message="tns:UzeException" />
+      <fault name="UzeInvalidParameterException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchRealizableZo/Fault/UzeInvalidParameterException" message="tns:UzeInvalidParameterException" />
+    </operation>
+    <operation name="searchUzeLa">
+      <input wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchUzeLaRequest" message="tns:searchUzeLa" />
+      <output wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchUzeLaResponse" message="tns:searchUzeLaResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchUzeLa/Fault/AccessException" message="tns:AccessException" />
+      <fault name="CardException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchUzeLa/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchUzeLa/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchUzeLa/Fault/ServiceException" message="tns:ServiceException" />
+      <fault name="UzeException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchUzeLa/Fault/UzeException" message="tns:UzeException" />
+      <fault name="UzeInvalidParameterException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchUzeLa/Fault/UzeInvalidParameterException" message="tns:UzeInvalidParameterException" />
+    </operation>
+    <operation name="searchUzeLe">
+      <input wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchUzeLeRequest" message="tns:searchUzeLe" />
+      <output wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchUzeLeResponse" message="tns:searchUzeLeResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchUzeLe/Fault/AccessException" message="tns:AccessException" />
+      <fault name="CardException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchUzeLe/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchUzeLe/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchUzeLe/Fault/ServiceException" message="tns:ServiceException" />
+      <fault name="UzeException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchUzeLe/Fault/UzeException" message="tns:UzeException" />
+      <fault name="UzeInvalidParameterException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/searchUzeLe/Fault/UzeInvalidParameterException" message="tns:UzeInvalidParameterException" />
+    </operation>
+    <operation name="storeUze">
+      <input wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/storeUzeRequest" message="tns:storeUze" />
+      <output wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/storeUzeResponse" message="tns:storeUzeResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/storeUze/Fault/AccessException" message="tns:AccessException" />
+      <fault name="CardException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/storeUze/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/storeUze/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/storeUze/Fault/ServiceException" message="tns:ServiceException" />
+      <fault name="UzeAnspruchException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/storeUze/Fault/UzeAnspruchException" message="tns:UzeAnspruchException" />
+      <fault name="UzeException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/storeUze/Fault/UzeException" message="tns:UzeException" />
+      <fault name="UzeInvalidParameterException" wsam:Action="http://soap.uze.client.chipkarte.at/IUzeService/storeUze/Fault/UzeInvalidParameterException" message="tns:UzeInvalidParameterException" />
+    </operation>
+  </portType>
+  <binding name="uze_5Binding" type="tns:IUzeService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="acquireAnspruchSvPerson">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+      <fault name="UzeAnspruchException">
+        <soap:fault name="UzeAnspruchException" use="literal" />
+      </fault>
+      <fault name="UzeException">
+        <soap:fault name="UzeException" use="literal" />
+      </fault>
+      <fault name="UzeInvalidParameterException">
+        <soap:fault name="UzeInvalidParameterException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="cancelUzeLa">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+      <fault name="UzeException">
+        <soap:fault name="UzeException" use="literal" />
+      </fault>
+      <fault name="UzeInvalidParameterException">
+        <soap:fault name="UzeInvalidParameterException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="cancelUzeLe">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+      <fault name="UzeException">
+        <soap:fault name="UzeException" use="literal" />
+      </fault>
+      <fault name="UzeInvalidParameterException">
+        <soap:fault name="UzeInvalidParameterException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="changeUzeLa">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+      <fault name="UzeException">
+        <soap:fault name="UzeException" use="literal" />
+      </fault>
+      <fault name="UzeInvalidParameterException">
+        <soap:fault name="UzeInvalidParameterException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="checkStatus">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getAllUzeStatus">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getBehandlungskontexte">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getFachgebieteZo">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getMedikamentCodierungsysteme">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getModifyUzeStatusLa">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getWeisungstypenLa">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getWeisungstypenLe">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="preparePatientenInformationsBlatt">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+      <fault name="UzeException">
+        <soap:fault name="UzeException" use="literal" />
+      </fault>
+      <fault name="UzeInvalidParameterException">
+        <soap:fault name="UzeInvalidParameterException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="realizeUze">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+      <fault name="UzeAnspruchException">
+        <soap:fault name="UzeAnspruchException" use="literal" />
+      </fault>
+      <fault name="UzeException">
+        <soap:fault name="UzeException" use="literal" />
+      </fault>
+      <fault name="UzeFachgebietException">
+        <soap:fault name="UzeFachgebietException" use="literal" />
+      </fault>
+      <fault name="UzeInvalidParameterException">
+        <soap:fault name="UzeInvalidParameterException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="restoreUzeLa">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+      <fault name="UzeException">
+        <soap:fault name="UzeException" use="literal" />
+      </fault>
+      <fault name="UzeInvalidParameterException">
+        <soap:fault name="UzeInvalidParameterException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="searchLeForZo">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+      <fault name="UzeException">
+        <soap:fault name="UzeException" use="literal" />
+      </fault>
+      <fault name="UzeInvalidParameterException">
+        <soap:fault name="UzeInvalidParameterException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="searchModifiableUzeLa">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+      <fault name="UzeException">
+        <soap:fault name="UzeException" use="literal" />
+      </fault>
+      <fault name="UzeInvalidParameterException">
+        <soap:fault name="UzeInvalidParameterException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="searchModifiableUzeLe">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+      <fault name="UzeException">
+        <soap:fault name="UzeException" use="literal" />
+      </fault>
+      <fault name="UzeInvalidParameterException">
+        <soap:fault name="UzeInvalidParameterException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="searchRealizableUze">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+      <fault name="UzeException">
+        <soap:fault name="UzeException" use="literal" />
+      </fault>
+      <fault name="UzeInvalidParameterException">
+        <soap:fault name="UzeInvalidParameterException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="searchRealizableZo">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+      <fault name="UzeException">
+        <soap:fault name="UzeException" use="literal" />
+      </fault>
+      <fault name="UzeInvalidParameterException">
+        <soap:fault name="UzeInvalidParameterException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="searchUzeLa">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+      <fault name="UzeException">
+        <soap:fault name="UzeException" use="literal" />
+      </fault>
+      <fault name="UzeInvalidParameterException">
+        <soap:fault name="UzeInvalidParameterException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="searchUzeLe">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+      <fault name="UzeException">
+        <soap:fault name="UzeException" use="literal" />
+      </fault>
+      <fault name="UzeInvalidParameterException">
+        <soap:fault name="UzeInvalidParameterException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="storeUze">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+      <fault name="UzeAnspruchException">
+        <soap:fault name="UzeAnspruchException" use="literal" />
+      </fault>
+      <fault name="UzeException">
+        <soap:fault name="UzeException" use="literal" />
+      </fault>
+      <fault name="UzeInvalidParameterException">
+        <soap:fault name="UzeInvalidParameterException" use="literal" />
+      </fault>
+    </operation>
+  </binding>
+  <service name="UzeService">
+    <port name="uze_5" binding="tns:uze_5Binding">
+      <soap:address location="http://localhost/uze/5" />
+    </port>
+  </service>
+</definitions>

@@ -1,0 +1,324 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://soap.sas.client.chipkarte.at" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://soap.sas.client.chipkarte.at" name="SasService">
+  <types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://exceptions.soap.base.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://exceptions.soap.base.client.chipkarte.at" version="1.0">
+      <xs:element name="AccessException" type="tns:accessExceptionContent" />
+      <xs:element name="DialogException" type="tns:dialogExceptionContent" />
+      <xs:element name="ServiceException" type="tns:serviceExceptionContent" />
+      <xs:complexType name="accessExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="baseExceptionContent">
+        <xs:sequence>
+          <xs:element name="code" type="xs:string" minOccurs="0" />
+          <xs:element name="errorCode" type="xs:int" minOccurs="0" />
+          <xs:element name="message" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="dialogExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="serviceExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://soap.base.client.chipkarte.at" xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" xmlns:tns="http://exceptions.soap.sas.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://exceptions.soap.sas.client.chipkarte.at" version="1.0">
+      <xs:import namespace="http://exceptions.soap.base.client.chipkarte.at" />
+      <xs:element name="InvalidParameterSuchkriterienException" type="tns:invalidParameterSuchkriterienExceptionContent" />
+      <xs:element name="SasException" type="tns:sasExceptionContent" />
+      <xs:complexType name="invalidParameterSuchkriterienExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="baseexc:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="sasExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="baseexc:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://soap.base.client.chipkarte.at" version="1.0">
+      <xs:complexType name="property">
+        <xs:sequence>
+          <xs:element name="key" type="xs:string" minOccurs="0" />
+          <xs:element name="value" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://soap.base.client.chipkarte.at" xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" xmlns:sasexc="http://exceptions.soap.sas.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://soap.sas.client.chipkarte.at" version="1.0">
+      <xs:import namespace="http://soap.base.client.chipkarte.at" />
+      <xs:element name="adressdatenAbfragen" type="tns:adressdatenAbfragen" />
+      <xs:element name="adressdatenAbfragenResponse" type="tns:adressdatenAbfragenResponse" />
+      <xs:element name="checkStatus" type="tns:checkStatus" />
+      <xs:element name="checkStatusResponse" type="tns:checkStatusResponse" />
+      <xs:element name="patientendatenAbfragen" type="tns:patientendatenAbfragen" />
+      <xs:element name="patientendatenAbfragenResponse" type="tns:patientendatenAbfragenResponse" />
+      <xs:element name="svNummerAbfragen" type="tns:svNummerAbfragen" />
+      <xs:element name="svNummerAbfragenResponse" type="tns:svNummerAbfragenResponse" />
+      <xs:complexType name="abfrageErgebnis">
+        <xs:sequence>
+          <xs:element name="druckFamilienname" type="xs:string" minOccurs="0" />
+          <xs:element name="druckVorname" type="xs:string" minOccurs="0" />
+          <xs:element name="familienname" type="xs:string" minOccurs="0" />
+          <xs:element name="geburtsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="todesdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="todesdatumBestaetigtKZ" type="xs:string" minOccurs="0" />
+          <xs:element name="vorname" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="adressdaten">
+        <xs:sequence>
+          <xs:element name="abgabestelle" type="xs:string" minOccurs="0" />
+          <xs:element name="anschriftszusatz" type="xs:string" minOccurs="0" />
+          <xs:element name="hausnummer" type="xs:string" minOccurs="0" />
+          <xs:element name="ort" type="xs:string" minOccurs="0" />
+          <xs:element name="plz" type="xs:string" minOccurs="0" />
+          <xs:element name="postfachNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="postfachText" type="xs:string" minOccurs="0" />
+          <xs:element name="staatscode" type="xs:string" minOccurs="0" />
+          <xs:element name="stockTuerNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="strasse" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="adressdatenAbfragen">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="adressdatenAbfragenResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:adressdaten" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="checkStatus">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="checkStatusResponse">
+        <xs:sequence>
+          <xs:element name="return" type="base:property" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="patientendatenAbfragen">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="patientendatenAbfragenResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:abfrageErgebnis" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="suchkriterien">
+        <xs:sequence>
+          <xs:element name="familienname" type="xs:string" minOccurs="0" />
+          <xs:element name="geburtsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="vorname" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="svNummerAbfragen">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummerAbfragenSuchkriterien" type="tns:suchkriterien" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="svNummerAbfragenResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:abfrageErgebnis" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </types>
+  <message name="AccessException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:AccessException" />
+  </message>
+  <message name="DialogException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:DialogException" />
+  </message>
+  <message name="InvalidParameterSuchkriterienException">
+    <part xmlns:sasexc="http://exceptions.soap.sas.client.chipkarte.at" name="fault" element="sasexc:InvalidParameterSuchkriterienException" />
+  </message>
+  <message name="SasException">
+    <part xmlns:sasexc="http://exceptions.soap.sas.client.chipkarte.at" name="fault" element="sasexc:SasException" />
+  </message>
+  <message name="ServiceException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:ServiceException" />
+  </message>
+  <message name="adressdatenAbfragen">
+    <part name="parameters" element="tns:adressdatenAbfragen" />
+  </message>
+  <message name="adressdatenAbfragenResponse">
+    <part name="parameters" element="tns:adressdatenAbfragenResponse" />
+  </message>
+  <message name="checkStatus">
+    <part name="parameters" element="tns:checkStatus" />
+  </message>
+  <message name="checkStatusResponse">
+    <part name="parameters" element="tns:checkStatusResponse" />
+  </message>
+  <message name="patientendatenAbfragen">
+    <part name="parameters" element="tns:patientendatenAbfragen" />
+  </message>
+  <message name="patientendatenAbfragenResponse">
+    <part name="parameters" element="tns:patientendatenAbfragenResponse" />
+  </message>
+  <message name="svNummerAbfragen">
+    <part name="parameters" element="tns:svNummerAbfragen" />
+  </message>
+  <message name="svNummerAbfragenResponse">
+    <part name="parameters" element="tns:svNummerAbfragenResponse" />
+  </message>
+  <portType name="ISasService">
+    <operation name="adressdatenAbfragen">
+      <input wsam:Action="http://soap.sas.client.chipkarte.at/ISasService/adressdatenAbfragenRequest" message="tns:adressdatenAbfragen" />
+      <output wsam:Action="http://soap.sas.client.chipkarte.at/ISasService/adressdatenAbfragenResponse" message="tns:adressdatenAbfragenResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.sas.client.chipkarte.at/ISasService/adressdatenAbfragen/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.sas.client.chipkarte.at/ISasService/adressdatenAbfragen/Fault/DialogException" message="tns:DialogException" />
+      <fault name="InvalidParameterSuchkriterienException" wsam:Action="http://soap.sas.client.chipkarte.at/ISasService/adressdatenAbfragen/Fault/InvalidParameterSuchkriterienException" message="tns:InvalidParameterSuchkriterienException" />
+      <fault name="SasException" wsam:Action="http://soap.sas.client.chipkarte.at/ISasService/adressdatenAbfragen/Fault/SasException" message="tns:SasException" />
+      <fault name="ServiceException" wsam:Action="http://soap.sas.client.chipkarte.at/ISasService/adressdatenAbfragen/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="checkStatus">
+      <input wsam:Action="http://soap.sas.client.chipkarte.at/ISasService/checkStatusRequest" message="tns:checkStatus" />
+      <output wsam:Action="http://soap.sas.client.chipkarte.at/ISasService/checkStatusResponse" message="tns:checkStatusResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.sas.client.chipkarte.at/ISasService/checkStatus/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.sas.client.chipkarte.at/ISasService/checkStatus/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.sas.client.chipkarte.at/ISasService/checkStatus/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="patientendatenAbfragen">
+      <input wsam:Action="http://soap.sas.client.chipkarte.at/ISasService/patientendatenAbfragenRequest" message="tns:patientendatenAbfragen" />
+      <output wsam:Action="http://soap.sas.client.chipkarte.at/ISasService/patientendatenAbfragenResponse" message="tns:patientendatenAbfragenResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.sas.client.chipkarte.at/ISasService/patientendatenAbfragen/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.sas.client.chipkarte.at/ISasService/patientendatenAbfragen/Fault/DialogException" message="tns:DialogException" />
+      <fault name="InvalidParameterSuchkriterienException" wsam:Action="http://soap.sas.client.chipkarte.at/ISasService/patientendatenAbfragen/Fault/InvalidParameterSuchkriterienException" message="tns:InvalidParameterSuchkriterienException" />
+      <fault name="SasException" wsam:Action="http://soap.sas.client.chipkarte.at/ISasService/patientendatenAbfragen/Fault/SasException" message="tns:SasException" />
+      <fault name="ServiceException" wsam:Action="http://soap.sas.client.chipkarte.at/ISasService/patientendatenAbfragen/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="svNummerAbfragen">
+      <input wsam:Action="http://soap.sas.client.chipkarte.at/ISasService/svNummerAbfragenRequest" message="tns:svNummerAbfragen" />
+      <output wsam:Action="http://soap.sas.client.chipkarte.at/ISasService/svNummerAbfragenResponse" message="tns:svNummerAbfragenResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.sas.client.chipkarte.at/ISasService/svNummerAbfragen/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.sas.client.chipkarte.at/ISasService/svNummerAbfragen/Fault/DialogException" message="tns:DialogException" />
+      <fault name="InvalidParameterSuchkriterienException" wsam:Action="http://soap.sas.client.chipkarte.at/ISasService/svNummerAbfragen/Fault/InvalidParameterSuchkriterienException" message="tns:InvalidParameterSuchkriterienException" />
+      <fault name="SasException" wsam:Action="http://soap.sas.client.chipkarte.at/ISasService/svNummerAbfragen/Fault/SasException" message="tns:SasException" />
+      <fault name="ServiceException" wsam:Action="http://soap.sas.client.chipkarte.at/ISasService/svNummerAbfragen/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+  </portType>
+  <binding name="sas_12Binding" type="tns:ISasService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="adressdatenAbfragen">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="InvalidParameterSuchkriterienException">
+        <soap:fault name="InvalidParameterSuchkriterienException" use="literal" />
+      </fault>
+      <fault name="SasException">
+        <soap:fault name="SasException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="checkStatus">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="patientendatenAbfragen">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="InvalidParameterSuchkriterienException">
+        <soap:fault name="InvalidParameterSuchkriterienException" use="literal" />
+      </fault>
+      <fault name="SasException">
+        <soap:fault name="SasException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="svNummerAbfragen">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="InvalidParameterSuchkriterienException">
+        <soap:fault name="InvalidParameterSuchkriterienException" use="literal" />
+      </fault>
+      <fault name="SasException">
+        <soap:fault name="SasException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+  </binding>
+  <service name="SasService">
+    <port name="sas_12" binding="tns:sas_12Binding">
+      <soap:address location="http://localhost/sas/12" />
+    </port>
+  </service>
+</definitions>

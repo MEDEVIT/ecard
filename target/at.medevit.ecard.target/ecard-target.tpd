@@ -1,0 +1,8 @@
+target "Mars for E-Card" 
+
+with source allEnvironments
+
+location "http://download.eclipse.org/releases/mars" {
+	org.eclipse.e4.rcp.feature.group
+	org.eclipse.rap.sdk.feature.feature.group
+}

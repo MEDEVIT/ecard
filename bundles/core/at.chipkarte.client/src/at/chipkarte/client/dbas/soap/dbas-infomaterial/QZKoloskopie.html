@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Dokumentationsblatt Koloskope</title>
+<style type="text/css">
+body {
+	background-color: #FFFFFF;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+	color: #000000;
+}
+
+#container {
+	background-color: #FFFFFF;
+	margin-right: auto;
+	margin-left: auto;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	height: auto;
+}
+
+legend {
+	font-size: 10pt;
+	font-weight: bold;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	color: black;
+}
+
+fieldset {
+  width:644px;
+  border: solid 1px black;
+	padding: 5px;
+}
+
+.titel {
+	font-size: 12pt;
+	font-weight: bold;
+	padding-bottom: 4px;
+	margin-bottom: 0px;
+}
+
+.key {
+	width:50%;
+	font-weight: bold;
+}
+
+.value {
+	width:50%;
+}
+
+.key_big {
+  width:75%;
+	font-weight: bold;
+}
+
+.key_small {
+  width:25%;
+	font-weight: bold;
+}
+
+.value_big {
+  width:75%;
+}
+
+.value_small {
+  width:25%;
+}
+
+td {
+	vertical-align: top;
+}
+.value_small1 { width:162px;
+ vertical-align:top;
+}
+</style>
+</head>
+<body>
+<div id="container">
+<div class="titel">Befundblatt QZ Koloskopie</div>
+
+<fieldset><legend>Vertragspartnernummer</legend>
+<table width="100%">
+	<tr>
+		<td class="key_small"><nobr>Vertragspartnernummer:&nbsp;</nobr></td>
+		<td class="value_small"><!-- zip --> 010442</td>
+		
+	</tr>
+</table>
+</fieldset>
+
+<fieldset><legend>Personendaten</legend>
+  <table width="100%">
+
+	<tr>
+		<td class="key_small"><nobr>Vorname:&nbsp;</nobr></td>
+		<td class="value_small" colspan="3"><!-- JaNeinTyp --> Aleksandra</td>
+	</tr>
+		<tr>
+		<td class="key_small"><nobr>Familienname:&nbsp;</nobr></td>
+		<td class="value_small" colspan="3"><!-- JaNeinTyp --> Musterfrau</td>
+	</tr>
+    <tr>
+		<td class="key_small"><nobr>Postleitzahl:&nbsp;</nobr></td>
+		<td class="value_small">1010</td>
+		<td class="key_small"><nobr>Ort:&nbsp;</nobr></td>
+		<td class="value_small">Wien</td>
+	</tr>	
+	<tr>
+		<td class="key_small"><nobr>Geburtsdatum:&nbsp;</nobr></td>
+		<td class="value_small"><!-- xsd:date --> 01.01.1950</td>
+		<td class="key_small"><nobr>Geschlecht:&nbsp;</nobr></td>
+		<td class="value_small"><!-- sex --> weiblich</td>
+	</tr>
+</table>
+</fieldset>
+
+<fieldset><legend>Daten zur Untersuchung</legend>
+<table width="100%">	
+	<tr>
+		<td class="key_small"><nobr>Untersuchungsdatum:&nbsp;</nobr></td>
+		<td class="value_small"><!-- xsd:date --> 24.04.2008</td>
+		<td class="key_small"><nobr>Untersuchung:&nbsp;</nobr></td>
+		<td class="value_small"><!-- sex --> Vorsorge</td>
+	</tr>	
+</table>
+</fieldset>
+
+<fieldset><legend>Grundinformation</legend>
+<table width="100%">
+	<tr>
+		<td class="key_small"><nobr>Vorbereitungsqualit&auml;t:&nbsp;</nobr></td>
+		<td class="value_small" colspan="3">schlecht nur im rechten Kolon</td>
+
+	</tr>
+  
+  <tr>
+		<td class="key_small"><nobr>Sedierung / Analgesie:&nbsp;</nobr></td>
+		<td class="value_small"><!-- JaNeinTyp --> Ja</td>
+		<td class="key_small"><nobr>Zoekum erreicht:&nbsp;</nobr></td>
+		<td class="value_small"><!-- JaNeinTyp --> Nein</td>
+	</tr>
+	<tr>
+		<td class="key_small" colspan="2"><nobr>Grund f&uuml;r unvollst&auml;ndige Koloskopie:&nbsp;</nobr></td>
+		<td class="value_small" colspan="2"><!-- GrundUnvollstaendigeKoloTyp -->Verschmutzung</td>
+	</tr>
+</table>
+</fieldset>
+
+<fieldset><legend>Makroskopischer Befund</legend>
+<table width="100%">	
+	<tr>
+		<td class="key_small"><nobr>Makroskopischer Befund:&nbsp;</nobr></td>
+		<td class="value_big"><!-- MakroskopischerBefundTyp -->Rektum-Ca.</td>
+	</tr>
+</table>
+</fieldset>
+
+<fieldset><legend>Komplikationen</legend>
+<table width="100%">		
+	<tr>
+		<td class="key"><nobr>Interventionspflichtige
+		Komplikation:&nbsp;</nobr></td>
+		<td class="value"><!-- JaNeinTyp --> Ja</td>
+	</tr>
+	<tr>
+		<td class="key"><nobr>Komplikationsart:&nbsp;</nobr></td>
+		<td class="value"><!-- InterKomplikationJATyp --> kardiopulmonal</td>
+	</tr>
+	<tr>
+		<td class="key"><nobr>Behandlung der Komplikation:&nbsp;</nobr></td>
+		<td class="value"><!-- BehandlungTyp --> konservativ</td>
+	</tr>
+	<tr>
+		<td class="key"><nobr>Ausgang der Komplikation:&nbsp;</nobr></td>
+		<td class="value"><!-- AusgangTyp --> Restitutio ad integrum</td>
+	</tr>
+</table>
+</fieldset>
+
+<fieldset><legend>Bei Polypen</legend>
+<table width="100%">		
+	<tr>
+		<td class="key_small"><nobr>Anzahl:&nbsp;</nobr></td>
+		<td class="value_small"><!-- AnzahlTyp -->1</td>
+		<td class="key_small"><nobr>Form:&nbsp;</nobr></td>
+		<td class="value_small"><!-- FormTyp --> sessil</td>
+	</tr>
+	<tr>
+		<td class="key_small"><nobr>Gr&ouml;&szlig;e:&nbsp;</nobr></td>
+		<td class="value_small"><!-- GroesseTyp --> 1 - 2cm</td>
+		<td class="key_small"><nobr>Lokalisation:&nbsp;</nobr></td>
+		<td class="value_small"><!-- LokalisationTyp --> nur proximal des Sigma</td>
+	</tr>
+</table>
+</fieldset>
+
+<fieldset><legend>Polypenabtragung / Biopsie</legend>
+<table width="100%">	
+	<tr>
+		<td class="key" colspan="2"><nobr>Polypektomie mittels
+		Schlinge:&nbsp;</nobr></td>
+		<td class="value_small"><!-- JaNeinTyp --> hochfrequent</td>
+	</tr>
+	<tr>
+		<td class="key_small"><nobr>Zangenabtragung:&nbsp;</nobr></td>
+		<td class="value_small"><!-- JaNeinTyp --> Ja</td>
+		<td class="key_small"><nobr>Polyp(en) entfernt:&nbsp;</nobr></td>
+		<td class="value_small"><!-- EntferntTyp --> alle</td>
+	</tr>
+	<tr>
+		<td class="key_small"><nobr>Polyp(en) geborgen:&nbsp;</nobr></td>
+		<td class="value_small"><!-- JaNeinTyp --> Ja</td>
+		<td class="key_small"><nobr>Biopsie entnommen:&nbsp;</nobr></td>
+		<td class="value_small"><!-- JaNeinTyp --> Ja</td>
+	</tr>
+</table>
+</fieldset>
+
+<fieldset><legend>Histologischer Befund</legend>
+<table width="100%">		
+
+	<tr>
+		<td class="key_small"><nobr>Polyp:&nbsp;</nobr></td>
+		<td class="value_small" colspan="3"><!-- PolypTyp --> sonstiger (gutartig)</td>
+	</tr>
+	<tr>
+		<td class="key_small"><nobr>Adenom:&nbsp;</nobr></td>
+		<td class="value_small" colspan="3"><!-- AdenomTyp --> traditionell serratiertes Adenom (TSA)</td>
+	</tr>
+	<tr>
+		<td class="key_small"><nobr>Anzahl Adenome:&nbsp;</nobr></td>
+		<td class="value_small"><!-- JaNeinUnklarTyp --> 1</td>
+		<td class="key_small"><nobr>Adenom in toto entfernt:&nbsp;</nobr></td>
+		<td class="value_small"><!-- JaNeinUnklarTyp --> Ja</td>
+	</tr>
+	<tr>
+    <td class="key_small"><nobr>Karzinom:&nbsp;</nobr></td>
+		<td class="value_small"><!-- JaNeinUnklarTyp --> Ja</td>
+    <td class="key_small"><nobr>Karzinom in toto entfernt:&nbsp;</nobr></td>
+		<td class="value_small"><!-- JaNeinUnklarTyp --> Ja</td>
+
+	</tr>
+	<tr>
+		<td class="key_small"><nobr>Dysplasie:&nbsp;</nobr></td>
+		<td class="value_small">geringgradig (Low Grade)</td>
+		<td class="key_small"><nobr>Sonstiges:&nbsp;</nobr></td>
+		<td class="value_small"><!-- BenigneMaligneTyp --> benigne</td>
+	</tr>
+</table>
+</fieldset>
+
+<fieldset><legend>Diagnose</legend>
+<table width="100%">		
+	<tr>
+		<td class="key"><nobr>schwerwiegendste Diagnose:&nbsp;</nobr></td>
+		<td class="value"><!-- DiagnoseTyp --> Adenome</td>
+	</tr>
+</table>
+</fieldset>
+
+<fieldset><legend>Angeratene weitere Ma&szlig;nahmen</legend>
+<table width="100%">
+	<tr>
+		<td class="key_small">Angeratene weitere Ma&szlig;nahmen bei
+		Polyp(en) / Adenom(en) / Karzinom :&nbsp;</td>
+		<td class="value_small"><!-- WeitereMa&szlig;nahmenTyp --> Ja</td>
+	</tr>		
+	<tr>
+		<td class="key"><nobr>Ma&szlig;nahme:&nbsp;</nobr></td>
+		<td class="value"><!-- Ma&szlig;nahmeTyp -->
+	    Kontrollkoloskopie</td>
+	</tr>
+	<tr>
+		<td class="key"><nobr>endoskopische Polypenabtragung:&nbsp;</nobr></td>
+		<td class="value"><!-- AmbulantStationaerTyp --> -</td>
+	</tr>
+	<tr>
+		<td class="key"><nobr>Kontrollkoloskopie in:&nbsp;</nobr></td>
+		<td class="value"><!-- MonateTyp --> 6 Monate</td>
+	</tr>
+</table>
+</fieldset>
+
+</div>
+</body>
+</html>

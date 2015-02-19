@@ -1,0 +1,303 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://soap.tsv.client.chipkarte.at" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://soap.tsv.client.chipkarte.at" name="TsvService">
+  <types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://exceptions.soap.base.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://exceptions.soap.base.client.chipkarte.at" version="1.0">
+      <xs:element name="AccessException" type="tns:accessExceptionContent" />
+      <xs:element name="CardException" type="tns:cardExceptionContent" />
+      <xs:element name="DialogException" type="tns:dialogExceptionContent" />
+      <xs:element name="ServiceException" type="tns:serviceExceptionContent" />
+      <xs:complexType name="accessExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="baseExceptionContent">
+        <xs:sequence>
+          <xs:element name="code" type="xs:string" minOccurs="0" />
+          <xs:element name="errorCode" type="xs:int" minOccurs="0" />
+          <xs:element name="message" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="cardExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="dialogExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="serviceExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" xmlns:tns="http://exceptions.soap.tsv.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://exceptions.soap.tsv.client.chipkarte.at" version="1.0">
+      <xs:import namespace="http://exceptions.soap.base.client.chipkarte.at" />
+      <xs:element name="InvalidParameterException" type="tns:invalidParameterExceptionContent" />
+      <xs:element name="SchulungException" type="tns:schulungExceptionContent" />
+      <xs:complexType name="invalidParameterExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="baseexc:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="schulungExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="baseexc:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://soap.base.client.chipkarte.at" version="1.0">
+      <xs:complexType name="property">
+        <xs:sequence>
+          <xs:element name="key" type="xs:string" minOccurs="0" />
+          <xs:element name="value" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://soap.base.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://soap.tsv.client.chipkarte.at" version="1.0">
+      <xs:import namespace="http://soap.base.client.chipkarte.at" />
+      <xs:element name="checkStatus" type="tns:checkStatus" />
+      <xs:element name="checkStatusResponse" type="tns:checkStatusResponse" />
+      <xs:element name="deleteSchulungsdaten" type="tns:deleteSchulungsdaten" />
+      <xs:element name="deleteSchulungsdatenResponse" type="tns:deleteSchulungsdatenResponse" />
+      <xs:element name="getSchulungsszenarien" type="tns:getSchulungsszenarien" />
+      <xs:element name="getSchulungsszenarienResponse" type="tns:getSchulungsszenarienResponse" />
+      <xs:element name="setSchulungsszenario" type="tns:setSchulungsszenario" />
+      <xs:element name="setSchulungsszenarioResponse" type="tns:setSchulungsszenarioResponse" />
+      <xs:complexType name="checkStatus">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="checkStatusResponse">
+        <xs:sequence>
+          <xs:element name="return" type="base:property" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="deleteSchulungsdaten">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="deleteSchulungsdatenResponse">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="getSchulungsszenarien">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getSchulungsszenarienResponse">
+        <xs:sequence>
+          <xs:element name="return" type="xs:string" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="setSchulungsszenario">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="szenarioId" type="xs:string" minOccurs="0" />
+          <xs:element name="fachgebietsCode" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="setSchulungsszenarioResponse">
+        <xs:sequence />
+      </xs:complexType>
+    </xs:schema>
+  </types>
+  <message name="AccessException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:AccessException" />
+  </message>
+  <message name="CardException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:CardException" />
+  </message>
+  <message name="DialogException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:DialogException" />
+  </message>
+  <message name="InvalidParameterException">
+    <part xmlns:ns7="http://exceptions.soap.tsv.client.chipkarte.at" name="fault" element="ns7:InvalidParameterException" />
+  </message>
+  <message name="SchulungException">
+    <part xmlns:ns5="http://exceptions.soap.tsv.client.chipkarte.at" name="fault" element="ns5:SchulungException" />
+  </message>
+  <message name="ServiceException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:ServiceException" />
+  </message>
+  <message name="checkStatus">
+    <part name="parameters" element="tns:checkStatus" />
+  </message>
+  <message name="checkStatusResponse">
+    <part name="parameters" element="tns:checkStatusResponse" />
+  </message>
+  <message name="deleteSchulungsdaten">
+    <part name="parameters" element="tns:deleteSchulungsdaten" />
+  </message>
+  <message name="deleteSchulungsdatenResponse">
+    <part name="parameters" element="tns:deleteSchulungsdatenResponse" />
+  </message>
+  <message name="getSchulungsszenarien">
+    <part name="parameters" element="tns:getSchulungsszenarien" />
+  </message>
+  <message name="getSchulungsszenarienResponse">
+    <part name="parameters" element="tns:getSchulungsszenarienResponse" />
+  </message>
+  <message name="setSchulungsszenario">
+    <part name="parameters" element="tns:setSchulungsszenario" />
+  </message>
+  <message name="setSchulungsszenarioResponse">
+    <part name="parameters" element="tns:setSchulungsszenarioResponse" />
+  </message>
+  <portType name="ITsvService">
+    <operation name="checkStatus">
+      <input wsam:Action="http://soap.tsv.client.chipkarte.at/ITsvService/checkStatusRequest" message="tns:checkStatus" />
+      <output wsam:Action="http://soap.tsv.client.chipkarte.at/ITsvService/checkStatusResponse" message="tns:checkStatusResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.tsv.client.chipkarte.at/ITsvService/checkStatus/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.tsv.client.chipkarte.at/ITsvService/checkStatus/Fault/DialogException" message="tns:DialogException" />
+      <fault name="SchulungException" wsam:Action="http://soap.tsv.client.chipkarte.at/ITsvService/checkStatus/Fault/SchulungException" message="tns:SchulungException" />
+      <fault name="ServiceException" wsam:Action="http://soap.tsv.client.chipkarte.at/ITsvService/checkStatus/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="deleteSchulungsdaten">
+      <input wsam:Action="http://soap.tsv.client.chipkarte.at/ITsvService/deleteSchulungsdatenRequest" message="tns:deleteSchulungsdaten" />
+      <output wsam:Action="http://soap.tsv.client.chipkarte.at/ITsvService/deleteSchulungsdatenResponse" message="tns:deleteSchulungsdatenResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.tsv.client.chipkarte.at/ITsvService/deleteSchulungsdaten/Fault/AccessException" message="tns:AccessException" />
+      <fault name="CardException" wsam:Action="http://soap.tsv.client.chipkarte.at/ITsvService/deleteSchulungsdaten/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.tsv.client.chipkarte.at/ITsvService/deleteSchulungsdaten/Fault/DialogException" message="tns:DialogException" />
+      <fault name="SchulungException" wsam:Action="http://soap.tsv.client.chipkarte.at/ITsvService/deleteSchulungsdaten/Fault/SchulungException" message="tns:SchulungException" />
+      <fault name="ServiceException" wsam:Action="http://soap.tsv.client.chipkarte.at/ITsvService/deleteSchulungsdaten/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getSchulungsszenarien">
+      <input wsam:Action="http://soap.tsv.client.chipkarte.at/ITsvService/getSchulungsszenarienRequest" message="tns:getSchulungsszenarien" />
+      <output wsam:Action="http://soap.tsv.client.chipkarte.at/ITsvService/getSchulungsszenarienResponse" message="tns:getSchulungsszenarienResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.tsv.client.chipkarte.at/ITsvService/getSchulungsszenarien/Fault/AccessException" message="tns:AccessException" />
+      <fault name="DialogException" wsam:Action="http://soap.tsv.client.chipkarte.at/ITsvService/getSchulungsszenarien/Fault/DialogException" message="tns:DialogException" />
+      <fault name="SchulungException" wsam:Action="http://soap.tsv.client.chipkarte.at/ITsvService/getSchulungsszenarien/Fault/SchulungException" message="tns:SchulungException" />
+      <fault name="ServiceException" wsam:Action="http://soap.tsv.client.chipkarte.at/ITsvService/getSchulungsszenarien/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="setSchulungsszenario">
+      <input wsam:Action="http://soap.tsv.client.chipkarte.at/ITsvService/setSchulungsszenarioRequest" message="tns:setSchulungsszenario" />
+      <output wsam:Action="http://soap.tsv.client.chipkarte.at/ITsvService/setSchulungsszenarioResponse" message="tns:setSchulungsszenarioResponse" />
+      <fault name="AccessException" wsam:Action="http://soap.tsv.client.chipkarte.at/ITsvService/setSchulungsszenario/Fault/AccessException" message="tns:AccessException" />
+      <fault name="CardException" wsam:Action="http://soap.tsv.client.chipkarte.at/ITsvService/setSchulungsszenario/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.tsv.client.chipkarte.at/ITsvService/setSchulungsszenario/Fault/DialogException" message="tns:DialogException" />
+      <fault name="InvalidParameterException" wsam:Action="http://soap.tsv.client.chipkarte.at/ITsvService/setSchulungsszenario/Fault/InvalidParameterException" message="tns:InvalidParameterException" />
+      <fault name="SchulungException" wsam:Action="http://soap.tsv.client.chipkarte.at/ITsvService/setSchulungsszenario/Fault/SchulungException" message="tns:SchulungException" />
+      <fault name="ServiceException" wsam:Action="http://soap.tsv.client.chipkarte.at/ITsvService/setSchulungsszenario/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+  </portType>
+  <binding name="tsv_3Binding" type="tns:ITsvService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="checkStatus">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="SchulungException">
+        <soap:fault name="SchulungException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="deleteSchulungsdaten">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="SchulungException">
+        <soap:fault name="SchulungException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getSchulungsszenarien">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="SchulungException">
+        <soap:fault name="SchulungException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="setSchulungsszenario">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="AccessException">
+        <soap:fault name="AccessException" use="literal" />
+      </fault>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal" />
+      </fault>
+      <fault name="SchulungException">
+        <soap:fault name="SchulungException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+  </binding>
+  <service name="TsvService">
+    <port name="tsv_3" binding="tns:tsv_3Binding">
+      <soap:address location="http://localhost/tsv/3" />
+    </port>
+  </service>
+</definitions>

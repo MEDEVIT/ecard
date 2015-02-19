@@ -1,0 +1,1346 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://soap.base.client.chipkarte.at" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://soap.base.client.chipkarte.at" name="BaseService">
+  <types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://exceptions.soap.base.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://exceptions.soap.base.client.chipkarte.at" version="1.0">
+      <xs:element name="CardException" type="tns:cardExceptionContent" />
+      <xs:element name="DialogException" type="tns:dialogExceptionContent" />
+      <xs:element name="ServiceException" type="tns:serviceExceptionContent" />
+      <xs:complexType name="baseExceptionContent">
+        <xs:sequence>
+          <xs:element name="code" type="xs:string" minOccurs="0" />
+          <xs:element name="errorCode" type="xs:int" minOccurs="0" />
+          <xs:element name="message" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="cardExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="dialogExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="serviceExceptionContent">
+        <xs:complexContent>
+          <xs:extension base="tns:baseExceptionContent">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" elementFormDefault="qualified" targetNamespace="http://soap.base.client.chipkarte.at" version="1.0">
+      <xs:element name="authenticateDialog" type="tns:authenticateDialog" />
+      <xs:element name="authenticateDialogEnt" type="tns:authenticateDialogEnt" />
+      <xs:element name="authenticateDialogEntResponse" type="tns:authenticateDialogEntResponse" />
+      <xs:element name="authenticateDialogResponse" type="tns:authenticateDialogResponse" />
+      <xs:element name="changePin" type="tns:changePin" />
+      <xs:element name="changePinResponse" type="tns:changePinResponse" />
+      <xs:element name="changePinWithPuk" type="tns:changePinWithPuk" />
+      <xs:element name="changePinWithPukResponse" type="tns:changePinWithPukResponse" />
+      <xs:element name="checkStatus" type="tns:checkStatus" />
+      <xs:element name="checkStatusResponse" type="tns:checkStatusResponse" />
+      <xs:element name="closeDialog" type="tns:closeDialog" />
+      <xs:element name="closeDialogResponse" type="tns:closeDialogResponse" />
+      <xs:element name="createDialog" type="tns:createDialog" />
+      <xs:element name="createDialogEnt" type="tns:createDialogEnt" />
+      <xs:element name="createDialogEntResponse" type="tns:createDialogEntResponse" />
+      <xs:element name="createDialogResponse" type="tns:createDialogResponse" />
+      <xs:element name="doCardTest" type="tns:doCardTest" />
+      <xs:element name="doCardTestResponse" type="tns:doCardTestResponse" />
+      <xs:element name="getBerechtigungen" type="tns:getBerechtigungen" />
+      <xs:element name="getBerechtigungenResponse" type="tns:getBerechtigungenResponse" />
+      <xs:element name="getCardData" type="tns:getCardData" />
+      <xs:element name="getCardDataResponse" type="tns:getCardDataResponse" />
+      <xs:element name="getCardReaders" type="tns:getCardReaders" />
+      <xs:element name="getCardReadersResponse" type="tns:getCardReadersResponse" />
+      <xs:element name="getExtendedCardData" type="tns:getExtendedCardData" />
+      <xs:element name="getExtendedCardDataResponse" type="tns:getExtendedCardDataResponse" />
+      <xs:element name="getFachgebiete" type="tns:getFachgebiete" />
+      <xs:element name="getFachgebieteByOrdId" type="tns:getFachgebieteByOrdId" />
+      <xs:element name="getFachgebieteByOrdIdResponse" type="tns:getFachgebieteByOrdIdResponse" />
+      <xs:element name="getFachgebieteResponse" type="tns:getFachgebieteResponse" />
+      <xs:element name="getFreeDialogs" type="tns:getFreeDialogs" />
+      <xs:element name="getFreeDialogsResponse" type="tns:getFreeDialogsResponse" />
+      <xs:element name="getGinaAndServiceavailabilityInformation" type="tns:getGinaAndServiceavailabilityInformation" />
+      <xs:element name="getGinaAndServiceavailabilityInformationResponse" type="tns:getGinaAndServiceavailabilityInformationResponse" />
+      <xs:element name="getGinaSoftwareVersion" type="tns:getGinaSoftwareVersion" />
+      <xs:element name="getGinaSoftwareVersionResponse" type="tns:getGinaSoftwareVersionResponse" />
+      <xs:element name="getMessages" type="tns:getMessages" />
+      <xs:element name="getMessagesResponse" type="tns:getMessagesResponse" />
+      <xs:element name="getMinMsgPollingIntervall" type="tns:getMinMsgPollingIntervall" />
+      <xs:element name="getMinMsgPollingIntervallResponse" type="tns:getMinMsgPollingIntervallResponse" />
+      <xs:element name="getReaderStatusEvents" type="tns:getReaderStatusEvents" />
+      <xs:element name="getReaderStatusEventsResponse" type="tns:getReaderStatusEventsResponse" />
+      <xs:element name="getSVTs" type="tns:getSVTs" />
+      <xs:element name="getSVTsResponse" type="tns:getSVTsResponse" />
+      <xs:element name="getVertraege" type="tns:getVertraege" />
+      <xs:element name="getVertraegeResponse" type="tns:getVertraegeResponse" />
+      <xs:element name="pollMessages" type="tns:pollMessages" />
+      <xs:element name="pollMessagesResponse" type="tns:pollMessagesResponse" />
+      <xs:element name="releaseCardReader" type="tns:releaseCardReader" />
+      <xs:element name="releaseCardReaderResponse" type="tns:releaseCardReaderResponse" />
+      <xs:element name="setCardReader" type="tns:setCardReader" />
+      <xs:element name="setCardReaderResponse" type="tns:setCardReaderResponse" />
+      <xs:element name="setDialogAddress" type="tns:setDialogAddress" />
+      <xs:element name="setDialogAddressResponse" type="tns:setDialogAddressResponse" />
+      <xs:element name="uebersiedelnOrdination" type="tns:uebersiedelnOrdination" />
+      <xs:element name="uebersiedelnOrdinationResponse" type="tns:uebersiedelnOrdinationResponse" />
+      <xs:complexType name="authenticateDialog">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cin" type="xs:string" minOccurs="0" />
+          <xs:element name="pin" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="authenticateDialogEnt">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="authenticateDialogEntResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:vertragspartnerV2" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="authenticateDialogResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:vertragspartnerV2" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="authenticationStatus">
+        <xs:sequence>
+          <xs:element name="failedLoginAttempts" type="xs:int" minOccurs="0" />
+          <xs:element name="failedPINAttempts" type="xs:int" minOccurs="0" />
+          <xs:element name="lastLoginDate" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="baseProperty">
+        <xs:sequence>
+          <xs:element name="code" type="xs:string" minOccurs="0" />
+          <xs:element name="nurAnzeige" type="xs:boolean" minOccurs="0" />
+          <xs:element name="text" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="card">
+        <xs:sequence>
+          <xs:element name="cardType" type="xs:string" minOccurs="0" />
+          <xs:element name="cin" type="xs:string" minOccurs="0" />
+          <xs:element name="csn" type="xs:string" minOccurs="0" />
+          <xs:element name="geburtsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="geschlechtCode" type="xs:string" minOccurs="0" />
+          <xs:element name="nachname" type="xs:string" minOccurs="0" />
+          <xs:element name="nachnameLatin1" type="xs:string" minOccurs="0" />
+          <xs:element name="nummer" type="xs:string" minOccurs="0" />
+          <xs:element name="titel" type="xs:string" minOccurs="0" />
+          <xs:element name="titelHinten" type="xs:string" minOccurs="0" />
+          <xs:element name="titelHintenLatin1" type="xs:string" minOccurs="0" />
+          <xs:element name="titelLatin1" type="xs:string" minOccurs="0" />
+          <xs:element name="vorname" type="xs:string" minOccurs="0" />
+          <xs:element name="vornameLatin1" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="cardReader">
+        <xs:sequence>
+          <xs:element name="id" type="xs:string" minOccurs="0" />
+          <xs:element name="name" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="changePin">
+        <xs:sequence>
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="cin" type="xs:string" minOccurs="0" />
+          <xs:element name="oldPin" type="xs:string" minOccurs="0" />
+          <xs:element name="newPin" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="changePinResponse">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="changePinWithPuk">
+        <xs:sequence>
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="cin" type="xs:string" minOccurs="0" />
+          <xs:element name="puk" type="xs:string" minOccurs="0" />
+          <xs:element name="newPin" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="changePinWithPukResponse">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="checkStatus">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="checkStatusResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:property" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="closeDialog">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="closeDialogResponse">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="createDialog">
+        <xs:sequence>
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="produktInfo" type="tns:produktInfo" minOccurs="0" />
+          <xs:element name="extUID" type="xs:string" minOccurs="0" />
+          <xs:element name="pushMessageEnabled" type="xs:boolean" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createDialogEnt">
+        <xs:sequence>
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="produktInfo" type="tns:produktInfo" minOccurs="0" />
+          <xs:element name="extUID" type="xs:string" minOccurs="0" />
+          <xs:element name="vpNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="pushMessageEnabled" type="xs:boolean" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createDialogEntResponse">
+        <xs:sequence>
+          <xs:element name="return" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createDialogResponse">
+        <xs:sequence>
+          <xs:element name="return" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="dialogsInfo">
+        <xs:sequence>
+          <xs:element name="currentDialogsCount" type="xs:int" minOccurs="0" />
+          <xs:element name="maxDialogsCount" type="xs:int" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="doCardTest">
+        <xs:sequence>
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="doCardTestResponse">
+        <xs:sequence>
+          <xs:element name="return" type="xs:int" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getBerechtigungen">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getBerechtigungenResponse">
+        <xs:sequence>
+          <xs:element name="return" type="xs:string" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getCardData">
+        <xs:sequence>
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getCardDataResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:card" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getCardReaders">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="getCardReadersResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:cardReader" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getExtendedCardData">
+        <xs:sequence>
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="CIN" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getExtendedCardDataResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:property" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getFachgebiete">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="getFachgebieteByOrdId">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="ordId" type="xs:string" minOccurs="0" />
+          <xs:element name="taetigkeitsBereichId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getFachgebieteByOrdIdResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:baseProperty" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getFachgebieteResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:baseProperty" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getFreeDialogs">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="getFreeDialogsResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:dialogsInfo" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getGinaAndServiceavailabilityInformation">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="getGinaAndServiceavailabilityInformationResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:statusInformationen" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getGinaSoftwareVersion">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="getGinaSoftwareVersionResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:ginaVersion" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getMessages">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="newOnly" type="xs:boolean" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getMessagesResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:message" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getMinMsgPollingIntervall">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getMinMsgPollingIntervallResponse">
+        <xs:sequence>
+          <xs:element name="return" type="xs:int" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getReaderStatusEvents">
+        <xs:sequence>
+          <xs:element name="handle" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="timeOut" type="xs:int" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getReaderStatusEventsResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:readerStatusResult" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getSVTs">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="getSVTsResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:svtProperty" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getVertraege">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getVertraegeResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:vertragsDaten" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ginaInfo">
+        <xs:sequence>
+          <xs:element name="dnsName" type="xs:string" minOccurs="0" />
+          <xs:element name="ipAdresse" type="xs:string" minOccurs="0" />
+          <xs:element name="produktVersion" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ginaVersion">
+        <xs:sequence>
+          <xs:element name="softwareVersion" type="xs:string" minOccurs="0" />
+          <xs:element name="typ" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="message">
+        <xs:sequence>
+          <xs:element name="appid" type="xs:string" minOccurs="0" />
+          <xs:element name="category" type="xs:string" minOccurs="0" />
+          <xs:element name="data" type="xs:string" minOccurs="0" />
+          <xs:element name="id" type="xs:string" minOccurs="0" />
+          <xs:element name="text" type="xs:string" minOccurs="0" />
+          <xs:element name="timestamp" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="messagePollResult">
+        <xs:sequence>
+          <xs:element name="nachrichten" type="tns:message" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="nachrichtenVerfuegbar" type="xs:boolean" minOccurs="0" />
+          <xs:element name="naechsterSuchzeitpunkt" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ordination">
+        <xs:sequence>
+          <xs:element name="bezirk" type="xs:string" minOccurs="0" />
+          <xs:element name="bundeslandCode" type="xs:string" minOccurs="0" />
+          <xs:element name="landCode" type="xs:string" minOccurs="0" />
+          <xs:element name="ordinationId" type="xs:string" minOccurs="0" />
+          <xs:element name="ordinationNumber" type="xs:long" minOccurs="0" />
+          <xs:element name="postleitzahl" type="xs:string" minOccurs="0" />
+          <xs:element name="stadt" type="xs:string" minOccurs="0" />
+          <xs:element name="strasse" type="xs:string" minOccurs="0" />
+          <xs:element name="uebersiedeln" type="xs:boolean" minOccurs="0" />
+          <xs:element name="uebersiedelnDate" type="xs:string" minOccurs="0" />
+          <xs:element name="vorgaengerOrdinationId" type="xs:string" minOccurs="0" />
+          <xs:element name="taetigkeitsBereich" type="tns:taetigkeitsBereich" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="pollMessages">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="suchzeitpunkt" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="pollMessagesResponse">
+        <xs:sequence>
+          <xs:element name="return" type="tns:messagePollResult" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="produktInfo">
+        <xs:sequence>
+          <xs:element name="produktId" type="xs:int" minOccurs="0" />
+          <xs:element name="produktVersion" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="property">
+        <xs:sequence>
+          <xs:element name="key" type="xs:string" minOccurs="0" />
+          <xs:element name="value" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="readerStatusEvent">
+        <xs:sequence>
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderState" type="xs:string" minOccurs="0" />
+          <xs:element name="cardType" type="xs:string" minOccurs="0" />
+          <xs:element name="eventType" type="xs:string" minOccurs="0" />
+          <xs:element name="timeStamp" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="readerStatusResult">
+        <xs:sequence>
+          <xs:element name="handle" type="xs:string" minOccurs="0" />
+          <xs:element name="readerStatusEvents" type="tns:readerStatusEvent" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="releaseCardReader">
+        <xs:sequence>
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="releaseCardReaderResponse">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="serviceStatusInformation">
+        <xs:sequence>
+          <xs:element name="hinweisAktion" type="xs:string" minOccurs="0" />
+          <xs:element name="hinweisZusatz" type="xs:string" minOccurs="0" />
+          <xs:element name="modus" type="xs:boolean" minOccurs="0" />
+          <xs:element name="modusText" type="xs:string" minOccurs="0" />
+          <xs:element name="serviceName" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="setCardReader">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="cardReaderId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="setCardReaderResponse">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="setDialogAddress">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="ordinationId" type="xs:string" minOccurs="0" />
+          <xs:element name="taetigkeitsBereichId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="setDialogAddressResponse">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="statusInformationen">
+        <xs:sequence>
+          <xs:element name="ginaInfo" type="tns:ginaInfo" minOccurs="0" />
+          <xs:element name="serviceStatusInformation" type="tns:serviceStatusInformation" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="wartungsfensterBis" type="xs:string" minOccurs="0" />
+          <xs:element name="wartungsfensterHinweis" type="xs:string" minOccurs="0" />
+          <xs:element name="wartungsfensterKennzeichen" type="xs:boolean" minOccurs="0" />
+          <xs:element name="wartungsfensterText" type="xs:string" minOccurs="0" />
+          <xs:element name="wartungsfensterVon" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="svPersonV2">
+        <xs:sequence>
+          <xs:element name="druckNachname" type="xs:string" minOccurs="0" />
+          <xs:element name="druckTitelHinten" type="xs:string" minOccurs="0" />
+          <xs:element name="druckTitelVorne" type="xs:string" minOccurs="0" />
+          <xs:element name="druckVorname" type="xs:string" minOccurs="0" />
+          <xs:element name="geburtsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="geschlecht" type="xs:string" minOccurs="0" />
+          <xs:element name="nachname" type="xs:string" minOccurs="0" />
+          <xs:element name="svNummer" type="xs:string" minOccurs="0" />
+          <xs:element name="titelHinten" type="xs:string" minOccurs="0" />
+          <xs:element name="titelVorne" type="xs:string" minOccurs="0" />
+          <xs:element name="vorname" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="svtProperty">
+        <xs:complexContent>
+          <xs:extension base="tns:baseProperty">
+            <xs:sequence>
+              <xs:element name="ASVG" type="xs:boolean" minOccurs="0" />
+              <xs:element name="EKVKCode" type="xs:string" minOccurs="0" />
+              <xs:element name="EKVKName" type="xs:string" minOccurs="0" />
+              <xs:element name="kurzbezeichnung" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="taetigkeitsBereich">
+        <xs:sequence>
+          <xs:element name="id" type="xs:string" minOccurs="0" />
+          <xs:element name="code" type="xs:string" minOccurs="0" />
+          <xs:element name="anzeigeText" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="uebersiedelnOrdination">
+        <xs:sequence>
+          <xs:element name="dialogId" type="xs:string" minOccurs="0" />
+          <xs:element name="ordinationId" type="xs:string" minOccurs="0" />
+          <xs:element name="forceUebersiedlung" type="xs:boolean" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="uebersiedelnOrdinationResponse">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="vertragsDaten">
+        <xs:sequence>
+          <xs:element name="bezBereich" type="xs:string" minOccurs="0" />
+          <xs:element name="fachGebietsCode" type="xs:string" minOccurs="0" />
+          <xs:element name="konsultationsrecht" type="xs:boolean" minOccurs="0" />
+          <xs:element name="leistungsSVT" type="xs:string" minOccurs="0" />
+          <xs:element name="ordId" type="xs:string" minOccurs="0" />
+          <xs:element name="rezepturrecht" type="xs:boolean" minOccurs="0" />
+          <xs:element name="verrechnungsSVT" type="xs:string" minOccurs="0" />
+          <xs:element name="taetigkeitsBereichId" type="xs:string" minOccurs="0" />
+          <xs:element name="vertragsTyp" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="vertragspartnerV2">
+        <xs:sequence>
+          <xs:element name="anredeCode" type="xs:string" minOccurs="0" />
+          <xs:element name="authenticationStatus" type="tns:authenticationStatus" minOccurs="0" />
+          <xs:element name="druckNachname" type="xs:string" minOccurs="0" />
+          <xs:element name="druckVorname" type="xs:string" minOccurs="0" />
+          <xs:element name="druckTitelHinten" type="xs:string" minOccurs="0" />
+          <xs:element name="druckTitelVorne" type="xs:string" minOccurs="0" />
+          <xs:element name="geburtsdatum" type="xs:string" minOccurs="0" />
+          <xs:element name="nachname" type="xs:string" minOccurs="0" />
+          <xs:element name="ordination" type="tns:ordination" maxOccurs="unbounded" minOccurs="0" nillable="true" />
+          <xs:element name="titelHinten" type="xs:string" minOccurs="0" />
+          <xs:element name="titelVorne" type="xs:string" minOccurs="0" />
+          <xs:element name="vorname" type="xs:string" minOccurs="0" />
+          <xs:element name="vpId" type="xs:string" minOccurs="0" />
+          <xs:element name="vpNummer" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </types>
+  <message name="CardException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:CardException" />
+  </message>
+  <message name="DialogException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:DialogException" />
+  </message>
+  <message name="ServiceException">
+    <part xmlns:baseexc="http://exceptions.soap.base.client.chipkarte.at" name="fault" element="baseexc:ServiceException" />
+  </message>
+  <message name="authenticateDialog">
+    <part name="parameters" element="tns:authenticateDialog" />
+  </message>
+  <message name="authenticateDialogEnt">
+    <part name="parameters" element="tns:authenticateDialogEnt" />
+  </message>
+  <message name="authenticateDialogEntResponse">
+    <part name="parameters" element="tns:authenticateDialogEntResponse" />
+  </message>
+  <message name="authenticateDialogResponse">
+    <part name="parameters" element="tns:authenticateDialogResponse" />
+  </message>
+  <message name="changePin">
+    <part name="parameters" element="tns:changePin" />
+  </message>
+  <message name="changePinResponse">
+    <part name="parameters" element="tns:changePinResponse" />
+  </message>
+  <message name="changePinWithPuk">
+    <part name="parameters" element="tns:changePinWithPuk" />
+  </message>
+  <message name="changePinWithPukResponse">
+    <part name="parameters" element="tns:changePinWithPukResponse" />
+  </message>
+  <message name="checkStatus">
+    <part name="parameters" element="tns:checkStatus" />
+  </message>
+  <message name="checkStatusResponse">
+    <part name="parameters" element="tns:checkStatusResponse" />
+  </message>
+  <message name="closeDialog">
+    <part name="parameters" element="tns:closeDialog" />
+  </message>
+  <message name="closeDialogResponse">
+    <part name="parameters" element="tns:closeDialogResponse" />
+  </message>
+  <message name="createDialog">
+    <part name="parameters" element="tns:createDialog" />
+  </message>
+  <message name="createDialogEnt">
+    <part name="parameters" element="tns:createDialogEnt" />
+  </message>
+  <message name="createDialogEntResponse">
+    <part name="parameters" element="tns:createDialogEntResponse" />
+  </message>
+  <message name="createDialogResponse">
+    <part name="parameters" element="tns:createDialogResponse" />
+  </message>
+  <message name="doCardTest">
+    <part name="parameters" element="tns:doCardTest" />
+  </message>
+  <message name="doCardTestResponse">
+    <part name="parameters" element="tns:doCardTestResponse" />
+  </message>
+  <message name="getBerechtigungen">
+    <part name="parameters" element="tns:getBerechtigungen" />
+  </message>
+  <message name="getBerechtigungenResponse">
+    <part name="parameters" element="tns:getBerechtigungenResponse" />
+  </message>
+  <message name="getCardData">
+    <part name="parameters" element="tns:getCardData" />
+  </message>
+  <message name="getCardDataResponse">
+    <part name="parameters" element="tns:getCardDataResponse" />
+  </message>
+  <message name="getCardReaders">
+    <part name="parameters" element="tns:getCardReaders" />
+  </message>
+  <message name="getCardReadersResponse">
+    <part name="parameters" element="tns:getCardReadersResponse" />
+  </message>
+  <message name="getExtendedCardData">
+    <part name="parameters" element="tns:getExtendedCardData" />
+  </message>
+  <message name="getExtendedCardDataResponse">
+    <part name="parameters" element="tns:getExtendedCardDataResponse" />
+  </message>
+  <message name="getFachgebiete">
+    <part name="parameters" element="tns:getFachgebiete" />
+  </message>
+  <message name="getFachgebieteByOrdId">
+    <part name="parameters" element="tns:getFachgebieteByOrdId" />
+  </message>
+  <message name="getFachgebieteByOrdIdResponse">
+    <part name="parameters" element="tns:getFachgebieteByOrdIdResponse" />
+  </message>
+  <message name="getFachgebieteResponse">
+    <part name="parameters" element="tns:getFachgebieteResponse" />
+  </message>
+  <message name="getFreeDialogs">
+    <part name="parameters" element="tns:getFreeDialogs" />
+  </message>
+  <message name="getFreeDialogsResponse">
+    <part name="parameters" element="tns:getFreeDialogsResponse" />
+  </message>
+  <message name="getGinaAndServiceavailabilityInformation">
+    <part name="parameters" element="tns:getGinaAndServiceavailabilityInformation" />
+  </message>
+  <message name="getGinaAndServiceavailabilityInformationResponse">
+    <part name="parameters" element="tns:getGinaAndServiceavailabilityInformationResponse" />
+  </message>
+  <message name="getGinaSoftwareVersion">
+    <part name="parameters" element="tns:getGinaSoftwareVersion" />
+  </message>
+  <message name="getGinaSoftwareVersionResponse">
+    <part name="parameters" element="tns:getGinaSoftwareVersionResponse" />
+  </message>
+  <message name="getMessages">
+    <part name="parameters" element="tns:getMessages" />
+  </message>
+  <message name="getMessagesResponse">
+    <part name="parameters" element="tns:getMessagesResponse" />
+  </message>
+  <message name="getMinMsgPollingIntervall">
+    <part name="parameters" element="tns:getMinMsgPollingIntervall" />
+  </message>
+  <message name="getMinMsgPollingIntervallResponse">
+    <part name="parameters" element="tns:getMinMsgPollingIntervallResponse" />
+  </message>
+  <message name="getReaderStatusEvents">
+    <part name="parameters" element="tns:getReaderStatusEvents" />
+  </message>
+  <message name="getReaderStatusEventsResponse">
+    <part name="parameters" element="tns:getReaderStatusEventsResponse" />
+  </message>
+  <message name="getSVTs">
+    <part name="parameters" element="tns:getSVTs" />
+  </message>
+  <message name="getSVTsResponse">
+    <part name="parameters" element="tns:getSVTsResponse" />
+  </message>
+  <message name="getVertraege">
+    <part name="parameters" element="tns:getVertraege" />
+  </message>
+  <message name="getVertraegeResponse">
+    <part name="parameters" element="tns:getVertraegeResponse" />
+  </message>
+  <message name="pollMessages">
+    <part name="parameters" element="tns:pollMessages" />
+  </message>
+  <message name="pollMessagesResponse">
+    <part name="parameters" element="tns:pollMessagesResponse" />
+  </message>
+  <message name="releaseCardReader">
+    <part name="parameters" element="tns:releaseCardReader" />
+  </message>
+  <message name="releaseCardReaderResponse">
+    <part name="parameters" element="tns:releaseCardReaderResponse" />
+  </message>
+  <message name="setCardReader">
+    <part name="parameters" element="tns:setCardReader" />
+  </message>
+  <message name="setCardReaderResponse">
+    <part name="parameters" element="tns:setCardReaderResponse" />
+  </message>
+  <message name="setDialogAddress">
+    <part name="parameters" element="tns:setDialogAddress" />
+  </message>
+  <message name="setDialogAddressResponse">
+    <part name="parameters" element="tns:setDialogAddressResponse" />
+  </message>
+  <message name="uebersiedelnOrdination">
+    <part name="parameters" element="tns:uebersiedelnOrdination" />
+  </message>
+  <message name="uebersiedelnOrdinationResponse">
+    <part name="parameters" element="tns:uebersiedelnOrdinationResponse" />
+  </message>
+  <portType name="IBaseService">
+    <operation name="authenticateDialog">
+      <input wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/authenticateDialogRequest" message="tns:authenticateDialog" />
+      <output wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/authenticateDialogResponse" message="tns:authenticateDialogResponse" />
+      <fault name="CardException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/authenticateDialog/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/authenticateDialog/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/authenticateDialog/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="authenticateDialogEnt">
+      <input wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/authenticateDialogEntRequest" message="tns:authenticateDialogEnt" />
+      <output wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/authenticateDialogEntResponse" message="tns:authenticateDialogEntResponse" />
+      <fault name="DialogException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/authenticateDialogEnt/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/authenticateDialogEnt/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="changePin">
+      <input wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/changePinRequest" message="tns:changePin" />
+      <output wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/changePinResponse" message="tns:changePinResponse" />
+      <fault name="CardException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/changePin/Fault/CardException" message="tns:CardException" />
+      <fault name="ServiceException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/changePin/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="changePinWithPuk">
+      <input wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/changePinWithPukRequest" message="tns:changePinWithPuk" />
+      <output wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/changePinWithPukResponse" message="tns:changePinWithPukResponse" />
+      <fault name="CardException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/changePinWithPuk/Fault/CardException" message="tns:CardException" />
+      <fault name="ServiceException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/changePinWithPuk/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="checkStatus">
+      <input wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/checkStatusRequest" message="tns:checkStatus" />
+      <output wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/checkStatusResponse" message="tns:checkStatusResponse" />
+      <fault name="DialogException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/checkStatus/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/checkStatus/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="closeDialog">
+      <input wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/closeDialogRequest" message="tns:closeDialog" />
+      <output wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/closeDialogResponse" message="tns:closeDialogResponse" />
+      <fault name="DialogException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/closeDialog/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/closeDialog/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="createDialog">
+      <input wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/createDialogRequest" message="tns:createDialog" />
+      <output wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/createDialogResponse" message="tns:createDialogResponse" />
+      <fault name="CardException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/createDialog/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/createDialog/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/createDialog/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="createDialogEnt">
+      <input wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/createDialogEntRequest" message="tns:createDialogEnt" />
+      <output wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/createDialogEntResponse" message="tns:createDialogEntResponse" />
+      <fault name="CardException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/createDialogEnt/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/createDialogEnt/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/createDialogEnt/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="doCardTest">
+      <input wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/doCardTestRequest" message="tns:doCardTest" />
+      <output wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/doCardTestResponse" message="tns:doCardTestResponse" />
+      <fault name="CardException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/doCardTest/Fault/CardException" message="tns:CardException" />
+      <fault name="ServiceException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/doCardTest/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getBerechtigungen">
+      <input wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getBerechtigungenRequest" message="tns:getBerechtigungen" />
+      <output wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getBerechtigungenResponse" message="tns:getBerechtigungenResponse" />
+      <fault name="DialogException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getBerechtigungen/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getBerechtigungen/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getCardData">
+      <input wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getCardDataRequest" message="tns:getCardData" />
+      <output wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getCardDataResponse" message="tns:getCardDataResponse" />
+      <fault name="CardException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getCardData/Fault/CardException" message="tns:CardException" />
+      <fault name="ServiceException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getCardData/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getCardReaders">
+      <input wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getCardReadersRequest" message="tns:getCardReaders" />
+      <output wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getCardReadersResponse" message="tns:getCardReadersResponse" />
+      <fault name="ServiceException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getCardReaders/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getExtendedCardData">
+      <input wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getExtendedCardDataRequest" message="tns:getExtendedCardData" />
+      <output wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getExtendedCardDataResponse" message="tns:getExtendedCardDataResponse" />
+      <fault name="CardException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getExtendedCardData/Fault/CardException" message="tns:CardException" />
+      <fault name="ServiceException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getExtendedCardData/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getFachgebiete">
+      <input wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getFachgebieteRequest" message="tns:getFachgebiete" />
+      <output wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getFachgebieteResponse" message="tns:getFachgebieteResponse" />
+      <fault name="ServiceException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getFachgebiete/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getFachgebieteByOrdId">
+      <input wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getFachgebieteByOrdIdRequest" message="tns:getFachgebieteByOrdId" />
+      <output wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getFachgebieteByOrdIdResponse" message="tns:getFachgebieteByOrdIdResponse" />
+      <fault name="DialogException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getFachgebieteByOrdId/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getFachgebieteByOrdId/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getFreeDialogs">
+      <input wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getFreeDialogsRequest" message="tns:getFreeDialogs" />
+      <output wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getFreeDialogsResponse" message="tns:getFreeDialogsResponse" />
+      <fault name="ServiceException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getFreeDialogs/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getGinaAndServiceavailabilityInformation">
+      <input wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getGinaAndServiceavailabilityInformationRequest" message="tns:getGinaAndServiceavailabilityInformation" />
+      <output wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getGinaAndServiceavailabilityInformationResponse" message="tns:getGinaAndServiceavailabilityInformationResponse" />
+      <fault name="ServiceException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getGinaAndServiceavailabilityInformation/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getGinaSoftwareVersion">
+      <input wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getGinaSoftwareVersionRequest" message="tns:getGinaSoftwareVersion" />
+      <output wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getGinaSoftwareVersionResponse" message="tns:getGinaSoftwareVersionResponse" />
+      <fault name="ServiceException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getGinaSoftwareVersion/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getMessages">
+      <input wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getMessagesRequest" message="tns:getMessages" />
+      <output wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getMessagesResponse" message="tns:getMessagesResponse" />
+      <fault name="DialogException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getMessages/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getMessages/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getMinMsgPollingIntervall">
+      <input wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getMinMsgPollingIntervallRequest" message="tns:getMinMsgPollingIntervall" />
+      <output wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getMinMsgPollingIntervallResponse" message="tns:getMinMsgPollingIntervallResponse" />
+      <fault name="DialogException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getMinMsgPollingIntervall/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getMinMsgPollingIntervall/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getReaderStatusEvents">
+      <input wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getReaderStatusEventsRequest" message="tns:getReaderStatusEvents" />
+      <output wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getReaderStatusEventsResponse" message="tns:getReaderStatusEventsResponse" />
+      <fault name="CardException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getReaderStatusEvents/Fault/CardException" message="tns:CardException" />
+      <fault name="ServiceException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getReaderStatusEvents/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getSVTs">
+      <input wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getSVTsRequest" message="tns:getSVTs" />
+      <output wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getSVTsResponse" message="tns:getSVTsResponse" />
+      <fault name="ServiceException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getSVTs/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="getVertraege">
+      <input wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getVertraegeRequest" message="tns:getVertraege" />
+      <output wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getVertraegeResponse" message="tns:getVertraegeResponse" />
+      <fault name="DialogException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getVertraege/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/getVertraege/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="pollMessages">
+      <input wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/pollMessagesRequest" message="tns:pollMessages" />
+      <output wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/pollMessagesResponse" message="tns:pollMessagesResponse" />
+      <fault name="DialogException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/pollMessages/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/pollMessages/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="releaseCardReader">
+      <input wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/releaseCardReaderRequest" message="tns:releaseCardReader" />
+      <output wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/releaseCardReaderResponse" message="tns:releaseCardReaderResponse" />
+      <fault name="CardException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/releaseCardReader/Fault/CardException" message="tns:CardException" />
+      <fault name="ServiceException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/releaseCardReader/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="setCardReader">
+      <input wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/setCardReaderRequest" message="tns:setCardReader" />
+      <output wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/setCardReaderResponse" message="tns:setCardReaderResponse" />
+      <fault name="CardException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/setCardReader/Fault/CardException" message="tns:CardException" />
+      <fault name="DialogException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/setCardReader/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/setCardReader/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="setDialogAddress">
+      <input wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/setDialogAddressRequest" message="tns:setDialogAddress" />
+      <output wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/setDialogAddressResponse" message="tns:setDialogAddressResponse" />
+      <fault name="DialogException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/setDialogAddress/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/setDialogAddress/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+    <operation name="uebersiedelnOrdination">
+      <input wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/uebersiedelnOrdinationRequest" message="tns:uebersiedelnOrdination" />
+      <output wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/uebersiedelnOrdinationResponse" message="tns:uebersiedelnOrdinationResponse" />
+      <fault name="DialogException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/uebersiedelnOrdination/Fault/DialogException" message="tns:DialogException" />
+      <fault name="ServiceException" wsam:Action="http://soap.base.client.chipkarte.at/IBaseService/uebersiedelnOrdination/Fault/ServiceException" message="tns:ServiceException" />
+    </operation>
+  </portType>
+  <binding name="base_12Binding" type="tns:IBaseService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="authenticateDialog">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="authenticateDialogEnt">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="changePin">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="changePinWithPuk">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="checkStatus">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="closeDialog">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="createDialog">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="createDialogEnt">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="doCardTest">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getBerechtigungen">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getCardData">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getCardReaders">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getExtendedCardData">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getFachgebiete">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getFachgebieteByOrdId">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getFreeDialogs">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getGinaAndServiceavailabilityInformation">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getGinaSoftwareVersion">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getMessages">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getMinMsgPollingIntervall">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getReaderStatusEvents">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getSVTs">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="getVertraege">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="pollMessages">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="releaseCardReader">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="setCardReader">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="CardException">
+        <soap:fault name="CardException" use="literal" />
+      </fault>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="setDialogAddress">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+    <operation name="uebersiedelnOrdination">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="DialogException">
+        <soap:fault name="DialogException" use="literal" />
+      </fault>
+      <fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal" />
+      </fault>
+    </operation>
+  </binding>
+  <service name="BaseService">
+    <port name="base_12" binding="tns:base_12Binding">
+      <soap:address location="http://localhost/base/12" />
+    </port>
+  </service>
+</definitions>
