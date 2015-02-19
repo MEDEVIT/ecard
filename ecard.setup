@@ -32,7 +32,7 @@
     </setupTask>
     <setupTask
         xsi:type="setup:EclipseIniTask"
-        option="-Doomph.redirection.elexissetup"
+        option="-Doomph.redirection.ecardsetup"
         value="=https://raw.githubusercontent.com/MEDEVIT/ecard/master/Elexis.setup->${core.git.clone.location|uri}/ecard.setup"
         vm="true"/>
     <setupTask
