@@ -118,8 +118,6 @@
         xsi:type="projects:ProjectsImportTask">
       <sourceLocator
           rootFolder="${core.git.clone.location}"/>
-      <sourceLocator
-          rootFolder="${base.git.clone.location}"/>
     </setupTask>
   </stream>
   <logicalProjectContainer
